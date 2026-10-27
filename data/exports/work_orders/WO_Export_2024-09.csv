@@ -29,7 +29,7 @@ WO-101091,LD-FRM-031,Forming Pneumatic cylinder 1,Forming,C,PM,PM-00275,Pneumati
 WO-101092,LD-FRM-032,Forming Pneumatic cylinder 2,Forming,A,PM,PM-00276,Pneumatic leak check,,02/09/2024 06:00,09/09/2024,09/09/2024,Completed,0.55,0,T02
 WO-101093,LD-PPK-003,Primary Packing Flow wrapper 3,Primary Packing,B,PM,PM-00359,Flow wrapper jaw & knife inspection,,02/09/2024 06:00,09/09/2024,08/09/2024,Completed,0.39,0,T08
 WO-101094,LD-PPK-016,Primary Packing Conveyor 1,Primary Packing,A,Reactive,,Breakdown: sensor,Electrical - sensor,02/09/2024 06:37,,02/09/2024,Completed,0.57,31,T12
-WO-101095,LD-FLK-011,Flaking Flaking roll 3,Flaking,C,Corrective,PM-00167,Found on PM: bearing - planned repair,Mechanical - bearing,02/09/2024 16:00,05/09/2024,05/09/2024,Completed,4.55,0,T10
+WO-101095,LD-FLK-011,Flaking roll 3,Flaking,C,Corrective,PM-00167,Found on PM: bearing - planned repair,Mechanical - bearing,02/09/2024 16:00,05/09/2024,05/09/2024,Completed,4.55,0,T10
 WO-101096,LD-BAK-004,Baking Drive motor 4,Baking,A,PM,PM-00296,Grease motor bearings,,03/09/2024 06:00,10/09/2024,12/10/2024,Completed,1.0,0,T01
 WO-101097,LD-COK-007,Cooking Drive motor 7,Cooking,B,PM,PM-00013,Motor visual inspection & temperature check,,03/09/2024 06:00,10/09/2024,08/09/2024,Completed,0.59,0,T10
 WO-101098,LD-COK-011,Cooking Gearbox 1,Cooking,C,PM,PM-00022,Gearbox oil change,,03/09/2024 06:00,10/09/2024,08/09/2024,Completed,0.94,0,T01
@@ -37,7 +37,7 @@ WO-101099,LD-DRY-012,Drying Fan 4,Drying,B,PM,PM-00100,Fan bearing vibration rea
 WO-101100,LD-DRY-023,Drying Conveyor 1,Drying,B,PM,PM-00118,Conveyor belt tension & tracking check,,03/09/2024 06:00,10/09/2024,07/09/2024,Completed,0.5,0,T07
 WO-101101,LD-EOL-019,End of Line Conveyor 9,End of Line,B,PM,PM-00447,Conveyor belt tension & tracking check,,03/09/2024 06:00,10/09/2024,09/09/2024,Completed,0.39,0,T10
 WO-101102,LD-EOL-025,End of Line Drive motor 1,End of Line,A,PM,PM-00459,Motor visual inspection & temperature check,,03/09/2024 06:00,10/09/2024,10/09/2024,Completed,0.48,0,T11
-WO-101103,LD-FLK-018,Flaking Flaking roll 10,Flaking,C,PM,PM-00181,Flaking roll gap & bearing temperature check,,03/09/2024 06:00,10/09/2024,09/09/2024,Completed,0.5,0,T07
+WO-101103,LD-FLK-018,Flaking roll 10,Flaking,C,PM,PM-00181,Flaking roll gap & bearing temperature check,,03/09/2024 06:00,10/09/2024,09/09/2024,Completed,0.5,0,T07
 WO-101104,LD-FLK-028,Flaking Conveyor 6,Flaking,A,PM,PM-00201,Conveyor belt tension & tracking check,,03/09/2024 06:00,10/09/2024,09/09/2024,Completed,0.43,0,T08
 WO-101105,LD-FRM-030,Forming Vacuum pump 4,Forming,B,PM,PM-00273,Vacuum pump filter & vane check,,03/09/2024 06:00,10/09/2024,07/09/2024,Completed,0.69,0,T04
 WO-101106,LD-PPK-005,Primary Packing Flow wrapper 5,Primary Packing,C,PM,PM-00363,Flow wrapper jaw & knife inspection,,03/09/2024 06:00,10/09/2024,10/09/2024,Completed,0.68,0,T04
@@ -50,7 +50,7 @@ WO-101112,LD-DRY-025,Drying Conveyor 3,Drying,B,PM,PM-00122,Conveyor belt tensio
 WO-101113,LD-EOL-006,End of Line Stretch wrapper 1,End of Line,C,PM,PM-00426,Stretch wrapper film carriage check,,04/09/2024 06:00,11/09/2024,,Cancelled,0.0,0,
 WO-101114,LD-EOL-021,End of Line Conveyor 11,End of Line,A,PM,PM-00451,Conveyor belt tension & tracking check,,04/09/2024 06:00,11/09/2024,11/09/2024,Completed,0.58,0,T12
 WO-101115,LD-EOL-031,End of Line Pneumatic cylinder 1,End of Line,B,PM,PM-00471,Pneumatic leak check,,04/09/2024 06:00,11/09/2024,11/09/2024,Completed,0.53,0,T10
-WO-101116,LD-FLK-016,Flaking Flaking roll 8,Flaking,B,PM,PM-00177,Flaking roll gap & bearing temperature check,,04/09/2024 06:00,11/09/2024,08/09/2024,Completed,0.62,0,T07
+WO-101116,LD-FLK-016,Flaking roll 8,Flaking,B,PM,PM-00177,Flaking roll gap & bearing temperature check,,04/09/2024 06:00,11/09/2024,08/09/2024,Completed,0.62,0,T07
 WO-101117,LD-FLK-024,Flaking Conveyor 2,Flaking,C,PM,PM-00193,Conveyor belt tension & tracking check,,04/09/2024 06:00,11/09/2024,11/09/2024,Completed,0.48,0,T10
 WO-101118,LD-FRM-024,Forming Conveyor 8,Forming,A,PM,PM-00261,Conveyor belt tension & tracking check,,04/09/2024 06:00,11/09/2024,09/09/2024,Completed,0.57,0,T04
 WO-101119,LD-FRM-033,Forming Pneumatic cylinder 3,Forming,B,PM,PM-00277,Pneumatic leak check,,04/09/2024 06:00,11/09/2024,09/09/2024,Completed,0.36,0,T12
@@ -66,7 +66,7 @@ WO-101128,LD-COK-004,Cooking Drive motor 4,Cooking,A,PM,PM-00008,Grease motor be
 WO-101129,LD-EOL-009,End of Line Label printer applicator 2,End of Line,C,PM,PM-00429,Clean printhead & check applicator,,05/09/2024 06:00,12/09/2024,12/09/2024,Completed,0.4,0,T05
 WO-101130,LD-EOL-011,End of Line Conveyor 1,End of Line,B,PM,PM-00431,Conveyor belt tension & tracking check,,05/09/2024 06:00,12/09/2024,12/09/2024,Completed,0.51,0,T09
 WO-101131,LD-EOL-030,End of Line Drive motor 6,End of Line,B,PM,PM-00469,Motor visual inspection & temperature check,,05/09/2024 06:00,12/09/2024,11/09/2024,Completed,0.65,0,T12
-WO-101132,LD-FLK-009,Flaking Flaking roll 1,Flaking,B,PM,PM-00163,Flaking roll gap & bearing temperature check,,05/09/2024 06:00,12/09/2024,11/09/2024,Completed,0.71,0,T03
+WO-101132,LD-FLK-009,Flaking roll 1,Flaking,B,PM,PM-00163,Flaking roll gap & bearing temperature check,,05/09/2024 06:00,12/09/2024,11/09/2024,Completed,0.71,0,T03
 WO-101133,LD-FLK-023,Flaking Conveyor 1,Flaking,B,PM,PM-00191,Conveyor belt tension & tracking check,,05/09/2024 06:00,12/09/2024,12/09/2024,Completed,0.48,0,T05
 WO-101134,LD-FLK-025,Flaking Conveyor 3,Flaking,C,PM,PM-00195,Conveyor belt tension & tracking check,,05/09/2024 06:00,12/09/2024,10/09/2024,Completed,0.59,0,T01
 WO-101135,LD-PPK-006,Primary Packing Flow wrapper 6,Primary Packing,C,PM,PM-00365,Flow wrapper jaw & knife inspection,,05/09/2024 06:00,12/09/2024,11/09/2024,Completed,0.6,0,T11
@@ -80,7 +80,7 @@ WO-101142,LD-COK-020,Cooking Conveyor 4,Cooking,A,PM,PM-00039,Conveyor belt tens
 WO-101143,LD-EOL-003,End of Line Case packer 3,End of Line,B,PM,PM-00420,Case packer gripper & guide inspection,,06/09/2024 06:00,13/09/2024,11/09/2024,Completed,0.61,0,T06
 WO-101144,LD-EOL-005,End of Line Palletiser 2,End of Line,C,PM,PM-00424,Palletiser chain & safety circuit check,,06/09/2024 06:00,13/09/2024,18/09/2024,Completed,0.47,0,T03
 WO-101145,LD-EOL-022,End of Line Conveyor 12,End of Line,B,PM,PM-00453,Conveyor belt tension & tracking check,,06/09/2024 06:00,13/09/2024,13/09/2024,Completed,0.56,0,T08
-WO-101146,LD-FLK-013,Flaking Flaking roll 5,Flaking,B,PM,PM-00171,Flaking roll gap & bearing temperature check,,06/09/2024 06:00,13/09/2024,11/09/2024,Completed,0.39,0,T11
+WO-101146,LD-FLK-013,Flaking roll 5,Flaking,B,PM,PM-00171,Flaking roll gap & bearing temperature check,,06/09/2024 06:00,13/09/2024,11/09/2024,Completed,0.39,0,T11
 WO-101147,LD-FLK-034,Flaking Gearbox 4,Flaking,C,PM,PM-00213,Check gearbox oil level & leaks,,06/09/2024 06:00,13/09/2024,11/09/2024,Completed,0.38,0,T10
 WO-101148,LD-FRM-003,Forming Drive motor 3,Forming,B,PM,PM-00229,Motor visual inspection & temperature check,,06/09/2024 06:00,13/09/2024,11/09/2024,Completed,0.59,0,T03
 WO-101149,LD-PPK-020,Primary Packing Conveyor 5,Primary Packing,A,PM,PM-00384,Conveyor belt tension & tracking check,,06/09/2024 06:00,13/09/2024,13/09/2024,Completed,0.44,0,T03
@@ -97,8 +97,8 @@ WO-101159,LD-DRY-011,Drying Fan 3,Drying,C,PM,PM-00099,Grease fan bearings,,07/0
 WO-101160,LD-EOL-012,End of Line Conveyor 2,End of Line,C,PM,PM-00433,Conveyor belt tension & tracking check,,07/09/2024 06:00,14/09/2024,23/09/2024,Completed,0.63,0,T04
 WO-101161,LD-EOL-020,End of Line Conveyor 10,End of Line,C,PM,PM-00449,Conveyor belt tension & tracking check,,07/09/2024 06:00,14/09/2024,14/09/2024,Completed,0.36,0,T02
 WO-101162,LD-EOL-026,End of Line Drive motor 2,End of Line,B,PM,PM-00461,Motor visual inspection & temperature check,,07/09/2024 06:00,14/09/2024,12/09/2024,Completed,0.71,0,T09
-WO-101163,LD-FLK-014,Flaking Flaking roll 6,Flaking,A,PM,PM-00173,Flaking roll gap & bearing temperature check,,07/09/2024 06:00,14/09/2024,19/09/2024,Completed,0.65,0,T03
-WO-101164,LD-FLK-015,Flaking Flaking roll 7,Flaking,B,PM,PM-00175,Flaking roll gap & bearing temperature check,,07/09/2024 06:00,14/09/2024,,Cancelled,0.0,0,
+WO-101163,LD-FLK-014,Flaking roll 6,Flaking,A,PM,PM-00173,Flaking roll gap & bearing temperature check,,07/09/2024 06:00,14/09/2024,19/09/2024,Completed,0.65,0,T03
+WO-101164,LD-FLK-015,Flaking roll 7,Flaking,B,PM,PM-00175,Flaking roll gap & bearing temperature check,,07/09/2024 06:00,14/09/2024,,Cancelled,0.0,0,
 WO-101165,LD-FRM-022,Forming Conveyor 6,Forming,B,PM,PM-00257,Conveyor belt tension & tracking check,,07/09/2024 06:00,14/09/2024,21/09/2024,Completed,0.38,0,T12
 WO-101166,LD-FRM-035,Forming Pneumatic cylinder 5,Forming,B,PM,PM-00279,Pneumatic leak check,,07/09/2024 06:00,14/09/2024,07/10/2024,Completed,0.58,0,T08
 WO-101167,LD-PPK-012,Primary Packing Checkweigher 3,Primary Packing,C,PM,PM-00375,Checkweigher calibration check,,07/09/2024 06:00,14/09/2024,13/09/2024,Completed,0.42,0,T09
@@ -113,7 +113,7 @@ WO-101175,LD-EOL-013,End of Line Conveyor 3,End of Line,A,PM,PM-00435,Conveyor b
 WO-101176,LD-EOL-014,End of Line Conveyor 4,End of Line,C,PM,PM-00437,Conveyor belt tension & tracking check,,08/09/2024 06:00,15/09/2024,15/09/2024,Completed,0.56,0,T09
 WO-101177,LD-EOL-016,End of Line Conveyor 6,End of Line,B,PM,PM-00441,Conveyor belt tension & tracking check,,08/09/2024 06:00,15/09/2024,23/09/2024,Completed,0.49,0,T05
 WO-101178,LD-FLK-001,Flaking Drive motor 1,Flaking,A,PM,PM-00147,Motor visual inspection & temperature check,,08/09/2024 06:00,15/09/2024,15/09/2024,Completed,0.7,0,T08
-WO-101179,LD-FLK-012,Flaking Flaking roll 4,Flaking,B,PM,PM-00169,Flaking roll gap & bearing temperature check,,08/09/2024 06:00,15/09/2024,14/09/2024,Completed,0.6,0,T12
+WO-101179,LD-FLK-012,Flaking roll 4,Flaking,B,PM,PM-00169,Flaking roll gap & bearing temperature check,,08/09/2024 06:00,15/09/2024,14/09/2024,Completed,0.6,0,T12
 WO-101180,LD-FLK-035,Flaking Gearbox 5,Flaking,C,PM,PM-00215,Check gearbox oil level & leaks,,08/09/2024 06:00,15/09/2024,15/09/2024,Completed,0.58,0,T02
 WO-101181,LD-FRM-001,Forming Drive motor 1,Forming,C,PM,PM-00225,Motor visual inspection & temperature check,,08/09/2024 06:00,15/09/2024,13/09/2024,Completed,0.67,0,T09
 WO-101182,LD-FRM-015,Forming Servo drive 9,Forming,C,PM,PM-00245,Servo drive fan & fault log check,,08/09/2024 06:00,15/09/2024,13/09/2024,Completed,0.51,0,T01
@@ -145,8 +145,8 @@ WO-101207,LD-PPK-034,Primary Packing Servo drive 7,Primary Packing,C,PM,PM-00406
 WO-101208,LD-BAK-018,Baking Fan 4,Baking,B,PM,PM-00315,Fan bearing vibration reading,,10/09/2024 06:00,17/09/2024,14/09/2024,Completed,0.43,0,T12
 WO-101209,LD-BAK-027,Baking Conveyor 5,Baking,C,PM,PM-00333,Conveyor belt tension & tracking check,,10/09/2024 06:00,17/09/2024,14/09/2024,Completed,0.61,0,T08
 WO-101210,LD-DRY-028,Drying Conveyor 6,Drying,C,PM,PM-00128,Conveyor belt tension & tracking check,,10/09/2024 06:00,17/09/2024,17/09/2024,Completed,0.41,0,T01
-WO-101211,LD-FLK-011,Flaking Flaking roll 3,Flaking,C,PM,PM-00167,Flaking roll gap & bearing temperature check,,10/09/2024 06:00,17/09/2024,16/09/2024,Completed,0.54,0,T12
-WO-101212,LD-FLK-017,Flaking Flaking roll 9,Flaking,B,PM,PM-00179,Flaking roll gap & bearing temperature check,,10/09/2024 06:00,17/09/2024,17/09/2024,Completed,0.47,0,T11
+WO-101211,LD-FLK-011,Flaking roll 3,Flaking,C,PM,PM-00167,Flaking roll gap & bearing temperature check,,10/09/2024 06:00,17/09/2024,16/09/2024,Completed,0.54,0,T12
+WO-101212,LD-FLK-017,Flaking roll 9,Flaking,B,PM,PM-00179,Flaking roll gap & bearing temperature check,,10/09/2024 06:00,17/09/2024,17/09/2024,Completed,0.47,0,T11
 WO-101213,LD-FRM-014,Forming Servo drive 8,Forming,B,PM,PM-00244,Servo drive fan & fault log check,,10/09/2024 06:00,17/09/2024,14/09/2024,Completed,0.37,0,T10
 WO-101214,LD-PPK-005,Primary Packing Flow wrapper 5,Primary Packing,C,PM,PM-00363,Flow wrapper jaw & knife inspection,,10/09/2024 06:00,17/09/2024,16/09/2024,Completed,0.43,0,T01
 WO-101215,LD-PPK-007,Primary Packing Carton erector 1,Primary Packing,A,PM,PM-00367,Carton erector suction cup & glue check,,10/09/2024 06:00,17/09/2024,17/09/2024,Completed,0.69,0,T01
@@ -157,7 +157,7 @@ WO-101219,LD-COK-022,Cooking Conveyor 6,Cooking,A,PM,PM-00044,Replace conveyor b
 WO-101220,LD-COK-026,Cooking Conveyor 10,Cooking,B,PM,PM-00051,Conveyor belt tension & tracking check,,11/09/2024 06:00,18/09/2024,17/09/2024,Completed,0.43,0,T02
 WO-101221,LD-COK-030,Cooking Pump 4,Cooking,B,PM,PM-00059,Pump seal & vibration check,,11/09/2024 06:00,18/09/2024,17/09/2024,Completed,0.44,0,T12
 WO-101222,LD-FLK-005,Flaking Drive motor 5,Flaking,B,PM,PM-00156,Grease motor bearings,,11/09/2024 06:00,18/09/2024,16/09/2024,Completed,0.6,0,T01
-WO-101223,LD-FLK-010,Flaking Flaking roll 2,Flaking,B,PM,PM-00165,Flaking roll gap & bearing temperature check,,11/09/2024 06:00,18/09/2024,,Cancelled,0.0,0,
+WO-101223,LD-FLK-010,Flaking roll 2,Flaking,B,PM,PM-00165,Flaking roll gap & bearing temperature check,,11/09/2024 06:00,18/09/2024,,Cancelled,0.0,0,
 WO-101224,LD-FLK-026,Flaking Conveyor 4,Flaking,B,PM,PM-00197,Conveyor belt tension & tracking check,,11/09/2024 06:00,18/09/2024,17/09/2024,Completed,0.5,0,T05
 WO-101225,LD-FRM-018,Forming Conveyor 2,Forming,A,PM,PM-00249,Conveyor belt tension & tracking check,,11/09/2024 06:00,18/09/2024,24/09/2024,Completed,0.73,0,T04
 WO-101226,LD-PPK-004,Primary Packing Flow wrapper 4,Primary Packing,B,PM,PM-00361,Flow wrapper jaw & knife inspection,,11/09/2024 06:00,18/09/2024,16/09/2024,Completed,0.48,0,T11
@@ -196,7 +196,7 @@ WO-101258,LD-EOL-001,End of Line Case packer 1,End of Line,A,PM,PM-00416,Case pa
 WO-101259,LD-EOL-018,End of Line Conveyor 8,End of Line,B,PM,PM-00446,Replace conveyor belt,,13/09/2024 06:00,20/09/2024,13/10/2024,Completed,3.56,0,T12
 WO-101260,LD-EOL-023,End of Line Conveyor 13,End of Line,C,PM,PM-00455,Conveyor belt tension & tracking check,,13/09/2024 06:00,20/09/2024,19/09/2024,Completed,0.56,0,T05
 WO-101261,LD-FLK-005,Flaking Drive motor 5,Flaking,B,PM,PM-00155,Motor visual inspection & temperature check,,13/09/2024 06:00,20/09/2024,20/09/2024,Completed,0.53,0,T08
-WO-101262,LD-FLK-017,Flaking Flaking roll 9,Flaking,B,PM,PM-00180,Regrind / swap flaking roll,,13/09/2024 06:00,20/09/2024,19/09/2024,Completed,2.2,0,T03
+WO-101262,LD-FLK-017,Flaking roll 9,Flaking,B,PM,PM-00180,Regrind / swap flaking roll,,13/09/2024 06:00,20/09/2024,19/09/2024,Completed,2.2,0,T03
 WO-101263,LD-FRM-002,Forming Drive motor 2,Forming,B,PM,PM-00227,Motor visual inspection & temperature check,,13/09/2024 06:00,20/09/2024,17/09/2024,Completed,0.48,0,T06
 WO-101264,LD-COK-026,Cooking Conveyor 10,Cooking,B,Reactive,,Breakdown: belt/chain,Mechanical - belt/chain,14/09/2024 02:02,,14/09/2024,Completed,3.14,0,T02
 WO-101265,LD-DRY-030,Drying Conveyor 8,Drying,A,PM,PM-00132,Conveyor belt tension & tracking check,,14/09/2024 06:00,21/09/2024,21/09/2024,Completed,0.69,0,T03
@@ -211,7 +211,7 @@ WO-101273,LD-FRM-019,Forming Conveyor 3,Forming,B,PM,PM-00251,Conveyor belt tens
 WO-101274,LD-FRM-026,Forming Conveyor 10,Forming,B,PM,PM-00265,Conveyor belt tension & tracking check,,14/09/2024 06:00,21/09/2024,20/09/2024,Completed,0.56,0,T06
 WO-101275,LD-PPK-012,Primary Packing Checkweigher 3,Primary Packing,C,PM,PM-00375,Checkweigher calibration check,,14/09/2024 06:00,21/09/2024,28/09/2024,Completed,0.4,0,T01
 WO-101276,LD-PPK-023,Primary Packing Conveyor 8,Primary Packing,B,PM,PM-00390,Conveyor belt tension & tracking check,,14/09/2024 06:00,21/09/2024,,Cancelled,0.0,0,
-WO-101277,LD-FLK-012,Flaking Flaking roll 4,Flaking,B,Corrective,PM-00169,Found on PM: bearing - planned repair,Mechanical - bearing,14/09/2024 17:00,21/09/2024,21/09/2024,Completed,5.29,0,T07
+WO-101277,LD-FLK-012,Flaking roll 4,Flaking,B,Corrective,PM-00169,Found on PM: bearing - planned repair,Mechanical - bearing,14/09/2024 17:00,21/09/2024,21/09/2024,Completed,5.29,0,T07
 WO-101278,LD-EOL-016,End of Line Conveyor 6,End of Line,B,Reactive,,Breakdown: bearing,Mechanical - bearing,14/09/2024 17:37,,14/09/2024,Completed,0.68,38,T03
 WO-101279,LD-BAK-008,Baking Burner 2,Baking,C,PM,PM-00302,Burner ignition & flame check,,15/09/2024 06:00,22/09/2024,19/10/2024,Completed,0.35,0,T10
 WO-101280,LD-BAK-011,Baking Burner 5,Baking,A,PM,PM-00305,Burner ignition & flame check,,15/09/2024 06:00,22/09/2024,22/09/2024,Completed,0.39,0,T03
@@ -252,7 +252,7 @@ WO-101314,LD-DRY-014,Drying Fan 6,Drying,C,PM,PM-00104,Fan bearing vibration rea
 WO-101315,LD-DRY-016,Drying Fan 8,Drying,B,PM,PM-00108,Fan bearing vibration reading,,17/09/2024 06:00,24/09/2024,22/09/2024,Completed,0.35,0,T05
 WO-101316,LD-DRY-023,Drying Conveyor 1,Drying,B,PM,PM-00118,Conveyor belt tension & tracking check,,17/09/2024 06:00,24/09/2024,23/09/2024,Completed,0.44,0,T01
 WO-101317,LD-EOL-019,End of Line Conveyor 9,End of Line,B,PM,PM-00447,Conveyor belt tension & tracking check,,17/09/2024 06:00,24/09/2024,23/09/2024,Completed,0.49,0,T09
-WO-101318,LD-FLK-018,Flaking Flaking roll 10,Flaking,C,PM,PM-00181,Flaking roll gap & bearing temperature check,,17/09/2024 06:00,24/09/2024,24/09/2024,Completed,0.44,0,T04
+WO-101318,LD-FLK-018,Flaking roll 10,Flaking,C,PM,PM-00181,Flaking roll gap & bearing temperature check,,17/09/2024 06:00,24/09/2024,24/09/2024,Completed,0.44,0,T04
 WO-101319,LD-FLK-028,Flaking Conveyor 6,Flaking,A,PM,PM-00201,Conveyor belt tension & tracking check,,17/09/2024 06:00,24/09/2024,23/09/2024,Completed,0.38,0,T03
 WO-101320,LD-PPK-005,Primary Packing Flow wrapper 5,Primary Packing,C,PM,PM-00363,Flow wrapper jaw & knife inspection,,17/09/2024 06:00,24/09/2024,22/09/2024,Completed,0.55,0,T06
 WO-101321,LD-PPK-007,Primary Packing Carton erector 1,Primary Packing,A,PM,PM-00367,Carton erector suction cup & glue check,,17/09/2024 06:00,24/09/2024,24/09/2024,Completed,0.42,0,T01
@@ -269,7 +269,7 @@ WO-101331,LD-DRY-010,Drying Fan 2,Drying,C,PM,PM-00097,Grease fan bearings,,18/0
 WO-101332,LD-DRY-025,Drying Conveyor 3,Drying,B,PM,PM-00122,Conveyor belt tension & tracking check,,18/09/2024 06:00,25/09/2024,23/09/2024,Completed,0.43,0,T11
 WO-101333,LD-EOL-021,End of Line Conveyor 11,End of Line,A,PM,PM-00451,Conveyor belt tension & tracking check,,18/09/2024 06:00,25/09/2024,27/09/2024,Completed,0.56,0,T04
 WO-101334,LD-EOL-027,End of Line Drive motor 3,End of Line,B,PM,PM-00463,Motor visual inspection & temperature check,,18/09/2024 06:00,25/09/2024,22/09/2024,Completed,0.38,0,T05
-WO-101335,LD-FLK-016,Flaking Flaking roll 8,Flaking,B,PM,PM-00177,Flaking roll gap & bearing temperature check,,18/09/2024 06:00,25/09/2024,28/09/2024,Completed,0.57,0,T05
+WO-101335,LD-FLK-016,Flaking roll 8,Flaking,B,PM,PM-00177,Flaking roll gap & bearing temperature check,,18/09/2024 06:00,25/09/2024,28/09/2024,Completed,0.57,0,T05
 WO-101336,LD-FLK-024,Flaking Conveyor 2,Flaking,C,PM,PM-00193,Conveyor belt tension & tracking check,,18/09/2024 06:00,25/09/2024,23/09/2024,Completed,0.5,0,T10
 WO-101337,LD-FRM-005,Forming Drive motor 5,Forming,C,PM,PM-00233,Motor visual inspection & temperature check,,18/09/2024 06:00,25/09/2024,,Cancelled,0.0,0,
 WO-101338,LD-FRM-024,Forming Conveyor 8,Forming,A,PM,PM-00261,Conveyor belt tension & tracking check,,18/09/2024 06:00,25/09/2024,25/09/2024,Completed,0.36,0,T07
@@ -283,7 +283,7 @@ WO-101345,LD-DRY-008,Drying Drive motor 8,Drying,A,PM,PM-00092,Motor visual insp
 WO-101346,LD-EOL-009,End of Line Label printer applicator 2,End of Line,C,PM,PM-00429,Clean printhead & check applicator,,19/09/2024 06:00,26/09/2024,25/09/2024,Completed,0.71,0,T05
 WO-101347,LD-EOL-011,End of Line Conveyor 1,End of Line,B,PM,PM-00431,Conveyor belt tension & tracking check,,19/09/2024 06:00,26/09/2024,23/09/2024,Completed,0.49,0,T02
 WO-101348,LD-EOL-033,End of Line Pneumatic cylinder 3,End of Line,B,PM,PM-00473,Pneumatic leak check,,19/09/2024 06:00,26/09/2024,24/09/2024,Completed,0.47,0,T05
-WO-101349,LD-FLK-009,Flaking Flaking roll 1,Flaking,B,PM,PM-00163,Flaking roll gap & bearing temperature check,,19/09/2024 06:00,26/09/2024,23/09/2024,Completed,0.44,0,T10
+WO-101349,LD-FLK-009,Flaking roll 1,Flaking,B,PM,PM-00163,Flaking roll gap & bearing temperature check,,19/09/2024 06:00,26/09/2024,23/09/2024,Completed,0.44,0,T10
 WO-101350,LD-FLK-023,Flaking Conveyor 1,Flaking,B,PM,PM-00191,Conveyor belt tension & tracking check,,19/09/2024 06:00,26/09/2024,26/09/2024,Completed,0.35,0,T02
 WO-101351,LD-FLK-025,Flaking Conveyor 3,Flaking,C,PM,PM-00195,Conveyor belt tension & tracking check,,19/09/2024 06:00,26/09/2024,09/10/2024,Completed,0.72,0,T09
 WO-101352,LD-FRM-026,Forming Conveyor 10,Forming,B,PM,PM-00266,Replace conveyor belt,,19/09/2024 06:00,26/09/2024,23/09/2024,Completed,2.4,0,T05
@@ -302,7 +302,7 @@ WO-101364,LD-EOL-005,End of Line Palletiser 2,End of Line,C,PM,PM-00424,Palletis
 WO-101365,LD-EOL-007,End of Line Stretch wrapper 2,End of Line,B,PM,PM-00427,Stretch wrapper film carriage check,,20/09/2024 06:00,27/09/2024,25/09/2024,Completed,0.62,0,T07
 WO-101366,LD-EOL-022,End of Line Conveyor 12,End of Line,B,PM,PM-00453,Conveyor belt tension & tracking check,,20/09/2024 06:00,27/09/2024,25/09/2024,Completed,0.53,0,T09
 WO-101367,LD-FLK-006,Flaking Drive motor 6,Flaking,B,PM,PM-00158,Grease motor bearings,,20/09/2024 06:00,27/09/2024,25/09/2024,Completed,0.87,0,T08
-WO-101368,LD-FLK-013,Flaking Flaking roll 5,Flaking,B,PM,PM-00171,Flaking roll gap & bearing temperature check,,20/09/2024 06:00,27/09/2024,27/09/2024,Completed,0.65,0,T08
+WO-101368,LD-FLK-013,Flaking roll 5,Flaking,B,PM,PM-00171,Flaking roll gap & bearing temperature check,,20/09/2024 06:00,27/09/2024,27/09/2024,Completed,0.65,0,T08
 WO-101369,LD-FRM-028,Forming Vacuum pump 2,Forming,C,PM,PM-00269,Vacuum pump filter & vane check,,20/09/2024 06:00,27/09/2024,24/09/2024,Completed,0.47,0,T12
 WO-101370,LD-PPK-008,Primary Packing Carton erector 2,Primary Packing,A,PM,PM-00370,Replace suction cups,,20/09/2024 06:00,27/09/2024,27/09/2024,Completed,2.66,0,T11
 WO-101371,LD-PPK-020,Primary Packing Conveyor 5,Primary Packing,A,PM,PM-00384,Conveyor belt tension & tracking check,,20/09/2024 06:00,27/09/2024,24/09/2024,Completed,0.5,0,T05
@@ -313,8 +313,8 @@ WO-101375,LD-COK-023,Cooking Conveyor 7,Cooking,B,PM,PM-00045,Conveyor belt tens
 WO-101376,LD-COK-023,Cooking Conveyor 7,Cooking,B,PM,PM-00046,Replace conveyor belt,,21/09/2024 06:00,28/09/2024,28/09/2024,Completed,3.89,0,T02
 WO-101377,LD-EOL-012,End of Line Conveyor 2,End of Line,C,PM,PM-00433,Conveyor belt tension & tracking check,,21/09/2024 06:00,28/09/2024,27/09/2024,Completed,0.5,0,T04
 WO-101378,LD-EOL-020,End of Line Conveyor 10,End of Line,C,PM,PM-00449,Conveyor belt tension & tracking check,,21/09/2024 06:00,28/09/2024,27/09/2024,Completed,0.54,0,T01
-WO-101379,LD-FLK-014,Flaking Flaking roll 6,Flaking,A,PM,PM-00173,Flaking roll gap & bearing temperature check,,21/09/2024 06:00,28/09/2024,26/09/2024,Completed,0.65,0,T08
-WO-101380,LD-FLK-015,Flaking Flaking roll 7,Flaking,B,PM,PM-00175,Flaking roll gap & bearing temperature check,,21/09/2024 06:00,28/09/2024,26/09/2024,Completed,0.55,0,T08
+WO-101379,LD-FLK-014,Flaking roll 6,Flaking,A,PM,PM-00173,Flaking roll gap & bearing temperature check,,21/09/2024 06:00,28/09/2024,26/09/2024,Completed,0.65,0,T08
+WO-101380,LD-FLK-015,Flaking roll 7,Flaking,B,PM,PM-00175,Flaking roll gap & bearing temperature check,,21/09/2024 06:00,28/09/2024,26/09/2024,Completed,0.55,0,T08
 WO-101381,LD-FLK-020,Flaking Hydraulic power unit 2,Flaking,B,PM,PM-00186,Change HPU filter,,21/09/2024 06:00,28/09/2024,25/09/2024,Completed,2.34,0,T06
 WO-101382,LD-FRM-022,Forming Conveyor 6,Forming,B,PM,PM-00257,Conveyor belt tension & tracking check,,21/09/2024 06:00,28/09/2024,26/09/2024,Completed,0.56,0,T07
 WO-101383,LD-FRM-036,Forming Pneumatic cylinder 6,Forming,C,PM,PM-00280,Pneumatic leak check,,21/09/2024 06:00,28/09/2024,28/09/2024,Completed,0.41,0,T01
@@ -335,7 +335,7 @@ WO-101397,LD-EOL-008,End of Line Label printer applicator 1,End of Line,A,PM,PM-
 WO-101398,LD-EOL-013,End of Line Conveyor 3,End of Line,A,PM,PM-00435,Conveyor belt tension & tracking check,,22/09/2024 06:00,29/09/2024,28/09/2024,Completed,0.41,0,T05
 WO-101399,LD-EOL-014,End of Line Conveyor 4,End of Line,C,PM,PM-00437,Conveyor belt tension & tracking check,,22/09/2024 06:00,29/09/2024,27/09/2024,Completed,0.38,0,T04
 WO-101400,LD-EOL-016,End of Line Conveyor 6,End of Line,B,PM,PM-00441,Conveyor belt tension & tracking check,,22/09/2024 06:00,29/09/2024,27/09/2024,Completed,0.7,0,T02
-WO-101401,LD-FLK-012,Flaking Flaking roll 4,Flaking,B,PM,PM-00169,Flaking roll gap & bearing temperature check,,22/09/2024 06:00,29/09/2024,29/09/2024,Completed,0.57,0,T07
+WO-101401,LD-FLK-012,Flaking roll 4,Flaking,B,PM,PM-00169,Flaking roll gap & bearing temperature check,,22/09/2024 06:00,29/09/2024,29/09/2024,Completed,0.57,0,T07
 WO-101402,LD-FRM-017,Forming Conveyor 1,Forming,B,PM,PM-00247,Conveyor belt tension & tracking check,,22/09/2024 06:00,29/09/2024,26/09/2024,Completed,0.62,0,T01
 WO-101403,LD-PPK-001,Primary Packing Flow wrapper 1,Primary Packing,B,PM,PM-00355,Flow wrapper jaw & knife inspection,,22/09/2024 06:00,29/09/2024,01/10/2024,Completed,0.74,0,T07
 WO-101404,LD-PPK-002,Primary Packing Flow wrapper 2,Primary Packing,B,PM,PM-00357,Flow wrapper jaw & knife inspection,,22/09/2024 06:00,29/09/2024,27/09/2024,Completed,0.65,0,T04
@@ -364,8 +364,8 @@ WO-101426,LD-DRY-028,Drying Conveyor 6,Drying,C,PM,PM-00128,Conveyor belt tensio
 WO-101427,LD-DRY-039,Drying Rotary valve 1,Drying,A,PM,PM-00142,Rotary valve clearance check,,24/09/2024 06:00,01/10/2024,30/09/2024,Completed,0.37,0,T10
 WO-101428,LD-DRY-041,Drying Rotary valve 3,Drying,A,PM,PM-00144,Rotary valve clearance check,,24/09/2024 06:00,01/10/2024,30/09/2024,Completed,0.68,0,T08
 WO-101429,LD-EOL-028,End of Line Drive motor 4,End of Line,C,PM,PM-00465,Motor visual inspection & temperature check,,24/09/2024 06:00,01/10/2024,12/10/2024,Completed,0.41,0,T09
-WO-101430,LD-FLK-011,Flaking Flaking roll 3,Flaking,C,PM,PM-00167,Flaking roll gap & bearing temperature check,,24/09/2024 06:00,01/10/2024,30/09/2024,Completed,0.68,0,T12
-WO-101431,LD-FLK-017,Flaking Flaking roll 9,Flaking,B,PM,PM-00179,Flaking roll gap & bearing temperature check,,24/09/2024 06:00,01/10/2024,28/09/2024,Completed,0.54,0,T10
+WO-101430,LD-FLK-011,Flaking roll 3,Flaking,C,PM,PM-00167,Flaking roll gap & bearing temperature check,,24/09/2024 06:00,01/10/2024,30/09/2024,Completed,0.68,0,T12
+WO-101431,LD-FLK-017,Flaking roll 9,Flaking,B,PM,PM-00179,Flaking roll gap & bearing temperature check,,24/09/2024 06:00,01/10/2024,28/09/2024,Completed,0.54,0,T10
 WO-101432,LD-PPK-005,Primary Packing Flow wrapper 5,Primary Packing,C,PM,PM-00363,Flow wrapper jaw & knife inspection,,24/09/2024 06:00,01/10/2024,29/09/2024,Completed,0.72,0,T09
 WO-101433,LD-PPK-007,Primary Packing Carton erector 1,Primary Packing,A,PM,PM-00367,Carton erector suction cup & glue check,,24/09/2024 06:00,01/10/2024,29/09/2024,Completed,0.36,0,T11
 WO-101434,LD-PPK-011,Primary Packing Checkweigher 2,Primary Packing,B,PM,PM-00374,Checkweigher calibration check,,24/09/2024 06:00,01/10/2024,30/09/2024,Completed,0.39,0,T01
@@ -381,7 +381,7 @@ WO-101443,LD-EOL-027,End of Line Drive motor 3,End of Line,B,PM,PM-00464,Grease 
 WO-101444,LD-EOL-035,End of Line Pneumatic cylinder 5,End of Line,A,PM,PM-00475,Pneumatic leak check,,25/09/2024 06:00,02/10/2024,18/10/2024,Completed,0.5,0,T03
 WO-101445,LD-FLK-002,Flaking Drive motor 2,Flaking,B,PM,PM-00149,Motor visual inspection & temperature check,,25/09/2024 06:00,02/10/2024,29/09/2024,Completed,0.7,0,T09
 WO-101446,LD-FLK-003,Flaking Drive motor 3,Flaking,C,PM,PM-00152,Grease motor bearings,,25/09/2024 06:00,02/10/2024,02/10/2024,Completed,0.6,0,T12
-WO-101447,LD-FLK-010,Flaking Flaking roll 2,Flaking,B,PM,PM-00165,Flaking roll gap & bearing temperature check,,25/09/2024 06:00,02/10/2024,30/09/2024,Completed,0.39,0,T03
+WO-101447,LD-FLK-010,Flaking roll 2,Flaking,B,PM,PM-00165,Flaking roll gap & bearing temperature check,,25/09/2024 06:00,02/10/2024,30/09/2024,Completed,0.39,0,T03
 WO-101448,LD-FLK-026,Flaking Conveyor 4,Flaking,B,PM,PM-00197,Conveyor belt tension & tracking check,,25/09/2024 06:00,02/10/2024,02/10/2024,Completed,0.74,0,T07
 WO-101449,LD-FRM-018,Forming Conveyor 2,Forming,A,PM,PM-00249,Conveyor belt tension & tracking check,,25/09/2024 06:00,02/10/2024,02/10/2024,Completed,0.68,0,T12
 WO-101450,LD-FRM-039,Forming Pneumatic cylinder 9,Forming,A,PM,PM-00283,Pneumatic leak check,,25/09/2024 06:00,02/10/2024,02/10/2024,Completed,0.57,0,T01
@@ -404,7 +404,7 @@ WO-101466,LD-FLK-036,Flaking Gearbox 6,Flaking,B,PM,PM-00217,Check gearbox oil l
 WO-101467,LD-FRM-021,Forming Conveyor 5,Forming,B,PM,PM-00255,Conveyor belt tension & tracking check,,26/09/2024 06:00,03/10/2024,06/10/2024,Completed,0.65,0,T05
 WO-101468,LD-PPK-006,Primary Packing Flow wrapper 6,Primary Packing,C,PM,PM-00365,Flow wrapper jaw & knife inspection,,26/09/2024 06:00,03/10/2024,07/10/2024,Completed,0.45,0,T07
 WO-101469,LD-PPK-018,Primary Packing Conveyor 3,Primary Packing,C,PM,PM-00380,Conveyor belt tension & tracking check,,26/09/2024 06:00,03/10/2024,03/10/2024,Completed,0.38,0,T07
-WO-101470,LD-FLK-015,Flaking Flaking roll 7,Flaking,B,Corrective,PM-00175,Found on PM: bearing - planned repair,Mechanical - bearing,26/09/2024 13:00,05/10/2024,05/10/2024,Completed,3.55,0,T12
+WO-101470,LD-FLK-015,Flaking roll 7,Flaking,B,Corrective,PM-00175,Found on PM: bearing - planned repair,Mechanical - bearing,26/09/2024 13:00,05/10/2024,05/10/2024,Completed,3.55,0,T12
 WO-101471,LD-FLK-023,Flaking Conveyor 1,Flaking,B,Corrective,PM-00191,Found on PM: bearing - planned repair,Mechanical - bearing,26/09/2024 15:00,01/10/2024,01/10/2024,Completed,1.01,0,T04
 WO-101472,LD-PPK-041,Primary Packing Pneumatic cylinder 4,Primary Packing,B,Corrective,PM-00413,Found on PM: seal - planned repair,Mechanical - seal,26/09/2024 18:00,04/10/2024,04/10/2024,Completed,0.77,0,T07
 WO-101473,LD-FRM-032,Forming Pneumatic cylinder 2,Forming,A,Reactive,,Breakdown: Pneumatic leak,Pneumatic leak,26/09/2024 23:38,,26/09/2024,Completed,0.21,7,T01
@@ -417,7 +417,7 @@ WO-101479,LD-DRY-027,Drying Conveyor 5,Drying,A,PM,PM-00126,Conveyor belt tensio
 WO-101480,LD-EOL-001,End of Line Case packer 1,End of Line,A,PM,PM-00416,Case packer gripper & guide inspection,,27/09/2024 06:00,04/10/2024,01/10/2024,Completed,0.57,0,T02
 WO-101481,LD-EOL-023,End of Line Conveyor 13,End of Line,C,PM,PM-00455,Conveyor belt tension & tracking check,,27/09/2024 06:00,04/10/2024,17/10/2024,Completed,0.58,0,T10
 WO-101482,LD-FLK-007,Flaking Drive motor 7,Flaking,B,PM,PM-00159,Motor visual inspection & temperature check,,27/09/2024 06:00,04/10/2024,04/10/2024,Completed,0.51,0,T07
-WO-101483,LD-FLK-013,Flaking Flaking roll 5,Flaking,B,PM,PM-00172,Regrind / swap flaking roll,,27/09/2024 06:00,04/10/2024,09/10/2024,Completed,3.67,0,T03
+WO-101483,LD-FLK-013,Flaking roll 5,Flaking,B,PM,PM-00172,Regrind / swap flaking roll,,27/09/2024 06:00,04/10/2024,09/10/2024,Completed,3.67,0,T03
 WO-101484,LD-FLK-021,Flaking Hydraulic power unit 3,Flaking,B,PM,PM-00187,"HPU oil level, filter & leak check",,27/09/2024 06:00,04/10/2024,01/10/2024,Completed,0.42,0,T06
 WO-101485,LD-FRM-004,Forming Drive motor 4,Forming,B,PM,PM-00231,Motor visual inspection & temperature check,,27/09/2024 06:00,04/10/2024,01/10/2024,Completed,0.71,0,T03
 WO-101486,LD-FRM-007,Forming Servo drive 1,Forming,C,PM,PM-00237,Servo drive fan & fault log check,,27/09/2024 06:00,04/10/2024,01/10/2024,Completed,0.37,0,T11

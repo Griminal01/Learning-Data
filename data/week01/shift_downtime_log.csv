@@ -120,6 +120,6 @@ Date,Start Time,Shift,Zone,Asset,Asset Description,Category,Cause,Minutes
 13/06/2026,19:37,Nights,Primary Packing,LD-PPK-042,Primary Packing Pneumatic cylinder 5,Breakdown,Pneumatic leak,89
 13/06/2026,21:36,Nights,Forming,LD-FRM-024,Forming Conveyor 8,Breakdown,Mechanical - belt/chain,23
 13/06/2026,22:27,Nights,Primary Packing,LD-PPK-035,Primary Packing Servo drive 8,Minor stop,Sensor misread,2
-14/06/2026,06:16,Days,Flaking,LD-FLK-015,Flaking Flaking roll 7,Minor stop,Blockage,6
+14/06/2026,06:16,Days,Flaking,LD-FLK-015,Flaking roll 7,Minor stop,Blockage,6
 14/06/2026,10:30,Days,Primary Packing,LD-PPK-006,Primary Packing Flow wrapper 6,Minor stop,Sensor misread,3
 14/06/2026,14:45,Days,Primary Packing,LD-PPK-017,Primary Packing Conveyor 2,Minor stop,Guard door opened,9

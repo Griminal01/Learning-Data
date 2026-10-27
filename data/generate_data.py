@@ -163,7 +163,7 @@ def build_assets(rng):
                 install = (START + timedelta(days=rng.randint(30, 300))) if new_install else date(rng.randint(2008, 2022), rng.randint(1, 12), 1)
                 assets.append({
                     "asset_id": f"LD-{zcode}-{n:03d}",
-                    "asset_name": f"{zname} {tname} {i + 1}",
+                    "asset_name": (f"{tname} {i + 1}" if tname.split()[0] == zname.split()[0] else f"{zname} {tname} {i + 1}"),
                     "zone_code": zcode,
                     "zone": zname,
                     "asset_type": tname,
@@ -582,6 +582,18 @@ def main():
                         "Minutes": d["duration_min"]})
     write_csv(os.path.join(OUT, "week01", "shift_downtime_log.csv"), log,
               ["Date", "Start Time", "Shift", "Zone", "Asset", "Asset Description", "Category", "Cause", "Minutes"])
+
+    # Wide 'zone x week' downtime sheet, the shape people build by hand (for unpivot practice)
+    wide = {}
+    for d in dts:
+        if d["start"].date() >= date(2026, 1, 5):
+            wk = d["start"].date() - timedelta(days=d["start"].weekday())
+            wide.setdefault(amap[d["asset_id"]]["zone"], {}).setdefault(wk, 0)
+            wide[amap[d["asset_id"]]["zone"]][wk] += d["duration_min"]
+    weeks = sorted({w for z in wide.values() for w in z})
+    write_csv(os.path.join(OUT, "week07", "zone_downtime_by_week_wide.csv"),
+              [{"Zone": zn, **{f"w/c {w.strftime('%d/%m/%Y')}": wide.get(zn, {}).get(w, 0) for w in weeks}} for _, zn in ZONES],
+              ["Zone"] + [f"w/c {w.strftime('%d/%m/%Y')}" for w in weeks])
 
     build_sqlite(os.path.join(OUT, "line_d.db"), assets, tasks, wos, dts)
     build_vibration(rng)
