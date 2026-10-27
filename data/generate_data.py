@@ -537,6 +537,33 @@ def build_vibration(rng):
               ["bearing_id", "day", "rms_velocity_mm_s", "peak_accel_g", "crest_factor", "kurtosis", "temp_c", "rul_days", "fail_within_14d"])
 
 
+def build_sensor_rollout(rng, assets):
+    """Wireless vibration sensor rollout plan for rotating kit (Phase 3 dashboard page)."""
+    rotating = [a for a in assets if a["type_code"] in ("MTR", "GBX", "FAN", "PMP", "VAC", "ROL", "RVL")]
+    rows = []
+    for a in rotating:
+        wave = {"A": 1, "B": 2, "C": 3}[a["criticality"]]
+        planned = date(2026, 1, 12) + timedelta(weeks=(wave - 1) * 10 + rng.randint(0, 8))
+        r = rng.random()
+        if planned <= date(2026, 6, 30) and r < 0.75:
+            installed = planned + timedelta(days=rng.randint(-5, 25))
+            installed = min(installed, date(2026, 6, 30))
+            status = "Commissioned" if rng.random() < 0.8 else "Installed - not commissioned"
+        else:
+            installed, status = None, ("Overdue" if planned < date(2026, 6, 30) else "Planned")
+        rows.append({"sensor_id": f"VS-{len(rows) + 1:03d}", "asset_id": a["asset_id"], "rollout_wave": wave,
+                     "planned_date": iso(planned), "installed_date": iso(installed), "status": status})
+    write_csv(os.path.join(OUT, "csv", "sensor_rollout.csv"), rows,
+              ["sensor_id", "asset_id", "rollout_wave", "planned_date", "installed_date", "status"])
+    con = sqlite3.connect(os.path.join(OUT, "line_d.db"))
+    con.execute("""CREATE TABLE sensor_rollout (sensor_id TEXT PRIMARY KEY, asset_id TEXT NOT NULL REFERENCES assets(asset_id),
+                   rollout_wave INTEGER, planned_date TEXT, installed_date TEXT, status TEXT)""")
+    con.executemany("INSERT INTO sensor_rollout VALUES (?,?,?,?,?,?)",
+                    [(r["sensor_id"], r["asset_id"], r["rollout_wave"], r["planned_date"], r["installed_date"] or None, r["status"]) for r in rows])
+    con.commit()
+    con.close()
+
+
 def main():
     rng = random.Random(SEED)
     assets = build_assets(rng)
@@ -597,6 +624,7 @@ def main():
 
     build_sqlite(os.path.join(OUT, "line_d.db"), assets, tasks, wos, dts)
     build_vibration(rng)
+    build_sensor_rollout(rng, assets)
 
     print(f"assets={len(assets)} pm_tasks={len(tasks)} work_orders={len(wos)} downtime_events={len(dts)} week01_rows={len(log)}")
 
