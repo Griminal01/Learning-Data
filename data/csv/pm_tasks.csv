@@ -1,0 +1,476 @@
+pm_id,asset_id,task_description,task_type,frequency_days,est_minutes
+PM-00001,LD-COK-001,Motor visual inspection & temperature check,Inspection,28,30
+PM-00002,LD-COK-001,Grease motor bearings,Lubrication,91,45
+PM-00003,LD-COK-002,Motor visual inspection & temperature check,Inspection,28,30
+PM-00004,LD-COK-002,Grease motor bearings,Lubrication,91,45
+PM-00005,LD-COK-003,Motor visual inspection & temperature check,Inspection,28,30
+PM-00006,LD-COK-003,Grease motor bearings,Lubrication,91,45
+PM-00007,LD-COK-004,Motor visual inspection & temperature check,Inspection,28,30
+PM-00008,LD-COK-004,Grease motor bearings,Lubrication,91,45
+PM-00009,LD-COK-005,Motor visual inspection & temperature check,Inspection,28,30
+PM-00010,LD-COK-005,Grease motor bearings,Lubrication,91,45
+PM-00011,LD-COK-006,Motor visual inspection & temperature check,Inspection,28,30
+PM-00012,LD-COK-006,Grease motor bearings,Lubrication,91,45
+PM-00013,LD-COK-007,Motor visual inspection & temperature check,Inspection,28,30
+PM-00014,LD-COK-007,Grease motor bearings,Lubrication,91,45
+PM-00015,LD-COK-008,Motor visual inspection & temperature check,Inspection,28,30
+PM-00016,LD-COK-008,Grease motor bearings,Lubrication,91,45
+PM-00017,LD-COK-009,Motor visual inspection & temperature check,Inspection,28,30
+PM-00018,LD-COK-009,Grease motor bearings,Lubrication,91,45
+PM-00019,LD-COK-010,Motor visual inspection & temperature check,Inspection,28,30
+PM-00020,LD-COK-010,Grease motor bearings,Lubrication,91,45
+PM-00021,LD-COK-011,Check gearbox oil level & leaks,Inspection,28,30
+PM-00022,LD-COK-011,Gearbox oil change,Lubrication,182,45
+PM-00023,LD-COK-012,Check gearbox oil level & leaks,Inspection,28,30
+PM-00024,LD-COK-012,Gearbox oil change,Lubrication,182,45
+PM-00025,LD-COK-013,Check gearbox oil level & leaks,Inspection,28,30
+PM-00026,LD-COK-013,Gearbox oil change,Lubrication,182,45
+PM-00027,LD-COK-014,Check gearbox oil level & leaks,Inspection,28,30
+PM-00028,LD-COK-014,Gearbox oil change,Lubrication,182,45
+PM-00029,LD-COK-015,Check gearbox oil level & leaks,Inspection,28,30
+PM-00030,LD-COK-015,Gearbox oil change,Lubrication,182,45
+PM-00031,LD-COK-016,Check gearbox oil level & leaks,Inspection,28,30
+PM-00032,LD-COK-016,Gearbox oil change,Lubrication,182,45
+PM-00033,LD-COK-017,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00034,LD-COK-017,Replace conveyor belt,Replacement,182,180
+PM-00035,LD-COK-018,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00036,LD-COK-018,Replace conveyor belt,Replacement,182,180
+PM-00037,LD-COK-019,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00038,LD-COK-019,Replace conveyor belt,Replacement,182,180
+PM-00039,LD-COK-020,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00040,LD-COK-020,Replace conveyor belt,Replacement,182,180
+PM-00041,LD-COK-021,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00042,LD-COK-021,Replace conveyor belt,Replacement,182,180
+PM-00043,LD-COK-022,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00044,LD-COK-022,Replace conveyor belt,Replacement,182,180
+PM-00045,LD-COK-023,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00046,LD-COK-023,Replace conveyor belt,Replacement,182,180
+PM-00047,LD-COK-024,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00048,LD-COK-024,Replace conveyor belt,Replacement,182,180
+PM-00049,LD-COK-025,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00050,LD-COK-025,Replace conveyor belt,Replacement,182,180
+PM-00051,LD-COK-026,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00052,LD-COK-026,Replace conveyor belt,Replacement,182,180
+PM-00053,LD-COK-027,Pump seal & vibration check,Inspection,28,30
+PM-00054,LD-COK-027,Replace pump mechanical seal,Replacement,365,180
+PM-00055,LD-COK-028,Pump seal & vibration check,Inspection,28,30
+PM-00056,LD-COK-028,Replace pump mechanical seal,Replacement,365,180
+PM-00057,LD-COK-029,Pump seal & vibration check,Inspection,28,30
+PM-00058,LD-COK-029,Replace pump mechanical seal,Replacement,365,180
+PM-00059,LD-COK-030,Pump seal & vibration check,Inspection,28,30
+PM-00060,LD-COK-030,Replace pump mechanical seal,Replacement,365,180
+PM-00061,LD-COK-031,Pump seal & vibration check,Inspection,28,30
+PM-00062,LD-COK-031,Replace pump mechanical seal,Replacement,365,180
+PM-00063,LD-COK-032,Pump seal & vibration check,Inspection,28,30
+PM-00064,LD-COK-032,Replace pump mechanical seal,Replacement,365,180
+PM-00065,LD-COK-033,Pump seal & vibration check,Inspection,28,30
+PM-00066,LD-COK-033,Replace pump mechanical seal,Replacement,365,180
+PM-00067,LD-COK-034,Pump seal & vibration check,Inspection,28,30
+PM-00068,LD-COK-034,Replace pump mechanical seal,Replacement,365,180
+PM-00069,LD-COK-035,Calibrate transmitter,Inspection,182,30
+PM-00070,LD-COK-036,Calibrate transmitter,Inspection,182,30
+PM-00071,LD-COK-037,Calibrate transmitter,Inspection,182,30
+PM-00072,LD-COK-038,Calibrate transmitter,Inspection,182,30
+PM-00073,LD-COK-039,Calibrate transmitter,Inspection,182,30
+PM-00074,LD-COK-040,Calibrate transmitter,Inspection,182,30
+PM-00075,LD-COK-041,Calibrate transmitter,Inspection,182,30
+PM-00076,LD-COK-042,Pneumatic leak check,Inspection,28,30
+PM-00077,LD-COK-043,Pneumatic leak check,Inspection,28,30
+PM-00078,LD-DRY-001,Motor visual inspection & temperature check,Inspection,28,30
+PM-00079,LD-DRY-001,Grease motor bearings,Lubrication,91,45
+PM-00080,LD-DRY-002,Motor visual inspection & temperature check,Inspection,28,30
+PM-00081,LD-DRY-002,Grease motor bearings,Lubrication,91,45
+PM-00082,LD-DRY-003,Motor visual inspection & temperature check,Inspection,28,30
+PM-00083,LD-DRY-003,Grease motor bearings,Lubrication,91,45
+PM-00084,LD-DRY-004,Motor visual inspection & temperature check,Inspection,28,30
+PM-00085,LD-DRY-004,Grease motor bearings,Lubrication,91,45
+PM-00086,LD-DRY-005,Motor visual inspection & temperature check,Inspection,28,30
+PM-00087,LD-DRY-005,Grease motor bearings,Lubrication,91,45
+PM-00088,LD-DRY-006,Motor visual inspection & temperature check,Inspection,28,30
+PM-00089,LD-DRY-006,Grease motor bearings,Lubrication,91,45
+PM-00090,LD-DRY-007,Motor visual inspection & temperature check,Inspection,28,30
+PM-00091,LD-DRY-007,Grease motor bearings,Lubrication,91,45
+PM-00092,LD-DRY-008,Motor visual inspection & temperature check,Inspection,28,30
+PM-00093,LD-DRY-008,Grease motor bearings,Lubrication,91,45
+PM-00094,LD-DRY-009,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00095,LD-DRY-009,Grease fan bearings,Lubrication,91,45
+PM-00096,LD-DRY-010,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00097,LD-DRY-010,Grease fan bearings,Lubrication,91,45
+PM-00098,LD-DRY-011,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00099,LD-DRY-011,Grease fan bearings,Lubrication,91,45
+PM-00100,LD-DRY-012,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00101,LD-DRY-012,Grease fan bearings,Lubrication,91,45
+PM-00102,LD-DRY-013,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00103,LD-DRY-013,Grease fan bearings,Lubrication,91,45
+PM-00104,LD-DRY-014,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00105,LD-DRY-014,Grease fan bearings,Lubrication,91,45
+PM-00106,LD-DRY-015,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00107,LD-DRY-015,Grease fan bearings,Lubrication,91,45
+PM-00108,LD-DRY-016,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00109,LD-DRY-016,Grease fan bearings,Lubrication,91,45
+PM-00110,LD-DRY-017,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00111,LD-DRY-017,Grease fan bearings,Lubrication,91,45
+PM-00112,LD-DRY-018,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00113,LD-DRY-018,Grease fan bearings,Lubrication,91,45
+PM-00114,LD-DRY-019,Burner ignition & flame check,Inspection,28,30
+PM-00115,LD-DRY-020,Burner ignition & flame check,Inspection,28,30
+PM-00116,LD-DRY-021,Burner ignition & flame check,Inspection,28,30
+PM-00117,LD-DRY-022,Burner ignition & flame check,Inspection,28,30
+PM-00118,LD-DRY-023,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00119,LD-DRY-023,Replace conveyor belt,Replacement,182,180
+PM-00120,LD-DRY-024,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00121,LD-DRY-024,Replace conveyor belt,Replacement,182,180
+PM-00122,LD-DRY-025,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00123,LD-DRY-025,Replace conveyor belt,Replacement,182,180
+PM-00124,LD-DRY-026,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00125,LD-DRY-026,Replace conveyor belt,Replacement,182,180
+PM-00126,LD-DRY-027,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00127,LD-DRY-027,Replace conveyor belt,Replacement,182,180
+PM-00128,LD-DRY-028,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00129,LD-DRY-028,Replace conveyor belt,Replacement,182,180
+PM-00130,LD-DRY-029,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00131,LD-DRY-029,Replace conveyor belt,Replacement,182,180
+PM-00132,LD-DRY-030,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00133,LD-DRY-030,Replace conveyor belt,Replacement,182,180
+PM-00134,LD-DRY-031,Calibrate transmitter,Inspection,182,30
+PM-00135,LD-DRY-032,Calibrate transmitter,Inspection,182,30
+PM-00136,LD-DRY-033,Calibrate transmitter,Inspection,182,30
+PM-00137,LD-DRY-034,Calibrate transmitter,Inspection,182,30
+PM-00138,LD-DRY-035,Calibrate transmitter,Inspection,182,30
+PM-00139,LD-DRY-036,Calibrate transmitter,Inspection,182,30
+PM-00140,LD-DRY-037,Calibrate transmitter,Inspection,182,30
+PM-00141,LD-DRY-038,Calibrate transmitter,Inspection,182,30
+PM-00142,LD-DRY-039,Rotary valve clearance check,Inspection,56,30
+PM-00143,LD-DRY-040,Rotary valve clearance check,Inspection,56,30
+PM-00144,LD-DRY-041,Rotary valve clearance check,Inspection,56,30
+PM-00145,LD-DRY-042,Rotary valve clearance check,Inspection,56,30
+PM-00146,LD-DRY-043,Rotary valve clearance check,Inspection,56,30
+PM-00147,LD-FLK-001,Motor visual inspection & temperature check,Inspection,28,30
+PM-00148,LD-FLK-001,Grease motor bearings,Lubrication,91,45
+PM-00149,LD-FLK-002,Motor visual inspection & temperature check,Inspection,28,30
+PM-00150,LD-FLK-002,Grease motor bearings,Lubrication,91,45
+PM-00151,LD-FLK-003,Motor visual inspection & temperature check,Inspection,28,30
+PM-00152,LD-FLK-003,Grease motor bearings,Lubrication,91,45
+PM-00153,LD-FLK-004,Motor visual inspection & temperature check,Inspection,28,30
+PM-00154,LD-FLK-004,Grease motor bearings,Lubrication,91,45
+PM-00155,LD-FLK-005,Motor visual inspection & temperature check,Inspection,28,30
+PM-00156,LD-FLK-005,Grease motor bearings,Lubrication,91,45
+PM-00157,LD-FLK-006,Motor visual inspection & temperature check,Inspection,28,30
+PM-00158,LD-FLK-006,Grease motor bearings,Lubrication,91,45
+PM-00159,LD-FLK-007,Motor visual inspection & temperature check,Inspection,28,30
+PM-00160,LD-FLK-007,Grease motor bearings,Lubrication,91,45
+PM-00161,LD-FLK-008,Motor visual inspection & temperature check,Inspection,28,30
+PM-00162,LD-FLK-008,Grease motor bearings,Lubrication,91,45
+PM-00163,LD-FLK-009,Flaking roll gap & bearing temperature check,Inspection,14,30
+PM-00164,LD-FLK-009,Regrind / swap flaking roll,Replacement,120,180
+PM-00165,LD-FLK-010,Flaking roll gap & bearing temperature check,Inspection,14,30
+PM-00166,LD-FLK-010,Regrind / swap flaking roll,Replacement,120,180
+PM-00167,LD-FLK-011,Flaking roll gap & bearing temperature check,Inspection,14,30
+PM-00168,LD-FLK-011,Regrind / swap flaking roll,Replacement,120,180
+PM-00169,LD-FLK-012,Flaking roll gap & bearing temperature check,Inspection,14,30
+PM-00170,LD-FLK-012,Regrind / swap flaking roll,Replacement,120,180
+PM-00171,LD-FLK-013,Flaking roll gap & bearing temperature check,Inspection,14,30
+PM-00172,LD-FLK-013,Regrind / swap flaking roll,Replacement,120,180
+PM-00173,LD-FLK-014,Flaking roll gap & bearing temperature check,Inspection,14,30
+PM-00174,LD-FLK-014,Regrind / swap flaking roll,Replacement,120,180
+PM-00175,LD-FLK-015,Flaking roll gap & bearing temperature check,Inspection,14,30
+PM-00176,LD-FLK-015,Regrind / swap flaking roll,Replacement,120,180
+PM-00177,LD-FLK-016,Flaking roll gap & bearing temperature check,Inspection,14,30
+PM-00178,LD-FLK-016,Regrind / swap flaking roll,Replacement,120,180
+PM-00179,LD-FLK-017,Flaking roll gap & bearing temperature check,Inspection,14,30
+PM-00180,LD-FLK-017,Regrind / swap flaking roll,Replacement,120,180
+PM-00181,LD-FLK-018,Flaking roll gap & bearing temperature check,Inspection,14,30
+PM-00182,LD-FLK-018,Regrind / swap flaking roll,Replacement,120,180
+PM-00183,LD-FLK-019,"HPU oil level, filter & leak check",Inspection,28,30
+PM-00184,LD-FLK-019,Change HPU filter,Replacement,182,180
+PM-00185,LD-FLK-020,"HPU oil level, filter & leak check",Inspection,28,30
+PM-00186,LD-FLK-020,Change HPU filter,Replacement,182,180
+PM-00187,LD-FLK-021,"HPU oil level, filter & leak check",Inspection,28,30
+PM-00188,LD-FLK-021,Change HPU filter,Replacement,182,180
+PM-00189,LD-FLK-022,"HPU oil level, filter & leak check",Inspection,28,30
+PM-00190,LD-FLK-022,Change HPU filter,Replacement,182,180
+PM-00191,LD-FLK-023,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00192,LD-FLK-023,Replace conveyor belt,Replacement,182,180
+PM-00193,LD-FLK-024,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00194,LD-FLK-024,Replace conveyor belt,Replacement,182,180
+PM-00195,LD-FLK-025,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00196,LD-FLK-025,Replace conveyor belt,Replacement,182,180
+PM-00197,LD-FLK-026,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00198,LD-FLK-026,Replace conveyor belt,Replacement,182,180
+PM-00199,LD-FLK-027,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00200,LD-FLK-027,Replace conveyor belt,Replacement,182,180
+PM-00201,LD-FLK-028,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00202,LD-FLK-028,Replace conveyor belt,Replacement,182,180
+PM-00203,LD-FLK-029,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00204,LD-FLK-029,Replace conveyor belt,Replacement,182,180
+PM-00205,LD-FLK-030,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00206,LD-FLK-030,Replace conveyor belt,Replacement,182,180
+PM-00207,LD-FLK-031,Check gearbox oil level & leaks,Inspection,28,30
+PM-00208,LD-FLK-031,Gearbox oil change,Lubrication,182,45
+PM-00209,LD-FLK-032,Check gearbox oil level & leaks,Inspection,28,30
+PM-00210,LD-FLK-032,Gearbox oil change,Lubrication,182,45
+PM-00211,LD-FLK-033,Check gearbox oil level & leaks,Inspection,28,30
+PM-00212,LD-FLK-033,Gearbox oil change,Lubrication,182,45
+PM-00213,LD-FLK-034,Check gearbox oil level & leaks,Inspection,28,30
+PM-00214,LD-FLK-034,Gearbox oil change,Lubrication,182,45
+PM-00215,LD-FLK-035,Check gearbox oil level & leaks,Inspection,28,30
+PM-00216,LD-FLK-035,Gearbox oil change,Lubrication,182,45
+PM-00217,LD-FLK-036,Check gearbox oil level & leaks,Inspection,28,30
+PM-00218,LD-FLK-036,Gearbox oil change,Lubrication,182,45
+PM-00219,LD-FLK-037,Calibrate transmitter,Inspection,182,30
+PM-00220,LD-FLK-038,Calibrate transmitter,Inspection,182,30
+PM-00221,LD-FLK-039,Calibrate transmitter,Inspection,182,30
+PM-00222,LD-FLK-040,Calibrate transmitter,Inspection,182,30
+PM-00223,LD-FLK-041,Calibrate transmitter,Inspection,182,30
+PM-00224,LD-FLK-042,Calibrate transmitter,Inspection,182,30
+PM-00225,LD-FRM-001,Motor visual inspection & temperature check,Inspection,28,30
+PM-00226,LD-FRM-001,Grease motor bearings,Lubrication,91,45
+PM-00227,LD-FRM-002,Motor visual inspection & temperature check,Inspection,28,30
+PM-00228,LD-FRM-002,Grease motor bearings,Lubrication,91,45
+PM-00229,LD-FRM-003,Motor visual inspection & temperature check,Inspection,28,30
+PM-00230,LD-FRM-003,Grease motor bearings,Lubrication,91,45
+PM-00231,LD-FRM-004,Motor visual inspection & temperature check,Inspection,28,30
+PM-00232,LD-FRM-004,Grease motor bearings,Lubrication,91,45
+PM-00233,LD-FRM-005,Motor visual inspection & temperature check,Inspection,28,30
+PM-00234,LD-FRM-005,Grease motor bearings,Lubrication,91,45
+PM-00235,LD-FRM-006,Motor visual inspection & temperature check,Inspection,28,30
+PM-00236,LD-FRM-006,Grease motor bearings,Lubrication,91,45
+PM-00237,LD-FRM-007,Servo drive fan & fault log check,Inspection,91,30
+PM-00238,LD-FRM-008,Servo drive fan & fault log check,Inspection,91,30
+PM-00239,LD-FRM-009,Servo drive fan & fault log check,Inspection,91,30
+PM-00240,LD-FRM-010,Servo drive fan & fault log check,Inspection,91,30
+PM-00241,LD-FRM-011,Servo drive fan & fault log check,Inspection,91,30
+PM-00242,LD-FRM-012,Servo drive fan & fault log check,Inspection,91,30
+PM-00243,LD-FRM-013,Servo drive fan & fault log check,Inspection,91,30
+PM-00244,LD-FRM-014,Servo drive fan & fault log check,Inspection,91,30
+PM-00245,LD-FRM-015,Servo drive fan & fault log check,Inspection,91,30
+PM-00246,LD-FRM-016,Servo drive fan & fault log check,Inspection,91,30
+PM-00247,LD-FRM-017,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00248,LD-FRM-017,Replace conveyor belt,Replacement,182,180
+PM-00249,LD-FRM-018,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00250,LD-FRM-018,Replace conveyor belt,Replacement,182,180
+PM-00251,LD-FRM-019,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00252,LD-FRM-019,Replace conveyor belt,Replacement,182,180
+PM-00253,LD-FRM-020,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00254,LD-FRM-020,Replace conveyor belt,Replacement,182,180
+PM-00255,LD-FRM-021,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00256,LD-FRM-021,Replace conveyor belt,Replacement,182,180
+PM-00257,LD-FRM-022,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00258,LD-FRM-022,Replace conveyor belt,Replacement,182,180
+PM-00259,LD-FRM-023,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00260,LD-FRM-023,Replace conveyor belt,Replacement,182,180
+PM-00261,LD-FRM-024,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00262,LD-FRM-024,Replace conveyor belt,Replacement,182,180
+PM-00263,LD-FRM-025,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00264,LD-FRM-025,Replace conveyor belt,Replacement,182,180
+PM-00265,LD-FRM-026,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00266,LD-FRM-026,Replace conveyor belt,Replacement,182,180
+PM-00267,LD-FRM-027,Vacuum pump filter & vane check,Inspection,56,30
+PM-00268,LD-FRM-027,Replace vacuum pump vanes,Replacement,240,180
+PM-00269,LD-FRM-028,Vacuum pump filter & vane check,Inspection,56,30
+PM-00270,LD-FRM-028,Replace vacuum pump vanes,Replacement,240,180
+PM-00271,LD-FRM-029,Vacuum pump filter & vane check,Inspection,56,30
+PM-00272,LD-FRM-029,Replace vacuum pump vanes,Replacement,240,180
+PM-00273,LD-FRM-030,Vacuum pump filter & vane check,Inspection,56,30
+PM-00274,LD-FRM-030,Replace vacuum pump vanes,Replacement,240,180
+PM-00275,LD-FRM-031,Pneumatic leak check,Inspection,28,30
+PM-00276,LD-FRM-032,Pneumatic leak check,Inspection,28,30
+PM-00277,LD-FRM-033,Pneumatic leak check,Inspection,28,30
+PM-00278,LD-FRM-034,Pneumatic leak check,Inspection,28,30
+PM-00279,LD-FRM-035,Pneumatic leak check,Inspection,28,30
+PM-00280,LD-FRM-036,Pneumatic leak check,Inspection,28,30
+PM-00281,LD-FRM-037,Pneumatic leak check,Inspection,28,30
+PM-00282,LD-FRM-038,Pneumatic leak check,Inspection,28,30
+PM-00283,LD-FRM-039,Pneumatic leak check,Inspection,28,30
+PM-00284,LD-FRM-040,Pneumatic leak check,Inspection,28,30
+PM-00285,LD-FRM-041,Calibrate transmitter,Inspection,182,30
+PM-00286,LD-FRM-042,Calibrate transmitter,Inspection,182,30
+PM-00287,LD-FRM-043,Calibrate transmitter,Inspection,182,30
+PM-00288,LD-FRM-044,Calibrate transmitter,Inspection,182,30
+PM-00289,LD-BAK-001,Motor visual inspection & temperature check,Inspection,28,30
+PM-00290,LD-BAK-001,Grease motor bearings,Lubrication,91,45
+PM-00291,LD-BAK-002,Motor visual inspection & temperature check,Inspection,28,30
+PM-00292,LD-BAK-002,Grease motor bearings,Lubrication,91,45
+PM-00293,LD-BAK-003,Motor visual inspection & temperature check,Inspection,28,30
+PM-00294,LD-BAK-003,Grease motor bearings,Lubrication,91,45
+PM-00295,LD-BAK-004,Motor visual inspection & temperature check,Inspection,28,30
+PM-00296,LD-BAK-004,Grease motor bearings,Lubrication,91,45
+PM-00297,LD-BAK-005,Motor visual inspection & temperature check,Inspection,28,30
+PM-00298,LD-BAK-005,Grease motor bearings,Lubrication,91,45
+PM-00299,LD-BAK-006,Motor visual inspection & temperature check,Inspection,28,30
+PM-00300,LD-BAK-006,Grease motor bearings,Lubrication,91,45
+PM-00301,LD-BAK-007,Burner ignition & flame check,Inspection,28,30
+PM-00302,LD-BAK-008,Burner ignition & flame check,Inspection,28,30
+PM-00303,LD-BAK-009,Burner ignition & flame check,Inspection,28,30
+PM-00304,LD-BAK-010,Burner ignition & flame check,Inspection,28,30
+PM-00305,LD-BAK-011,Burner ignition & flame check,Inspection,28,30
+PM-00306,LD-BAK-012,Burner ignition & flame check,Inspection,28,30
+PM-00307,LD-BAK-013,Burner ignition & flame check,Inspection,28,30
+PM-00308,LD-BAK-014,Burner ignition & flame check,Inspection,28,30
+PM-00309,LD-BAK-015,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00310,LD-BAK-015,Grease fan bearings,Lubrication,91,45
+PM-00311,LD-BAK-016,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00312,LD-BAK-016,Grease fan bearings,Lubrication,91,45
+PM-00313,LD-BAK-017,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00314,LD-BAK-017,Grease fan bearings,Lubrication,91,45
+PM-00315,LD-BAK-018,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00316,LD-BAK-018,Grease fan bearings,Lubrication,91,45
+PM-00317,LD-BAK-019,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00318,LD-BAK-019,Grease fan bearings,Lubrication,91,45
+PM-00319,LD-BAK-020,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00320,LD-BAK-020,Grease fan bearings,Lubrication,91,45
+PM-00321,LD-BAK-021,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00322,LD-BAK-021,Grease fan bearings,Lubrication,91,45
+PM-00323,LD-BAK-022,Fan bearing vibration reading,Condition Monitoring,28,20
+PM-00324,LD-BAK-022,Grease fan bearings,Lubrication,91,45
+PM-00325,LD-BAK-023,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00326,LD-BAK-023,Replace conveyor belt,Replacement,182,180
+PM-00327,LD-BAK-024,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00328,LD-BAK-024,Replace conveyor belt,Replacement,182,180
+PM-00329,LD-BAK-025,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00330,LD-BAK-025,Replace conveyor belt,Replacement,182,180
+PM-00331,LD-BAK-026,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00332,LD-BAK-026,Replace conveyor belt,Replacement,182,180
+PM-00333,LD-BAK-027,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00334,LD-BAK-027,Replace conveyor belt,Replacement,182,180
+PM-00335,LD-BAK-028,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00336,LD-BAK-028,Replace conveyor belt,Replacement,182,180
+PM-00337,LD-BAK-029,Check gearbox oil level & leaks,Inspection,28,30
+PM-00338,LD-BAK-029,Gearbox oil change,Lubrication,182,45
+PM-00339,LD-BAK-030,Check gearbox oil level & leaks,Inspection,28,30
+PM-00340,LD-BAK-030,Gearbox oil change,Lubrication,182,45
+PM-00341,LD-BAK-031,Check gearbox oil level & leaks,Inspection,28,30
+PM-00342,LD-BAK-031,Gearbox oil change,Lubrication,182,45
+PM-00343,LD-BAK-032,Check gearbox oil level & leaks,Inspection,28,30
+PM-00344,LD-BAK-032,Gearbox oil change,Lubrication,182,45
+PM-00345,LD-BAK-033,Calibrate transmitter,Inspection,182,30
+PM-00346,LD-BAK-034,Calibrate transmitter,Inspection,182,30
+PM-00347,LD-BAK-035,Calibrate transmitter,Inspection,182,30
+PM-00348,LD-BAK-036,Calibrate transmitter,Inspection,182,30
+PM-00349,LD-BAK-037,Calibrate transmitter,Inspection,182,30
+PM-00350,LD-BAK-038,Calibrate transmitter,Inspection,182,30
+PM-00351,LD-BAK-039,Calibrate transmitter,Inspection,182,30
+PM-00352,LD-BAK-040,Calibrate transmitter,Inspection,182,30
+PM-00353,LD-BAK-041,Calibrate transmitter,Inspection,182,30
+PM-00354,LD-BAK-042,Calibrate transmitter,Inspection,182,30
+PM-00355,LD-PPK-001,Flow wrapper jaw & knife inspection,Inspection,7,30
+PM-00356,LD-PPK-001,Replace sealing jaws,Replacement,182,180
+PM-00357,LD-PPK-002,Flow wrapper jaw & knife inspection,Inspection,7,30
+PM-00358,LD-PPK-002,Replace sealing jaws,Replacement,182,180
+PM-00359,LD-PPK-003,Flow wrapper jaw & knife inspection,Inspection,7,30
+PM-00360,LD-PPK-003,Replace sealing jaws,Replacement,182,180
+PM-00361,LD-PPK-004,Flow wrapper jaw & knife inspection,Inspection,7,30
+PM-00362,LD-PPK-004,Replace sealing jaws,Replacement,182,180
+PM-00363,LD-PPK-005,Flow wrapper jaw & knife inspection,Inspection,7,30
+PM-00364,LD-PPK-005,Replace sealing jaws,Replacement,182,180
+PM-00365,LD-PPK-006,Flow wrapper jaw & knife inspection,Inspection,7,30
+PM-00366,LD-PPK-006,Replace sealing jaws,Replacement,182,180
+PM-00367,LD-PPK-007,Carton erector suction cup & glue check,Inspection,7,30
+PM-00368,LD-PPK-007,Replace suction cups,Replacement,91,180
+PM-00369,LD-PPK-008,Carton erector suction cup & glue check,Inspection,7,30
+PM-00370,LD-PPK-008,Replace suction cups,Replacement,91,180
+PM-00371,LD-PPK-009,Carton erector suction cup & glue check,Inspection,7,30
+PM-00372,LD-PPK-009,Replace suction cups,Replacement,91,180
+PM-00373,LD-PPK-010,Checkweigher calibration check,Inspection,7,30
+PM-00374,LD-PPK-011,Checkweigher calibration check,Inspection,7,30
+PM-00375,LD-PPK-012,Checkweigher calibration check,Inspection,7,30
+PM-00376,LD-PPK-016,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00377,LD-PPK-016,Replace conveyor belt,Replacement,182,180
+PM-00378,LD-PPK-017,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00379,LD-PPK-017,Replace conveyor belt,Replacement,182,180
+PM-00380,LD-PPK-018,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00381,LD-PPK-018,Replace conveyor belt,Replacement,182,180
+PM-00382,LD-PPK-019,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00383,LD-PPK-019,Replace conveyor belt,Replacement,182,180
+PM-00384,LD-PPK-020,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00385,LD-PPK-020,Replace conveyor belt,Replacement,182,180
+PM-00386,LD-PPK-021,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00387,LD-PPK-021,Replace conveyor belt,Replacement,182,180
+PM-00388,LD-PPK-022,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00389,LD-PPK-022,Replace conveyor belt,Replacement,182,180
+PM-00390,LD-PPK-023,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00391,LD-PPK-023,Replace conveyor belt,Replacement,182,180
+PM-00392,LD-PPK-024,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00393,LD-PPK-024,Replace conveyor belt,Replacement,182,180
+PM-00394,LD-PPK-025,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00395,LD-PPK-025,Replace conveyor belt,Replacement,182,180
+PM-00396,LD-PPK-026,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00397,LD-PPK-026,Replace conveyor belt,Replacement,182,180
+PM-00398,LD-PPK-027,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00399,LD-PPK-027,Replace conveyor belt,Replacement,182,180
+PM-00400,LD-PPK-028,Servo drive fan & fault log check,Inspection,91,30
+PM-00401,LD-PPK-029,Servo drive fan & fault log check,Inspection,91,30
+PM-00402,LD-PPK-030,Servo drive fan & fault log check,Inspection,91,30
+PM-00403,LD-PPK-031,Servo drive fan & fault log check,Inspection,91,30
+PM-00404,LD-PPK-032,Servo drive fan & fault log check,Inspection,91,30
+PM-00405,LD-PPK-033,Servo drive fan & fault log check,Inspection,91,30
+PM-00406,LD-PPK-034,Servo drive fan & fault log check,Inspection,91,30
+PM-00407,LD-PPK-035,Servo drive fan & fault log check,Inspection,91,30
+PM-00408,LD-PPK-036,Servo drive fan & fault log check,Inspection,91,30
+PM-00409,LD-PPK-037,Servo drive fan & fault log check,Inspection,91,30
+PM-00410,LD-PPK-038,Pneumatic leak check,Inspection,28,30
+PM-00411,LD-PPK-039,Pneumatic leak check,Inspection,28,30
+PM-00412,LD-PPK-040,Pneumatic leak check,Inspection,28,30
+PM-00413,LD-PPK-041,Pneumatic leak check,Inspection,28,30
+PM-00414,LD-PPK-042,Pneumatic leak check,Inspection,28,30
+PM-00415,LD-PPK-043,Pneumatic leak check,Inspection,28,30
+PM-00416,LD-EOL-001,Case packer gripper & guide inspection,Inspection,14,30
+PM-00417,LD-EOL-001,Case packer overhaul,Replacement,365,180
+PM-00418,LD-EOL-002,Case packer gripper & guide inspection,Inspection,14,30
+PM-00419,LD-EOL-002,Case packer overhaul,Replacement,365,180
+PM-00420,LD-EOL-003,Case packer gripper & guide inspection,Inspection,14,30
+PM-00421,LD-EOL-003,Case packer overhaul,Replacement,365,180
+PM-00422,LD-EOL-004,Palletiser chain & safety circuit check,Inspection,14,30
+PM-00423,LD-EOL-004,Replace palletiser lift chain,Replacement,365,180
+PM-00424,LD-EOL-005,Palletiser chain & safety circuit check,Inspection,14,30
+PM-00425,LD-EOL-005,Replace palletiser lift chain,Replacement,365,180
+PM-00426,LD-EOL-006,Stretch wrapper film carriage check,Inspection,28,30
+PM-00427,LD-EOL-007,Stretch wrapper film carriage check,Inspection,28,30
+PM-00428,LD-EOL-008,Clean printhead & check applicator,Inspection,7,30
+PM-00429,LD-EOL-009,Clean printhead & check applicator,Inspection,7,30
+PM-00430,LD-EOL-010,Clean printhead & check applicator,Inspection,7,30
+PM-00431,LD-EOL-011,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00432,LD-EOL-011,Replace conveyor belt,Replacement,182,180
+PM-00433,LD-EOL-012,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00434,LD-EOL-012,Replace conveyor belt,Replacement,182,180
+PM-00435,LD-EOL-013,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00436,LD-EOL-013,Replace conveyor belt,Replacement,182,180
+PM-00437,LD-EOL-014,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00438,LD-EOL-014,Replace conveyor belt,Replacement,182,180
+PM-00439,LD-EOL-015,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00440,LD-EOL-015,Replace conveyor belt,Replacement,182,180
+PM-00441,LD-EOL-016,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00442,LD-EOL-016,Replace conveyor belt,Replacement,182,180
+PM-00443,LD-EOL-017,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00444,LD-EOL-017,Replace conveyor belt,Replacement,182,180
+PM-00445,LD-EOL-018,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00446,LD-EOL-018,Replace conveyor belt,Replacement,182,180
+PM-00447,LD-EOL-019,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00448,LD-EOL-019,Replace conveyor belt,Replacement,182,180
+PM-00449,LD-EOL-020,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00450,LD-EOL-020,Replace conveyor belt,Replacement,182,180
+PM-00451,LD-EOL-021,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00452,LD-EOL-021,Replace conveyor belt,Replacement,182,180
+PM-00453,LD-EOL-022,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00454,LD-EOL-022,Replace conveyor belt,Replacement,182,180
+PM-00455,LD-EOL-023,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00456,LD-EOL-023,Replace conveyor belt,Replacement,182,180
+PM-00457,LD-EOL-024,Conveyor belt tension & tracking check,Inspection,14,30
+PM-00458,LD-EOL-024,Replace conveyor belt,Replacement,182,180
+PM-00459,LD-EOL-025,Motor visual inspection & temperature check,Inspection,28,30
+PM-00460,LD-EOL-025,Grease motor bearings,Lubrication,91,45
+PM-00461,LD-EOL-026,Motor visual inspection & temperature check,Inspection,28,30
+PM-00462,LD-EOL-026,Grease motor bearings,Lubrication,91,45
+PM-00463,LD-EOL-027,Motor visual inspection & temperature check,Inspection,28,30
+PM-00464,LD-EOL-027,Grease motor bearings,Lubrication,91,45
+PM-00465,LD-EOL-028,Motor visual inspection & temperature check,Inspection,28,30
+PM-00466,LD-EOL-028,Grease motor bearings,Lubrication,91,45
+PM-00467,LD-EOL-029,Motor visual inspection & temperature check,Inspection,28,30
+PM-00468,LD-EOL-029,Grease motor bearings,Lubrication,91,45
+PM-00469,LD-EOL-030,Motor visual inspection & temperature check,Inspection,28,30
+PM-00470,LD-EOL-030,Grease motor bearings,Lubrication,91,45
+PM-00471,LD-EOL-031,Pneumatic leak check,Inspection,28,30
+PM-00472,LD-EOL-032,Pneumatic leak check,Inspection,28,30
+PM-00473,LD-EOL-033,Pneumatic leak check,Inspection,28,30
+PM-00474,LD-EOL-034,Pneumatic leak check,Inspection,28,30
+PM-00475,LD-EOL-035,Pneumatic leak check,Inspection,28,30

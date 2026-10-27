@@ -1,0 +1,125 @@
+Date,Start Time,Shift,Zone,Asset,Asset Description,Category,Cause,Minutes
+01/06/2026,02:08,Nights,Primary Packing,LD-PPK-039,Primary Packing Pneumatic cylinder 2,Minor stop,Jam / blockage,4
+01/06/2026,04:06,Nights,Primary Packing,LD-PPK-021,Primary Packing Conveyor 6,Breakdown,Mechanical - bearing,36
+01/06/2026,04:21,Nights,End of Line,LD-EOL-031,End of Line Pneumatic cylinder 1,Minor stop,Film / carton misfeed,14
+01/06/2026,05:56,Nights,Primary Packing,LD-PPK-002,Primary Packing Flow wrapper 2,Minor stop,Guard door opened,13
+01/06/2026,06:24,Days,Flaking,LD-FLK-032,Flaking Gearbox 2,Minor stop,Sensor misread,2
+01/06/2026,07:09,Days,End of Line,LD-EOL-028,End of Line Drive motor 4,Minor stop,Guard door opened,12
+01/06/2026,11:46,Days,Primary Packing,LD-PPK-031,Primary Packing Servo drive 4,Minor stop,Guard door opened,15
+01/06/2026,11:48,Days,Primary Packing,LD-PPK-013,Primary Packing Metal detector 1,Minor stop,Sensor misread,12
+01/06/2026,19:52,Nights,Primary Packing,LD-PPK-001,Primary Packing Flow wrapper 1,Minor stop,Sensor misread,2
+01/06/2026,20:09,Nights,Forming,LD-FRM-006,Forming Drive motor 6,Minor stop,Product build-up,12
+01/06/2026,23:07,Nights,Flaking,LD-FLK-039,Flaking Sensor / transmitter 3,Breakdown,Electrical - sensor,100
+02/06/2026,08:16,Days,Primary Packing,LD-PPK-031,Primary Packing Servo drive 4,Minor stop,Sensor misread,10
+02/06/2026,08:43,Days,Cooking,LD-COK-041,Cooking Sensor / transmitter 7,Minor stop,Guard door opened,2
+02/06/2026,16:23,Days,End of Line,LD-EOL-019,End of Line Conveyor 9,Minor stop,Film / carton misfeed,3
+02/06/2026,16:28,Days,End of Line,LD-EOL-003,End of Line Case packer 3,Minor stop,Sensor misread,9
+02/06/2026,16:45,Days,End of Line,LD-EOL-008,End of Line Label printer applicator 1,Breakdown,Operational - jam,34
+02/06/2026,18:01,Nights,Primary Packing,LD-PPK-019,Primary Packing Conveyor 4,Minor stop,Guard door opened,9
+02/06/2026,20:54,Nights,End of Line,LD-EOL-008,End of Line Label printer applicator 1,Minor stop,Jam / blockage,9
+02/06/2026,23:07,Nights,Primary Packing,LD-PPK-012,Primary Packing Checkweigher 3,Minor stop,Guard door opened,10
+03/06/2026,03:06,Nights,Primary Packing,LD-PPK-009,Primary Packing Carton erector 3,Minor stop,Guard door opened,12
+03/06/2026,12:20,Days,End of Line,LD-EOL-006,End of Line Stretch wrapper 1,Minor stop,Jam / blockage,10
+03/06/2026,15:55,Days,Cooking,LD-COK-013,Cooking Gearbox 3,Minor stop,Guard door opened,2
+03/06/2026,22:09,Nights,End of Line,LD-EOL-005,End of Line Palletiser 2,Minor stop,Sensor misread,3
+04/06/2026,01:41,Nights,Forming,LD-FRM-023,Forming Conveyor 7,Minor stop,Guard door opened,14
+04/06/2026,04:06,Nights,Forming,LD-FRM-039,Forming Pneumatic cylinder 9,Minor stop,Guard door opened,7
+04/06/2026,07:08,Days,Primary Packing,LD-PPK-037,Primary Packing Servo drive 10,Minor stop,Film / carton misfeed,6
+04/06/2026,09:48,Days,Cooking,LD-COK-007,Cooking Drive motor 7,Minor stop,Blockage,8
+04/06/2026,16:15,Days,Forming,LD-FRM-029,Forming Vacuum pump 3,Breakdown,Mechanical - bearing,177
+04/06/2026,22:04,Nights,Primary Packing,LD-PPK-029,Primary Packing Servo drive 2,Minor stop,Film / carton misfeed,12
+04/06/2026,23:02,Nights,Forming,LD-FRM-027,Forming Vacuum pump 1,Minor stop,Blockage,6
+05/06/2026,02:52,Nights,Primary Packing,LD-PPK-010,Primary Packing Checkweigher 1,Minor stop,Jam / blockage,3
+05/06/2026,04:36,Nights,End of Line,LD-EOL-011,End of Line Conveyor 1,Minor stop,Sensor misread,7
+05/06/2026,06:57,Days,Primary Packing,LD-PPK-022,Primary Packing Conveyor 7,Minor stop,Film / carton misfeed,6
+05/06/2026,09:30,Days,Primary Packing,LD-PPK-017,Primary Packing Conveyor 2,Minor stop,Jam / blockage,9
+05/06/2026,10:20,Days,End of Line,LD-EOL-016,End of Line Conveyor 6,Minor stop,Jam / blockage,10
+05/06/2026,11:21,Days,End of Line,LD-EOL-016,End of Line Conveyor 6,Minor stop,Film / carton misfeed,2
+05/06/2026,12:38,Days,Primary Packing,LD-PPK-022,Primary Packing Conveyor 7,Minor stop,Jam / blockage,8
+05/06/2026,13:27,Days,Baking,LD-BAK-040,Baking Sensor / transmitter 8,Minor stop,Guard door opened,12
+05/06/2026,20:25,Nights,Cooking,LD-COK-030,Cooking Pump 4,Minor stop,Guard door opened,5
+05/06/2026,22:26,Nights,End of Line,LD-EOL-027,End of Line Drive motor 3,Minor stop,Sensor misread,13
+06/06/2026,00:27,Nights,Primary Packing,LD-PPK-018,Primary Packing Conveyor 3,Minor stop,Guard door opened,6
+06/06/2026,02:19,Nights,Primary Packing,LD-PPK-037,Primary Packing Servo drive 10,Minor stop,Film / carton misfeed,5
+06/06/2026,02:45,Nights,Forming,LD-FRM-012,Forming Servo drive 6,Minor stop,Guard door opened,6
+06/06/2026,03:04,Nights,Primary Packing,LD-PPK-016,Primary Packing Conveyor 1,Minor stop,Film / carton misfeed,8
+06/06/2026,03:24,Nights,Drying,LD-DRY-036,Drying Sensor / transmitter 6,Minor stop,Product build-up,8
+06/06/2026,12:34,Days,End of Line,LD-EOL-018,End of Line Conveyor 8,Minor stop,Jam / blockage,4
+06/06/2026,12:35,Days,Forming,LD-FRM-021,Forming Conveyor 5,Minor stop,Blockage,10
+06/06/2026,14:07,Days,Forming,LD-FRM-027,Forming Vacuum pump 1,Minor stop,Sensor misread,4
+06/06/2026,14:15,Days,Forming,LD-FRM-016,Forming Servo drive 10,Breakdown,Mechanical - cooling fan,54
+06/06/2026,14:46,Days,End of Line,LD-EOL-032,End of Line Pneumatic cylinder 2,Minor stop,Film / carton misfeed,5
+06/06/2026,19:15,Nights,Primary Packing,LD-PPK-019,Primary Packing Conveyor 4,Breakdown,Electrical - sensor,30
+06/06/2026,21:40,Nights,Baking,LD-BAK-009,Baking Burner 3,Minor stop,Blockage,5
+06/06/2026,22:52,Nights,Drying,LD-DRY-006,Drying Drive motor 6,Minor stop,Product build-up,14
+07/06/2026,06:42,Days,Primary Packing,LD-PPK-008,Primary Packing Carton erector 2,Minor stop,Sensor misread,13
+07/06/2026,06:54,Days,End of Line,LD-EOL-016,End of Line Conveyor 6,Minor stop,Guard door opened,10
+07/06/2026,09:58,Days,Primary Packing,LD-PPK-030,Primary Packing Servo drive 3,Minor stop,Sensor misread,5
+07/06/2026,11:45,Days,Baking,LD-BAK-033,Baking Sensor / transmitter 1,Minor stop,Product build-up,13
+07/06/2026,17:29,Days,Primary Packing,LD-PPK-017,Primary Packing Conveyor 2,Minor stop,Jam / blockage,5
+07/06/2026,21:34,Nights,Flaking,LD-FLK-040,Flaking Sensor / transmitter 4,Minor stop,Guard door opened,6
+07/06/2026,21:34,Nights,End of Line,LD-EOL-035,End of Line Pneumatic cylinder 5,Minor stop,Film / carton misfeed,7
+07/06/2026,22:43,Nights,End of Line,LD-EOL-028,End of Line Drive motor 4,Minor stop,Sensor misread,8
+07/06/2026,23:14,Nights,Forming,LD-FRM-027,Forming Vacuum pump 1,Minor stop,Sensor misread,15
+08/06/2026,03:08,Nights,Cooking,LD-COK-014,Cooking Gearbox 4,Minor stop,Sensor misread,7
+08/06/2026,06:22,Days,Forming,LD-FRM-029,Forming Vacuum pump 3,Minor stop,Sensor misread,10
+08/06/2026,14:19,Days,Primary Packing,LD-PPK-012,Primary Packing Checkweigher 3,Minor stop,Film / carton misfeed,9
+08/06/2026,18:58,Nights,Primary Packing,LD-PPK-037,Primary Packing Servo drive 10,Minor stop,Jam / blockage,12
+08/06/2026,20:17,Nights,Baking,LD-BAK-009,Baking Burner 3,Minor stop,Guard door opened,14
+08/06/2026,20:25,Nights,Primary Packing,LD-PPK-039,Primary Packing Pneumatic cylinder 2,Minor stop,Sensor misread,10
+08/06/2026,21:12,Nights,Primary Packing,LD-PPK-011,Primary Packing Checkweigher 2,Minor stop,Jam / blockage,9
+08/06/2026,22:44,Nights,Forming,LD-FRM-042,Forming Sensor / transmitter 2,Minor stop,Guard door opened,6
+09/06/2026,01:39,Nights,Drying,LD-DRY-038,Drying Sensor / transmitter 8,Breakdown,Electrical - sensor,126
+09/06/2026,05:36,Nights,End of Line,LD-EOL-013,End of Line Conveyor 3,Breakdown,Mechanical - belt/chain,74
+09/06/2026,07:04,Days,End of Line,LD-EOL-014,End of Line Conveyor 4,Minor stop,Guard door opened,14
+09/06/2026,07:44,Days,Primary Packing,LD-PPK-023,Primary Packing Conveyor 8,Minor stop,Guard door opened,4
+09/06/2026,15:24,Days,Forming,LD-FRM-032,Forming Pneumatic cylinder 2,Minor stop,Sensor misread,7
+09/06/2026,17:41,Days,Primary Packing,LD-PPK-002,Primary Packing Flow wrapper 2,Breakdown,Operational - jam,39
+09/06/2026,20:12,Nights,Primary Packing,LD-PPK-043,Primary Packing Pneumatic cylinder 6,Minor stop,Sensor misread,5
+09/06/2026,22:08,Nights,End of Line,LD-EOL-031,End of Line Pneumatic cylinder 1,Minor stop,Film / carton misfeed,15
+09/06/2026,22:53,Nights,Forming,LD-FRM-014,Forming Servo drive 8,Minor stop,Guard door opened,12
+09/06/2026,23:50,Nights,End of Line,LD-EOL-013,End of Line Conveyor 3,Minor stop,Sensor misread,10
+10/06/2026,00:53,Nights,Forming,LD-FRM-030,Forming Vacuum pump 4,Minor stop,Guard door opened,10
+10/06/2026,03:04,Nights,Primary Packing,LD-PPK-002,Primary Packing Flow wrapper 2,Minor stop,Guard door opened,9
+10/06/2026,06:43,Days,Primary Packing,LD-PPK-009,Primary Packing Carton erector 3,Breakdown,Mechanical - suction cups,72
+10/06/2026,08:28,Days,Forming,LD-FRM-003,Forming Drive motor 3,Minor stop,Guard door opened,3
+10/06/2026,12:20,Days,Primary Packing,LD-PPK-017,Primary Packing Conveyor 2,Minor stop,Jam / blockage,7
+10/06/2026,16:57,Days,Cooking,LD-COK-012,Cooking Gearbox 2,Minor stop,Product build-up,9
+10/06/2026,17:26,Days,End of Line,LD-EOL-025,End of Line Drive motor 1,Minor stop,Sensor misread,9
+10/06/2026,17:51,Days,Forming,LD-FRM-008,Forming Servo drive 2,Minor stop,Product build-up,11
+10/06/2026,19:59,Nights,End of Line,LD-EOL-029,End of Line Drive motor 5,Minor stop,Sensor misread,12
+10/06/2026,21:18,Nights,Primary Packing,LD-PPK-021,Primary Packing Conveyor 6,Minor stop,Film / carton misfeed,7
+10/06/2026,22:43,Nights,End of Line,LD-EOL-019,End of Line Conveyor 9,Breakdown,Mechanical - belt/chain,96
+11/06/2026,02:23,Nights,Forming,LD-FRM-021,Forming Conveyor 5,Minor stop,Blockage,5
+11/06/2026,04:10,Nights,End of Line,LD-EOL-021,End of Line Conveyor 11,Minor stop,Jam / blockage,12
+11/06/2026,10:29,Days,End of Line,LD-EOL-012,End of Line Conveyor 2,Minor stop,Sensor misread,8
+11/06/2026,14:08,Days,Primary Packing,LD-PPK-006,Primary Packing Flow wrapper 6,Breakdown,Operational - jam,26
+11/06/2026,16:27,Days,End of Line,LD-EOL-016,End of Line Conveyor 6,Minor stop,Jam / blockage,12
+11/06/2026,16:29,Days,Primary Packing,LD-PPK-033,Primary Packing Servo drive 6,Minor stop,Guard door opened,6
+11/06/2026,23:02,Nights,Primary Packing,LD-PPK-012,Primary Packing Checkweigher 3,Minor stop,Guard door opened,15
+12/06/2026,03:27,Nights,Primary Packing,LD-PPK-021,Primary Packing Conveyor 6,Minor stop,Jam / blockage,10
+12/06/2026,04:00,Nights,Primary Packing,LD-PPK-016,Primary Packing Conveyor 1,Minor stop,Sensor misread,13
+12/06/2026,06:13,Days,Primary Packing,LD-PPK-031,Primary Packing Servo drive 4,Minor stop,Jam / blockage,11
+12/06/2026,12:31,Days,Primary Packing,LD-PPK-013,Primary Packing Metal detector 1,Minor stop,Jam / blockage,9
+12/06/2026,14:02,Days,Forming,LD-FRM-038,Forming Pneumatic cylinder 8,Minor stop,Blockage,2
+12/06/2026,14:29,Days,Flaking,LD-FLK-002,Flaking Drive motor 2,Minor stop,Sensor misread,8
+12/06/2026,15:50,Days,Primary Packing,LD-PPK-021,Primary Packing Conveyor 6,Minor stop,Sensor misread,14
+12/06/2026,18:42,Nights,End of Line,LD-EOL-005,End of Line Palletiser 2,Minor stop,Jam / blockage,7
+12/06/2026,21:32,Nights,Forming,LD-FRM-032,Forming Pneumatic cylinder 2,Minor stop,Sensor misread,12
+12/06/2026,23:35,Nights,End of Line,LD-EOL-015,End of Line Conveyor 5,Minor stop,Sensor misread,15
+12/06/2026,23:55,Nights,Flaking,LD-FLK-019,Flaking Hydraulic power unit 1,Minor stop,Product build-up,14
+13/06/2026,00:12,Nights,Flaking,LD-FLK-033,Flaking Gearbox 3,Minor stop,Product build-up,9
+13/06/2026,01:58,Nights,Primary Packing,LD-PPK-002,Primary Packing Flow wrapper 2,Minor stop,Jam / blockage,11
+13/06/2026,08:21,Days,Primary Packing,LD-PPK-004,Primary Packing Flow wrapper 4,Minor stop,Guard door opened,8
+13/06/2026,08:38,Days,End of Line,LD-EOL-034,End of Line Pneumatic cylinder 4,Minor stop,Guard door opened,6
+13/06/2026,09:00,Days,Primary Packing,LD-PPK-031,Primary Packing Servo drive 4,Minor stop,Guard door opened,12
+13/06/2026,10:00,Days,Forming,LD-FRM-018,Forming Conveyor 2,Minor stop,Product build-up,14
+13/06/2026,14:41,Days,End of Line,LD-EOL-024,End of Line Conveyor 14,Minor stop,Sensor misread,3
+13/06/2026,16:06,Days,End of Line,LD-EOL-016,End of Line Conveyor 6,Minor stop,Guard door opened,14
+13/06/2026,17:25,Days,Baking,LD-BAK-027,Baking Conveyor 5,Minor stop,Guard door opened,14
+13/06/2026,19:37,Nights,Primary Packing,LD-PPK-042,Primary Packing Pneumatic cylinder 5,Breakdown,Pneumatic leak,89
+13/06/2026,21:36,Nights,Forming,LD-FRM-024,Forming Conveyor 8,Breakdown,Mechanical - belt/chain,23
+13/06/2026,22:27,Nights,Primary Packing,LD-PPK-035,Primary Packing Servo drive 8,Minor stop,Sensor misread,2
+14/06/2026,06:16,Days,Flaking,LD-FLK-015,Flaking Flaking roll 7,Minor stop,Blockage,6
+14/06/2026,10:30,Days,Primary Packing,LD-PPK-006,Primary Packing Flow wrapper 6,Minor stop,Sensor misread,3
+14/06/2026,14:45,Days,Primary Packing,LD-PPK-017,Primary Packing Conveyor 2,Minor stop,Guard door opened,9

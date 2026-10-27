@@ -1,0 +1,293 @@
+asset_id,asset_name,zone_code,zone,asset_type,criticality,manufacturer,install_date
+LD-COK-001,Cooking Drive motor 1,COK,Cooking,Drive motor,B,Brightwell,2024-12-18
+LD-COK-002,Cooking Drive motor 2,COK,Cooking,Drive motor,A,Ostberg,2018-12-01
+LD-COK-003,Cooking Drive motor 3,COK,Cooking,Drive motor,A,Brightwell,2008-02-01
+LD-COK-004,Cooking Drive motor 4,COK,Cooking,Drive motor,A,Marlow Pack,2016-04-01
+LD-COK-005,Cooking Drive motor 5,COK,Cooking,Drive motor,B,Ostberg,2011-08-01
+LD-COK-006,Cooking Drive motor 6,COK,Cooking,Drive motor,B,Marlow Pack,2020-03-01
+LD-COK-007,Cooking Drive motor 7,COK,Cooking,Drive motor,B,Northgate,2011-06-01
+LD-COK-008,Cooking Drive motor 8,COK,Cooking,Drive motor,A,Ostberg,2021-06-01
+LD-COK-009,Cooking Drive motor 9,COK,Cooking,Drive motor,B,Ostberg,2025-03-23
+LD-COK-010,Cooking Drive motor 10,COK,Cooking,Drive motor,A,Kestrel Drives,2009-09-01
+LD-COK-011,Cooking Gearbox 1,COK,Cooking,Gearbox,C,Ostberg,2021-06-01
+LD-COK-012,Cooking Gearbox 2,COK,Cooking,Gearbox,A,Ridgeline,2018-04-01
+LD-COK-013,Cooking Gearbox 3,COK,Cooking,Gearbox,B,Halden,2011-02-01
+LD-COK-014,Cooking Gearbox 4,COK,Cooking,Gearbox,B,Kestrel Drives,2013-03-01
+LD-COK-015,Cooking Gearbox 5,COK,Cooking,Gearbox,B,Marlow Pack,2019-11-01
+LD-COK-016,Cooking Gearbox 6,COK,Cooking,Gearbox,A,Brightwell,2016-12-01
+LD-COK-017,Cooking Conveyor 1,COK,Cooking,Conveyor,A,Marlow Pack,2022-11-01
+LD-COK-018,Cooking Conveyor 2,COK,Cooking,Conveyor,B,Brightwell,2021-01-01
+LD-COK-019,Cooking Conveyor 3,COK,Cooking,Conveyor,C,Northgate,2014-05-01
+LD-COK-020,Cooking Conveyor 4,COK,Cooking,Conveyor,A,Kestrel Drives,2022-12-01
+LD-COK-021,Cooking Conveyor 5,COK,Cooking,Conveyor,A,Halden,2022-11-01
+LD-COK-022,Cooking Conveyor 6,COK,Cooking,Conveyor,A,Ostberg,2019-09-01
+LD-COK-023,Cooking Conveyor 7,COK,Cooking,Conveyor,B,Halden,2022-10-01
+LD-COK-024,Cooking Conveyor 8,COK,Cooking,Conveyor,B,Halden,2010-09-01
+LD-COK-025,Cooking Conveyor 9,COK,Cooking,Conveyor,A,Brightwell,2024-09-25
+LD-COK-026,Cooking Conveyor 10,COK,Cooking,Conveyor,B,Northgate,2014-10-01
+LD-COK-027,Cooking Pump 1,COK,Cooking,Pump,B,Kestrel Drives,2015-09-01
+LD-COK-028,Cooking Pump 2,COK,Cooking,Pump,C,Marlow Pack,2008-11-01
+LD-COK-029,Cooking Pump 3,COK,Cooking,Pump,A,Ridgeline,2020-05-01
+LD-COK-030,Cooking Pump 4,COK,Cooking,Pump,B,Halden,2014-03-01
+LD-COK-031,Cooking Pump 5,COK,Cooking,Pump,A,Ostberg,2019-05-01
+LD-COK-032,Cooking Pump 6,COK,Cooking,Pump,C,Kestrel Drives,2009-11-01
+LD-COK-033,Cooking Pump 7,COK,Cooking,Pump,C,Kestrel Drives,2011-03-01
+LD-COK-034,Cooking Pump 8,COK,Cooking,Pump,C,Northgate,2020-09-01
+LD-COK-035,Cooking Sensor / transmitter 1,COK,Cooking,Sensor / transmitter,B,Ridgeline,2009-06-01
+LD-COK-036,Cooking Sensor / transmitter 2,COK,Cooking,Sensor / transmitter,C,Northgate,2011-10-01
+LD-COK-037,Cooking Sensor / transmitter 3,COK,Cooking,Sensor / transmitter,A,Ridgeline,2009-09-01
+LD-COK-038,Cooking Sensor / transmitter 4,COK,Cooking,Sensor / transmitter,A,Kestrel Drives,2016-03-01
+LD-COK-039,Cooking Sensor / transmitter 5,COK,Cooking,Sensor / transmitter,B,Ridgeline,2011-09-01
+LD-COK-040,Cooking Sensor / transmitter 6,COK,Cooking,Sensor / transmitter,C,Marlow Pack,2012-07-01
+LD-COK-041,Cooking Sensor / transmitter 7,COK,Cooking,Sensor / transmitter,B,Northgate,2016-08-01
+LD-COK-042,Cooking Pneumatic cylinder 1,COK,Cooking,Pneumatic cylinder,A,Ostberg,2008-10-01
+LD-COK-043,Cooking Pneumatic cylinder 2,COK,Cooking,Pneumatic cylinder,A,Marlow Pack,2009-12-01
+LD-DRY-001,Drying Drive motor 1,DRY,Drying,Drive motor,A,Northgate,2008-06-01
+LD-DRY-002,Drying Drive motor 2,DRY,Drying,Drive motor,B,Ostberg,2015-04-01
+LD-DRY-003,Drying Drive motor 3,DRY,Drying,Drive motor,A,Halden,2017-10-01
+LD-DRY-004,Drying Drive motor 4,DRY,Drying,Drive motor,A,Northgate,2014-04-01
+LD-DRY-005,Drying Drive motor 5,DRY,Drying,Drive motor,A,Halden,2014-07-01
+LD-DRY-006,Drying Drive motor 6,DRY,Drying,Drive motor,C,Northgate,2024-09-19
+LD-DRY-007,Drying Drive motor 7,DRY,Drying,Drive motor,B,Brightwell,2021-02-01
+LD-DRY-008,Drying Drive motor 8,DRY,Drying,Drive motor,A,Brightwell,2010-07-01
+LD-DRY-009,Drying Fan 1,DRY,Drying,Fan,B,Halden,2022-02-01
+LD-DRY-010,Drying Fan 2,DRY,Drying,Fan,C,Marlow Pack,2009-01-01
+LD-DRY-011,Drying Fan 3,DRY,Drying,Fan,C,Brightwell,2009-04-01
+LD-DRY-012,Drying Fan 4,DRY,Drying,Fan,B,Northgate,2021-07-01
+LD-DRY-013,Drying Fan 5,DRY,Drying,Fan,A,Kestrel Drives,2025-02-15
+LD-DRY-014,Drying Fan 6,DRY,Drying,Fan,C,Marlow Pack,2012-07-01
+LD-DRY-015,Drying Fan 7,DRY,Drying,Fan,C,Marlow Pack,2016-11-01
+LD-DRY-016,Drying Fan 8,DRY,Drying,Fan,B,Ostberg,2011-01-01
+LD-DRY-017,Drying Fan 9,DRY,Drying,Fan,C,Northgate,2013-01-01
+LD-DRY-018,Drying Fan 10,DRY,Drying,Fan,B,Brightwell,2021-09-01
+LD-DRY-019,Drying Burner 1,DRY,Drying,Burner,A,Northgate,2021-03-01
+LD-DRY-020,Drying Burner 2,DRY,Drying,Burner,B,Northgate,2011-07-01
+LD-DRY-021,Drying Burner 3,DRY,Drying,Burner,C,Northgate,2017-10-01
+LD-DRY-022,Drying Burner 4,DRY,Drying,Burner,B,Ostberg,2017-10-01
+LD-DRY-023,Drying Conveyor 1,DRY,Drying,Conveyor,B,Kestrel Drives,2018-12-01
+LD-DRY-024,Drying Conveyor 2,DRY,Drying,Conveyor,A,Kestrel Drives,2018-11-01
+LD-DRY-025,Drying Conveyor 3,DRY,Drying,Conveyor,B,Northgate,2022-02-01
+LD-DRY-026,Drying Conveyor 4,DRY,Drying,Conveyor,B,Ostberg,2009-02-01
+LD-DRY-027,Drying Conveyor 5,DRY,Drying,Conveyor,A,Northgate,2022-06-01
+LD-DRY-028,Drying Conveyor 6,DRY,Drying,Conveyor,C,Ridgeline,2010-08-01
+LD-DRY-029,Drying Conveyor 7,DRY,Drying,Conveyor,B,Ostberg,2020-11-01
+LD-DRY-030,Drying Conveyor 8,DRY,Drying,Conveyor,A,Northgate,2012-11-01
+LD-DRY-031,Drying Sensor / transmitter 1,DRY,Drying,Sensor / transmitter,C,Marlow Pack,2009-02-01
+LD-DRY-032,Drying Sensor / transmitter 2,DRY,Drying,Sensor / transmitter,B,Marlow Pack,2017-04-01
+LD-DRY-033,Drying Sensor / transmitter 3,DRY,Drying,Sensor / transmitter,B,Ostberg,2021-05-01
+LD-DRY-034,Drying Sensor / transmitter 4,DRY,Drying,Sensor / transmitter,B,Northgate,2021-01-01
+LD-DRY-035,Drying Sensor / transmitter 5,DRY,Drying,Sensor / transmitter,B,Kestrel Drives,2008-01-01
+LD-DRY-036,Drying Sensor / transmitter 6,DRY,Drying,Sensor / transmitter,C,Marlow Pack,2012-03-01
+LD-DRY-037,Drying Sensor / transmitter 7,DRY,Drying,Sensor / transmitter,B,Northgate,2016-01-01
+LD-DRY-038,Drying Sensor / transmitter 8,DRY,Drying,Sensor / transmitter,A,Ostberg,2022-03-01
+LD-DRY-039,Drying Rotary valve 1,DRY,Drying,Rotary valve,A,Halden,2016-03-01
+LD-DRY-040,Drying Rotary valve 2,DRY,Drying,Rotary valve,A,Kestrel Drives,2022-01-01
+LD-DRY-041,Drying Rotary valve 3,DRY,Drying,Rotary valve,A,Ridgeline,2009-06-01
+LD-DRY-042,Drying Rotary valve 4,DRY,Drying,Rotary valve,B,Brightwell,2017-12-01
+LD-DRY-043,Drying Rotary valve 5,DRY,Drying,Rotary valve,C,Halden,2010-03-01
+LD-FLK-001,Flaking Drive motor 1,FLK,Flaking,Drive motor,A,Ridgeline,2013-07-01
+LD-FLK-002,Flaking Drive motor 2,FLK,Flaking,Drive motor,B,Brightwell,2011-05-01
+LD-FLK-003,Flaking Drive motor 3,FLK,Flaking,Drive motor,C,Ridgeline,2021-01-01
+LD-FLK-004,Flaking Drive motor 4,FLK,Flaking,Drive motor,B,Kestrel Drives,2022-08-01
+LD-FLK-005,Flaking Drive motor 5,FLK,Flaking,Drive motor,B,Northgate,2011-04-01
+LD-FLK-006,Flaking Drive motor 6,FLK,Flaking,Drive motor,B,Ridgeline,2012-02-01
+LD-FLK-007,Flaking Drive motor 7,FLK,Flaking,Drive motor,B,Ridgeline,2014-11-01
+LD-FLK-008,Flaking Drive motor 8,FLK,Flaking,Drive motor,B,Brightwell,2009-05-01
+LD-FLK-009,Flaking Flaking roll 1,FLK,Flaking,Flaking roll,B,Ostberg,2008-02-01
+LD-FLK-010,Flaking Flaking roll 2,FLK,Flaking,Flaking roll,B,Ostberg,2013-07-01
+LD-FLK-011,Flaking Flaking roll 3,FLK,Flaking,Flaking roll,C,Brightwell,2022-10-01
+LD-FLK-012,Flaking Flaking roll 4,FLK,Flaking,Flaking roll,B,Ridgeline,2008-09-01
+LD-FLK-013,Flaking Flaking roll 5,FLK,Flaking,Flaking roll,B,Marlow Pack,2019-12-01
+LD-FLK-014,Flaking Flaking roll 6,FLK,Flaking,Flaking roll,A,Ostberg,2018-06-01
+LD-FLK-015,Flaking Flaking roll 7,FLK,Flaking,Flaking roll,B,Ostberg,2019-05-01
+LD-FLK-016,Flaking Flaking roll 8,FLK,Flaking,Flaking roll,B,Kestrel Drives,2014-12-01
+LD-FLK-017,Flaking Flaking roll 9,FLK,Flaking,Flaking roll,B,Marlow Pack,2018-07-01
+LD-FLK-018,Flaking Flaking roll 10,FLK,Flaking,Flaking roll,C,Halden,2017-05-01
+LD-FLK-019,Flaking Hydraulic power unit 1,FLK,Flaking,Hydraulic power unit,B,Brightwell,2024-12-24
+LD-FLK-020,Flaking Hydraulic power unit 2,FLK,Flaking,Hydraulic power unit,B,Halden,2018-06-01
+LD-FLK-021,Flaking Hydraulic power unit 3,FLK,Flaking,Hydraulic power unit,B,Ridgeline,2016-08-01
+LD-FLK-022,Flaking Hydraulic power unit 4,FLK,Flaking,Hydraulic power unit,C,Northgate,2010-11-01
+LD-FLK-023,Flaking Conveyor 1,FLK,Flaking,Conveyor,B,Northgate,2017-06-01
+LD-FLK-024,Flaking Conveyor 2,FLK,Flaking,Conveyor,C,Brightwell,2018-05-01
+LD-FLK-025,Flaking Conveyor 3,FLK,Flaking,Conveyor,C,Halden,2008-04-01
+LD-FLK-026,Flaking Conveyor 4,FLK,Flaking,Conveyor,B,Marlow Pack,2015-07-01
+LD-FLK-027,Flaking Conveyor 5,FLK,Flaking,Conveyor,B,Halden,2014-08-01
+LD-FLK-028,Flaking Conveyor 6,FLK,Flaking,Conveyor,A,Ridgeline,2008-02-01
+LD-FLK-029,Flaking Conveyor 7,FLK,Flaking,Conveyor,B,Halden,2019-09-01
+LD-FLK-030,Flaking Conveyor 8,FLK,Flaking,Conveyor,A,Halden,2021-02-01
+LD-FLK-031,Flaking Gearbox 1,FLK,Flaking,Gearbox,A,Ostberg,2016-09-01
+LD-FLK-032,Flaking Gearbox 2,FLK,Flaking,Gearbox,B,Ridgeline,2015-10-01
+LD-FLK-033,Flaking Gearbox 3,FLK,Flaking,Gearbox,C,Halden,2021-09-01
+LD-FLK-034,Flaking Gearbox 4,FLK,Flaking,Gearbox,C,Kestrel Drives,2015-08-01
+LD-FLK-035,Flaking Gearbox 5,FLK,Flaking,Gearbox,C,Halden,2012-09-01
+LD-FLK-036,Flaking Gearbox 6,FLK,Flaking,Gearbox,B,Kestrel Drives,2009-12-01
+LD-FLK-037,Flaking Sensor / transmitter 1,FLK,Flaking,Sensor / transmitter,A,Northgate,2022-09-01
+LD-FLK-038,Flaking Sensor / transmitter 2,FLK,Flaking,Sensor / transmitter,A,Marlow Pack,2019-03-01
+LD-FLK-039,Flaking Sensor / transmitter 3,FLK,Flaking,Sensor / transmitter,A,Halden,2013-09-01
+LD-FLK-040,Flaking Sensor / transmitter 4,FLK,Flaking,Sensor / transmitter,B,Ridgeline,2014-07-01
+LD-FLK-041,Flaking Sensor / transmitter 5,FLK,Flaking,Sensor / transmitter,B,Halden,2021-10-01
+LD-FLK-042,Flaking Sensor / transmitter 6,FLK,Flaking,Sensor / transmitter,B,Ridgeline,2012-07-01
+LD-FRM-001,Forming Drive motor 1,FRM,Forming,Drive motor,C,Marlow Pack,2016-12-01
+LD-FRM-002,Forming Drive motor 2,FRM,Forming,Drive motor,B,Brightwell,2011-08-01
+LD-FRM-003,Forming Drive motor 3,FRM,Forming,Drive motor,B,Marlow Pack,2014-06-01
+LD-FRM-004,Forming Drive motor 4,FRM,Forming,Drive motor,B,Brightwell,2010-08-01
+LD-FRM-005,Forming Drive motor 5,FRM,Forming,Drive motor,C,Ostberg,2022-07-01
+LD-FRM-006,Forming Drive motor 6,FRM,Forming,Drive motor,B,Brightwell,2025-03-07
+LD-FRM-007,Forming Servo drive 1,FRM,Forming,Servo drive,C,Kestrel Drives,2012-07-01
+LD-FRM-008,Forming Servo drive 2,FRM,Forming,Servo drive,A,Kestrel Drives,2020-07-01
+LD-FRM-009,Forming Servo drive 3,FRM,Forming,Servo drive,C,Halden,2012-02-01
+LD-FRM-010,Forming Servo drive 4,FRM,Forming,Servo drive,A,Marlow Pack,2013-04-01
+LD-FRM-011,Forming Servo drive 5,FRM,Forming,Servo drive,A,Brightwell,2008-01-01
+LD-FRM-012,Forming Servo drive 6,FRM,Forming,Servo drive,A,Brightwell,2024-10-17
+LD-FRM-013,Forming Servo drive 7,FRM,Forming,Servo drive,A,Halden,2017-04-01
+LD-FRM-014,Forming Servo drive 8,FRM,Forming,Servo drive,B,Ostberg,2010-10-01
+LD-FRM-015,Forming Servo drive 9,FRM,Forming,Servo drive,C,Kestrel Drives,2020-03-01
+LD-FRM-016,Forming Servo drive 10,FRM,Forming,Servo drive,A,Ostberg,2025-01-06
+LD-FRM-017,Forming Conveyor 1,FRM,Forming,Conveyor,B,Brightwell,2014-12-01
+LD-FRM-018,Forming Conveyor 2,FRM,Forming,Conveyor,A,Northgate,2018-04-01
+LD-FRM-019,Forming Conveyor 3,FRM,Forming,Conveyor,B,Ridgeline,2018-10-01
+LD-FRM-020,Forming Conveyor 4,FRM,Forming,Conveyor,A,Kestrel Drives,2020-01-01
+LD-FRM-021,Forming Conveyor 5,FRM,Forming,Conveyor,B,Marlow Pack,2009-09-01
+LD-FRM-022,Forming Conveyor 6,FRM,Forming,Conveyor,B,Northgate,2021-08-01
+LD-FRM-023,Forming Conveyor 7,FRM,Forming,Conveyor,B,Marlow Pack,2022-08-01
+LD-FRM-024,Forming Conveyor 8,FRM,Forming,Conveyor,A,Kestrel Drives,2016-11-01
+LD-FRM-025,Forming Conveyor 9,FRM,Forming,Conveyor,B,Halden,2020-08-01
+LD-FRM-026,Forming Conveyor 10,FRM,Forming,Conveyor,B,Ridgeline,2012-06-01
+LD-FRM-027,Forming Vacuum pump 1,FRM,Forming,Vacuum pump,A,Brightwell,2012-08-01
+LD-FRM-028,Forming Vacuum pump 2,FRM,Forming,Vacuum pump,C,Kestrel Drives,2018-07-01
+LD-FRM-029,Forming Vacuum pump 3,FRM,Forming,Vacuum pump,A,Brightwell,2010-08-01
+LD-FRM-030,Forming Vacuum pump 4,FRM,Forming,Vacuum pump,B,Marlow Pack,2012-10-01
+LD-FRM-031,Forming Pneumatic cylinder 1,FRM,Forming,Pneumatic cylinder,C,Northgate,2016-04-01
+LD-FRM-032,Forming Pneumatic cylinder 2,FRM,Forming,Pneumatic cylinder,A,Marlow Pack,2016-04-01
+LD-FRM-033,Forming Pneumatic cylinder 3,FRM,Forming,Pneumatic cylinder,B,Northgate,2015-01-01
+LD-FRM-034,Forming Pneumatic cylinder 4,FRM,Forming,Pneumatic cylinder,B,Marlow Pack,2011-05-01
+LD-FRM-035,Forming Pneumatic cylinder 5,FRM,Forming,Pneumatic cylinder,B,Halden,2016-06-01
+LD-FRM-036,Forming Pneumatic cylinder 6,FRM,Forming,Pneumatic cylinder,C,Halden,2013-12-01
+LD-FRM-037,Forming Pneumatic cylinder 7,FRM,Forming,Pneumatic cylinder,B,Brightwell,2009-12-01
+LD-FRM-038,Forming Pneumatic cylinder 8,FRM,Forming,Pneumatic cylinder,B,Brightwell,2020-12-01
+LD-FRM-039,Forming Pneumatic cylinder 9,FRM,Forming,Pneumatic cylinder,A,Ostberg,2012-12-01
+LD-FRM-040,Forming Pneumatic cylinder 10,FRM,Forming,Pneumatic cylinder,C,Ridgeline,2012-02-01
+LD-FRM-041,Forming Sensor / transmitter 1,FRM,Forming,Sensor / transmitter,A,Northgate,2010-05-01
+LD-FRM-042,Forming Sensor / transmitter 2,FRM,Forming,Sensor / transmitter,C,Ostberg,2008-01-01
+LD-FRM-043,Forming Sensor / transmitter 3,FRM,Forming,Sensor / transmitter,B,Northgate,2018-08-01
+LD-FRM-044,Forming Sensor / transmitter 4,FRM,Forming,Sensor / transmitter,C,Halden,2015-08-01
+LD-BAK-001,Baking Drive motor 1,BAK,Baking,Drive motor,B,Northgate,2012-08-01
+LD-BAK-002,Baking Drive motor 2,BAK,Baking,Drive motor,C,Marlow Pack,2009-10-01
+LD-BAK-003,Baking Drive motor 3,BAK,Baking,Drive motor,B,Kestrel Drives,2020-10-01
+LD-BAK-004,Baking Drive motor 4,BAK,Baking,Drive motor,A,Ostberg,2016-07-01
+LD-BAK-005,Baking Drive motor 5,BAK,Baking,Drive motor,B,Halden,2020-09-01
+LD-BAK-006,Baking Drive motor 6,BAK,Baking,Drive motor,B,Halden,2021-10-01
+LD-BAK-007,Baking Burner 1,BAK,Baking,Burner,B,Northgate,2017-12-01
+LD-BAK-008,Baking Burner 2,BAK,Baking,Burner,C,Marlow Pack,2011-05-01
+LD-BAK-009,Baking Burner 3,BAK,Baking,Burner,A,Brightwell,2016-02-01
+LD-BAK-010,Baking Burner 4,BAK,Baking,Burner,A,Kestrel Drives,2017-08-01
+LD-BAK-011,Baking Burner 5,BAK,Baking,Burner,A,Ridgeline,2012-12-01
+LD-BAK-012,Baking Burner 6,BAK,Baking,Burner,B,Ridgeline,2022-05-01
+LD-BAK-013,Baking Burner 7,BAK,Baking,Burner,C,Halden,2020-04-01
+LD-BAK-014,Baking Burner 8,BAK,Baking,Burner,A,Ridgeline,2010-05-01
+LD-BAK-015,Baking Fan 1,BAK,Baking,Fan,A,Ostberg,2025-01-04
+LD-BAK-016,Baking Fan 2,BAK,Baking,Fan,C,Northgate,2012-08-01
+LD-BAK-017,Baking Fan 3,BAK,Baking,Fan,B,Ostberg,2014-05-01
+LD-BAK-018,Baking Fan 4,BAK,Baking,Fan,B,Halden,2017-01-01
+LD-BAK-019,Baking Fan 5,BAK,Baking,Fan,C,Brightwell,2008-02-01
+LD-BAK-020,Baking Fan 6,BAK,Baking,Fan,C,Northgate,2017-10-01
+LD-BAK-021,Baking Fan 7,BAK,Baking,Fan,C,Northgate,2012-10-01
+LD-BAK-022,Baking Fan 8,BAK,Baking,Fan,C,Halden,2016-11-01
+LD-BAK-023,Baking Conveyor 1,BAK,Baking,Conveyor,C,Marlow Pack,2017-07-01
+LD-BAK-024,Baking Conveyor 2,BAK,Baking,Conveyor,C,Halden,2015-06-01
+LD-BAK-025,Baking Conveyor 3,BAK,Baking,Conveyor,B,Kestrel Drives,2021-03-01
+LD-BAK-026,Baking Conveyor 4,BAK,Baking,Conveyor,B,Ridgeline,2018-07-01
+LD-BAK-027,Baking Conveyor 5,BAK,Baking,Conveyor,C,Kestrel Drives,2024-09-14
+LD-BAK-028,Baking Conveyor 6,BAK,Baking,Conveyor,B,Ridgeline,2020-07-01
+LD-BAK-029,Baking Gearbox 1,BAK,Baking,Gearbox,B,Halden,2018-09-01
+LD-BAK-030,Baking Gearbox 2,BAK,Baking,Gearbox,B,Ridgeline,2013-10-01
+LD-BAK-031,Baking Gearbox 3,BAK,Baking,Gearbox,B,Kestrel Drives,2008-04-01
+LD-BAK-032,Baking Gearbox 4,BAK,Baking,Gearbox,B,Halden,2015-12-01
+LD-BAK-033,Baking Sensor / transmitter 1,BAK,Baking,Sensor / transmitter,A,Marlow Pack,2017-04-01
+LD-BAK-034,Baking Sensor / transmitter 2,BAK,Baking,Sensor / transmitter,A,Northgate,2016-07-01
+LD-BAK-035,Baking Sensor / transmitter 3,BAK,Baking,Sensor / transmitter,A,Northgate,2009-08-01
+LD-BAK-036,Baking Sensor / transmitter 4,BAK,Baking,Sensor / transmitter,B,Kestrel Drives,2022-12-01
+LD-BAK-037,Baking Sensor / transmitter 5,BAK,Baking,Sensor / transmitter,B,Halden,2021-08-01
+LD-BAK-038,Baking Sensor / transmitter 6,BAK,Baking,Sensor / transmitter,A,Ostberg,2014-04-01
+LD-BAK-039,Baking Sensor / transmitter 7,BAK,Baking,Sensor / transmitter,B,Kestrel Drives,2021-02-01
+LD-BAK-040,Baking Sensor / transmitter 8,BAK,Baking,Sensor / transmitter,C,Kestrel Drives,2013-09-01
+LD-BAK-041,Baking Sensor / transmitter 9,BAK,Baking,Sensor / transmitter,C,Ostberg,2012-10-01
+LD-BAK-042,Baking Sensor / transmitter 10,BAK,Baking,Sensor / transmitter,C,Ostberg,2010-08-01
+LD-PPK-001,Primary Packing Flow wrapper 1,PPK,Primary Packing,Flow wrapper,B,Halden,2020-09-01
+LD-PPK-002,Primary Packing Flow wrapper 2,PPK,Primary Packing,Flow wrapper,B,Brightwell,2011-12-01
+LD-PPK-003,Primary Packing Flow wrapper 3,PPK,Primary Packing,Flow wrapper,B,Northgate,2020-07-01
+LD-PPK-004,Primary Packing Flow wrapper 4,PPK,Primary Packing,Flow wrapper,B,Halden,2022-07-01
+LD-PPK-005,Primary Packing Flow wrapper 5,PPK,Primary Packing,Flow wrapper,C,Halden,2018-03-01
+LD-PPK-006,Primary Packing Flow wrapper 6,PPK,Primary Packing,Flow wrapper,C,Ridgeline,2017-06-01
+LD-PPK-007,Primary Packing Carton erector 1,PPK,Primary Packing,Carton erector,A,Halden,2009-09-01
+LD-PPK-008,Primary Packing Carton erector 2,PPK,Primary Packing,Carton erector,A,Brightwell,2021-11-01
+LD-PPK-009,Primary Packing Carton erector 3,PPK,Primary Packing,Carton erector,A,Ostberg,2012-06-01
+LD-PPK-010,Primary Packing Checkweigher 1,PPK,Primary Packing,Checkweigher,B,Ridgeline,2021-06-01
+LD-PPK-011,Primary Packing Checkweigher 2,PPK,Primary Packing,Checkweigher,B,Marlow Pack,2013-11-01
+LD-PPK-012,Primary Packing Checkweigher 3,PPK,Primary Packing,Checkweigher,C,Ostberg,2016-01-01
+LD-PPK-013,Primary Packing Metal detector 1,PPK,Primary Packing,Metal detector,A,Brightwell,2022-05-01
+LD-PPK-014,Primary Packing Metal detector 2,PPK,Primary Packing,Metal detector,C,Marlow Pack,2009-11-01
+LD-PPK-015,Primary Packing Metal detector 3,PPK,Primary Packing,Metal detector,C,Northgate,2019-05-01
+LD-PPK-016,Primary Packing Conveyor 1,PPK,Primary Packing,Conveyor,A,Kestrel Drives,2012-06-01
+LD-PPK-017,Primary Packing Conveyor 2,PPK,Primary Packing,Conveyor,B,Marlow Pack,2014-10-01
+LD-PPK-018,Primary Packing Conveyor 3,PPK,Primary Packing,Conveyor,C,Ridgeline,2009-10-01
+LD-PPK-019,Primary Packing Conveyor 4,PPK,Primary Packing,Conveyor,B,Brightwell,2015-10-01
+LD-PPK-020,Primary Packing Conveyor 5,PPK,Primary Packing,Conveyor,A,Marlow Pack,2015-05-01
+LD-PPK-021,Primary Packing Conveyor 6,PPK,Primary Packing,Conveyor,A,Marlow Pack,2022-05-01
+LD-PPK-022,Primary Packing Conveyor 7,PPK,Primary Packing,Conveyor,B,Kestrel Drives,2013-10-01
+LD-PPK-023,Primary Packing Conveyor 8,PPK,Primary Packing,Conveyor,B,Ridgeline,2012-08-01
+LD-PPK-024,Primary Packing Conveyor 9,PPK,Primary Packing,Conveyor,B,Northgate,2021-08-01
+LD-PPK-025,Primary Packing Conveyor 10,PPK,Primary Packing,Conveyor,A,Marlow Pack,2017-05-01
+LD-PPK-026,Primary Packing Conveyor 11,PPK,Primary Packing,Conveyor,B,Kestrel Drives,2018-07-01
+LD-PPK-027,Primary Packing Conveyor 12,PPK,Primary Packing,Conveyor,A,Northgate,2020-12-01
+LD-PPK-028,Primary Packing Servo drive 1,PPK,Primary Packing,Servo drive,C,Ridgeline,2021-05-01
+LD-PPK-029,Primary Packing Servo drive 2,PPK,Primary Packing,Servo drive,C,Marlow Pack,2013-04-01
+LD-PPK-030,Primary Packing Servo drive 3,PPK,Primary Packing,Servo drive,A,Ridgeline,2020-12-01
+LD-PPK-031,Primary Packing Servo drive 4,PPK,Primary Packing,Servo drive,B,Marlow Pack,2018-02-01
+LD-PPK-032,Primary Packing Servo drive 5,PPK,Primary Packing,Servo drive,B,Ostberg,2015-01-01
+LD-PPK-033,Primary Packing Servo drive 6,PPK,Primary Packing,Servo drive,B,Kestrel Drives,2022-05-01
+LD-PPK-034,Primary Packing Servo drive 7,PPK,Primary Packing,Servo drive,C,Kestrel Drives,2010-09-01
+LD-PPK-035,Primary Packing Servo drive 8,PPK,Primary Packing,Servo drive,B,Kestrel Drives,2021-03-01
+LD-PPK-036,Primary Packing Servo drive 9,PPK,Primary Packing,Servo drive,C,Marlow Pack,2020-05-01
+LD-PPK-037,Primary Packing Servo drive 10,PPK,Primary Packing,Servo drive,C,Brightwell,2015-02-01
+LD-PPK-038,Primary Packing Pneumatic cylinder 1,PPK,Primary Packing,Pneumatic cylinder,C,Marlow Pack,2018-12-01
+LD-PPK-039,Primary Packing Pneumatic cylinder 2,PPK,Primary Packing,Pneumatic cylinder,C,Kestrel Drives,2020-09-01
+LD-PPK-040,Primary Packing Pneumatic cylinder 3,PPK,Primary Packing,Pneumatic cylinder,A,Northgate,2012-09-01
+LD-PPK-041,Primary Packing Pneumatic cylinder 4,PPK,Primary Packing,Pneumatic cylinder,B,Ostberg,2018-05-01
+LD-PPK-042,Primary Packing Pneumatic cylinder 5,PPK,Primary Packing,Pneumatic cylinder,B,Marlow Pack,2013-02-01
+LD-PPK-043,Primary Packing Pneumatic cylinder 6,PPK,Primary Packing,Pneumatic cylinder,A,Ostberg,2025-01-14
+LD-EOL-001,End of Line Case packer 1,EOL,End of Line,Case packer,A,Marlow Pack,2021-08-01
+LD-EOL-002,End of Line Case packer 2,EOL,End of Line,Case packer,B,Northgate,2010-01-01
+LD-EOL-003,End of Line Case packer 3,EOL,End of Line,Case packer,B,Ostberg,2009-04-01
+LD-EOL-004,End of Line Palletiser 1,EOL,End of Line,Palletiser,A,Marlow Pack,2018-12-01
+LD-EOL-005,End of Line Palletiser 2,EOL,End of Line,Palletiser,C,Brightwell,2019-12-01
+LD-EOL-006,End of Line Stretch wrapper 1,EOL,End of Line,Stretch wrapper,C,Ostberg,2021-08-01
+LD-EOL-007,End of Line Stretch wrapper 2,EOL,End of Line,Stretch wrapper,B,Kestrel Drives,2008-12-01
+LD-EOL-008,End of Line Label printer applicator 1,EOL,End of Line,Label printer applicator,A,Northgate,2011-06-01
+LD-EOL-009,End of Line Label printer applicator 2,EOL,End of Line,Label printer applicator,C,Kestrel Drives,2022-11-01
+LD-EOL-010,End of Line Label printer applicator 3,EOL,End of Line,Label printer applicator,A,Northgate,2009-08-01
+LD-EOL-011,End of Line Conveyor 1,EOL,End of Line,Conveyor,B,Northgate,2017-01-01
+LD-EOL-012,End of Line Conveyor 2,EOL,End of Line,Conveyor,C,Brightwell,2010-10-01
+LD-EOL-013,End of Line Conveyor 3,EOL,End of Line,Conveyor,A,Brightwell,2011-10-01
+LD-EOL-014,End of Line Conveyor 4,EOL,End of Line,Conveyor,C,Ridgeline,2020-03-01
+LD-EOL-015,End of Line Conveyor 5,EOL,End of Line,Conveyor,C,Brightwell,2024-10-13
+LD-EOL-016,End of Line Conveyor 6,EOL,End of Line,Conveyor,B,Ridgeline,2009-11-01
+LD-EOL-017,End of Line Conveyor 7,EOL,End of Line,Conveyor,A,Ostberg,2024-11-29
+LD-EOL-018,End of Line Conveyor 8,EOL,End of Line,Conveyor,B,Marlow Pack,2008-03-01
+LD-EOL-019,End of Line Conveyor 9,EOL,End of Line,Conveyor,B,Halden,2009-08-01
+LD-EOL-020,End of Line Conveyor 10,EOL,End of Line,Conveyor,C,Ostberg,2009-08-01
+LD-EOL-021,End of Line Conveyor 11,EOL,End of Line,Conveyor,A,Ostberg,2019-11-01
+LD-EOL-022,End of Line Conveyor 12,EOL,End of Line,Conveyor,B,Halden,2008-01-01
+LD-EOL-023,End of Line Conveyor 13,EOL,End of Line,Conveyor,C,Marlow Pack,2009-08-01
+LD-EOL-024,End of Line Conveyor 14,EOL,End of Line,Conveyor,C,Ostberg,2009-06-01
+LD-EOL-025,End of Line Drive motor 1,EOL,End of Line,Drive motor,A,Ostberg,2017-11-01
+LD-EOL-026,End of Line Drive motor 2,EOL,End of Line,Drive motor,B,Kestrel Drives,2017-09-01
+LD-EOL-027,End of Line Drive motor 3,EOL,End of Line,Drive motor,B,Northgate,2009-12-01
+LD-EOL-028,End of Line Drive motor 4,EOL,End of Line,Drive motor,C,Marlow Pack,2020-09-01
+LD-EOL-029,End of Line Drive motor 5,EOL,End of Line,Drive motor,C,Halden,2022-04-01
+LD-EOL-030,End of Line Drive motor 6,EOL,End of Line,Drive motor,B,Northgate,2014-12-01
+LD-EOL-031,End of Line Pneumatic cylinder 1,EOL,End of Line,Pneumatic cylinder,B,Brightwell,2012-06-01
+LD-EOL-032,End of Line Pneumatic cylinder 2,EOL,End of Line,Pneumatic cylinder,B,Northgate,2009-02-01
+LD-EOL-033,End of Line Pneumatic cylinder 3,EOL,End of Line,Pneumatic cylinder,B,Ostberg,2013-03-01
+LD-EOL-034,End of Line Pneumatic cylinder 4,EOL,End of Line,Pneumatic cylinder,A,Marlow Pack,2016-06-01
+LD-EOL-035,End of Line Pneumatic cylinder 5,EOL,End of Line,Pneumatic cylinder,A,Ridgeline,2018-07-01
