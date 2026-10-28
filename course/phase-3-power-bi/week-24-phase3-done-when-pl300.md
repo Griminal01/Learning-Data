@@ -67,9 +67,9 @@ PL-300 is the most recognised data certificate in UK manufacturing roles. It's o
 
 ---
 
-## Where Tableau fits
+## Next: Tableau and production data
 
-Not needed. Power BI covers the same ground and suits a Microsoft site. If a job advert you want asks for Tableau, spend one weekend rebuilding page 1 in **Tableau Public** (free) and list it on your CV.
+Your production team's Redzone data lives in **Tableau**, so Phase 4 teaches it next, along with OEE and linking production downtime to CMMS work orders. Everything you've just learned transfers: the star schema becomes Tableau *relationships*, DAX measures become *calculated fields*, and filter context becomes Tableau's *order of operations*. Being fluent in both tools is a genuine strength: Power BI for maintenance reporting, Tableau where production already works.
 
 ---
 

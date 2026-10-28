@@ -2,7 +2,7 @@
 
 **Phase 2 · Data modelling & SQL** · Mon 25 Jan – Sun 31 Jan 2027 · about 5 hours
 
-`GROUP BY` collapses rows. **Window functions** calculate across rows *without* collapsing them: "days since this asset's last breakdown", "running total", "rank within zone". They're how you get time between failures, which is the foundation of the reliability engineering in Phase 5.
+`GROUP BY` collapses rows. **Window functions** calculate across rows *without* collapsing them: "days since this asset's last breakdown", "running total", "rank within zone". They're how you get time between failures, which is the foundation of the reliability engineering in Phase 6.
 
 **By Sunday you'll be able to:**
 
@@ -118,7 +118,7 @@ Availability comes out at about 99.8 % even for the worst asset. That looks grea
 
 1. **These are single assets.** The line is a chain: if *any* of ~40 packing assets stops, packing stops. Line availability ≈ the product of every asset's availability in series.
 2. **Minor stops aren't included.** They're a separate loss (OEE *performance*), and in packing they cost more hours than breakdowns (Week 11).
-3. **MTBF hides the pattern.** 474 h is an average. Are the failures random, or do they bunch up as the jaws wear? That question is what **Weibull analysis** answers in Phase 5, and the `days_since_last` column you made with LAG is its raw input.
+3. **MTBF hides the pattern.** 474 h is an average. Are the failures random, or do they bunch up as the jaws wear? That question is what **Weibull analysis** answers in Phase 6, and the `days_since_last` column you made with LAG is its raw input.
 
 ---
 

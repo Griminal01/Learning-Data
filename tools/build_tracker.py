@@ -21,11 +21,13 @@ PHASES = [
      "done_when": "You can answer 'which 10 assets lost the most hours to reactive work last quarter, and were their PMs on time?' in one query."},
     {"id": 3, "name": "Power BI", "short": "Power BI",
      "done_when": "The Model Line team could use the dashboard in a weekly review without you explaining it."},
-    {"id": 4, "name": "Python for data", "short": "Python",
+    {"id": 4, "name": "Production data: OEE, Redzone & Tableau", "short": "OEE & Tableau",
+     "done_when": "You can rebuild line OEE from raw shift data to match the dashboard, and show in Tableau what share of lost time is maintenance-related and which assets drive it."},
+    {"id": 5, "name": "Python for data", "short": "Python",
      "done_when": "A task that took you an hour a week in Excel now runs from a single command."},
-    {"id": 5, "name": "Statistics & reliability analytics", "short": "Reliability",
+    {"id": 6, "name": "Statistics & reliability analytics", "short": "Reliability",
      "done_when": "You can defend a PM interval change with numbers in front of an engineering manager."},
-    {"id": 6, "name": "Machine learning & condition monitoring", "short": "ML & CM",
+    {"id": 7, "name": "Machine learning & condition monitoring", "short": "ML & CM",
      "done_when": "You can explain to a non-specialist why your model's alerts are worth acting on, and how many false alarms to expect."},
 ]
 

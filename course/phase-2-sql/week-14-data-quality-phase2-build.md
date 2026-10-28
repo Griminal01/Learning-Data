@@ -97,7 +97,7 @@ WHERE w.wo_type = 'PM';
 
 Now `SELECT zone_code, AVG(on_time) FROM v_pm_results GROUP BY zone_code;` is one line. (Remember **Write Changes**, `Ctrl+S`, after creating a view.)
 
-> Do this in your own copy of the database, or keep a backup of `line_d.db`. You can always regenerate it by running `python data/generate_data.py` (from Phase 4 onwards).
+> Do this in your own copy of the database, or keep a backup of `line_d.db`. You can always regenerate it by running `python data/generate_data.py` (from Phase 5 onwards).
 
 ### Phase 2 *done when*
 
