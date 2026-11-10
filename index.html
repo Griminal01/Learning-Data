@@ -2,117 +2,23 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Data Skills Studio</title>
-<meta name="description" content="Tracker for the 62-week Line D data skills course: progress, weekly log and a practice data generator.">
-<style>
-:root {
-  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef1f5; --text: #1d2330; --muted: #5d6678;
-  --border: #dde2ea; --accent: #1f4e79; --accent-soft: #dbe7f3; --good: #2e7d32; --good-soft: #e3f1e4;
-  --bad: #c62828; --warn: #b26a00; --warn-soft: #fff1d6; --shadow: 0 1px 2px rgba(16,24,40,.06), 0 1px 3px rgba(16,24,40,.08);
-  --radius: 10px; --font: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #12151b; --surface: #1a1f27; --surface-2: #232a35; --text: #e6e9ef; --muted: #9aa4b5;
-    --border: #2e3644; --accent: #7fb0e0; --accent-soft: #1e3247; --good: #6cc070; --good-soft: #1d3320;
-    --bad: #ef6b6b; --warn: #e5a54a; --warn-soft: #3a2c14; --shadow: none;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #12151b; --surface: #1a1f27; --surface-2: #232a35; --text: #e6e9ef; --muted: #9aa4b5;
-  --border: #2e3644; --accent: #7fb0e0; --accent-soft: #1e3247; --good: #6cc070; --good-soft: #1d3320;
-  --bad: #ef6b6b; --warn: #e5a54a; --warn-soft: #3a2c14; --shadow: none;
-}
-* { box-sizing: border-box; }
-html, body { margin: 0; }
-body { background: var(--bg); color: var(--text); font: 15px/1.5 var(--font); }
-a { color: var(--accent); }
-.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px 48px; }
-header.top { padding: 20px 0 8px; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: end; justify-content: space-between; }
-header.top h1 { margin: 0; font-size: 22px; letter-spacing: -.01em; }
-header.top p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
-.overall { min-width: 240px; flex: 1; max-width: 380px; }
-.overall .label { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
-.bar { height: 8px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
-.bar > span { display: block; height: 100%; background: var(--accent); border-radius: 99px; transition: width .3s; }
-.bar.good > span { background: var(--good); }
-nav.tabs { display: flex; gap: 4px; margin: 14px 0 18px; border-bottom: 1px solid var(--border); overflow-x: auto; }
-nav.tabs button { background: none; border: 0; padding: 10px 14px; font: inherit; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
-nav.tabs button[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); font-weight: 600; }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
-.now { padding: 14px 16px; margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
-.now b { font-size: 16px; }
-.now .meta { color: var(--muted); font-size: 13px; }
-.phase { margin-bottom: 12px; overflow: hidden; }
-.phase > summary { list-style: none; cursor: pointer; padding: 14px 16px; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; }
-.phase > summary::-webkit-details-marker { display: none; }
-.phase h2 { margin: 0; font-size: 16px; }
-.phase .sub { color: var(--muted); font-size: 13px; }
-.phase .pbar { grid-column: 1 / -1; }
-.chip { font-size: 12px; padding: 2px 8px; border-radius: 99px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
-.chip.done { background: var(--good-soft); color: var(--good); }
-.chip.locked { background: var(--warn-soft); color: var(--warn); }
-.donewhen { margin: 0 16px 12px; padding: 12px 14px; border-radius: 8px; background: var(--accent-soft); display: flex; gap: 10px; align-items: flex-start; }
-.donewhen.passed { background: var(--good-soft); }
-.donewhen strong { display: block; font-size: 13px; }
-.lockmsg { margin: 0 16px 12px; font-size: 13px; color: var(--warn); }
-.week { border-top: 1px solid var(--border); }
-.week > summary { list-style: none; cursor: pointer; padding: 10px 16px; display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; align-items: center; }
-.week > summary::-webkit-details-marker { display: none; }
-.week .num { font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
-.week .t { min-width: 0; }
-.week .t span { display: block; font-size: 12px; color: var(--muted); }
-.week.current > summary { background: var(--accent-soft); }
-.week.complete .num { color: var(--good); }
-.week .body { padding: 4px 16px 14px 78px; }
-.week ul { list-style: none; padding: 0; margin: 0 0 10px; }
-.week li { padding: 3px 0; }
-label.tick { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
-label.tick input { margin-top: 4px; width: 16px; height: 16px; accent-color: var(--good); flex: none; }
-input[disabled] + span { color: var(--muted); }
-.btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: 14px; cursor: pointer; text-decoration: none; }
-.btn:hover { border-color: var(--accent); }
-.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-:root[data-theme="dark"] .btn.primary, :root:not([data-theme="light"]) .btn.primary { color: #0e1726; }
-@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .btn.primary { color: #fff; } }
-:root[data-theme="light"] .btn.primary { color: #fff; }
-.btn.danger { color: var(--bad); }
-.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-.pad { padding: 16px; }
-.field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
-.field label { font-size: 13px; color: var(--muted); }
-input[type=text], input[type=number], input[type=date], input[type=url], textarea, select {
-  font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; width: 100%; }
-textarea { min-height: 64px; resize: vertical; }
-.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-h3 { margin: 0 0 10px; font-size: 15px; }
-.muted { color: var(--muted); font-size: 13px; }
-table.log { width: 100%; border-collapse: collapse; font-size: 14px; }
-table.log th, table.log td { text-align: left; padding: 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
-table.log th { color: var(--muted); font-weight: 600; font-size: 12px; }
-.tablewrap { overflow-x: auto; }
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
-.stat { padding: 12px 14px; }
-.stat b { display: block; font-size: 22px; font-variant-numeric: tabular-nums; }
-.stat span { font-size: 12px; color: var(--muted); }
-svg text { fill: var(--muted); font: 11px var(--font); }
-.hidden { display: none !important; }
-code { font: 0.92em ui-monospace, "Cascadia Code", Consolas, monospace; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
-.toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: 14px; opacity: 0; transition: opacity .2s; pointer-events: none; }
-.toast.show { opacity: 1; }
-@media (max-width: 560px) {
-  .week > summary { grid-template-columns: 40px 1fr; }
-  .week > summary .chip { grid-column: 2; justify-self: start; }
-  .week .body { padding-left: 16px; }
-}
-</style>
+<meta name="description" content="Tracker for the 62-week Line D data skills course: today's plan, lessons, quiz cards, progress, weekly log and a practice data generator.">
+<meta name="theme-color" content="#1f4e79" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Data Skills">
+<link rel="icon" type="image/png" sizes="32x32" href="app/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="app/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="app/app.css">
 </head>
 <body>
 <div class="wrap">
   <header class="top">
     <div>
-      <h1>Data Skills Studio</h1>
+      <h1><img src="app/icons/icon-192.png" alt="" width="28" height="28">Data Skills Studio</h1>
       <p>62 weeks · Excel → SQL → Power BI → OEE &amp; Tableau → Python → Reliability → ML</p>
     </div>
     <div class="overall">
@@ -121,19 +27,28 @@ code { font: 0.92em ui-monospace, "Cascadia Code", Consolas, monospace; backgrou
     </div>
   </header>
 
-  <nav class="tabs" role="tablist">
-    <button role="tab" data-tab="course" aria-selected="true">Course</button>
-    <button role="tab" data-tab="log" aria-selected="false">Weekly log</button>
-    <button role="tab" data-tab="data" aria-selected="false">Practice data</button>
-    <button role="tab" data-tab="settings" aria-selected="false">Settings</button>
+  <nav class="tabs" aria-label="Main">
+    <button type="button" data-tab="today">Today</button>
+    <button type="button" data-tab="course">Course</button>
+    <button type="button" data-tab="cards">Quiz cards<span class="badge hidden" data-badge="cards"></span></button>
+    <button type="button" data-tab="log">Weekly log</button>
+    <button type="button" data-tab="data">Practice data</button>
+    <button type="button" data-tab="settings">Settings</button>
   </nav>
 
-  <section id="tab-course">
+  <main>
+  <section id="view-today" aria-label="Today"></section>
+
+  <section id="view-course" class="hidden" aria-label="Course">
     <div class="card now" id="nowCard"></div>
     <div id="phases"></div>
   </section>
 
-  <section id="tab-log" class="hidden">
+  <section id="view-reader" class="hidden" aria-label="Lesson reader"></section>
+
+  <section id="view-cards" class="hidden" aria-label="Quiz cards"></section>
+
+  <section id="view-log" class="hidden" aria-label="Weekly log">
     <div class="stats" id="logStats"></div>
     <div class="card pad" style="margin-bottom:16px">
       <h3>Hours per week vs target</h3>
@@ -158,7 +73,7 @@ code { font: 0.92em ui-monospace, "Cascadia Code", Consolas, monospace; backgrou
     </div>
   </section>
 
-  <section id="tab-data" class="hidden">
+  <section id="view-data" class="hidden" aria-label="Practice data">
     <div class="card pad" style="margin-bottom:16px">
       <h3>Practice data generator</h3>
       <p class="muted">Makes a fresh, realistic maintenance data set for a fictional 7-zone cereal line: assets, PM tasks, PM / reactive / corrective work orders and downtime events. Failures follow Weibull failure modes, packing has weaker PM compliance, and late PMs cause more breakdowns. The lessons use the fixed data set in the repo's <code>data/</code> folder (so the answers match). Use this to get <em>new</em> practice data once you've finished a week.</p>
@@ -174,404 +89,84 @@ code { font: 0.92em ui-monospace, "Cascadia Code", Consolas, monospace; backgrou
     </div>
   </section>
 
-  <section id="tab-settings" class="hidden">
+  <section id="view-settings" class="hidden" aria-label="Settings">
+    <div class="card pad phone-only" style="margin-bottom:16px">
+      <div class="row"><a class="btn" href="#data">Practice data generator ›</a><span class="muted">Makes fresh CSVs to practise on. Best on a PC.</span></div>
+    </div>
     <div class="grid2">
       <div class="card pad">
         <h3>Plan</h3>
         <div class="field"><label for="sStart">Course start date (a Monday)</label><input type="date" id="sStart"></div>
         <div class="field"><label for="sTarget">Weekly hours target</label><input type="number" id="sTarget" min="1" max="40" step="0.5"></div>
         <div class="field"><label for="sRepo">Lesson link base (GitHub)</label><input type="url" id="sRepo"></div>
-        <div class="field"><label for="sTheme">Theme</label>
+        <div class="field"><label for="sTheme">Theme (this device)</label>
           <select id="sTheme"><option value="auto">Match device</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
+        <div class="field"><label for="sDevice">Today assumes I'm on (this device)</label>
+          <select id="sDevice"><option value="auto">Work it out from the screen</option><option value="phone">Phone</option><option value="pc">PC</option></select></div>
         <p class="muted">Missed a few weeks? Move the start date later and every week's dates shift with it.</p>
       </div>
+
       <div class="card pad">
-        <h3>Backup</h3>
-        <p class="muted">Progress is saved in this browser only. Export a backup now and then, especially before clearing browser data or switching PC.</p>
+        <h3>Backup and moving between devices</h3>
+        <p class="muted">Progress is saved in this browser. To carry it to another device, export a backup here and import it there. <b>Import merges</b>: it adds the other device's ticks, cards and log entries to yours and never wipes anything. Newer changes win, so an item you un-ticked stays un-ticked.</p>
         <div class="row">
-          <button class="btn" id="bExport" type="button">Export progress (JSON)</button>
-          <label class="btn" for="bImport">Import JSON</label>
+          <button class="btn" id="bExport" type="button">Export backup</button>
+          <button class="btn hidden" id="bShare" type="button">Share backup…</button>
+          <label class="btn" for="bImport">Import and merge</label>
           <input type="file" id="bImport" accept="application/json,.json" class="hidden">
         </div>
-        <hr style="border:0;border-top:1px solid var(--border);margin:16px 0">
+        <hr class="sep">
         <button class="btn danger" id="bReset" type="button">Reset all progress</button>
+      </div>
+
+      <div class="card pad" id="syncCard">
+        <h3>Sync with a private GitHub gist (optional)</h3>
+        <p class="muted">Keeps your phone and PC in step automatically, with no server of ours. Your progress is saved in one <b>secret gist</b> on your own GitHub account. Each device pulls and merges when the app opens, and pushes a few seconds after you change something.</p>
+        <div id="syncOff">
+          <p class="small"><b>What you need:</b> a GitHub token that can only touch gists. It works like a password for that one job, and is stored <b>only in this browser</b>. It isn't in your backups and isn't sent anywhere except GitHub.</p>
+          <ol class="steps-help">
+            <li>On GitHub, go to <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens</b> and press <b>Generate new token</b> (<a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">open the page</a>).</li>
+            <li>Give it a name like "Data Skills sync" and an expiry date. Under <b>Repository access</b> choose <b>Public repositories</b> (it doesn't need any). Under <b>Account permissions</b>, set <b>Gists</b> to <b>Read and write</b>. Leave everything else as "No access".</li>
+            <li>Generate it, copy it, and paste it below. Do the same on your other device (you can reuse the token).</li>
+          </ol>
+          <p class="muted">A classic token also works if you tick only the <b>gist</b> scope.</p>
+          <div class="field"><label for="syncToken">GitHub token</label><input type="password" id="syncToken" autocomplete="off" spellcheck="false" placeholder="github_pat_… or ghp_…"></div>
+          <button class="btn primary" id="syncConnect" type="button">Turn on sync</button>
+        </div>
+        <div id="syncOn" class="hidden">
+          <div class="sync-status" id="syncStatus" role="status"></div>
+          <div class="row">
+            <button class="btn primary" id="syncNow" type="button">Sync now</button>
+            <button class="btn danger" id="syncDisconnect" type="button">Turn off sync</button>
+          </div>
+          <p class="muted">Turning sync off deletes the token from this browser. Your progress here stays. The gist stays on GitHub until you delete it at gist.github.com, and you can revoke the token in GitHub's settings at any time.</p>
+        </div>
+      </div>
+
+      <div class="card pad">
+        <h3>Install on your phone</h3>
+        <p class="muted" id="installNote"></p>
+        <button class="btn primary hidden" id="installBtn" type="button">Install app</button>
       </div>
     </div>
   </section>
+  </main>
 </div>
-<div class="toast" id="toast"></div>
 
-<script>
-const COURSE = /*COURSE_DATA_START*/{"phases":[{"id":0,"name":"Foundations","short":"Excel basics","done_when":"You built the two-week downtime summary with SUMIFS formulas that reconcile to 124 events / 1,931 minutes, plus a decluttered chart."},{"id":1,"name":"Advanced Excel & Power Query","short":"Excel & PQ","done_when":"You drop a new export into the folder, press Refresh All, and every table and chart updates with zero manual edits."},{"id":2,"name":"Data modelling & SQL","short":"SQL","done_when":"You can answer 'which 10 assets lost the most hours to reactive work last quarter, and were their PMs on time?' in one query."},{"id":3,"name":"Power BI","short":"Power BI","done_when":"The Model Line team could use the dashboard in a weekly review without you explaining it."},{"id":4,"name":"Production data: OEE, Redzone & Tableau","short":"OEE & Tableau","done_when":"You can rebuild line OEE from raw shift data to match the dashboard, and show in Tableau what share of lost time is maintenance-related and which assets drive it."},{"id":5,"name":"Python for data","short":"Python","done_when":"A task that took you an hour a week in Excel now runs from a single command."},{"id":6,"name":"Statistics & reliability analytics","short":"Reliability","done_when":"You can defend a PM interval change with numbers in front of an engineering manager."},{"id":7,"name":"Machine learning & condition monitoring","short":"ML & CM","done_when":"You can explain to a non-specialist why your model's alerts are worth acting on, and how many false alarms to expect."}],"weeks":[{"week":1,"phase":0,"title":"Excel basics, your first look at downtime data","path":"course/phase-0-foundations/week-01-excel-basics.md","ticks":["Saved the CSV as `.xlsx` with frozen headers and filters","Used the status bar to check a total","Wrote `SUM`, `AVERAGE`, `MIN`, `MAX`, `COUNT`, `IF`","Used `$` to lock a reference and know why","Answered all six handover questions"]},{"week":2,"phase":0,"title":"Summarising and charting","path":"course/phase-0-foundations/week-02-excel-summaries-charts.md","ticks":["Zone summary built with `COUNTIF`/`SUMIFS`, totals reconcile to 124 / 1931","Extracted zone code with `MID` and day name with `TEXT`","Drop-down that drives a formula","One clean, titled, decluttered chart","Phase 0 done. Next week you start the real course."]},{"week":3,"phase":1,"title":"Structured Tables and XLOOKUP","path":"course/phase-1-excel-power-query/week-03-tables-xlookup.md","ticks":["Three named Tables: `tblWO`, `tblAssets`, `tblPM`","XLOOKUP columns for manufacturer, install date and PM frequency, with no `#N/A`","Days Late and Asset Age calculated","Summary sheet survives the \"paste more rows\" test"]},{"week":4,"phase":1,"title":"Cleaning messy data and formula-based conditional formatting","path":"course/phase-1-excel-power-query/week-04-cleaning-conditional-formatting.md","ticks":["Profiled the raw file: rows, uniques, spellings, text-numbers","Asset, zone and labour cleaned with formulas, zero NOT FOUND","Duplicates removed (1,470 rows), labour reconciled, and the gap explained","Row-highlighting conditional formatting with `$`-locked formulas"]},{"week":5,"phase":1,"title":"Dynamic arrays, LET and LAMBDA","path":"course/phase-1-excel-power-query/week-05-dynamic-arrays-lambda.md","ticks":["FILTER with a zone drop-down and an \"if empty\" message","Top-5 list with TAKE + SORTBY","SEQUENCE-driven June calendar with a chart","Compliance calculated with LET","At least three LAMBDA functions in Name Manager"]},{"week":6,"phase":1,"title":"PivotTables, PivotCharts, slicers and a downtime Pareto","path":"course/phase-1-excel-power-query/week-06-pivottables-pareto.md","ticks":["Count and sum pivots with Show Values As","Dates grouped by month","Slicers and a timeline connected to several pivots","Top-10 downtime Pareto combo chart, matching the reference","Three sentences on what you'd investigate"]},{"week":7,"phase":1,"title":"Power Query, import, clean and combine automatically","path":"course/phase-1-excel-power-query/week-07-power-query.md","ticks":["All 24 files combined from a folder, 11,902 rows, correct UK dates","PM frequency and asset details merged in, with the row count unchanged","Wide sheet unpivoted to 182 rows","`FolderPath` and `ReportDate` parameters working","\"Drop a file in, Refresh All\" test passed"]},{"week":8,"phase":1,"title":"Power Pivot, first DAX, and the Phase 1 build","path":"course/phase-1-excel-power-query/week-08-power-pivot-phase1-build.md","ticks":["Calendar table and relationships in the Data Model","Five DAX measures working in a Data Model pivot","PM Compliance Workbook: Dashboard, Overdue, Pareto and About sheets","Phase 1 done-when test passed (ticked in the tracker)"]},{"week":9,"phase":2,"title":"Data modelling, how a CMMS stores its data","path":"course/phase-2-sql/week-09-data-modelling.md","ticks":["DB Browser installed, `line_d.db` explored","Grain, PK and FK identified for all five tables","Built `my_cmms.db` from CSVs, with matching row counts","Star schema drawn, including Calendar","Designed `sensor_readings` and `technicians`"]},{"week":10,"phase":2,"title":"SQL core, SELECT, WHERE and ORDER BY","path":"course/phase-2-sql/week-10-sql-select-where.md","ticks":["SQLBolt lessons 1–4 done","Can filter with `IN`, `LIKE`, `BETWEEN` and `IS NULL`","Understand why brackets matter with `AND`/`OR`","`week10.sql` saved with all 7 weekend queries"]},{"week":11,"phase":2,"title":"JOINs, GROUP BY and HAVING","path":"course/phase-2-sql/week-11-joins-groupby.md","ticks":["Three-table JOIN written from memory","Can explain why the INNER join lost 5,467 rows","`LEFT JOIN … IS NULL` used to find assets that never failed","GROUP BY + HAVING for repeat offenders","`week11.sql` saved"]},{"week":12,"phase":2,"title":"CASE, CTEs and dates","path":"course/phase-2-sql/week-12-case-cte-dates.md","ticks":["CASE labels and conditional SUM for compliance (79.5 %)","Compliance by month with `strftime`","Days late with `julianday`","A multi-step CTE query","`week12.sql` saved"]},{"week":13,"phase":2,"title":"Window functions, MTBF and MTTR","path":"course/phase-2-sql/week-13-window-functions-mtbf.md","ticks":["LAG days-between-failures partitioned by asset","Running total with `SUM() OVER`","MTBF/MTTR/availability per asset, with LD-PPK-005 worst","Can explain why 99.8 % asset availability doesn't mean a good line","`week13.sql` saved"]},{"week":14,"phase":2,"title":"Data quality, and the Phase 2 build","path":"course/phase-2-sql/week-14-data-quality-phase2-build.md","ticks":["Seven data quality checks written and understood","`v_pm_results` view created","Done-when query written, matching the Week 6 Pareto","`portfolio/02-mini-cmms-sql/` committed, with README and findings"]},{"week":15,"phase":3,"title":"Power BI Desktop and getting data in","path":"course/phase-3-power-bi/week-15-power-bi-desktop-get-data.md","ticks":["Power BI Desktop installed","Six tables plus Calendar loaded with correct types and row counts","`PM Result`, `Is Planned`, `Raised Date` and `Duration Hrs` columns added in Power Query","First card, bar, table and slicer on the canvas","`LineD_Maintenance.pbix` saved"]},{"week":16,"phase":3,"title":"Modelling, star schema, relationships and the date table","path":"course/phase-3-power-bi/week-16-modelling-star-schema.md","ticks":["Star schema built: 7 active relationships plus 1 inactive (due date)","Auto date/time off, Calendar marked as date table, months sort correctly","Model tested with two facts sliced by shared dimensions","Columns renamed, formatted and foldered; keys hidden","`model.png` saved"]},{"week":17,"phase":3,"title":"DAX 1, measures vs calculated columns","path":"course/phase-3-power-bi/week-17-dax-measures-basics.md","ticks":["`_Measures` table with 12+ formatted measures, all matching the reference values","Age Band calculated column plus a chart","`MTTR Hrs` written with VAR/RETURN (1.86 h)","KPI page v1 with cards, charts and slicers","SQLBI *Introducing DAX*, modules 1–3"]},{"week":18,"phase":3,"title":"DAX 2, CALCULATE and filter context","path":"course/phase-3-power-bi/week-18-calculate-filter-context.md","ticks":["`% of Line` measures with REMOVEFILTERS","Understand why filters on one column replace and others stay","`SUMX` cost measure and `FILTER`-based count (39 assets)","MTBF measure that responds to Calendar and Zone","Comparison matrix with conditional formatting"]},{"week":19,"phase":3,"title":"DAX 3, time intelligence, variables and USERELATIONSHIP","path":"course/phase-3-power-bi/week-19-time-intelligence.md","ticks":["YTD, PY, PY YTD and YoY measures, with June 2026 matching the reference","Rolling 13 weeks with the end-of-data cap","PM compliance by due date via USERELATIONSHIP (434 / 81.3 % for June 2026)","Trend page with target line and conditional colours"]},{"week":20,"phase":3,"title":"Visuals, KPI cards, Pareto and matrix formatting","path":"course/phase-3-power-bi/week-20-visuals-kpis-pareto.md","ticks":["KPI cards with targets","Sorted zone bar chart with a dynamic finding-style title","DAX Pareto matching the Excel and SQL Q2 results","Heat-map matrix and icon formatting","Explored a decomposition tree down to failure code"]},{"week":21,"phase":3,"title":"Interactivity, drill-through, tooltips and bookmarks","path":"course/phase-3-power-bi/week-21-drillthrough-tooltips-bookmarks.md","ticks":["Asset Detail drill-through page works from any asset visual","Report-page tooltip on the Pareto","Interactions edited and slicers synced","Chart/table bookmark toggle and a Reset button","Field parameter metric switcher"]},{"week":22,"phase":3,"title":"Report design, and building the Model Line dashboard","path":"course/phase-3-power-bi/week-22-report-design-build.md","ticks":["Theme JSON applied, colour rules written down","Layout grid and header consistent across pages","Pages 1–5 built","About page with KPI definitions"]},{"week":23,"phase":3,"title":"Power BI Service, sharing, refresh and row-level security","path":"course/phase-3-power-bi/week-23-service-rls-power-platform.md","ticks":["Can explain workspace, semantic model, report and app","Know when a gateway is needed, and the SharePoint workaround","Static RLS roles tested with *View as*","Dynamic RLS with `USERPRINCIPALNAME()` tested","Power Automate flow and Power App designed on paper, plus a half-page proposal"]},{"week":24,"phase":3,"title":"Finish the dashboard, done-when test, PL-300 plan","path":"course/phase-3-power-bi/week-24-phase3-done-when-pl300.md","ticks":["Performance Analyzer checked, model tidied, measure descriptions added","Reconciliation table: Power BI = SQL = Excel","Done-when test passed with an independent tester","`portfolio/03-lined-dashboard/` committed","PL-300 practice assessment taken, revision plan written"]},{"week":25,"phase":4,"title":"OEE fundamentals, from shift data to one honest number","path":"course/phase-4-production-oee-tableau/week-25-oee-fundamentals.md","ticks":["A, P, Q and OEE calculated for one shift by hand (73.4 %)","Line OEE calculated correctly from totals (70.3 % overall, 71.9 % H1 2026)","Can explain why averaging OEE percentages is wrong","H1 2026 minute bridge as a waterfall chart","One-page note of your site's OEE definitions"]},{"week":26,"phase":4,"title":"Downtime reasons, the six big losses, and operator-coded data","path":"course/phase-4-production-oee-tableau/week-26-downtime-reasons-six-big-losses.md","ticks":["Downtime mapped onto the six big losses","Category, reason and machine Paretos for H1 2026","Coding quality measured (unassigned 7.3 % of minutes), with miscoding examples found","Event minutes reconciled to shift minutes, and the gap explained","Half page: what our downtime data can and can't tell maintenance"]},{"week":27,"phase":4,"title":"Tableau 1, getting started with Tableau Public","path":"course/phase-4-production-oee-tableau/week-27-tableau-basics.md","ticks":["Tableau Public installed, both CSVs connected with correct types","Can explain dimension/measure and discrete/continuous","Line, bar and table views built with Color, Label and filters","H1 2026 reason Pareto matches Week 26","Three Phase 3 visuals rebuilt in Tableau, with notes on the differences"]},{"week":28,"phase":4,"title":"Tableau 2, calculated fields, LOD expressions and table calculations","path":"course/phase-4-production-oee-tableau/week-28-tableau-calculations-lod.md","ticks":["A, P, Q and OEE calculated fields, correct at every level (71.9 % H1 2026)","FIXED LOD for shift OEE; 50 shifts under 60 % found","Bins and histogram of shift OEE","Dual-axis Pareto with a running % of total","Moving average, with *Compute Using* understood"]},{"week":29,"phase":4,"title":"Tableau 3, dashboards, and getting data *out* of Tableau","path":"course/phase-4-production-oee-tableau/week-29-tableau-dashboards-downloads.md","ticks":["Dashboard with KPI row, filter action, highlight action and target parameter","Can explain each Tableau download option and its traps","Crosstab cleaned in Power Query: total row removed, types fixed, partial week flagged","Downloaded total (71.9 %) matches my own calculation","Asked about (or done) a first real, permitted download"]},{"week":30,"phase":4,"title":"Linking production downtime to maintenance work orders","path":"course/phase-4-production-oee-tableau/week-30-link-production-maintenance.md","ticks":["Machine → asset mapping understood (one-to-one vs one-to-many)","Stops matched to WOs with a time window, chosen with evidence","Match rates in both directions, with the gaps explained","Maintenance share of lost time (~46 %) and top assets calculated","`matched_stops.csv` exported for Tableau"]},{"week":31,"phase":4,"title":"The CMMS from an end user's side, Mainsaver to Ultimo","path":"course/phase-4-production-oee-tableau/week-31-cmms-mainsaver-to-ultimo.md","ticks":["Can explain functional location vs equipment, and why history needs both","Close-out checklist written (6 lines)","Migration checks run: 1 duplicate, 3 unmapped, 1 merge, 20 unmapped codes","KPI restated on new equipment IDs, with totals reconciled","Questions asked of the Ultimo project team, answers noted"]},{"week":32,"phase":4,"title":"Phase 4 build, the OEE & maintenance impact dashboard","path":"course/phase-4-production-oee-tableau/week-32-oee-maintenance-dashboard-done-when.md","ticks":["Tableau model with relationships, OEE still 71.9 %","Bridge, maintenance share, top-10 assets and trend sheets","Dashboard with actions, an About box, and published to Tableau Public","Done-when passed: OEE reconciled three ways, and a colleague answered the questions unaided","`portfolio/04-oee-maintenance-impact/` committed"]},{"week":33,"phase":5,"title":"Setup, Python, VS Code, virtual environments, Jupyter and Git","path":"course/phase-5-python/week-33-setup-python-vscode-git.md","ticks":["Python, VS Code (with Python and Jupyter extensions) and Git installed","Repo cloned, `.venv` created, requirements installed","`generate_data.py` runs and prints the expected counts","First script and first notebook run","Personal portfolio repo created on GitHub"]},{"week":34,"phase":5,"title":"Core Python 1, values, lists, dictionaries, loops and decisions","path":"course/phase-5-python/week-34-core-python-1.md","ticks":["Comfortable with strings, f-strings, lists and dicts","`for` + `if/elif/else`, with correct indentation","List comprehension written","All six weekend exercises done","Kaggle Python lessons 1–3"]},{"week":35,"phase":5,"title":"Core Python 2, functions, files, errors and modules","path":"course/phase-5-python/week-35-core-python-2.md","ticks":["Functions with docstrings, defaults and returns","Read and wrote CSVs with `pathlib` + `csv`","`try / except ValueError` used on messy values","`reliability.py` module imported into a notebook","Kaggle Python course finished"]},{"week":36,"phase":5,"title":"pandas 1, reading, inspecting, selecting and filtering","path":"course/phase-5-python/week-36-pandas-1.md","ticks":["Read clean CSVs and the UK-dated export with correct types","`info`, `describe`, `value_counts` and `isna().sum()` on every table","Boolean filters with `&`, `|`, `isin`, `str.contains` and `between`","Weekend questions answered, top 10 written to Excel","Kaggle Pandas lessons 1–3"]},{"week":37,"phase":5,"title":"pandas 2, cleaning, merging, groupby and pivot","path":"course/phase-5-python/week-37-pandas-2.md","ticks":["Dirty export cleaned in pandas, matching the Excel result (1,470 rows, 1,124.02 h)","Merges with `validate=` on every one","groupby/agg summary and a styled pivot heat-map","Phase 2 done-when recreated in pandas","Repeat-failure count = 68"]},{"week":38,"phase":5,"title":"pandas 3, dates and time series","path":"course/phase-5-python/week-38-pandas-time-series.md","ticks":["Weekly/monthly resampling with empty periods kept","Rolling 13 weeks matches Power BI (139.4 h)","Hour, weekday and shift patterns","Days between failures with `groupby().diff()`","Kaggle Pandas course complete"]},{"week":39,"phase":5,"title":"Plotting with matplotlib, seaborn and plotly","path":"course/phase-5-python/week-39-plotting.md","ticks":["`fig, ax` style with decluttered, finding-titled charts","seaborn box plot and histogram","Interactive plotly HTML","2×2 chart pack PNG","Kaggle Data Visualization course"]},{"week":40,"phase":5,"title":"Automation, the weekly PM report script","path":"course/phase-5-python/week-40-automation-weekly-report.md","ticks":["Spec written before code","Each function tested against the expected-values table","Formatted Excel output with charts embedded","argparse options and `--help`","Runs from Task Scheduler via a batch file, with a log"]},{"week":41,"phase":5,"title":"Vibration trend analysis","path":"course/phase-5-python/week-41-vibration-trend-analysis.md","ticks":["Trend plotted with `transform` + rolling, failed bearings highlighted","Absolute and baseline-relative limits applied","Warning-days table matching the expected values","Can explain the P-F interval and route frequency using your own data","Packaged as `vibration_trend.py` with argparse"]},{"week":42,"phase":5,"title":"Phase 5 done-when, portfolio, and the PLC stretch","path":"course/phase-5-python/week-42-phase5-done-when-plc.md","ticks":["Done-when passed: one command, three weeks, all KPIs correct","Ruff clean, docstrings, clear errors","Portfolio folders 04 and 05 with READMEs and screenshots","pycomm3 stretch attempted (rig) or simulated (no rig)"]},{"week":43,"phase":6,"title":"Descriptive statistics and distributions","path":"course/phase-6-statistics-reliability/week-43-descriptive-stats-distributions.md","ticks":["Can explain why mean ≠ median for downtime (112 vs 73 min)","Percentiles used to answer a planning question","Four distributions described in my own words","Lognormal found to be the best fit for repair time, by AIC","Khan Academy units done"]},{"week":44,"phase":6,"title":"Confidence intervals and hypothesis testing","path":"course/phase-6-statistics-reliability/week-44-confidence-intervals-hypothesis-tests.md","ticks":["MTTR with 95 % CIs, both by formula and by bootstrap","t-test, Mann-Whitney, chi-square and binomial rate test run and interpreted","Can explain what a p-value is *not*","Before/after test plan written for a PM change"]},{"week":45,"phase":6,"title":"Regression, and did the PM actually make a difference?","path":"course/phase-6-statistics-reliability/week-45-regression-confounding.md","ticks":["Correlation and simple OLS run and interpreted","Confounding by asset type found and controlled","Poisson regression for counts","Half-page write-up: *\"Does late PM cause breakdowns on Line D?\"*"]},{"week":46,"phase":6,"title":"SPC, control charts, run rules and capability","path":"course/phase-6-statistics-reliability/week-46-spc-control-charts-capability.md","ticks":["c-chart of weekly reactive jobs; one signal found and investigated","I-MR chart of packing minor stops (stable)","Run rule 4 coded","Cp/Cpk calculated and explained (1.53 / 1.17)"]},{"week":47,"phase":6,"title":"Reliability metrics, failure rate and the bathtub curve","path":"course/phase-6-statistics-reliability/week-47-reliability-metrics-bathtub.md","ticks":["R(t), F(t) and λ(t) explained in my own words","Flow wrapper MTBF, availability and weekly survival probability calculated","Can explain the bathtub curve and why Nowlan & Heap matters for PM","Series and parallel availability; PPK zone ≈ 0.987"]},{"week":48,"phase":6,"title":"Weibull analysis","path":"course/phase-6-statistics-reliability/week-48-weibull-analysis.md","ticks":["Can explain β < 1, ≈ 1 and > 1 and what each means for PM","Built failure and suspension life data for one mode","Jaws: η ≈ 86 d, β ≈ 3.0. Jams: β ≈ 0.9.","Showed what ignoring suspensions and mixing modes does","Table of β/η for at least four failure modes"]},{"week":49,"phase":6,"title":"From Weibull to PM decisions, optimal intervals, P-F, RCM and FMEA","path":"course/phase-6-statistics-reliability/week-49-pm-intervals-pf-rcm-fmea.md","ticks":["Optimal interval found for the jaws (37 d), with sensitivity to cost","Can explain why the current 182-day PM equals run to failure","RCM task choice made for five Line D failure modes","Inspection interval set from the P-F interval","FMEA for one flow wrapper, with at least 6 modes"]},{"week":50,"phase":6,"title":"Phase 6 build, the Weibull PM interval study","path":"course/phase-6-statistics-reliability/week-50-weibull-study-done-when.md","ticks":["Evidence pack: plot, R(current), cost curve, sensitivity, annual impact","One-page recommendation plus appendix","Presented and defended against the five questions. Done-when passed.","`portfolio/07-weibull-pm-study/` committed"]},{"week":51,"phase":7,"title":"Machine learning basics, and the leakage trap","path":"course/phase-7-ml-condition-monitoring/week-51-ml-basics.md","ticks":["Can explain features, labels, train/test, supervised vs unsupervised","Saw that accuracy ≈ the \"always no\" baseline","Overfitting shown with tree depth","Re-split by bearing with `GroupShuffleSplit`","Kaggle Intro to ML done"]},{"week":52,"phase":7,"title":"Evaluation, precision, recall and the cost of false alarms","path":"course/phase-7-ml-condition-monitoring/week-52-evaluation-metrics.md","ticks":["Confusion matrix, precision, recall and F1 calculated","The rule baseline (F1 0.74) is the bar to beat","Threshold trade-off table and a PR curve","GroupKFold cross-validation with its spread","Metrics translated into false alarms per month and £"]},{"week":53,"phase":7,"title":"Linear and logistic regression in scikit-learn","path":"course/phase-7-ml-condition-monitoring/week-53-linear-logistic-regression.md","ticks":["Rolling and 7-day-change features engineered per bearing","Logistic regression pipeline, F1 ≈ 0.84 on unseen bearings","Coefficients interpreted","Feature ablation shows the value of trend features"]},{"week":54,"phase":7,"title":"Decision trees and random forests","path":"course/phase-7-ml-condition-monitoring/week-54-decision-trees-random-forest.md","ticks":["Depth-3 tree read and written out as a fault-finding rule","Random forest F1 ≈ 0.87 on unseen bearings","Impurity and permutation importance compared","Tested the forest without temperature features"]},{"week":55,"phase":7,"title":"Gradient boosting, tuning, and \"is ML worth it?\"","path":"course/phase-7-ml-condition-monitoring/week-55-gradient-boosting-tuning.md","ticks":["Gradient boosting trained (F1 ≈ 0.93)","Hyperparameters tuned with GroupKFold CV, test used once","The full comparison table filled in","Half-page \"rule vs model\" recommendation written"]},{"week":56,"phase":7,"title":"Unsupervised learning, clustering assets with k-means","path":"course/phase-7-ml-condition-monitoring/week-56-clustering-kmeans.md","ticks":["Asset profile table built from CMMS data","k chosen with elbow plus silhouette (k = 4)","Clusters named and mapped to strategies","PCA scatter and a one-page segmentation note"]},{"week":57,"phase":7,"title":"Anomaly detection, finding \"not normal\" without failure labels","path":"course/phase-7-ml-condition-monitoring/week-57-anomaly-detection.md","ticks":["Baseline z-score detector with persistence (91 / 55 days' lead, 0 false alarms)","Isolation Forest detector built and compared","Threshold and persistence sweep table","Robust (median/MAD) baseline tried"]},{"week":58,"phase":7,"title":"Vibration signal features, RMS, peak, crest factor and kurtosis","path":"course/phase-7-ml-condition-monitoring/week-58-vibration-signal-features.md","ticks":["Waveforms plotted, impacts visible on the faulty ones","Nyquist and frequency resolution explained","RMS, peak, crest factor and kurtosis calculated from raw data","Can explain why crest factor and kurtosis lead RMS for early faults"]},{"week":59,"phase":7,"title":"FFT, frequency bands and bearing defect frequencies","path":"course/phase-7-ml-condition-monitoring/week-59-fft-bearing-frequencies.md","ticks":["FFT and Welch spectra plotted; 1× and 2× identified","Resonance band energy: 3 % → 21 % → 59 %","Envelope analysis finds 88 Hz = BPFO","`band_energy()` feature function written","Fault frequency table made"]},{"week":60,"phase":7,"title":"Remaining useful life (RUL) prediction, and its limits","path":"course/phase-7-ml-condition-monitoring/week-60-rul-prediction-limits.md","ticks":["RUL random forest trained, MAE reported by RUL band","Can explain the \"flat then dropping\" prediction shape","Prediction interval from tree spread, with coverage checked","Planner-friendly decision rule written"]},{"week":61,"phase":7,"title":"Phase 7 build, the bearing anomaly detector","path":"course/phase-7-ml-condition-monitoring/week-61-anomaly-detector-build.md","ticks":["`score()`, `alarms()` and `evaluate()` written and tested","Threshold chosen with the evaluation table (6, persistence 3)","60/60 detected, 0 false alarms, median ~62 days' warning","Config file, alarm CSV and plain-English alarm sentences"]},{"week":62,"phase":7,"title":"Phase 7 done-when, the finished portfolio, and what's next","path":"course/phase-7-ml-condition-monitoring/week-62-done-when-portfolio-next-steps.md","ticks":["Non-specialist explanation passed. Phase 7 done.","Portfolio: 8 projects, top-level README, pinned","Conversation with your manager about using it on real data (with permission)","Next-step plan: a cert, a book, a project","Course complete ✅"]}]}/*COURSE_DATA_END*/;
+<div id="pendingBar" class="hidden" role="status"></div>
 
-// ---------- state ----------
-const KEY = "data-skills-studio-v1";
-const DEFAULTS = { start: "2026-11-02", target: 5, repo: "https://github.com/griminal01/learning-data/blob/HEAD/",
-                   theme: "auto", ticks: {}, doneWhen: {}, log: [] };
-let S = load();
+<nav class="bottombar" aria-label="Main">
+  <button type="button" data-tab="today"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Today</button>
+  <button type="button" data-tab="course"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7"/></svg>Course</button>
+  <button type="button" data-tab="cards"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></svg>Cards<span class="badge hidden" data-badge="cards"></span></button>
+  <button type="button" data-tab="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Log</button>
+  <button type="button" data-tab="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>More</button>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-function load() {
-  try {
-    const raw = localStorage.getItem(KEY);
-    if (raw) return Object.assign({}, DEFAULTS, JSON.parse(raw));
-  } catch (e) { /* storage blocked or corrupt: start fresh */ }
-  return JSON.parse(JSON.stringify(DEFAULTS));
-}
-function save() {
-  try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { toast("Couldn't save in this browser. Export a backup."); }
-}
-function toast(msg) {
-  const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show");
-  clearTimeout(toast._h); toast._h = setTimeout(() => t.classList.remove("show"), 2200);
-}
-const $ = (id) => document.getElementById(id);
-const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const md = (s) => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
-
-// ---------- dates ----------
-function parseISO(s) { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); }
-function iso(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; }
-function addDays(d, n) { const x = new Date(d); x.setDate(x.getDate() + n); return x; }
-function fmt(d) { return d.toLocaleDateString("en-GB", { day: "numeric", month: "short" }); }
-function fmtY(d) { return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }); }
-function weekStart(n) { return addDays(parseISO(S.start), (n - 1) * 7); }
-function mondayOf(d) { const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); const wd = (x.getDay() + 6) % 7; return addDays(x, -wd); }
-function currentWeekNo() {
-  const diff = Math.floor((mondayOf(new Date()) - parseISO(S.start)) / 864e5 / 7) + 1;
-  return diff;
-}
-
-// ---------- progress ----------
-const tickKey = (w, i) => `${w}:${i}`;
-function weekDone(w) { return w.ticks.filter((_, i) => S.ticks[tickKey(w.week, i)]).length; }
-function phaseWeeks(p) { return COURSE.weeks.filter(w => w.phase === p); }
-function phaseUnlocked(p) { return p === 0 || !!S.doneWhen[p - 1]; }
-
-function renderCourse() {
-  const total = COURSE.weeks.reduce((a, w) => a + w.ticks.length, 0);
-  const done = COURSE.weeks.reduce((a, w) => a + weekDone(w), 0);
-  const pct = total ? Math.round(done / total * 100) : 0;
-  $("overallPct").textContent = `${pct}% · ${done}/${total}`;
-  $("overallBar").style.width = pct + "%";
-
-  // "This week" card
-  const cw = currentWeekNo();
-  const nc = $("nowCard");
-  if (cw < 1) {
-    nc.innerHTML = `<div><b>Starts ${fmtY(parseISO(S.start))}</b><div class="meta">Week 1: ${esc(COURSE.weeks[0].title)}</div></div>
-      <a class="btn primary" href="${lessonUrl(COURSE.weeks[0])}" target="_blank" rel="noopener">Open Week 1</a>`;
-  } else if (cw > COURSE.weeks.length) {
-    nc.innerHTML = `<div><b>Plan finished</b><div class="meta">The planned 62 weeks are over. Tick off anything outstanding, or move the start date in Settings.</div></div>`;
-  } else {
-    const w = COURSE.weeks[cw - 1], s = weekStart(cw);
-    nc.innerHTML = `<div><b>This week: Week ${cw}, ${esc(w.title)}</b>
-      <div class="meta">${fmt(s)} – ${fmt(addDays(s, 6))} · ${weekDone(w)}/${w.ticks.length} done · Phase ${w.phase}: ${esc(COURSE.phases[w.phase].name)}</div></div>
-      <a class="btn primary" href="${lessonUrl(w)}" target="_blank" rel="noopener">Open lesson</a>`;
-  }
-
-  const host = $("phases");
-  const openState = {};
-  host.querySelectorAll("details[data-key]").forEach(d => openState[d.dataset.key] = d.open);
-  host.innerHTML = COURSE.phases.map(ph => {
-    const ws = phaseWeeks(ph.id);
-    const t = ws.reduce((a, w) => a + w.ticks.length, 0), d = ws.reduce((a, w) => a + weekDone(w), 0);
-    const p = t ? Math.round(d / t * 100) : 0;
-    const unlocked = phaseUnlocked(ph.id), passed = !!S.doneWhen[ph.id];
-    const first = ws[0].week, last = ws[ws.length - 1].week;
-    const chip = passed ? `<span class="chip done">Passed</span>` : unlocked ? `<span class="chip">${p}%</span>` : `<span class="chip locked">Locked</span>`;
-    const isOpen = openState["p" + ph.id] ?? (cw >= first && cw <= last);
-    return `<details class="card phase" data-key="p${ph.id}" ${isOpen ? "open" : ""}>
-      <summary><div><h2>Phase ${ph.id}: ${esc(ph.name)}</h2>
-        <div class="sub">Weeks ${first}–${last} · ${fmt(weekStart(first))} – ${fmtY(addDays(weekStart(last), 6))}</div></div>${chip}
-        <div class="pbar bar ${passed ? "good" : ""}"><span style="width:${p}%"></span></div></summary>
-      ${unlocked ? "" : `<div class="lockmsg">Pass the Phase ${ph.id - 1} done-when test to unlock ticking here. You can still read the lessons.</div>`}
-      <div class="donewhen ${passed ? "passed" : ""}">
-        <input type="checkbox" id="dw${ph.id}" data-dw="${ph.id}" ${passed ? "checked" : ""} ${unlocked ? "" : "disabled"} style="margin-top:4px;width:16px;height:16px;accent-color:var(--good)">
-        <label for="dw${ph.id}"><strong>Done when</strong>${esc(ph.done_when)}</label>
-      </div>
-      ${ws.map(w => weekHtml(w, unlocked, cw, openState)).join("")}
-    </details>`;
-  }).join("");
-}
-
-function lessonUrl(w) { return (S.repo || DEFAULTS.repo).replace(/\/?$/, "/") + w.path; }
-
-function weekHtml(w, unlocked, cw, openState) {
-  const s = weekStart(w.week), d = weekDone(w), complete = d === w.ticks.length && d > 0;
-  const isOpen = openState["w" + w.week] ?? (w.week === cw);
-  return `<details class="week ${w.week === cw ? "current" : ""} ${complete ? "complete" : ""}" data-key="w${w.week}" ${isOpen ? "open" : ""}>
-    <summary><span class="num">W${w.week}</span>
-      <span class="t">${md(w.title)}<span>${fmt(s)} – ${fmt(addDays(s, 6))}</span></span>
-      <span class="chip ${complete ? "done" : ""}">${complete ? "✓ " : ""}${d}/${w.ticks.length}</span></summary>
-    <div class="body"><ul>${w.ticks.map((t, i) => `<li><label class="tick">
-      <input type="checkbox" data-tick="${tickKey(w.week, i)}" ${S.ticks[tickKey(w.week, i)] ? "checked" : ""} ${unlocked ? "" : "disabled"}>
-      <span>${md(t)}</span></label></li>`).join("")}</ul>
-      <a class="btn" href="${lessonUrl(w)}" target="_blank" rel="noopener">Open lesson ↗</a></div>
-  </details>`;
-}
-
-$("phases").addEventListener("change", (e) => {
-  const t = e.target;
-  if (t.dataset.tick) { if (t.checked) S.ticks[t.dataset.tick] = true; else delete S.ticks[t.dataset.tick]; }
-  else if (t.dataset.dw) {
-    const p = +t.dataset.dw;
-    if (t.checked) S.doneWhen[p] = new Date().toISOString().slice(0, 10);
-    else { for (let q = p; q < COURSE.phases.length; q++) delete S.doneWhen[q]; }
-    if (t.checked) toast(`Phase ${p} passed 🎉`);
-  } else return;
-  save(); renderCourse();
-});
-
-// ---------- weekly log ----------
-function renderLog() {
-  const target = +S.target || 5;
-  const byWeek = {};
-  S.log.forEach(e => { const k = iso(mondayOf(parseISO(e.date))); byWeek[k] = (byWeek[k] || 0) + (+e.hours || 0); });
-  const totalHrs = S.log.reduce((a, e) => a + (+e.hours || 0), 0);
-  const weeks = Object.keys(byWeek).sort();
-  const hit = weeks.filter(k => byWeek[k] >= target).length;
-  const avg = weeks.length ? totalHrs / weeks.length : 0;
-  $("logStats").innerHTML = [
-    ["Total hours", totalHrs.toFixed(1)], ["Weeks logged", weeks.length],
-    ["Avg per week", avg.toFixed(1)], [`Weeks ≥ ${target} h`, `${hit}/${weeks.length}`]
-  ].map(([l, v]) => `<div class="card stat"><b>${v}</b><span>${l}</span></div>`).join("");
-
-  // Chart: last 16 calendar weeks up to this week (or the logged range)
-  let end = mondayOf(new Date());
-  if (weeks.length && parseISO(weeks[weeks.length - 1]) > end) end = parseISO(weeks[weeks.length - 1]);
-  const startW = weeks.length ? parseISO(weeks[0]) : addDays(end, -7 * 7);
-  let first = addDays(end, -15 * 7); if (startW > first) first = startW;
-  if (first > addDays(end, -7 * 7)) first = addDays(end, -7 * 7);   // always show at least 8 weeks
-  const cols = [];
-  for (let d = new Date(first); d <= end; d = addDays(d, 7)) cols.push(iso(d));
-  if (!cols.length) cols.push(iso(end));
-  const max = Math.max(target * 1.5, ...cols.map(k => byWeek[k] || 0));
-  const W = 640, H = 200, pl = 28, pb = 22, pt = 8, bw = (W - pl) / cols.length;
-  const y = v => pt + (H - pt - pb) * (1 - v / max);
-  let svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Hours per week chart">`;
-  [0, target, Math.floor(max)].filter((v, i, a) => a.indexOf(v) === i).forEach(v => svg += `<text x="${pl - 6}" y="${y(v) + 4}" text-anchor="end">${v}</text>`);
-  cols.forEach((k, i) => {
-    const v = byWeek[k] || 0, x = pl + i * bw + bw * 0.15, h = H - pb - y(v);
-    const col = v >= target ? "var(--good)" : v > 0 ? "var(--accent)" : "var(--surface-2)";
-    svg += `<rect x="${x}" y="${y(v)}" width="${bw * 0.7}" height="${Math.max(h, v ? 1 : 2)}" rx="3" fill="${col}"><title>w/c ${fmt(parseISO(k))}: ${v} h</title></rect>`;
-    if (cols.length <= 16 && (i % 2 === 0 || cols.length <= 8)) svg += `<text x="${x + bw * 0.35}" y="${H - 6}" text-anchor="middle">${fmt(parseISO(k))}</text>`;
-  });
-  svg += `<line x1="${pl}" x2="${W}" y1="${y(target)}" y2="${y(target)}" stroke="var(--bad)" stroke-dasharray="4 4"/>`;
-  svg += `<text x="${pl + 4}" y="${y(target) - 5}" text-anchor="start">target ${target} h</text></svg>`;
-  $("chart").innerHTML = svg;
-
-  const rows = [...S.log].sort((a, b) => b.date.localeCompare(a.date));
-  $("logTable").innerHTML = rows.length
-    ? `<tr><th>Date</th><th>Hrs</th><th>Studied / built / blockers</th><th></th></tr>` + rows.map(e => `<tr>
-        <td>${fmt(parseISO(e.date))}</td><td>${(+e.hours).toFixed(2).replace(/\.?0+$/, "")}</td>
-        <td>${e.studied ? esc(e.studied) : ""}${e.built ? `<div class="muted">Built: ${esc(e.built)}</div>` : ""}${e.blockers ? `<div class="muted">Blocker: ${esc(e.blockers)}</div>` : ""}</td>
-        <td><button class="btn danger" data-del="${e.id}" type="button" aria-label="Delete entry">✕</button></td></tr>`).join("")
-    : `<tr><td class="muted">No entries yet. Log each session: two weekday evenings and a weekend block.</td></tr>`;
-}
-$("logForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  S.log.push({ id: Date.now().toString(36), date: $("lDate").value, hours: +$("lHours").value,
-               studied: $("lStudied").value.trim(), built: $("lBuilt").value.trim(), blockers: $("lBlockers").value.trim() });
-  save(); renderLog(); toast("Entry saved");
-  ["lHours", "lStudied", "lBuilt", "lBlockers"].forEach(id => $(id).value = "");
-});
-$("logTable").addEventListener("click", (e) => {
-  const id = e.target.dataset.del; if (!id) return;
-  if (!confirm("Delete this entry?")) return;
-  S.log = S.log.filter(x => x.id !== id); save(); renderLog();
-});
-
-// ---------- settings ----------
-function applyTheme() {
-  const r = document.documentElement;
-  if (S.theme === "auto") r.removeAttribute("data-theme"); else r.setAttribute("data-theme", S.theme);
-}
-function renderSettings() { $("sStart").value = S.start; $("sTarget").value = S.target; $("sRepo").value = S.repo; $("sTheme").value = S.theme; }
-$("sStart").addEventListener("change", e => { if (e.target.value) { S.start = iso(mondayOf(parseISO(e.target.value))); e.target.value = S.start; save(); renderCourse(); toast("Plan dates updated"); } });
-$("sTarget").addEventListener("change", e => { S.target = Math.max(1, +e.target.value || 5); save(); renderLog(); });
-$("sRepo").addEventListener("change", e => { S.repo = e.target.value.trim() || DEFAULTS.repo; save(); renderCourse(); });
-$("sTheme").addEventListener("change", e => { S.theme = e.target.value; save(); applyTheme(); });
-$("bExport").addEventListener("click", () => {
-  download(`data-skills-progress-${iso(new Date())}.json`, JSON.stringify(S, null, 2), "application/json");
-});
-$("bImport").addEventListener("change", async (e) => {
-  const f = e.target.files[0]; if (!f) return;
-  try {
-    const obj = JSON.parse(await f.text());
-    if (typeof obj !== "object" || !obj.ticks) throw new Error("not a progress file");
-    S = Object.assign({}, DEFAULTS, obj); save(); applyTheme(); renderAll(); toast("Progress imported");
-  } catch (err) { toast("That file isn't a Data Skills Studio backup"); }
-  e.target.value = "";
-});
-$("bReset").addEventListener("click", () => {
-  if (!confirm("Reset ALL ticks, done-when tests and log entries? Export a backup first if unsure.")) return;
-  S = JSON.parse(JSON.stringify(DEFAULTS)); save(); applyTheme(); renderAll(); toast("Reset");
-});
-
-function download(name, text, type) {
-  const url = URL.createObjectURL(new Blob([text], { type }));
-  const a = Object.assign(document.createElement("a"), { href: url, download: name });
-  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
-// ---------- practice data generator ----------
-// Same model as data/generate_data.py, simplified: competing Weibull failure modes per asset type,
-// PMs that renew or lubricate their target modes, inspections that sometimes catch wear-out early.
-function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-const ZONES = [["COK", "Cooking"], ["DRY", "Drying"], ["FLK", "Flaking"], ["FRM", "Forming"], ["BAK", "Baking"], ["PPK", "Primary Packing"], ["EOL", "End of Line"]];
-const M = (code, beta, eta, mttr) => ({ code, beta, eta, mttr });
-const TYPES = {
-  MTR: ["Drive motor", [M("Electrical - motor", .9, 1500, 3), M("Mechanical - bearing", 2.2, 500, 2.5)], [["Motor inspection & temperature check", 28, "Inspection", "inspect", []], ["Grease motor bearings", 91, "Lubrication", "lube", ["Mechanical - bearing"]]]],
-  GBX: ["Gearbox", [M("Mechanical - gears", 2.8, 900, 6), M("Mechanical - bearing", 2.4, 600, 4)], [["Gearbox oil level & leak check", 28, "Inspection", "inspect", []], ["Gearbox oil change", 182, "Lubrication", "lube", ["Mechanical - gears", "Mechanical - bearing"]]]],
-  CNV: ["Conveyor", [M("Mechanical - belt/chain", 2.6, 200, 1.5), M("Mechanical - bearing", 2, 400, 1.5), M("Electrical - sensor", .9, 500, .7)], [["Belt tension & tracking check", 14, "Inspection", "inspect", []], ["Replace conveyor belt", 182, "Replacement", "replace", ["Mechanical - belt/chain"]]]],
-  PMP: ["Pump", [M("Mechanical - seal", 2.5, 300, 3), M("Electrical - motor", .9, 1500, 3)], [["Pump seal & vibration check", 28, "Inspection", "inspect", []], ["Replace pump mechanical seal", 365, "Replacement", "replace", ["Mechanical - seal"]]]],
-  FAN: ["Fan", [M("Mechanical - bearing", 2.6, 350, 3), M("Mechanical - imbalance", 1.5, 600, 2)], [["Fan bearing vibration reading", 28, "Condition Monitoring", "inspect", []], ["Grease fan bearings", 91, "Lubrication", "lube", ["Mechanical - bearing"]]]],
-  BRN: ["Burner", [M("Combustion - ignition", 1, 250, 2), M("Control - flame safeguard", .8, 900, 3)], [["Burner ignition & flame check", 28, "Inspection", "inspect", []]]],
-  SNS: ["Sensor / transmitter", [M("Electrical - sensor", .9, 400, 1)], [["Calibrate transmitter", 182, "Inspection", "none", []]]],
-  SRV: ["Servo drive", [M("Electrical - drive fault", 1, 450, 2), M("Mechanical - cooling fan", 2, 600, 1)], [["Servo drive fan & fault log check", 91, "Inspection", "inspect", []]]],
-  ROL: ["Flaking roll", [M("Mechanical - bearing", 3, 260, 6), M("Mechanical - roll wear", 3.5, 140, 5)], [["Roll gap & bearing temperature check", 14, "Inspection", "inspect", []], ["Regrind / swap flaking roll", 120, "Replacement", "replace", ["Mechanical - roll wear"]]]],
-  PNU: ["Pneumatic cylinder", [M("Pneumatic leak", 1.8, 250, .7), M("Mechanical - seal", 2, 400, .8)], [["Pneumatic leak check", 28, "Inspection", "inspect", []]]],
-  FWR: ["Flow wrapper", [M("Mechanical - jaws", 3, 75, 1.2), M("Electrical - sensor", .9, 150, .8), M("Operational - jam", 1, 60, .5)], [["Jaw & knife inspection", 7, "Inspection", "inspect", []], ["Replace sealing jaws", 182, "Replacement", "replace", ["Mechanical - jaws"]]]],
-  CSP: ["Case packer", [M("Mechanical - grippers", 2.4, 160, 1.5), M("Operational - jam", 1, 80, .5)], [["Gripper & guide inspection", 14, "Inspection", "inspect", []], ["Case packer overhaul", 365, "Replacement", "replace", ["Mechanical - grippers"]]]],
-  PAL: ["Palletiser", [M("Mechanical - chain", 2.8, 300, 3), M("Control - PLC/IO", .8, 600, 2)], [["Chain & safety circuit check", 14, "Inspection", "inspect", []], ["Replace lift chain", 365, "Replacement", "replace", ["Mechanical - chain"]]]],
-};
-const MIX = { COK: { MTR: 10, GBX: 6, CNV: 10, PMP: 8, SNS: 6 }, DRY: { MTR: 8, FAN: 10, BRN: 4, CNV: 8, SNS: 8 },
-  FLK: { MTR: 8, ROL: 10, CNV: 8, GBX: 6, SNS: 6 }, FRM: { MTR: 6, SRV: 10, CNV: 10, PNU: 10, SNS: 4 },
-  BAK: { MTR: 6, BRN: 8, FAN: 8, CNV: 6, SNS: 10 }, PPK: { FWR: 6, CNV: 12, SRV: 10, PNU: 6, SNS: 4 },
-  EOL: { CSP: 3, PAL: 2, CNV: 14, MTR: 6, PNU: 5 } };
-
-function generate(seed, perZone, months, packOnTime) {
-  const R = mulberry32(seed >>> 0 || 1);
-  const rnd = (a, b) => a + Math.floor(R() * (b - a + 1));
-  const pick = (arr) => arr[Math.floor(R() * arr.length)];
-  const weib = (eta, beta) => eta * Math.pow(-Math.log(1 - R()), 1 / beta);
-  const logn = (mean, s) => mean * Math.exp(s * Math.sqrt(-2 * Math.log(1 - R())) * Math.cos(2 * Math.PI * R()) - s * s / 2);
-  const start = new Date(2024, 6, 1), days = Math.round(months * 30.44), end = addDays(start, days - 1);
-  const onTime = { COK: .88, DRY: .86, FLK: .84, FRM: .82, BAK: .87, PPK: packOnTime / 100, EOL: Math.min(.95, packOnTime / 100 + .08) };
-  const assets = [], pms = [], wos = [], dts = [];
-  for (const [zc, zn] of ZONES) {
-    const mix = MIX[zc], base = Object.values(mix).reduce((a, b) => a + b, 0);
-    let n = 0;
-    for (const [tc, cnt] of Object.entries(mix)) {
-      const k = Math.max(1, Math.round(cnt * perZone / base));
-      for (let i = 0; i < k; i++) {
-        n++;
-        assets.push({ asset_id: `LD-${zc}-${String(n).padStart(3, "0")}`, asset_name: `${zn} ${TYPES[tc][0]} ${i + 1}`, zone_code: zc, zone: zn,
-          asset_type: TYPES[tc][0], criticality: pick(["A", "B", "B", "C"]), install_date: `${rnd(2008, 2022)}-${String(rnd(1, 12)).padStart(2, "0")}-01`, _t: tc });
-      }
-    }
-  }
-  let pmN = 0;
-  for (const a of assets) for (const [desc, freq, ttype, eff, targets] of TYPES[a._t][2]) {
-    pmN++; pms.push({ pm_id: `PM-${String(pmN).padStart(5, "0")}`, asset_id: a.asset_id, task_description: desc, task_type: ttype, frequency_days: freq,
-      est_minutes: { Inspection: 30, Lubrication: 45, "Condition Monitoring": 20, Replacement: 180 }[ttype], _eff: eff, _targets: targets, _first: rnd(0, freq - 1) });
-  }
-  const at = (day, mins) => { const d = addDays(start, day); d.setMinutes(mins); return d; };
-  const dts_ = (d) => `${iso(d)} ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
-  for (const a of assets) {
-    const modes = TYPES[a._t][1], st = {};
-    for (const m of modes) { const age = R() * m.eta * .8; let life = m.beta < 1.05 ? age + weib(m.eta, m.beta) : weib(m.eta, m.beta); let g = 0; while (life <= age && g++ < 50) life = weib(m.eta, m.beta); if (life <= age) life = age + 1; st[m.code] = [age, life, m]; }
-    const events = {};
-    for (const t of pms.filter(p => p.asset_id === a.asset_id)) {
-      for (let due = t._first; due < days; due += t.frequency_days) {
-        const r = R(); let done = null, status = "Cancelled";
-        if (r < onTime[a.zone_code]) { done = due - rnd(0, Math.min(3, Math.floor(t.frequency_days / 3))); status = "Completed"; }
-        else if (r < .95) { done = due + rnd(1, Math.max(2, Math.min(45, t.frequency_days))); status = "Completed"; }
-        if (done !== null && done >= days) { done = null; status = "Open"; }
-        const wo = { asset_id: a.asset_id, pm_id: t.pm_id, wo_type: "PM", priority: 3, description: t.task_description, failure_code: "",
-          _raised: at(Math.max(0, due - Math.min(7, t.frequency_days)), 360), due_date: iso(addDays(start, due)), completed_date: done === null ? "" : iso(addDays(start, Math.max(done, 0))),
-          status, labour_hours: done === null ? 0 : +(t.est_minutes / 60 * (0.7 + R() * .8)).toFixed(2), technician: done === null ? "" : `T${String(rnd(1, 12)).padStart(2, "0")}` };
-        wos.push(wo); if (done !== null) (events[done] = events[done] || []).push(t);
-      }
-    }
-    const prio = { A: 1, B: 2, C: 3 }[a.criticality], stopP = { A: 1, B: .75, C: .3 }[a.criticality];
-    for (let day = 0; day < days; day++) {
-      for (const k in st) st[k][0] += 1;
-      for (const t of (events[day] || [])) {
-        if (t._eff === "replace") t._targets.forEach(c => { const m = st[c][2]; st[c] = [0, weib(m.eta, m.beta), m]; });
-        else if (t._eff === "lube") t._targets.forEach(c => st[c][0] *= .6);
-        else if (t._eff === "inspect") for (const c in st) {
-          const [age, life, m] = st[c];
-          if (m.beta > 1.4 && age > .85 * life && R() < .35) {
-            const cd = Math.min(days - 1, day + rnd(1, 10));
-            wos.push({ asset_id: a.asset_id, pm_id: t.pm_id, wo_type: "Corrective", priority: 2, description: `Found on PM: ${c.split(" - ").pop()} - planned repair`,
-              failure_code: c, _raised: at(day, rnd(7, 20) * 60), due_date: iso(addDays(start, cd)), completed_date: iso(addDays(start, cd)), status: "Completed",
-              labour_hours: +logn(m.mttr * .8, .4).toFixed(2), technician: `T${String(rnd(1, 12)).padStart(2, "0")}` });
-            st[c] = [0, weib(m.eta, m.beta), m];
-          }
-        }
-      }
-      for (const c in st) {
-        const [age, life, m] = st[c]; if (age < life) continue;
-        const when = at(day, rnd(0, 1439)), hrs = logn(m.mttr, .6), comp = new Date(when.getTime() + hrs * 3.6e6);
-        const wo = { asset_id: a.asset_id, pm_id: "", wo_type: "Reactive", priority: prio, description: `Breakdown: ${c.split(" - ").pop()}`, failure_code: c,
-          _raised: when, due_date: "", completed_date: comp > end ? "" : iso(comp), status: comp > end ? "Open" : "Completed",
-          labour_hours: +(hrs * (1 + R() * .6)).toFixed(2), technician: `T${String(rnd(1, 12)).padStart(2, "0")}` };
-        wos.push(wo);
-        if (R() < stopP) dts.push({ asset_id: a.asset_id, _wo: wo, _start: when, duration_min: Math.max(5, Math.round(hrs * 60 * (.8 + R() * .5))), category: "Breakdown", cause: c });
-        st[c] = [0, weib(m.eta, m.beta), m];
-      }
-    }
-  }
-  const rates = { COK: .3, DRY: .2, FLK: .5, FRM: 1.2, BAK: .3, PPK: 3, EOL: 2 }, scale = perZone / 40;
-  const byZone = {}; assets.forEach(a => (byZone[a.zone_code] = byZone[a.zone_code] || []).push(a));
-  for (let day = 0; day < days; day++) for (const [z, rate] of Object.entries(rates)) {
-    let k = 0; for (let i = 0; i < 6; i++) if (R() < rate * scale / 6) k++;
-    for (let i = 0; i < k; i++) {
-      const a = pick(byZone[z]);
-      dts.push({ asset_id: a.asset_id, _wo: null, _start: at(day, rnd(0, 1439)), duration_min: rnd(2, 15), category: "Minor stop",
-        cause: pick(z === "PPK" || z === "EOL" ? ["Jam / blockage", "Sensor misread", "Film / carton misfeed", "Guard door opened"] : ["Product build-up", "Blockage", "Sensor misread", "Guard door opened"]) });
-    }
-  }
-  wos.sort((x, y) => x._raised - y._raised || x.asset_id.localeCompare(y.asset_id));
-  wos.forEach((w, i) => { w.wo_id = `WO-${100001 + i}`; w.raised_datetime = dts_(w._raised); });
-  dts.sort((x, y) => x._start - y._start);
-  dts.forEach((d, i) => { d.event_id = `DT-${String(i + 1).padStart(6, "0")}`; d.wo_id = d._wo ? d._wo.wo_id : "";
-    d.start_datetime = dts_(d._start); d.end_datetime = dts_(new Date(d._start.getTime() + d.duration_min * 6e4)); });
-  return { assets, pms, wos, dts };
-}
-
-function toCSV(rows, cols) {
-  const q = v => { const s = String(v ?? ""); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
-  return [cols.join(","), ...rows.map(r => cols.map(c => q(r[c])).join(","))].join("\r\n");
-}
-
-$("gRun").addEventListener("click", () => {
-  const seed = +$("gSeed").value || 1, per = Math.min(150, Math.max(5, +$("gScale").value || 40));
-  const months = Math.min(60, Math.max(3, +$("gMonths").value || 24)), pack = Math.min(100, Math.max(20, +$("gPack").value || 66));
-  $("gStatus").textContent = "Generating…";
-  setTimeout(() => {
-    const t0 = performance.now(), g = generate(seed, per, months, pack);
-    const reactive = g.wos.filter(w => w.wo_type === "Reactive").length;
-    const pm = g.wos.filter(w => w.wo_type === "PM"), ontime = pm.filter(w => w.completed_date && w.completed_date <= w.due_date).length;
-    $("gStatus").textContent = `${g.assets.length} assets · ${g.pms.length} PM tasks · ${g.wos.length.toLocaleString()} work orders (${reactive} reactive) · ` +
-      `${g.dts.length.toLocaleString()} downtime events · PM compliance ${(ontime / pm.length * 100).toFixed(1)}% · ${Math.round(performance.now() - t0)} ms`;
-    const files = [
-      ["assets.csv", g.assets, ["asset_id", "asset_name", "zone_code", "zone", "asset_type", "criticality", "install_date"]],
-      ["pm_tasks.csv", g.pms, ["pm_id", "asset_id", "task_description", "task_type", "frequency_days", "est_minutes"]],
-      ["work_orders.csv", g.wos, ["wo_id", "asset_id", "pm_id", "wo_type", "priority", "description", "failure_code", "raised_datetime", "due_date", "completed_date", "status", "labour_hours", "technician"]],
-      ["downtime_events.csv", g.dts, ["event_id", "asset_id", "wo_id", "start_datetime", "end_datetime", "duration_min", "category", "cause"]],
-    ];
-    const box = $("gDownloads"); box.innerHTML = "";
-    files.forEach(([name, rows, cols]) => {
-      const b = Object.assign(document.createElement("button"), { className: "btn", type: "button", textContent: `⬇ ${name}` });
-      b.onclick = () => download(`seed${seed}_${name}`, toCSV(rows, cols), "text/csv");
-      box.appendChild(b);
-    });
-  }, 20);
-});
-
-// ---------- tabs & boot ----------
-document.querySelectorAll("nav.tabs button").forEach(b => b.addEventListener("click", () => {
-  document.querySelectorAll("nav.tabs button").forEach(x => x.setAttribute("aria-selected", x === b));
-  ["course", "log", "data", "settings"].forEach(t => $("tab-" + t).classList.toggle("hidden", t !== b.dataset.tab));
-  try { sessionStorage.setItem(KEY + "-tab", b.dataset.tab); } catch (e) {}
-  if (b.dataset.tab === "log") renderLog();
-}));
-function renderAll() { renderCourse(); renderLog(); renderSettings(); }
-$("lDate").value = iso(new Date());
-applyTheme(); renderAll();
-try { const t = sessionStorage.getItem(KEY + "-tab"); if (t) document.querySelector(`nav.tabs button[data-tab="${t}"]`)?.click(); } catch (e) {}
-</script>
+<!-- Plain script tags (not modules, not fetch) so this works when opened from disk (file://). -->
+<script src="app/markdown.js"></script>
+<script src="app/course-data.js"></script>
+<script src="app/app.js"></script>
 </body>
 </html>

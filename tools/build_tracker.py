@@ -1,16 +1,30 @@
 """
-Rebuild the course data inside index.html from the lesson files.
+Rebuild the tracker's course data from the lesson files.
 
-Run after editing any lesson's title or "Tick off" list:
+Run after editing any lesson (title, sections, "Tick off", "Check yourself",
+"Watch" or "Short on time?"):
     python tools/build_tracker.py
+
+It writes app/course-data.js, a plain script that sets window.COURSE_DATA.
+index.html loads it with a <script src> tag, so the app still works when it is
+opened by double-click from disk (file://), where fetch() of local files fails.
+It also stamps a content hash into sw.js so a new deploy replaces the old
+offline cache.
 """
+import hashlib
 import json
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "app" / "course-data.js"
+SW = ROOT / "sw.js"
 INDEX = ROOT / "index.html"
-START, END = "/*COURSE_DATA_START*/", "/*COURSE_DATA_END*/"
+# Files the service worker caches. Their contents feed the cache version hash.
+SHELL = ["index.html", "app/app.js", "app/markdown.js", "app/app.css", "app/course-data.js",
+         "manifest.webmanifest", "app/icons/icon-192.png", "app/icons/icon-512.png",
+         "app/icons/icon-maskable-512.png", "app/icons/apple-touch-icon.png", "app/icons/favicon-32.png"]
 
 PHASES = [
     {"id": 0, "name": "Foundations", "short": "Excel basics",
@@ -31,33 +45,340 @@ PHASES = [
      "done_when": "You can explain to a non-specialist why your model's alerts are worth acting on, and how many false alarms to expect."},
 ]
 
+# A code fence line, including one opened straight after a list marker ("4. ```", "- ```sql").
+FENCE = re.compile(r"^\s*(?:(?:[-*+]|\d{1,9}[.)])\s+)?(`{3,}|~{3,})[\w+#.-]*\s*$")
+NUM_ITEM = re.compile(r"^(\d+)\.\s+(.*)$")
+# A search phrase is a quoted phrase in italics: *"Leila Gharani XLOOKUP"* (straight or curly quotes).
+SEARCH = re.compile(r"[*_][\"“]([^\"”*]+)[\"”][*_]")
+LINK = re.compile(r"\[([^\]]*)\]\((https?://[^)\s]+)\)")
+HOURS = re.compile(r"\((\d+(?:\.\d+)?)\s*h\)")
 
-def parse_lesson(path: Path):
+
+GREEK = {"α": "alpha", "β": "beta", "γ": "gamma", "η": "eta", "λ": "lambda", "μ": "mu", "σ": "sigma"}
+
+
+def slug(text):
+    text = "".join(GREEK.get(c, c) for c in text)
+    s = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+    return s[:40].strip("-") or "section"
+
+
+def kind_of(title):
+    t = title.lower()
+    if t.startswith("short on time"):
+        return "short"
+    if t.startswith("tick off"):
+        return "tick"
+    if t.startswith("check yourself"):
+        return "check"
+    if t.startswith("watch"):
+        return "watch"
+    if t.startswith("session") or t.startswith("weekend"):
+        return "hands"
+    return "other"
+
+
+def split_sections(lines):
+    """Split a lesson body (after the title line) on '## ' headings outside code fences."""
+    sections, cur, in_fence = [], {"title": "Overview", "lines": []}, False
+    for line in lines:
+        if FENCE.match(line):
+            in_fence = not in_fence
+        if not in_fence and line.startswith("## "):
+            sections.append(cur)
+            cur = {"title": line[3:].strip(), "lines": []}
+        else:
+            cur["lines"].append(line)
+    sections.append(cur)
+    return sections
+
+
+def trim(lines):
+    """Drop leading/trailing blank lines and horizontal rules."""
+    lines = list(lines)
+    while lines and lines[0].strip() in ("", "---"):
+        lines.pop(0)
+    while lines and lines[-1].strip() in ("", "---"):
+        lines.pop()
+    return lines
+
+
+def h3_list(lines):
+    out, in_fence = [], False
+    for line in lines:
+        if FENCE.match(line):
+            in_fence = not in_fence
+        elif not in_fence and line.startswith("### "):
+            out.append(line[4:].strip())
+    return out
+
+
+def words(lines):
+    return sum(len(l.split()) for l in lines)
+
+
+def why_parts(lines):
+    """Indexes (among the section's h3 headings) of 'Why ...' explanation parts, and their word count."""
+    idx, count, k, in_fence, inside = [], 0, -1, False, False
+    for line in lines:
+        if FENCE.match(line):
+            in_fence = not in_fence
+        if not in_fence and line.startswith("### "):
+            k += 1
+            inside = line[4:].strip().lower().startswith("why")
+            if inside:
+                idx.append(k)
+            continue
+        if inside:
+            count += len(line.split())
+    return idx, count
+
+
+def list_items(lines, pattern):
+    """Collect top-level list items matching `pattern` (a compiled regex with the text in its last group).
+
+    An item continues over indented lines, blank lines followed by indented lines, and lazy
+    continuation lines (non-blank, straight after a non-blank line). The list ends at the first
+    non-indented paragraph after a blank line: anything after it is not part of the list.
+    """
+    items, cur, started, prev_blank, in_fence = [], None, False, False, False
+    for line in lines:
+        if cur is not None and in_fence:
+            cur["lines"].append(line)
+            if FENCE.match(line):
+                in_fence = False
+            continue
+        m = pattern.match(line)
+        if m:
+            cur = {"m": m, "lines": [m.group(m.lastindex)]}
+            items.append(cur)
+            started, prev_blank = True, False
+            if FENCE.match(m.group(m.lastindex)):
+                in_fence = True
+            continue
+        if not started:
+            continue
+        if not line.strip():
+            prev_blank = True
+            if cur is not None:
+                cur["lines"].append("")
+            continue
+        if line.startswith((" ", "\t")):
+            if cur is not None:
+                cur["lines"].append(line)
+                if FENCE.match(line):
+                    in_fence = True
+            prev_blank = False
+            continue
+        if not prev_blank and cur is not None and not line.startswith(("<", "#", "|", "---")):
+            cur["lines"].append(line)  # lazy continuation
+            continue
+        break  # a new top-level block: the list is over
+    return [{"m": it["m"], "md": "\n".join(dedent(it["lines"])).strip()} for it in items]
+
+
+def dedent(lines):
+    """Remove the common indentation of continuation lines (the first line has none)."""
+    if len(lines) <= 1:
+        return lines
+    rest = [l for l in lines[1:] if l.strip()]
+    pad = min((len(l) - len(l.lstrip(" ")) for l in rest), default=0)
+    return [lines[0]] + [l[pad:] if l.strip() else "" for l in lines[1:]]
+
+
+def parse_quiz(week, lines, report):
+    """Pair the numbered questions in 'Check yourself' with the numbered answers in its <details> block."""
+    before, inside, depth, seen = [], [], 0, False
+    for line in lines:
+        s = line.strip()
+        if s.startswith("<details"):
+            depth += 1
+            seen = True
+            continue
+        if s.startswith("</details"):
+            depth -= 1
+            if depth == 0:
+                break
+            continue
+        if s.startswith("<summary"):
+            continue
+        (inside if seen else before).append(line)
+    qs = {int(i["m"].group(1)): i["md"] for i in list_items(before, NUM_ITEM)}
+    ans = {int(i["m"].group(1)): i["md"] for i in list_items(inside, NUM_ITEM)}
+    cards = []
+    if not qs and ans:
+        # Week 50 style: the answers start with the question in bold, e.g. "**Wear-out?** ...".
+        for n, a in sorted(ans.items()):
+            m = re.match(r"\*\*(.+?)\*\*\s*(.*)", a, re.S)
+            if m:
+                cards.append({"id": f"{week}-{n}", "n": n, "q": m.group(1), "a": m.group(2).strip() or a})
+        report.append(f"week {week}: no numbered questions; used the {len(cards)} bold answer labels as questions")
+        return cards
+    for n in sorted(qs):
+        if n in ans:
+            cards.append({"id": f"{week}-{n}", "n": n, "q": qs[n], "a": ans[n]})
+    if len(qs) != len(ans) or len(cards) != len(qs):
+        report.append(f"week {week}: {len(qs)} questions, {len(ans)} answers, {len(cards)} paired")
+    return cards
+
+
+BULLET = re.compile(r"^[-*]\s+(.*)$")
+
+
+def parse_watch(lines):
+    out = []
+    for i, item in enumerate(list_items(lines, BULLET)):
+        text = item["md"]
+        searches = [s.strip() for s in SEARCH.findall(text)]
+        urls = [u for _, u in LINK.findall(text)]
+        out.append({"i": i, "md": text, "searches": searches, "urls": urls})
+    return out
+
+
+def parse_short(lines):
+    found = {}
+    for item in list_items(lines, BULLET):
+        m = re.match(r"\*\*(.+?)\*\*\s*:?\s*(.*)", item["md"], re.S)
+        if not m:
+            continue
+        label = m.group(1).strip().rstrip(":").strip()
+        text = m.group(2).strip()
+        low = label.lower()
+        key = "must" if low.startswith("must") else "phone" if "phone" in low else "skip" if "skip" in low else None
+        if key:
+            found[key] = {"label": label, "text": text}
+    return found or None
+
+
+def parse_lesson(path: Path, report):
     text = path.read_text(encoding="utf-8")
     lines = text.splitlines()
     m = re.match(r"# Week (\d+): (.+)", lines[0])
     week, title = int(m.group(1)), m.group(2).strip()
     phase = int(re.match(r"\*\*Phase (\d+)", lines[2]).group(1))
-    ticks, in_tick = [], False
-    for line in lines:
+    ticks, sections, quiz, watch, short, used = [], [], [], [], None, set()
+    for sec in split_sections(lines[1:]):
+        body = trim(sec["lines"])
+        kind = kind_of(sec["title"]) if sec["title"] != "Overview" or sections else "intro"
+        sid = slug(HOURS.sub("", sec["title"]))
+        while sid in used:
+            sid += "-2"
+        used.add(sid)
+        hrs = HOURS.search(sec["title"])
+        why, why_words = why_parts(body)
+        entry = {"id": sid, "title": sec["title"], "kind": kind, "md": "\n".join(body)}
+        if hrs:
+            entry["mins"] = round(float(hrs.group(1)) * 60)
+        if why:
+            entry["why"] = why
+            entry["readMins"] = max(2, round(why_words / 180))
+        if kind in ("intro", "other"):
+            entry["readMins"] = max(2, round(words(body) / 180))
+        if kind == "tick":
+            ticks = [re.sub(r"\*\*(.+?)\*\*", r"\1", l[6:].strip()) for l in body if l.startswith("- [ ] ")]
+        elif kind == "check" and not quiz:
+            quiz = parse_quiz(week, body, report)
+        elif kind == "watch":
+            watch = parse_watch(body)
+        elif kind == "short":
+            short = parse_short(body)
+        sections.append(entry)
+    return {"week": week, "phase": phase, "title": title, "path": path.relative_to(ROOT).as_posix(),
+            "ticks": ticks, "sections": sections, "quiz": quiz, "watch": watch, "short": short}
+
+
+def raw_tick_count(path: Path):
+    """Count '- [ ] ' lines under '## Tick off' with a plain line scan (no fence tracking), as a cross-check."""
+    n, inside = 0, False
+    for line in path.read_text(encoding="utf-8").splitlines():
         if line.startswith("## "):
-            in_tick = line.strip() == "## Tick off"
-            continue
-        if in_tick and line.startswith("- [ ] "):
-            ticks.append(re.sub(r"\*\*(.+?)\*\*", r"\1", line[6:].strip()))
-    return {"week": week, "phase": phase, "title": title,
-            "path": path.relative_to(ROOT).as_posix(), "ticks": ticks}
+            inside = line.strip() == "## Tick off"
+        elif inside and line.startswith("- [ ] "):
+            n += 1
+    return n
+
+
+def check(weeks, paths):
+    """Fail loudly if a lesson didn't parse completely (for example a fence swallowing its tail)."""
+    errors = []
+    for w in weeks:
+        kinds = [s["kind"] for s in w["sections"]]
+        if "tick" not in kinds:
+            errors.append(f"week {w['week']}: no 'Tick off' section found")
+        if not w["ticks"]:
+            errors.append(f"week {w['week']}: no tick items")
+        short = w["short"] or {}
+        missing = [k for k in ("must", "phone", "skip") if not (short.get(k) or {}).get("text")]
+        if missing:
+            errors.append(f"week {w['week']}: 'Short on time?' section missing or incomplete ({', '.join(missing)})")
+        raw = raw_tick_count(paths[w["week"]])
+        if raw != len(w["ticks"]):
+            errors.append(f"week {w['week']}: parsed {len(w['ticks'])} ticks but the file has {raw} under '## Tick off'")
+    return errors
+
+
+def stamp_sw():
+    """Write a hash of every cached file into sw.js, so a deploy with any change gets a fresh cache."""
+    h = hashlib.sha256()
+    for rel in SHELL:
+        p = ROOT / rel
+        if p.exists():
+            h.update(rel.encode())
+            h.update(p.read_bytes())
+    version = h.hexdigest()[:12]
+    if SW.exists():
+        sw = SW.read_text(encoding="utf-8")
+        sw2 = re.sub(r'const VERSION = "[^"]*";', f'const VERSION = "{version}";', sw, count=1)
+        if sw2 != sw:
+            SW.write_text(sw2, encoding="utf-8")
+    return version
 
 
 def main():
-    weeks = sorted((parse_lesson(p) for p in (ROOT / "course").glob("phase-*/week-*.md")), key=lambda w: w["week"])
+    report = []
+    files = sorted((ROOT / "course").glob("phase-*/week-*.md"))
+    weeks, paths = [], {}
+    for p in files:
+        w = parse_lesson(p, report)
+        weeks.append(w)
+        paths[w["week"]] = p
+    weeks.sort(key=lambda w: w["week"])
     assert [w["week"] for w in weeks] == list(range(1, len(weeks) + 1)), "week numbers must run 1..N with no gaps"
+    errors = check(weeks, paths)
+    if errors:
+        print("Build FAILED, app/course-data.js not written:", file=sys.stderr)
+        for e in errors:
+            print("  " + e, file=sys.stderr)
+        return 1
     data = json.dumps({"phases": PHASES, "weeks": weeks}, ensure_ascii=False, separators=(",", ":"))
-    html = INDEX.read_text(encoding="utf-8")
-    a, b = html.index(START) + len(START), html.index(END)
-    INDEX.write_text(html[:a] + data + html[b:], encoding="utf-8")
-    print(f"index.html updated: {len(weeks)} weeks, {sum(len(w['ticks']) for w in weeks)} tick items")
+    # "</" is escaped so lesson text can never close the <script> element early.
+    data = data.replace("</", "<\\/")
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    OUT.write_text("/* Generated by tools/build_tracker.py from course/. Do not edit by hand. */\n"
+                   f"window.COURSE_DATA = {data};\n", encoding="utf-8")
+    version = stamp_sw()
+
+    n_ticks = sum(len(w["ticks"]) for w in weeks)
+    n_cards = sum(len(w["quiz"]) for w in weeks)
+    n_watch = sum(len(w["watch"]) for w in weeks)
+    n_search = sum(1 for w in weeks for x in w["watch"] if x["searches"])
+    n_short = sum(1 for w in weeks if w["short"])
+    size = OUT.stat().st_size
+    print(f"{OUT.relative_to(ROOT).as_posix()} written: {len(weeks)} weeks, {n_ticks} tick items, "
+          f"{n_cards} quiz cards, {n_watch} watch items ({n_search} with a search phrase), "
+          f"{n_short} 'Short on time?' sections, {size / 1024:.0f} KB")
+    print(f"sw.js cache version {version}")
+    raw_total = sum(raw_tick_count(p) for p in paths.values())
+    print(f"tick cross-check: {n_ticks} parsed = {raw_total} '- [ ] ' lines under '## Tick off'")
+    no_check = [w["week"] for w in weeks if not w["quiz"]]
+    if no_check:
+        print("No quiz cards in weeks: " + ", ".join(map(str, no_check)))
+    if report:
+        print("Question/answer notes:")
+        for r in report:
+            print("  " + r)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

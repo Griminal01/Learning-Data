@@ -11,8 +11,8 @@ Everything runs on a realistic **synthetic** data set for a fictional 7-zone cer
 ## Quick start
 
 1. **Get the files.** Click the green **Code** button → **Download ZIP** and unzip it to `Documents\Learning-Data`. (From Week 33 you'll switch to `git clone`.)
-2. **Open the tracker.** Double-click `index.html` to open **Data Skills Studio** in Edge. It tracks your ticks, done-when tests and weekly hours, and generates fresh practice data. (Or host it on GitHub Pages; see below.)
-3. **Open Week 1:** [`course/phase-0-foundations/week-01-excel-basics.md`](course/phase-0-foundations/week-01-excel-basics.md), or click *Open Week 1* in the tracker.
+2. **Open the tracker.** Double-click `index.html` to open **Data Skills Studio** in Edge. It tells you what to do today with the time you have, shows every lesson inside the app (offline), quizzes you with flash cards, and tracks your ticks, done-when tests and weekly hours. It also generates fresh practice data. To use it on your phone too, host it on GitHub Pages (see below).
+3. **Open Week 1:** in the tracker's **Today** tab, or [`course/phase-0-foundations/week-01-excel-basics.md`](course/phase-0-foundations/week-01-excel-basics.md) on GitHub.
 
 The full dated schedule is in **[`course/README.md`](course/README.md)**.
 
@@ -36,8 +36,39 @@ The full dated schedule is in **[`course/README.md`](course/README.md)**.
 - **Session 1 and Session 2** (weekday evenings, 1.5 h each): *Do it* first, then *Why it works*.
 - **Weekend** (2 h): practice or the phase build.
 - **Watch**: the best free videos for the topic, *after* you've tried it.
-- **Check yourself**: questions, with answers hidden in a collapsed section.
+- **Check yourself**: questions, with answers hidden in a collapsed section. The tracker turns these into quiz cards.
+- **Short on time?**: what you must do at a PC, what you can do on your phone, and what's safe to skip that week.
 - **Tick off**: the same items appear in the tracker app.
+
+---
+
+## Doing it day by day
+
+The plan assumes two 1.5-hour evenings and a weekend block, but most weeks won't go like that. The tracker is built for the days when you've only got ten minutes, or only your phone.
+
+- **Today tab.** Pick how long you've got (5, 15, 30 or 60 minutes) and whether you're on your phone or a PC. It suggests one thing to do, plus one or two alternatives, all from the week you're on. On a phone that's quiz cards, a "Why it works" section to read, or a video to watch. On a PC it's the next session, picking up where you left off.
+- **Log it in one tap.** When you finish, press **Log 15 min** (or whatever you chose). It goes into the weekly log and its chart, like any other entry.
+- **Streak.** Any logged time, or one quiz card, counts as a day. A single card is enough on a busy day.
+- **Short on time?** Each lesson has a short box saying what you must do (about 90 minutes at a PC), what works on your phone (about 10 minutes a day), and what's safe to skip. It's shown on Today and at the top of the lesson.
+- **Lessons in the app.** Every lesson opens in the app's reader, split into its sessions. Mark each part *Read it* (on the phone) or *Done it* (at the PC). It remembers where you got to in each week. The *Tick off* list in the reader is the same official checklist as the Course tab.
+- **Quiz cards.** The *Check yourself* questions become flash cards. Read the question, think of the answer, tap to check, then press **Got it** or **Again**. Cards you know come back less often (after 1, 3, 7, 14, then 30 days); cards you miss come back tomorrow. Cards unlock as you reach each week.
+- **Watch list.** Each video has a button that runs the YouTube search for you, and you can mark it watched.
+- **Behind schedule?** Today shows the calendar week next to the week you're actually on. Going at your own pace is fine. If you want the dates to match, move the start date in Settings.
+
+### Put it on your phone
+
+1. Host the tracker on GitHub Pages (see below) and open its address on your phone.
+2. **Android (Chrome):** menu ⋮ → *Install app* (or *Add to Home screen*). **iPhone (Safari):** Share → *Add to Home Screen*.
+3. It now opens like an app and works with no signal once it has been opened once. It picks up a new version by itself next time you open it online.
+
+### Keep your phone and PC in step
+
+Progress is saved in each browser separately, so you need one of these:
+
+- **Backup file (no setup).** Settings → **Export backup** (or **Share backup** on a phone, to send it to yourself), then on the other device Settings → **Import and merge**. Importing *merges*: it adds what's new and never wipes anything.
+- **Automatic sync with a private gist (optional).** Settings → *Sync with a private GitHub gist*. You make a GitHub token that can only touch gists (the app explains how), paste it on each device, and the app keeps your progress in one secret gist on your own account. It pulls when the app opens and pushes a few seconds after each change. The token is stored only in that browser, never in backups. **Turn off sync** deletes it.
+
+Both use the same rule: for each tick, card or entry, the most recent change wins, so something you un-tick on one device stays un-ticked on the other.
 
 ---
 
@@ -50,8 +81,10 @@ data/              the practice data set (CSV, SQLite, exports, production, migr
 solutions/         worked SQL, Python, reliability and ML solutions (all tested against the data)
 portfolio/         how to package each phase build for a public GitHub portfolio
 my_work/           your own files go here
-index.html         Data Skills Studio, the tracker app
-tools/             build script that syncs the tracker with the lessons
+index.html         Data Skills Studio, the tracker app (open it by double-click, or host it)
+app/               the app's script, styles, icons and course-data.js (lessons built for the app)
+sw.js, manifest.webmanifest   offline and "install on phone" support when hosted
+tools/             build script that syncs the tracker with the lessons, its icon maker and browser tests
 requirements.txt   Python libraries for Phases 5-7
 ```
 
@@ -91,9 +124,13 @@ The main free learning resources used throughout are Microsoft Learn (PL-300 pat
 2. Go to **Settings → Pages → Build and deployment**: Source = *Deploy from a branch*, Branch = your default branch, folder = `/ (root)` → Save.
 3. After a minute, the tracker is live at `https://<your-username>.github.io/<repo-name>/`.
 
-Your progress is stored in the browser you use (localStorage), so use the same browser each time, and use **Settings → Export progress** for backups.
+No build step is needed: GitHub Pages serves `index.html`, `app/`, `sw.js` and `manifest.webmanifest` as they are. The hosted copy works offline once opened and can be installed on a phone (see *Doing it day by day*).
 
-If you edit a lesson's title or its *Tick off* list, run `python tools/build_tracker.py` to update the app.
+Your progress is stored in the browser you use (localStorage). Use **Settings → Export backup** for backups, and import-merge or gist sync to move between devices.
+
+**After editing any lesson** (its title, sections, *Tick off*, *Check yourself*, *Watch* or *Short on time?*), run `python tools/build_tracker.py`. It rebuilds `app/course-data.js`, which is what the app reads, and updates the offline cache version in `sw.js`. It prints how many weeks, ticks, quiz cards and watch items it found, and any lesson where the *Check yourself* questions and answers don't pair up. Commit `app/course-data.js` with your lesson change.
+
+To check the app after changing it, run the browser tests (needs Node and Playwright): `node tools/test_app.js`.
 
 ---
 
