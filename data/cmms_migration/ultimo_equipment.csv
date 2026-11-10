@@ -1,0 +1,292 @@
+equipment_id,description,process_function,equipment_type,criticality
+EQ-53955,Cooking Drive motor 1,SITE/LINE-D/COK,Drive motor,B
+EQ-13597,Cooking Drive motor 2,SITE/LINE-D/COK,Drive motor,A
+EQ-75025,Cooking Drive motor 3,SITE/LINE-D/COK,Drive motor,A
+EQ-79494,Cooking Drive motor 4,SITE/LINE-D/COK,Drive motor,A
+EQ-91847,Cooking Drive motor 5,SITE/LINE-D/COK,Drive motor,B
+EQ-73653,Cooking Drive motor 6,SITE/LINE-D/COK,Drive motor,B
+EQ-77317,Cooking Drive motor 7,SITE/LINE-D/COK,Drive motor,B
+EQ-32522,Cooking Drive motor 8,SITE/LINE-D/COK,Drive motor,A
+EQ-10080,Cooking Drive motor 9,SITE/LINE-D/COK,Drive motor,B
+EQ-36608,Cooking Drive motor 10,SITE/LINE-D/COK,Drive motor,A
+EQ-43507,Cooking Gearbox 1,SITE/LINE-D/COK,Gearbox,C
+EQ-79781,Cooking Gearbox 2,SITE/LINE-D/COK,Gearbox,A
+EQ-37508,Cooking Gearbox 3,SITE/LINE-D/COK,Gearbox,B
+EQ-36086,Cooking Gearbox 4,SITE/LINE-D/COK,Gearbox,B
+EQ-89428,Cooking Gearbox 5,SITE/LINE-D/COK,Gearbox,B
+EQ-59754,Cooking Gearbox 6,SITE/LINE-D/COK,Gearbox,A
+EQ-15187,Cooking Conveyor 1,SITE/LINE-D/COK,Conveyor,A
+EQ-90397,Cooking Conveyor 2,SITE/LINE-D/COK,Conveyor,B
+EQ-52188,Cooking Conveyor 3,SITE/LINE-D/COK,Conveyor,C
+EQ-66394,Cooking Conveyor 4,SITE/LINE-D/COK,Conveyor,A
+EQ-53742,Cooking Conveyor 5,SITE/LINE-D/COK,Conveyor,A
+EQ-38972,Cooking Conveyor 6,SITE/LINE-D/COK,Conveyor,A
+EQ-14296,Cooking Conveyor 7,SITE/LINE-D/COK,Conveyor,B
+EQ-10638,Cooking Conveyor 8,SITE/LINE-D/COK,Conveyor,B
+EQ-82023,Cooking Conveyor 9,SITE/LINE-D/COK,Conveyor,A
+EQ-61384,Cooking Conveyor 10,SITE/LINE-D/COK,Conveyor,B
+EQ-70789,Cooking Pump 1,SITE/LINE-D/COK,Pump,B
+EQ-72156,Cooking Pump 2,SITE/LINE-D/COK,Pump,C
+EQ-53805,Cooking Pump 3,SITE/LINE-D/COK,Pump,A
+EQ-53753,Cooking Pump 4,SITE/LINE-D/COK,Pump,B
+EQ-18461,Cooking Pump 5,SITE/LINE-D/COK,Pump,A
+EQ-29432,Cooking Pump 6,SITE/LINE-D/COK,Pump,C
+EQ-80669,Cooking Pump 7,SITE/LINE-D/COK,Pump,C
+EQ-39816,Cooking Pump 8,SITE/LINE-D/COK,Pump,C
+EQ-21802,Cooking Sensor / transmitter 1,SITE/LINE-D/COK,Sensor / transmitter,B
+EQ-20992,Cooking Sensor / transmitter 2,SITE/LINE-D/COK,Sensor / transmitter,C
+EQ-90490,Cooking Sensor / transmitter 3,SITE/LINE-D/COK,Sensor / transmitter,A
+EQ-27338,Cooking Sensor / transmitter 4,SITE/LINE-D/COK,Sensor / transmitter,A
+EQ-29693,Cooking Sensor / transmitter 5,SITE/LINE-D/COK,Sensor / transmitter,B
+EQ-56911,Cooking Sensor / transmitter 6,SITE/LINE-D/COK,Sensor / transmitter,C
+EQ-80487,Cooking Sensor / transmitter 7,SITE/LINE-D/COK,Sensor / transmitter,B
+EQ-90639,Cooking Pneumatic cylinder 1,SITE/LINE-D/COK,Pneumatic cylinder,A
+EQ-87194,Cooking Pneumatic cylinder 2,SITE/LINE-D/COK,Pneumatic cylinder,A
+EQ-94734,Drying Drive motor 1,SITE/LINE-D/DRY,Drive motor,A
+EQ-41742,Drying Drive motor 2,SITE/LINE-D/DRY,Drive motor,B
+EQ-53403,Drying Drive motor 3,SITE/LINE-D/DRY,Drive motor,A
+EQ-46088,Drying Drive motor 4,SITE/LINE-D/DRY,Drive motor,A
+EQ-36323,Drying Drive motor 5,SITE/LINE-D/DRY,Drive motor,A
+EQ-28379,Drying Drive motor 6,SITE/LINE-D/DRY,Drive motor,C
+EQ-32273,Drying Drive motor 7,SITE/LINE-D/DRY,Drive motor,B
+EQ-15513,Drying Drive motor 8,SITE/LINE-D/DRY,Drive motor,A
+EQ-23156,Drying Fan 1,SITE/LINE-D/DRY,Fan,B
+EQ-36654,Drying Fan 2,SITE/LINE-D/DRY,Fan,C
+EQ-33327,Drying Fan 3,SITE/LINE-D/DRY,Fan,C
+EQ-24106,Drying Fan 4,SITE/LINE-D/DRY,Fan,B
+EQ-53665,Drying Fan 5,SITE/LINE-D/DRY,Fan,A
+EQ-52065,Drying Fan 6,SITE/LINE-D/DRY,Fan,C
+EQ-44051,Drying Fan 7,SITE/LINE-D/DRY,Fan,C
+EQ-75840,Drying Fan 8,SITE/LINE-D/DRY,Fan,B
+EQ-40532,Drying Fan 9,SITE/LINE-D/DRY,Fan,C
+EQ-89597,Drying Fan 10,SITE/LINE-D/DRY,Fan,B
+EQ-88536,Drying Burner 1,SITE/LINE-D/DRY,Burner,A
+EQ-70217,Drying Burner 2,SITE/LINE-D/DRY,Burner,B
+EQ-30252,Drying Burner 3,SITE/LINE-D/DRY,Burner,C
+EQ-88600,Drying Burner 4,SITE/LINE-D/DRY,Burner,B
+EQ-62548,Drying Conveyor 1,SITE/LINE-D/DRY,Conveyor,B
+EQ-44926,Drying Conveyor 2,SITE/LINE-D/DRY,Conveyor,A
+EQ-83381,Drying Conveyor 3,SITE/LINE-D/DRY,Conveyor,B
+EQ-84243,Drying Conveyor 4,SITE/LINE-D/DRY,Conveyor,B
+EQ-13887,Drying Conveyor 5,SITE/LINE-D/DRY,Conveyor,A
+EQ-82539,Drying Conveyor 6,SITE/LINE-D/DRY,Conveyor,C
+EQ-34500,Drying Conveyor 7,SITE/LINE-D/DRY,Conveyor,B
+EQ-90921,Drying Conveyor 8,SITE/LINE-D/DRY,Conveyor,A
+EQ-81469,Drying Sensor / transmitter 1,SITE/LINE-D/DRY,Sensor / transmitter,C
+EQ-54092,Drying Sensor / transmitter 2,SITE/LINE-D/DRY,Sensor / transmitter,B
+EQ-50833,Drying Sensor / transmitter 3,SITE/LINE-D/DRY,Sensor / transmitter,B
+EQ-85894,Drying Sensor / transmitter 4,SITE/LINE-D/DRY,Sensor / transmitter,B
+EQ-16007,Drying Sensor / transmitter 5,SITE/LINE-D/DRY,Sensor / transmitter,B
+EQ-49118,Drying Sensor / transmitter 6,SITE/LINE-D/DRY,Sensor / transmitter,C
+EQ-33100,Drying Sensor / transmitter 7,SITE/LINE-D/DRY,Sensor / transmitter,B
+EQ-54909,Drying Sensor / transmitter 8,SITE/LINE-D/DRY,Sensor / transmitter,A
+EQ-32134,Drying Rotary valve 1,SITE/LINE-D/DRY,Rotary valve,A
+EQ-67106,Drying Rotary valve 2,SITE/LINE-D/DRY,Rotary valve,A
+EQ-97869,Drying Rotary valve 3,SITE/LINE-D/DRY,Rotary valve,A
+EQ-15285,Drying Rotary valve 4,SITE/LINE-D/DRY,Rotary valve,B
+EQ-13867,Drying Rotary valve 5,SITE/LINE-D/DRY,Rotary valve,C
+EQ-26025,Flaking Drive motor 1,SITE/LINE-D/FLK,Drive motor,A
+EQ-78612,Flaking Drive motor 2,SITE/LINE-D/FLK,Drive motor,B
+EQ-86579,Flaking Drive motor 3,SITE/LINE-D/FLK,Drive motor,C
+EQ-91260,Flaking Drive motor 4,SITE/LINE-D/FLK,Drive motor,B
+EQ-92937,Flaking Drive motor 5,SITE/LINE-D/FLK,Drive motor,B
+EQ-84958,Flaking Drive motor 6,SITE/LINE-D/FLK,Drive motor,B
+EQ-93493,Flaking Drive motor 7,SITE/LINE-D/FLK,Drive motor,B
+EQ-55481,Flaking Drive motor 8,SITE/LINE-D/FLK,Drive motor,B
+EQ-39094,Flaking roll 1,SITE/LINE-D/FLK,Flaking roll,B
+EQ-33680,Flaking roll 2,SITE/LINE-D/FLK,Flaking roll,B
+EQ-11343,Flaking roll 3,SITE/LINE-D/FLK,Flaking roll,C
+EQ-99765,Flaking roll 4,SITE/LINE-D/FLK,Flaking roll,B
+EQ-62950,Flaking roll 5,SITE/LINE-D/FLK,Flaking roll,B
+EQ-82809,Flaking roll 6,SITE/LINE-D/FLK,Flaking roll,A
+EQ-78033,Flaking roll 7,SITE/LINE-D/FLK,Flaking roll,B
+EQ-65389,Flaking roll 8,SITE/LINE-D/FLK,Flaking roll,B
+EQ-37817,Flaking roll 9,SITE/LINE-D/FLK,Flaking roll,B
+EQ-95486,Flaking roll 10,SITE/LINE-D/FLK,Flaking roll,C
+EQ-74974,Flaking Hydraulic power unit 1,SITE/LINE-D/FLK,Hydraulic power unit,B
+EQ-34279,Flaking Hydraulic power unit 2,SITE/LINE-D/FLK,Hydraulic power unit,B
+EQ-61844,Flaking Hydraulic power unit 3,SITE/LINE-D/FLK,Hydraulic power unit,B
+EQ-55519,Flaking Hydraulic power unit 4,SITE/LINE-D/FLK,Hydraulic power unit,C
+EQ-99283,Flaking Conveyor 1,SITE/LINE-D/FLK,Conveyor,B
+EQ-62373,Flaking Conveyor 2,SITE/LINE-D/FLK,Conveyor,C
+EQ-37982,Flaking Conveyor 3,SITE/LINE-D/FLK,Conveyor,C
+EQ-64120,Flaking Conveyor 4,SITE/LINE-D/FLK,Conveyor,B
+EQ-59098,Flaking Conveyor 5,SITE/LINE-D/FLK,Conveyor,B
+EQ-14084,Flaking Conveyor 6,SITE/LINE-D/FLK,Conveyor,A
+EQ-56506,Flaking Conveyor 7,SITE/LINE-D/FLK,Conveyor,B
+EQ-11500,Flaking Conveyor 8,SITE/LINE-D/FLK,Conveyor,A
+EQ-55918,Flaking Gearbox 1,SITE/LINE-D/FLK,Gearbox,A
+EQ-88005,Flaking Gearbox 2,SITE/LINE-D/FLK,Gearbox,B
+EQ-79946,Flaking Gearbox 3,SITE/LINE-D/FLK,Gearbox,C
+EQ-69382,Flaking Gearbox 4,SITE/LINE-D/FLK,Gearbox,C
+EQ-28079,Flaking Gearbox 5,SITE/LINE-D/FLK,Gearbox,C
+EQ-37063,Flaking Gearbox 6,SITE/LINE-D/FLK,Gearbox,B
+EQ-66647,Flaking Sensor / transmitter 1,SITE/LINE-D/FLK,Sensor / transmitter,A
+EQ-13127,Flaking Sensor / transmitter 2,SITE/LINE-D/FLK,Sensor / transmitter,A
+EQ-13698,Flaking Sensor / transmitter 3,SITE/LINE-D/FLK,Sensor / transmitter,A
+EQ-11413,Flaking Sensor / transmitter 4,SITE/LINE-D/FLK,Sensor / transmitter,B
+EQ-31908,Flaking Sensor / transmitter 5,SITE/LINE-D/FLK,Sensor / transmitter,B
+EQ-82210,Flaking Sensor / transmitter 6,SITE/LINE-D/FLK,Sensor / transmitter,B
+EQ-71676,Forming Drive motor 1,SITE/LINE-D/FRM,Drive motor,C
+EQ-81269,Forming Drive motor 2,SITE/LINE-D/FRM,Drive motor,B
+EQ-81440,Forming Drive motor 3,SITE/LINE-D/FRM,Drive motor,B
+EQ-35891,Forming Drive motor 4,SITE/LINE-D/FRM,Drive motor,B
+EQ-83665,Forming Drive motor 5,SITE/LINE-D/FRM,Drive motor,C
+EQ-54507,Forming Drive motor 6,SITE/LINE-D/FRM,Drive motor,B
+EQ-11525,Forming Servo drive 1,SITE/LINE-D/FRM,Servo drive,C
+EQ-54546,Forming Servo drive 2,SITE/LINE-D/FRM,Servo drive,A
+EQ-85197,Forming Servo drive 3,SITE/LINE-D/FRM,Servo drive,C
+EQ-10751,Forming Servo drive 4,SITE/LINE-D/FRM,Servo drive,A
+EQ-84067,Forming Servo drive 5,SITE/LINE-D/FRM,Servo drive,A
+EQ-45494,Forming Servo drive 6,SITE/LINE-D/FRM,Servo drive,A
+EQ-23206,Forming Servo drive 7,SITE/LINE-D/FRM,Servo drive,A
+EQ-23607,Forming Servo drive 8,SITE/LINE-D/FRM,Servo drive,B
+EQ-14531,Forming Servo drive 9,SITE/LINE-D/FRM,Servo drive,C
+EQ-35720,Forming Servo drive 10,SITE/LINE-D/FRM,Servo drive,A
+EQ-71040,Forming Conveyor 1,SITE/LINE-D/FRM,Conveyor,B
+EQ-26429,Forming Conveyor 2,SITE/LINE-D/FRM,Conveyor,A
+EQ-53965,Forming Conveyor 3,SITE/LINE-D/FRM,Conveyor,B
+EQ-59683,Forming Conveyor 4,SITE/LINE-D/FRM,Conveyor,A
+EQ-74097,Forming Conveyor 5,SITE/LINE-D/FRM,Conveyor,B
+EQ-87646,Forming Conveyor 6,SITE/LINE-D/FRM,Conveyor,B
+EQ-21083,Forming Conveyor 7,SITE/LINE-D/FRM,Conveyor,B
+EQ-34105,Forming Conveyor 8,SITE/LINE-D/FRM,Conveyor,A
+EQ-83908,Forming Conveyor 9,SITE/LINE-D/FRM,Conveyor,B
+EQ-98960,Forming Conveyor 10,SITE/LINE-D/FRM,Conveyor,B
+EQ-24013,Forming Vacuum pump 1,SITE/LINE-D/FRM,Vacuum pump,A
+EQ-75522,Forming Vacuum pump 2,SITE/LINE-D/FRM,Vacuum pump,C
+EQ-50195,Forming Vacuum pump 3,SITE/LINE-D/FRM,Vacuum pump,A
+EQ-52825,Forming Vacuum pump 4,SITE/LINE-D/FRM,Vacuum pump,B
+EQ-44667,Forming Pneumatic cylinder 1,SITE/LINE-D/FRM,Pneumatic cylinder,C
+EQ-46320,Forming Pneumatic cylinder 3,SITE/LINE-D/FRM,Pneumatic cylinder,B
+EQ-74619,Forming Pneumatic cylinder 4,SITE/LINE-D/FRM,Pneumatic cylinder,B
+EQ-45472,Forming Pneumatic cylinder 5,SITE/LINE-D/FRM,Pneumatic cylinder,B
+EQ-55205,Forming Pneumatic cylinder 6,SITE/LINE-D/FRM,Pneumatic cylinder,C
+EQ-14685,Forming Pneumatic cylinder 7,SITE/LINE-D/FRM,Pneumatic cylinder,B
+EQ-68303,Forming Pneumatic cylinder 8,SITE/LINE-D/FRM,Pneumatic cylinder,B
+EQ-97562,Forming Pneumatic cylinder 9,SITE/LINE-D/FRM,Pneumatic cylinder,A
+EQ-10047,Forming Pneumatic cylinder 10,SITE/LINE-D/FRM,Pneumatic cylinder,C
+EQ-42105,Forming Sensor / transmitter 1,SITE/LINE-D/FRM,Sensor / transmitter,A
+EQ-97458,Forming Sensor / transmitter 2,SITE/LINE-D/FRM,Sensor / transmitter,C
+EQ-38642,Forming Sensor / transmitter 3,SITE/LINE-D/FRM,Sensor / transmitter,B
+EQ-22013,Forming Sensor / transmitter 4,SITE/LINE-D/FRM,Sensor / transmitter,C
+EQ-31993,Baking Drive motor 1,SITE/LINE-D/BAK,Drive motor,B
+EQ-38748,Baking Drive motor 2,SITE/LINE-D/BAK,Drive motor,C
+EQ-27875,Baking Drive motor 3,SITE/LINE-D/BAK,Drive motor,B
+EQ-90058,Baking Drive motor 4,SITE/LINE-D/BAK,Drive motor,A
+EQ-89794,Baking Drive motor 5,SITE/LINE-D/BAK,Drive motor,B
+EQ-49064,Baking Drive motor 6,SITE/LINE-D/BAK,Drive motor,B
+EQ-59257,Baking Burner 1,SITE/LINE-D/BAK,Burner,B
+EQ-38109,Baking Burner 2,SITE/LINE-D/BAK,Burner,C
+EQ-32202,Baking Burner 3,SITE/LINE-D/BAK,Burner,A
+EQ-75883,Baking Burner 4,SITE/LINE-D/BAK,Burner,A
+EQ-79868,Baking Burner 5,SITE/LINE-D/BAK,Burner,A
+EQ-54001,Baking Burner 6,SITE/LINE-D/BAK,Burner,B
+EQ-40117,Baking Burner 7,SITE/LINE-D/BAK,Burner,C
+EQ-45275,Baking Burner 8,SITE/LINE-D/BAK,Burner,A
+EQ-34471,Baking Fan 1,SITE/LINE-D/BAK,Fan,A
+EQ-15219,Baking Fan 2,SITE/LINE-D/BAK,Fan,C
+EQ-60330,Baking Fan 3,SITE/LINE-D/BAK,Fan,B
+EQ-99290,Baking Fan 4,SITE/LINE-D/BAK,Fan,B
+EQ-28912,Baking Fan 5,SITE/LINE-D/BAK,Fan,C
+EQ-28849,Baking Fan 6,SITE/LINE-D/BAK,Fan,C
+EQ-60075,Baking Fan 7,SITE/LINE-D/BAK,Fan,C
+EQ-19988,Baking Fan 8,SITE/LINE-D/BAK,Fan,C
+EQ-85895,Baking Conveyor 1,SITE/LINE-D/BAK,Conveyor,C
+EQ-98922,Baking Conveyor 2,SITE/LINE-D/BAK,Conveyor,C
+EQ-30774,Baking Conveyor 3,SITE/LINE-D/BAK,Conveyor,B
+EQ-15557,Baking Conveyor 4,SITE/LINE-D/BAK,Conveyor,B
+EQ-96438,Baking Conveyor 5,SITE/LINE-D/BAK,Conveyor,C
+EQ-38341,Baking Conveyor 6,SITE/LINE-D/BAK,Conveyor,B
+EQ-99305,Baking Gearbox 1,SITE/LINE-D/BAK,Gearbox,B
+EQ-59838,Baking Gearbox 2,SITE/LINE-D/BAK,Gearbox,B
+EQ-87370,Baking Gearbox 3,SITE/LINE-D/BAK,Gearbox,B
+EQ-70071,Baking Gearbox 4,SITE/LINE-D/BAK,Gearbox,B
+EQ-27365,Baking Sensor / transmitter 1,SITE/LINE-D/BAK,Sensor / transmitter,A
+EQ-63426,Baking Sensor / transmitter 2,SITE/LINE-D/BAK,Sensor / transmitter,A
+EQ-84713,Baking Sensor / transmitter 3,SITE/LINE-D/BAK,Sensor / transmitter,A
+EQ-97923,Baking Sensor / transmitter 4,SITE/LINE-D/BAK,Sensor / transmitter,B
+EQ-24396,Baking Sensor / transmitter 5,SITE/LINE-D/BAK,Sensor / transmitter,B
+EQ-65842,Baking Sensor / transmitter 6,SITE/LINE-D/BAK,Sensor / transmitter,A
+EQ-39203,Baking Sensor / transmitter 7,SITE/LINE-D/BAK,Sensor / transmitter,B
+EQ-17887,Baking Sensor / transmitter 8,SITE/LINE-D/BAK,Sensor / transmitter,C
+EQ-30430,Baking Sensor / transmitter 9,SITE/LINE-D/BAK,Sensor / transmitter,C
+EQ-29559,Baking Sensor / transmitter 10,SITE/LINE-D/BAK,Sensor / transmitter,C
+EQ-14119,Primary Packing Flow wrapper 1,SITE/LINE-D/PPK,Flow wrapper,B
+EQ-28264,Primary Packing Flow wrapper 2,SITE/LINE-D/PPK,Flow wrapper,B
+EQ-10956,Primary Packing Flow wrapper 3,SITE/LINE-D/PPK,Flow wrapper,B
+EQ-87666,Primary Packing Flow wrapper 4,SITE/LINE-D/PPK,Flow wrapper,B
+EQ-39873,Primary Packing Flow wrapper 5,SITE/LINE-D/PPK,Flow wrapper,C
+EQ-12424,Primary Packing Flow wrapper 6,SITE/LINE-D/PPK,Flow wrapper,C
+EQ-88152,Primary Packing Carton erector 1,SITE/LINE-D/PPK,Carton erector,A
+EQ-16662,Primary Packing Carton erector 2,SITE/LINE-D/PPK,Carton erector,A
+EQ-12390,Primary Packing Carton erector 3,SITE/LINE-D/PPK,Carton erector,A
+EQ-16832,Primary Packing Checkweigher 1,SITE/LINE-D/PPK,Checkweigher,B
+EQ-79646,Primary Packing Checkweigher 2,SITE/LINE-D/PPK,Checkweigher,B
+EQ-81516,Primary Packing Checkweigher 3,SITE/LINE-D/PPK,Checkweigher,C
+EQ-16597,Primary Packing Metal detector 1,SITE/LINE-D/PPK,Metal detector,A
+EQ-57974,Primary Packing Metal detector 2,SITE/LINE-D/PPK,Metal detector,C
+EQ-12366,Primary Packing Metal detector 3,SITE/LINE-D/PPK,Metal detector,C
+EQ-70564,Primary Packing Conveyor 1,SITE/LINE-D/PPK,Conveyor,A
+EQ-73139,Primary Packing Conveyor 2,SITE/LINE-D/PPK,Conveyor,B
+EQ-94722,Primary Packing Conveyor 3,SITE/LINE-D/PPK,Conveyor,C
+EQ-85232,Primary Packing Conveyor 4,SITE/LINE-D/PPK,Conveyor,B
+EQ-19741,Primary Packing Conveyor 5,SITE/LINE-D/PPK,Conveyor,A
+EQ-60084,Primary Packing Conveyor 6,SITE/LINE-D/PPK,Conveyor,A
+EQ-90017,Primary Packing Conveyor 7,SITE/LINE-D/PPK,Conveyor,B
+EQ-63390,Primary Packing Conveyor 8,SITE/LINE-D/PPK,Conveyor,B
+EQ-20872,Primary Packing Conveyor 9,SITE/LINE-D/PPK,Conveyor,B
+EQ-97231,Primary Packing Conveyor 10,SITE/LINE-D/PPK,Conveyor,A
+EQ-17664,Primary Packing Conveyor 11,SITE/LINE-D/PPK,Conveyor,B
+EQ-39779,Primary Packing Conveyor 12,SITE/LINE-D/PPK,Conveyor,A
+EQ-95461,Primary Packing Servo drive 1,SITE/LINE-D/PPK,Servo drive,C
+EQ-18736,Primary Packing Servo drive 2,SITE/LINE-D/PPK,Servo drive,C
+EQ-24993,Primary Packing Servo drive 3,SITE/LINE-D/PPK,Servo drive,A
+EQ-25454,Primary Packing Servo drive 4,SITE/LINE-D/PPK,Servo drive,B
+EQ-59921,Primary Packing Servo drive 5,SITE/LINE-D/PPK,Servo drive,B
+EQ-93871,Primary Packing Servo drive 6,SITE/LINE-D/PPK,Servo drive,B
+EQ-65318,Primary Packing Servo drive 7,SITE/LINE-D/PPK,Servo drive,C
+EQ-97042,Primary Packing Servo drive 8,SITE/LINE-D/PPK,Servo drive,B
+EQ-80488,Primary Packing Servo drive 9,SITE/LINE-D/PPK,Servo drive,C
+EQ-94349,Primary Packing Servo drive 10,SITE/LINE-D/PPK,Servo drive,C
+EQ-10342,Primary Packing Pneumatic cylinder 1,SITE/LINE-D/PPK,Pneumatic cylinder,C
+EQ-31305,Primary Packing Pneumatic cylinder 2,SITE/LINE-D/PPK,Pneumatic cylinder,C
+EQ-90402,Primary Packing Pneumatic cylinder 3,SITE/LINE-D/PPK,Pneumatic cylinder,A
+EQ-69070,Primary Packing Pneumatic cylinder 4,SITE/LINE-D/PPK,Pneumatic cylinder,B
+EQ-33978,Primary Packing Pneumatic cylinder 5,SITE/LINE-D/PPK,Pneumatic cylinder,B
+EQ-96668,Primary Packing Pneumatic cylinder 6,SITE/LINE-D/PPK,Pneumatic cylinder,A
+EQ-99386,End of Line Case packer 1,SITE/LINE-D/EOL,Case packer,A
+EQ-80066,End of Line Case packer 2,SITE/LINE-D/EOL,Case packer,B
+EQ-21562,End of Line Case packer 3,SITE/LINE-D/EOL,Case packer,B
+EQ-42785,End of Line Palletiser 1,SITE/LINE-D/EOL,Palletiser,A
+EQ-63919,End of Line Palletiser 2,SITE/LINE-D/EOL,Palletiser,C
+EQ-21032,End of Line Stretch wrapper 1,SITE/LINE-D/EOL,Stretch wrapper,C
+EQ-45252,End of Line Stretch wrapper 2,SITE/LINE-D/EOL,Stretch wrapper,B
+EQ-88661,End of Line Label printer applicator 1,SITE/LINE-D/EOL,Label printer applicator,A
+EQ-24998,End of Line Label printer applicator 2,SITE/LINE-D/EOL,Label printer applicator,C
+EQ-62357,End of Line Label printer applicator 3,SITE/LINE-D/EOL,Label printer applicator,A
+EQ-84006,End of Line Conveyor 1,SITE/LINE-D/EOL,Conveyor,B
+EQ-76517,End of Line Conveyor 2,SITE/LINE-D/EOL,Conveyor,C
+EQ-39080,End of Line Conveyor 3,SITE/LINE-D/EOL,Conveyor,A
+EQ-86733,End of Line Conveyor 4,SITE/LINE-D/EOL,Conveyor,C
+EQ-45689,End of Line Conveyor 5,SITE/LINE-D/EOL,Conveyor,C
+EQ-29109,End of Line Conveyor 6,SITE/LINE-D/EOL,Conveyor,B
+EQ-29701,End of Line Conveyor 7,SITE/LINE-D/EOL,Conveyor,A
+EQ-28378,End of Line Conveyor 8,SITE/LINE-D/EOL,Conveyor,B
+EQ-40765,End of Line Conveyor 9,SITE/LINE-D/EOL,Conveyor,B
+EQ-58409,End of Line Conveyor 10,SITE/LINE-D/EOL,Conveyor,C
+EQ-83386,End of Line Conveyor 11,SITE/LINE-D/EOL,Conveyor,A
+EQ-41701,End of Line Conveyor 12,SITE/LINE-D/EOL,Conveyor,B
+EQ-35780,End of Line Conveyor 13,SITE/LINE-D/EOL,Conveyor,C
+EQ-47139,End of Line Conveyor 14,SITE/LINE-D/EOL,Conveyor,C
+EQ-35255,End of Line Drive motor 1,SITE/LINE-D/EOL,Drive motor,A
+EQ-98521,End of Line Drive motor 2,SITE/LINE-D/EOL,Drive motor,B
+EQ-34536,End of Line Drive motor 3,SITE/LINE-D/EOL,Drive motor,B
+EQ-33569,End of Line Drive motor 4,SITE/LINE-D/EOL,Drive motor,C
+EQ-20172,End of Line Drive motor 5,SITE/LINE-D/EOL,Drive motor,C
+EQ-31767,End of Line Drive motor 6,SITE/LINE-D/EOL,Drive motor,B
+EQ-78603,End of Line Pneumatic cylinder 1,SITE/LINE-D/EOL,Pneumatic cylinder,B
+EQ-23741,End of Line Pneumatic cylinder 2,SITE/LINE-D/EOL,Pneumatic cylinder,B
+EQ-40091,End of Line Pneumatic cylinder 3,SITE/LINE-D/EOL,Pneumatic cylinder,B
+EQ-45323,End of Line Pneumatic cylinder 4,SITE/LINE-D/EOL,Pneumatic cylinder,A
+EQ-22810,End of Line Pneumatic cylinder 5,SITE/LINE-D/EOL,Pneumatic cylinder,A

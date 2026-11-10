@@ -3,7 +3,7 @@ Synthetic practice data for the Line D data skills course.
 
 Simulates two years (1 Jul 2024 - 30 Jun 2026) of maintenance on a fictional
 seven-zone cereal line: ~300 assets, PM schedules, PM/reactive/corrective work
-orders, downtime events, plus vibration data for Phases 4-6.
+orders, downtime events, plus vibration data for Phases 5-7.
 
 Failures follow a Weibull renewal process per asset type, completed PMs reset or
 reduce asset age, and late or missed PMs therefore cause more breakdowns, so the
@@ -86,7 +86,7 @@ TYPES = {
             [("Vacuum pump filter & vane check", 56, "Inspection", "inspect", []),
              ("Replace vacuum pump vanes", 240, "Replacement", "replace", ["Mechanical - vanes"])]),
     # The flow wrapper jaw interval (182 d) is deliberately far too long for a
-    # mode with beta 3 / eta 75 d: the Phase 5 Weibull study should find this.
+    # mode with beta 3 / eta 75 d: the Phase 6 Weibull study should find this.
     "FWR": ("Flow wrapper", [M("Mechanical - jaws", 3.0, 75, 1.2), M("Electrical - sensor", 0.9, 150, 0.8),
                              M("Operational - jam", 1.0, 60, 0.5), M("Electrical - drive fault", 1.0, 400, 2.0)],
             [("Flow wrapper jaw & knife inspection", 7, "Inspection", "inspect", []),
@@ -163,7 +163,7 @@ def build_assets(rng):
                 install = (START + timedelta(days=rng.randint(30, 300))) if new_install else date(rng.randint(2008, 2022), rng.randint(1, 12), 1)
                 assets.append({
                     "asset_id": f"LD-{zcode}-{n:03d}",
-                    "asset_name": f"{zname} {tname} {i + 1}",
+                    "asset_name": (f"{tname} {i + 1}" if tname.split()[0] == zname.split()[0] else f"{zname} {tname} {i + 1}"),
                     "zone_code": zcode,
                     "zone": zname,
                     "asset_type": tname,
@@ -524,7 +524,7 @@ def build_vibration(rng):
         write_csv(os.path.join(wf, f"fan_bearing_{name}.csv"),
                   [{"time_s": round(i / 5120, 6), "accel_g": v} for i, v in enumerate(sig)], ["time_s", "accel_g"])
 
-    # Run-to-failure fleet for machine learning (Phase 6)
+    # Run-to-failure fleet for machine learning (Phase 7)
     ml = os.path.join(OUT, "ml")
     os.makedirs(ml, exist_ok=True)
     rows = []
@@ -535,6 +535,264 @@ def build_vibration(rng):
                          "fail_within_14d": 1 if rul < 14 else 0})
     write_csv(os.path.join(ml, "bearing_fleet.csv"), rows,
               ["bearing_id", "day", "rms_velocity_mm_s", "peak_accel_g", "crest_factor", "kurtosis", "temp_c", "rul_days", "fail_within_14d"])
+
+
+def build_sensor_rollout(rng, assets):
+    """Wireless vibration sensor rollout plan for rotating kit (Phase 3 dashboard page)."""
+    rotating = [a for a in assets if a["type_code"] in ("MTR", "GBX", "FAN", "PMP", "VAC", "ROL", "RVL")]
+    rows = []
+    for a in rotating:
+        wave = {"A": 1, "B": 2, "C": 3}[a["criticality"]]
+        planned = date(2026, 1, 12) + timedelta(weeks=(wave - 1) * 10 + rng.randint(0, 8))
+        r = rng.random()
+        if planned <= date(2026, 6, 30) and r < 0.75:
+            installed = planned + timedelta(days=rng.randint(-5, 25))
+            installed = min(installed, date(2026, 6, 30))
+            status = "Commissioned" if rng.random() < 0.8 else "Installed - not commissioned"
+        else:
+            installed, status = None, ("Overdue" if planned < date(2026, 6, 30) else "Planned")
+        rows.append({"sensor_id": f"VS-{len(rows) + 1:03d}", "asset_id": a["asset_id"], "rollout_wave": wave,
+                     "planned_date": iso(planned), "installed_date": iso(installed), "status": status})
+    write_csv(os.path.join(OUT, "csv", "sensor_rollout.csv"), rows,
+              ["sensor_id", "asset_id", "rollout_wave", "planned_date", "installed_date", "status"])
+    con = sqlite3.connect(os.path.join(OUT, "line_d.db"))
+    con.execute("""CREATE TABLE sensor_rollout (sensor_id TEXT PRIMARY KEY, asset_id TEXT NOT NULL REFERENCES assets(asset_id),
+                   rollout_wave INTEGER, planned_date TEXT, installed_date TEXT, status TEXT)""")
+    con.executemany("INSERT INTO sensor_rollout VALUES (?,?,?,?,?,?)",
+                    [(r["sensor_id"], r["asset_id"], r["rollout_wave"], r["planned_date"], r["installed_date"] or None, r["status"]) for r in rows])
+    con.commit()
+    con.close()
+
+
+# ---------------------------------------------------------------- production (Redzone-style) data
+
+SKUS = {"Wheat Biscuits 24s": 110, "Wheat Biscuits 48s": 70, "Flakes 500g": 90, "Flakes 750g": 75}  # ideal packs/min
+OPERATOR_WORDS = {  # how an operator would describe a maintenance failure on the line
+    "jaws": "Sealing fault", "jam": "Jam", "sensor": "Sensor fault", "motor": "Motor tripped",
+    "drive fault": "Drive fault", "bearing": "Noise / bearing", "belt/chain": "Belt / chain off",
+    "chain": "Chain fault", "Pneumatic leak": "Air leak", "seal": "Leak", "suction cups": "Not picking cartons",
+    "grippers": "Not picking cases", "printhead": "Labels not printing", "load cell": "Weigher fault",
+    "PLC/IO": "Controls fault", "film carriage": "Film fault", "ignition": "Burner lockout",
+    "flame safeguard": "Burner lockout", "roll wear": "Flake thickness", "gears": "Gearbox noise",
+    "imbalance": "Vibration", "cooling fan": "Drive fault", "vanes": "Vacuum low", "rotor wear": "Valve blocking",
+    "pump": "Hydraulic fault", "Hydraulic leak": "Hydraulic leak", "Lubrication": "Noise / bearing",
+    "Installation defect": "Breakdown - other",
+}
+PROCESS_MACHINE = {"COK": "Cooker", "DRY": "Dryer", "FLK": "Flaker", "FRM": "Former", "BAK": "Oven"}
+MACHINE_NAME = {"FWR": "Wrapper", "CTN": "Carton Erector", "CHK": "Checkweigher", "MDT": "Metal Detector",
+                "CSP": "Case Packer", "PAL": "Palletiser", "STW": "Stretch Wrapper", "LPA": "Labeller"}
+
+
+def redzone_machine(a):
+    """Map a CMMS asset to the 'machine' an operator picks in the production system."""
+    if a["zone_code"] in PROCESS_MACHINE:
+        return PROCESS_MACHINE[a["zone_code"]]
+    if a["type_code"] in MACHINE_NAME:
+        return f"{MACHINE_NAME[a['type_code']]} {a['asset_name'].split()[-1]}"
+    return "Packing Conveyors" if a["zone_code"] == "PPK" else "EOL Conveyors"
+
+
+def operator_reason(cause, rng):
+    key = cause.split(" - ")[-1] if " - " in cause else cause
+    return OPERATOR_WORDS.get(key, OPERATOR_WORDS.get(cause, "Breakdown - other"))
+
+
+def build_production(assets, dts):
+    """Shift records and an operator-coded downtime log, like a production OEE system (e.g. Redzone)."""
+    rng = random.Random(SEED + 100)  # separate stream: the maintenance data above is unaffected
+    out = os.path.join(OUT, "production")
+    os.makedirs(out, exist_ok=True)
+    amap = {a["asset_id"]: a for a in assets}
+
+    write_csv(os.path.join(out, "machine_asset_map.csv"),
+              [{"machine": redzone_machine(a), "asset_id": a["asset_id"], "asset_name": a["asset_name"]} for a in assets],
+              ["machine", "asset_id", "asset_name"])
+
+    # Build the shift calendar: Days 06:00-18:00, Nights 18:00-06:00, 4 crews
+    shifts = []
+    sku, sku_left = rng.choice(list(SKUS)), rng.randint(2, 6)
+    for day in daterange(START, END):
+        n = (day - START).days
+        for sname, hour, crews in (("Days", 6, ("A", "C")), ("Nights", 18, ("B", "D"))):
+            start = datetime.combine(day, datetime.min.time()) + timedelta(hours=hour)
+            changeover = False
+            sku_left -= 1
+            if sku_left <= 0:
+                sku = rng.choice([k for k in SKUS if k != sku])
+                sku_left, changeover = rng.randint(2, 6), True
+            shifts.append({"start": start, "end": start + timedelta(hours=12), "shift": sname,
+                           "crew": crews[(n // 4) % 2], "sku": sku, "changeover": changeover,
+                           "sanitation": sname == "Days" and day.weekday() == 6, "events": []})
+
+    def shift_for(t):
+        i = int((t - shifts[0]["start"]).total_seconds() // (12 * 3600))
+        return shifts[i] if 0 <= i < len(shifts) else None
+
+    log = []
+    for d in dts:
+        s = shift_for(d["start"])
+        if s is None:
+            continue
+        a = amap[d["asset_id"]]
+        if d["category"] == "Breakdown":
+            # operator stops and tries first, then calls maintenance; sometimes much later
+            lead = rng.randint(0, 20) if rng.random() < 0.8 else rng.randint(45, 150)
+            start, dur = d["start"] - timedelta(minutes=lead), d["duration_min"] + lead
+            r = rng.random()
+            if r < 0.08:
+                cat, reason = "Unassigned", ""
+            elif r < 0.13:
+                cat, reason = "Operational", "Jam"
+            else:
+                cat, reason = ("Electrical" if d["cause"].startswith(("Electrical", "Control")) else "Mechanical",
+                               operator_reason(d["cause"], rng))
+        else:
+            start, dur = d["start"], d["duration_min"]
+            cat, reason = ("Unassigned", "") if rng.random() < 0.10 else ("Operational", d["cause"])
+        s = shift_for(start) or s
+        log.append({"start": start, "dur": dur, "machine": redzone_machine(a), "cat": cat, "reason": reason, "shift": s})
+
+    for s in shifts:
+        if s["changeover"]:
+            log.append({"start": s["start"] + timedelta(minutes=rng.randint(0, 20)), "dur": rng.randint(20, 60),
+                        "machine": "Wrapper 1", "cat": "Changeover", "reason": "SKU changeover", "shift": s})
+        if rng.random() < 0.12:
+            reason = rng.choice(["Waiting for film", "No product from process", "Waiting for cartons", "No operator", "QA hold"])
+            cat = {"No operator": "People", "QA hold": "Quality"}.get(reason, "Material")
+            log.append({"start": s["start"] + timedelta(minutes=rng.randint(30, 600)), "dur": rng.randint(10, 90),
+                        "machine": rng.choice(["Wrapper 1", "Packing Conveyors", "Case Packer 1"]), "cat": cat, "reason": reason, "shift": s})
+    log.sort(key=lambda e: e["start"])
+
+    comments = {"Sealing fault": ["jaws not sealing, called eng", "seals open on pack"], "Jam": ["film jam", "packs jammed at infeed", ""],
+                "Noise / bearing": ["grinding noise", ""], "Sensor fault": ["eye not seeing packs", "reset sensor"]}
+    rows = []
+    for i, e in enumerate(log, start=1):
+        s = e["shift"]
+        s["events"].append(e)
+        rows.append({"event_id": f"RZ-{i:06d}", "line": "Line D", "production_date": iso(s["start"].date()),
+                     "shift": s["shift"], "crew": s["crew"], "sku": s["sku"], "machine": e["machine"],
+                     "start_time": e["start"].strftime("%Y-%m-%d %H:%M"),
+                     "end_time": (e["start"] + timedelta(minutes=e["dur"])).strftime("%Y-%m-%d %H:%M"),
+                     "duration_min": e["dur"], "reason_category": e["cat"], "reason": e["reason"],
+                     "comment": rng.choice(comments.get(e["reason"], [""]))})
+    write_csv(os.path.join(out, "redzone_downtime.csv"), rows,
+              ["event_id", "line", "production_date", "shift", "crew", "sku", "machine", "start_time", "end_time",
+               "duration_min", "reason_category", "reason", "comment"])
+
+    srows = []
+    for i, s in enumerate(shifts, start=1):
+        planned_stop = 30 + (240 if s["sanitation"] else 0)  # breaks + weekly deep clean
+        planned = 720 - planned_stop
+        down = min(sum(e["dur"] for e in s["events"]), planned - 30)
+        run = planned - down
+        perf = max(0.70, min(0.97, rng.gauss(0.87, 0.03) - (0.04 if s["changeover"] else 0)))
+        ideal = SKUS[s["sku"]]
+        total = int(run * ideal * perf)
+        reject = int(total * max(0.004, rng.gauss(0.017, 0.005) + 0.0004 * len(s["events"])))
+        srows.append({"shift_id": f"S{i:05d}", "line": "Line D", "production_date": iso(s["start"].date()),
+                      "shift": s["shift"], "crew": s["crew"], "sku": s["sku"], "shift_min": 720,
+                      "planned_stop_min": planned_stop, "planned_production_min": planned, "downtime_min": down,
+                      "run_min": run, "ideal_rate_ppm": ideal, "total_count": total, "good_count": total - reject,
+                      "reject_count": reject})
+    write_csv(os.path.join(out, "shifts.csv"), srows, list(srows[0]))
+
+    # What you actually get from Tableau's 'Download > Crosstab': pre-aggregated, formatted text, a total row
+    weeks = {}
+    for r in srows:
+        wk = date.fromisoformat(r["production_date"])
+        wk = wk - timedelta(days=wk.weekday())
+        if wk < date(2026, 1, 5):
+            continue
+        w = weeks.setdefault(wk, {"plan": 0, "run": 0, "ideal": 0.0, "tot": 0, "good": 0, "down": 0})
+        w["plan"] += r["planned_production_min"]; w["run"] += r["run_min"]; w["down"] += r["downtime_min"]
+        w["ideal"] += r["run_min"] * r["ideal_rate_ppm"]; w["tot"] += r["total_count"]; w["good"] += r["good_count"]
+    def fmt_row(label, w):
+        A, P, Q = w["run"] / w["plan"], w["tot"] / w["ideal"], w["good"] / w["tot"]
+        return {"Week of Production Date": label, "OEE": f"{A * P * Q:.1%}", "Availability": f"{A:.1%}",
+                "Performance": f"{P:.1%}", "Quality": f"{Q:.1%}", "Downtime (min)": f"{w['down']:,}",
+                "Good Packs": f"{w['good']:,}"}
+    xrows = [fmt_row(f"{wk.day} {wk:%B %Y}", w) for wk, w in sorted(weeks.items())]
+    tot = {k: sum(w[k] for w in weeks.values()) for k in ("plan", "run", "ideal", "tot", "good", "down")}
+    xrows.append(fmt_row("Grand Total", tot))
+    write_csv(os.path.join(out, "tableau_crosstab_weekly_oee.csv"), xrows, list(xrows[0]))
+
+    con = sqlite3.connect(os.path.join(OUT, "line_d.db"))
+    con.executescript("""
+    DROP TABLE IF EXISTS shifts; DROP TABLE IF EXISTS redzone_downtime; DROP TABLE IF EXISTS machine_asset_map;
+    CREATE TABLE shifts (shift_id TEXT PRIMARY KEY, line TEXT, production_date TEXT, shift TEXT, crew TEXT, sku TEXT,
+        shift_min INTEGER, planned_stop_min INTEGER, planned_production_min INTEGER, downtime_min INTEGER, run_min INTEGER,
+        ideal_rate_ppm INTEGER, total_count INTEGER, good_count INTEGER, reject_count INTEGER);
+    CREATE TABLE redzone_downtime (event_id TEXT PRIMARY KEY, line TEXT, production_date TEXT, shift TEXT, crew TEXT, sku TEXT,
+        machine TEXT, start_time TEXT, end_time TEXT, duration_min INTEGER, reason_category TEXT, reason TEXT, comment TEXT);
+    CREATE TABLE machine_asset_map (machine TEXT NOT NULL, asset_id TEXT PRIMARY KEY REFERENCES assets(asset_id), asset_name TEXT);
+    """)
+    con.executemany("INSERT INTO shifts VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [tuple(r.values()) for r in srows])
+    con.executemany("INSERT INTO redzone_downtime VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                    [tuple(v if v != "" else None for v in r.values()) for r in rows])
+    con.executemany("INSERT INTO machine_asset_map VALUES (?,?,?)",
+                    [(redzone_machine(a), a["asset_id"], a["asset_name"]) for a in assets])
+    con.commit()
+    con.close()
+    return len(srows), len(rows)
+
+
+# ---------------------------------------------------------------- CMMS migration (Mainsaver -> Ultimo style) data
+
+FAILURE_MAP = {  # legacy free-ish code -> structured coding (object part / damage / cause), ISO 14224 style
+    "Mechanical - bearing": ("Bearing", "Wear", "Lubrication / age"), "Mechanical - jaws": ("Sealing jaws", "Wear", "Normal wear"),
+    "Operational - jam": ("Product path", "Blocked", "Operating condition"), "Electrical - sensor": ("Sensor", "No signal", "Contamination / misalignment"),
+    "Electrical - motor": ("Motor", "Electrical fault", "Insulation / overload"), "Electrical - drive fault": ("Drive", "Fault trip", "Overload / overheating"),
+    "Mechanical - belt/chain": ("Belt / chain", "Wear", "Tension / tracking"), "Pneumatic leak": ("Pneumatics", "Leak", "Seal wear"),
+}
+
+
+def build_migration(assets, wos):
+    rng = random.Random(SEED + 200)
+    out = os.path.join(OUT, "cmms_migration")
+    os.makedirs(out, exist_ok=True)
+    equip, amap_rows, used = [], [], set()
+    for a in assets:
+        eq = f"EQ-{rng.randint(10000, 99999)}"
+        while eq in used:
+            eq = f"EQ-{rng.randint(10000, 99999)}"
+        used.add(eq)
+        equip.append({"equipment_id": eq, "description": a["asset_name"], "process_function": f"SITE/LINE-D/{a['zone_code']}",
+                      "equipment_type": a["asset_type"], "criticality": a["criticality"], "_asset": a["asset_id"]})
+    # Deliberate migration problems to find
+    pnu = [e for e in equip if e["equipment_type"] == "Pneumatic cylinder" and "FRM" in e["process_function"]]
+    merged_into = pnu[0]["equipment_id"]  # two legacy cylinders merged into one new record
+    unmapped = {e["_asset"] for e in rng.sample([e for e in equip if e["equipment_type"] == "Sensor / transmitter"], 3)}
+    for e in equip:
+        if e["_asset"] in unmapped:
+            continue
+        new = merged_into if e is pnu[1] else e["equipment_id"]
+        amap_rows.append({"legacy_asset_id": e["_asset"], "equipment_id": new})
+    amap_rows.append(dict(amap_rows[10]))  # duplicated row from a copy-paste
+    equip = [e for e in equip if e is not pnu[1]]
+    write_csv(os.path.join(out, "ultimo_equipment.csv"), equip,
+              ["equipment_id", "description", "process_function", "equipment_type", "criticality"])
+    write_csv(os.path.join(out, "asset_id_map.csv"), amap_rows, ["legacy_asset_id", "equipment_id"])
+    codes = sorted({w["failure_code"] for w in wos if w["failure_code"]})
+    write_csv(os.path.join(out, "failure_code_map.csv"),
+              [{"legacy_failure_code": c, "object_part": FAILURE_MAP.get(c, ("", "", ""))[0],
+                "damage": FAILURE_MAP.get(c, ("", "", ""))[1], "cause": FAILURE_MAP.get(c, ("", "", ""))[2]} for c in codes],
+              ["legacy_failure_code", "object_part", "damage", "cause"])
+    con = sqlite3.connect(os.path.join(OUT, "line_d.db"))
+    con.executescript("""
+    DROP TABLE IF EXISTS ultimo_equipment; DROP TABLE IF EXISTS asset_id_map; DROP TABLE IF EXISTS failure_code_map;
+    CREATE TABLE ultimo_equipment (equipment_id TEXT PRIMARY KEY, description TEXT, process_function TEXT,
+        equipment_type TEXT, criticality TEXT);
+    CREATE TABLE asset_id_map (legacy_asset_id TEXT, equipment_id TEXT);   -- no keys on purpose: it has problems to find
+    CREATE TABLE failure_code_map (legacy_failure_code TEXT PRIMARY KEY, object_part TEXT, damage TEXT, cause TEXT);
+    """)
+    con.executemany("INSERT INTO ultimo_equipment VALUES (?,?,?,?,?)",
+                    [(e["equipment_id"], e["description"], e["process_function"], e["equipment_type"], e["criticality"]) for e in equip])
+    con.executemany("INSERT INTO asset_id_map VALUES (?,?)", [(r["legacy_asset_id"], r["equipment_id"]) for r in amap_rows])
+    con.executemany("INSERT INTO failure_code_map VALUES (?,?,?,?)",
+                    [(c, *(v or None for v in FAILURE_MAP.get(c, ("", "", "")))) for c in codes])
+    con.commit()
+    con.close()
+    return len(equip), len(amap_rows)
 
 
 def main():
@@ -583,8 +841,24 @@ def main():
     write_csv(os.path.join(OUT, "week01", "shift_downtime_log.csv"), log,
               ["Date", "Start Time", "Shift", "Zone", "Asset", "Asset Description", "Category", "Cause", "Minutes"])
 
+    # Wide 'zone x week' downtime sheet, the shape people build by hand (for unpivot practice)
+    wide = {}
+    for d in dts:
+        if d["start"].date() >= date(2026, 1, 5):
+            wk = d["start"].date() - timedelta(days=d["start"].weekday())
+            wide.setdefault(amap[d["asset_id"]]["zone"], {}).setdefault(wk, 0)
+            wide[amap[d["asset_id"]]["zone"]][wk] += d["duration_min"]
+    weeks = sorted({w for z in wide.values() for w in z})
+    write_csv(os.path.join(OUT, "week07", "zone_downtime_by_week_wide.csv"),
+              [{"Zone": zn, **{f"w/c {w.strftime('%d/%m/%Y')}": wide.get(zn, {}).get(w, 0) for w in weeks}} for _, zn in ZONES],
+              ["Zone"] + [f"w/c {w.strftime('%d/%m/%Y')}" for w in weeks])
+
     build_sqlite(os.path.join(OUT, "line_d.db"), assets, tasks, wos, dts)
     build_vibration(rng)
+    build_sensor_rollout(rng, assets)
+    n_shifts, n_rz = build_production(assets, dts)
+    n_eq, n_map = build_migration(assets, wos)
+    print(f"production: shifts={n_shifts} redzone_downtime={n_rz}  migration: equipment={n_eq} id_map_rows={n_map}")
 
     print(f"assets={len(assets)} pm_tasks={len(tasks)} work_orders={len(wos)} downtime_events={len(dts)} week01_rows={len(log)}")
 

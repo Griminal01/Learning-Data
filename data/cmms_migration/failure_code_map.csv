@@ -1,0 +1,29 @@
+legacy_failure_code,object_part,damage,cause
+Combustion - ignition,,,
+Control - PLC/IO,,,
+Control - flame safeguard,,,
+Electrical - drive fault,Drive,Fault trip,Overload / overheating
+Electrical - load cell,,,
+Electrical - motor,Motor,Electrical fault,Insulation / overload
+Electrical - printhead,,,
+Electrical - sensor,Sensor,No signal,Contamination / misalignment
+Hydraulic leak,,,
+Installation defect,,,
+Lubrication,,,
+Mechanical - bearing,Bearing,Wear,Lubrication / age
+Mechanical - belt/chain,Belt / chain,Wear,Tension / tracking
+Mechanical - chain,,,
+Mechanical - cooling fan,,,
+Mechanical - film carriage,,,
+Mechanical - gears,,,
+Mechanical - grippers,,,
+Mechanical - imbalance,,,
+Mechanical - jaws,Sealing jaws,Wear,Normal wear
+Mechanical - pump,,,
+Mechanical - roll wear,,,
+Mechanical - rotor wear,,,
+Mechanical - seal,,,
+Mechanical - suction cups,,,
+Mechanical - vanes,,,
+Operational - jam,Product path,Blocked,Operating condition
+Pneumatic leak,Pneumatics,Leak,Seal wear

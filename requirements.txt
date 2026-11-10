@@ -1,0 +1,17 @@
+# Course libraries (Phase 4 onwards). Install inside a virtual environment:
+#   python -m venv .venv
+#   .\.venv\Scripts\Activate.ps1      (Windows PowerShell)
+#   pip install -r requirements.txt
+pandas
+numpy
+matplotlib
+seaborn
+plotly
+openpyxl
+xlsxwriter
+ipykernel
+scipy
+statsmodels
+scikit-learn
+reliability
+ruff
