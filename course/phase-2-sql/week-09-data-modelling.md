@@ -179,6 +179,14 @@ A foreign key says *"this value must exist in that table"*. You can't record a w
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 3 (grain, primary key and foreign keys for all five tables, on paper) and Session 2 steps 1 to 6 (build `my_cmms.db`, import in parent-first order, Write Changes, check 292 / 11,902 / 6,177), then run the NULL fix and switch to `line_d.db`.
+- **On your phone (10 min a day):** Watch the Lucidchart ERD explainer and the Guy in a Cube star schema video, read the grain table and "Why the import order matters", and sketch the star schema with a Calendar plus your `sensor_readings` and `technicians` designs on paper. Weekend step 4, thinking about your real CMMS, fits a break at work.
+- **Safe to skip this week:** Writing the `work_orders` and `downtime_events` CREATE TABLE fully from scratch (Session 2 step 3, copy it from the answer if you're tired) and a neat draw.io version of the star schema can be skipped; a paper sketch is fine.
+
+---
+
 ## Tick off
 
 - [ ] DB Browser installed, `line_d.db` explored

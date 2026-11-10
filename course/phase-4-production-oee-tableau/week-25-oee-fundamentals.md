@@ -138,6 +138,14 @@ Write the answers in a one-page **"OEE definitions"** note. Without it, your num
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's A, P, Q and OEE columns in `tblShifts` (73.4 % for `S00001`), Session 2 steps 1 to 3 (the wrong average against the right sum-then-divide, then H1 2026 at 71.9 %), and the weekend H1 2026 minute bridge as a waterfall chart.
+- **On your phone (10 min a day):** Watch an "OEE explained" video, read oee.com and both "Why it works" parts, and work Check yourself question 1 on paper. At work, ask the five weekend questions about planned stops, ideal rates, minimum stop length, count points and line versus machine, and write your one-page OEE definitions note.
+- **Safe to skip this week:** Session 2 step 4 (OEE by shift and by SKU) and the "six big losses" head-start video can be skipped this week.
+
+---
+
 ## Tick off
 
 - [ ] A, P, Q and OEE calculated for one shift by hand (73.4 %)

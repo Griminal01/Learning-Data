@@ -135,6 +135,14 @@ Data sources, last refresh, every KPI definition (*on time*, *MTBF per asset*, *
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 (theme JSON applied, colour rules written, layout grid and one header copied to every page), then all five pages and the About page. This is the dashboard Week 24 tests, so none of the pages are optional, and it needs well over 90 minutes: give each page its own short sitting.
+- **On your phone (10 min a day):** Watch the Guy in a Cube report design tips video, read the Microsoft Learn *Tips for designing a great Power BI dashboard* page and "Why it matters", and sketch the 1280 × 720 grid and each page's one-question subtitle on paper before you build.
+- **Safe to skip this week:** The optional planned-versus-actual S-curve on page 5 and the quadrant text-box labels on the page 3 scatter are polish you can add later.
+
+---
+
 ## Tick off
 
 - [ ] Theme JSON applied, colour rules written down

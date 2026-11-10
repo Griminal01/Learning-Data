@@ -134,6 +134,14 @@ You've just diagnosed a bearing fault from raw data, the way a vibration analyst
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's FFT with 1× and 2× marked and the Welch band share (3 %, 21 %, 59 %), Session 2's envelope analysis finding 88 Hz (BPFO), and weekend item 2, the `band_energy()` function.
+- **On your phone (10 min a day):** Watch the 3Blue1Brown Fourier transform video and the Mobius Institute envelope analysis and bearing defect frequency videos, read both "Why it works" parts, and start your weekend item 4 fault frequency table on paper from a vibration chart.
+- **Safe to skip this week:** Weekend item 1 (envelope plots with BPFO harmonics) and item 3 (looking up a 6205 or 6308 bearing) can wait, along with the SciPy docs.
+
+---
+
 ## Tick off
 
 - [ ] FFT and Welch spectra plotted; 1× and 2× identified

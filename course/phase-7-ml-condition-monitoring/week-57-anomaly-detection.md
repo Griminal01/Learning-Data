@@ -120,6 +120,14 @@ The simple z-score gets **most of the benefit**, and you can explain it in one s
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's baseline z-score detector with the 3-in-a-row persistence filter (91 and 55 days' lead, 0 false alarms), Session 2's Isolation Forest and the compare table, and weekend items 1 and 2: the threshold and persistence sweep and the median/MAD baseline. Week 61 builds directly on this.
+- **On your phone (10 min a day):** Watch an "isolation forest explained" video and a vendor webinar on baseline anomaly detection, read both "Why it works" parts, and answer Check yourself in your head, especially question 3 on re-baselining after an overhaul.
+- **Safe to skip this week:** Weekend item 3 (which feature fired first on B5) and the scikit-learn *Novelty and Outlier Detection* page can wait.
+
+---
+
 ## Tick off
 
 - [ ] Baseline z-score detector with persistence (91 / 55 days' lead, 0 false alarms)

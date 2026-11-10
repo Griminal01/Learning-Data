@@ -137,6 +137,14 @@ The axes are transformed so that Weibull data falls on a **straight line**, with
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** The Session 1 hazard plot for the three β values, Session 2's jaw fit with suspensions (η about 85.7 d, β about 2.98), both "goes wrong" mistakes and the jam fit (β about 0.92), and weekend steps 1 and 2: fits for the flaking roll, conveyor and pump modes and your β/η table. Week 49 and the Week 50 study use these numbers.
+- **On your phone (10 min a day):** Read the β table, "Life data done properly" and "Reading the probability plot", watch the Weibull beta and right-censored data videos, and answer Check yourself in your head.
+- **Safe to skip this week:** Weekend step 3 (`Fit_Everything` on the jaws), the `reliability` docs pages in step 4 and *The New Weibull Handbook* can be skipped this week.
+
+---
+
 ## Tick off
 
 - [ ] Can explain β < 1, ≈ 1 and > 1 and what each means for PM

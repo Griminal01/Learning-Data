@@ -164,6 +164,14 @@ with open(out, "w", newline="", encoding="utf-8") as f:
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Type and run the Session 1 functions and the Session 2 file and `try / except` blocks (check the top five against Week 11), then weekend steps 1 to 3 to build `reliability.py` and import it into a notebook. Week 40 builds on scripts and functions like these.
+- **On your phone (10 min a day):** Watch the three Corey Schafer videos on functions, file objects and try except, read *Automate the Boring Stuff* chapter 3 and the "Why it works" notes on `print` versus `return` and on catching specific errors, and answer Check yourself in your head.
+- **Safe to skip this week:** Weekend step 4 (`read_pm_compliance` in plain Python, which pandas does in three lines next week) and the Kaggle lessons 4 to 7 can be deferred.
+
+---
+
 ## Tick off
 
 - [ ] Functions with docstrings, defaults and returns

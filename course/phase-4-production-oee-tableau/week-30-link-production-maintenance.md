@@ -139,6 +139,14 @@ C-critical breakdowns mostly **don't stop the line**, and that's what criticalit
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's mapping query and first matching query, Session 2's window comparison with your chosen window and the reason written down, the match rates by reason category and by criticality, then weekend steps 1, 2 and 4: the maintenance share (about 45.6 %), the top assets and `matched_stops.csv` exported. Weeks 31 and 32 need that file.
+- **On your phone (10 min a day):** Read the Session 1 notes on one-to-many mapping, the "two great findings" and the criticality paragraph in Session 2, look back at your Week 11 and Week 13 notes on joins and window functions, and answer Check yourself in your head.
+- **Safe to skip this week:** Weekend step 3 (the reason to failure code vocabulary map) and the case study search can be skipped this week.
+
+---
+
 ## Tick off
 
 - [ ] Machine → asset mapping understood (one-to-one vs one-to-many)

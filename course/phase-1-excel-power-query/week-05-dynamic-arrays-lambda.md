@@ -149,6 +149,14 @@ If the spill area isn't empty, you get `#SPILL!`. Clear the cells in the way.
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 3 (FILTER with the zone drop-down and "Nothing outstanding", then the top 5 with TAKE and SORTBY), Session 2 steps 2 and 3 (the SEQUENCE calendar with its chart and the LET compliance formula), and weekend steps 1 to 4 for three LAMBDA functions.
+- **On your phone (10 min a day):** Watch the Leila Gharani FILTER and LAMBDA videos, read the "Why it works" note on multiplying for AND and adding for OR, and answer Check yourself questions 2, 3 and 5 in your head.
+- **Safe to skip this week:** The Session 2 step 1 SEQUENCE warm-ups, weekend step 5 (`CLEANASSET`), the step 6 Live summary panel and the `GROUPBY` bonus can all be left for another week.
+
+---
+
 ## Tick off
 
 - [ ] FILTER with a zone drop-down and an "if empty" message

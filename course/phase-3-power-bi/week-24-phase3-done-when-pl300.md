@@ -105,6 +105,14 @@ Without looking anything up:
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** This is the Phase 3 done-when, so none of the core is skippable: the Session 1 step 3 reconciliation table, the Session 2 test with an independent tester (fix what they trip on), the `portfolio/03-lined-dashboard/` folder with screenshots and README, and the PL-300 practice assessment. That won't fit in 90 minutes, so book the tester first and fit the rest around them.
+- **On your phone (10 min a day):** Do the Phase 3 review in Check yourself in your head and sketch the star schema on paper, read the PL-300 study guide on Microsoft Learn, check the current exam price, and ask your manager at work whether the training budget will fund it.
+- **Safe to skip this week:** Only polish can wait: measure descriptions, display folders and removing unused columns (Session 1 step 2), a deep Performance Analyzer tidy-up and the second tester.
+
+---
+
 ## Tick off
 
 - [ ] Performance Analyzer checked, model tidied, measure descriptions added

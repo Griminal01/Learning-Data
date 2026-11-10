@@ -135,6 +135,14 @@ Join kinds are a big idea that comes back in SQL (Phase 2):
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 7 (From Folder, UK locale types, 11,902 rows), Session 2 steps 2 and 4 to 8 (the `On Time` column, the Assets and PMTasks merges with the row count unchanged), then the weekend unpivot to 182 rows, both parameters and the drop-a-file test. That is more than 90 minutes, so split it across two sittings if you need to, but don't drop any of it: Week 8 is built on this.
+- **On your phone (10 min a day):** Watch the Leila Gharani Power Query beginner and combine-from-folder videos, read the "Why it works" parts on locale and on join kinds, and answer all five Check yourself questions in your head.
+- **Safe to skip this week:** Session 2 steps 1 and 3 (the `Is PM` and `Due Month` columns), the PivotChart line chart after the unpivot and the *M Is for (Data) Monkey* book can all wait.
+
+---
+
 ## Tick off
 
 - [ ] All 24 files combined from a folder, 11,902 rows, correct UK dates

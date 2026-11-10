@@ -122,6 +122,14 @@ Worked SQL is in [`solutions/phase-4-production/w25_w26_oee_losses.sql`](../../s
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** The Session 1 category query (or pivot) with the six big losses table, and Session 2 steps 1 to 5: top reasons, the machine Pareto, the unassigned share (8.8 % of events, 7.3 % of minutes) with a couple of miscoding examples, and the 36,549 against 36,146 reconciliation.
+- **On your phone (10 min a day):** Watch the six big losses and SMED videos, read the Session 1 note on short stops, and answer Check yourself in your head. At work, look at your site's Redzone dashboards, ask a team leader who enters the stop reason and when, and draft your half page on what the downtime data can and can't tell maintenance.
+- **Safe to skip this week:** The Redzone vendor overview video and weekend step 1 (sketching your site's minute bridge if the dashboard doesn't show it) can wait.
+
+---
+
 ## Tick off
 
 - [ ] Downtime mapped onto the six big losses

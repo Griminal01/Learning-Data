@@ -186,6 +186,14 @@ Answers are in [`solutions/phase-2-sql/w12_case_cte_dates.sql`](../../solutions/
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's CASE grouped into On time, Late, Missed and Open plus the conditional `SUM` for 79.5 %, Session 2's compliance by month, the `julianday` days-late query and the three-step CTE (PPK 64.7 %, EOL 74.8 %), then weekend queries 1, 4 and 5 saved in `week12.sql`.
+- **On your phone (10 min a day):** Watch the Alex The Analyst CASE and CTE videos, read the Mode SQL Tutorial CASE and Date Format pages and the "Why it works" notes on CASE order and integer division, and answer Check yourself questions 1 and 3 in your head.
+- **Safe to skip this week:** Weekend queries 2 and 3 (breakdowns by hour and by weekday), the stretch query 6 (H2 2025 against H1 2026) and the SQLite date reference page can be left for later.
+
+---
+
 ## Tick off
 
 - [ ] CASE labels and conditional SUM for compliance (79.5 %)

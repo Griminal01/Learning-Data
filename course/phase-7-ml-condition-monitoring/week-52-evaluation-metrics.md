@@ -135,6 +135,14 @@ Nobody on the shop floor cares about F1. Translate:
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's confusion matrix with the "always no" and RMS ≥ 4.5 rule baselines (F1 0.74), Session 2's random forest at thresholds 0.3, 0.5 and 0.7, the PR curve and `GroupKFold` with its spread, and weekend items 1 and 2: false alarms per bearing-month and the cost at each threshold.
+- **On your phone (10 min a day):** Watch the StatQuest videos on the confusion matrix, sensitivity and specificity, ROC and AUC, and cross validation, read the precision and recall definitions, and practise Check yourself answer 4 as a one-sentence plant explanation.
+- **Safe to skip this week:** Weekend item 3 (the per-bearing event view, which Week 61 covers properly) and Coursera course 1 weeks 2 and 3 can be deferred.
+
+---
+
 ## Tick off
 
 - [ ] Confusion matrix, precision, recall and F1 calculated

@@ -144,6 +144,14 @@ The due-date version matches your SQL from Week 12 (`2026-06: 434 due, 81.3 %`).
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** The four Session 1 measures in a matrix (check June 2026: 266.9 h, 310.4 h, −14.0 %), Session 2's R13W with the `Last Data Date` cap, and the weekend `USERELATIONSHIP` measures for compliance by due date (434 / 81.3 %), then a simple trend page with the 90 % constant line and `Compliance Colour`.
+- **On your phone (10 min a day):** Watch the SQLBI time intelligence and USERELATIONSHIP videos and the Guy in a Cube rolling average video, read "Why it works" and "Why `VAR` matters here", and answer Check yourself in your head.
+- **Safe to skip this week:** Weekend item 1 (compliance R13W by due date), the `Reactive Jobs R13W` and `Reactive Jobs PY` measures in item 2, the `Has Data` column and the PL-300 time intelligence module can be skipped this week.
+
+---
+
 ## Tick off
 
 - [ ] YTD, PY, PY YTD and YoY measures, with June 2026 matching the reference

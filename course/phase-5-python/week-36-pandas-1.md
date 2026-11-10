@@ -141,6 +141,14 @@ Operations act on **whole columns at once**. There's no looping and no filling d
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's read and inspect block (including the UK-dated export with `format`), Session 2's filters, sort and new columns, and the five weekend questions with the top 10 written to Excel.
+- **On your phone (10 min a day):** Watch Corey Schafer's pandas episodes 1 to 4, read chapter 5 of Wes McKinney's free *Python for Data Analysis* and both "Why it works" parts on `info()` and boolean masks, and answer Check yourself questions 1 to 3 in your head.
+- **Safe to skip this week:** Kaggle Pandas lessons 1 to 3, the long Keith Galli tutorial and the `query()` alternative syntax can wait.
+
+---
+
 ## Tick off
 
 - [ ] Read clean CSVs and the UK-dated export with correct types

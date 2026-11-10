@@ -129,6 +129,14 @@ Small functions that each do **one** thing can be tested on their own, and you c
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's spec and the three data functions tested against the expected-values table, Session 2 steps 1, 2 and 4 (charts with `Agg`, the multi-sheet Excel with images, argparse), and weekend steps 1 to 4 (batch file, Task Scheduler, log, a clear error on an empty folder). Week 42's done-when runs this script, so give it two sittings if you need them.
+- **On your phone (10 min a day):** Watch the Corey Schafer argparse video, read *Automate the Boring Stuff* chapters 13 and 17 and the "Why it works" note on small testable functions, and answer Check yourself in your head. On the bus, estimate how long this report would take you by hand in Excel for weekend step 5.
+- **Safe to skip this week:** Session 2 step 3 (bold header, column widths, freeze panes, autofilter) is cosmetic and can wait, along with the xlsxwriter docs.
+
+---
+
 ## Tick off
 
 - [ ] Spec written before code

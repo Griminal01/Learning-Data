@@ -160,6 +160,14 @@ Python is where you go when Excel and Power BI run out: big sensor files, automa
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 5 (Python with PATH ticked, VS Code with both extensions, Git configured, repo cloned) and Session 2 steps 1 to 5 (`.venv`, `pip install -r requirements.txt`, `generate_data.py` printing the expected counts, first script, first notebook), then weekend steps 1 and 2 to branch and make your first commit.
+- **On your phone (10 min a day):** Watch the Corey Schafer VS Code setup and venv videos and the freeCodeCamp Git crash course, read the "Why it works" notes on venvs, scripts and notebooks, and learn the six Git commands in the weekend table. Creating your public portfolio repository on GitHub (weekend step 3) also works in a phone browser.
+- **Safe to skip this week:** Weekend step 4 (trying the Source Control panel) and the VS Code Python tutorial can be skipped; the command line does the same job.
+
+---
+
 ## Tick off
 
 - [ ] Python, VS Code (with Python and Jupyter extensions) and Git installed

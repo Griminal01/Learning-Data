@@ -103,6 +103,14 @@ View → **Sync slicers**. Make the Zone and Date slicers sync across the Compli
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 5 (the Asset Detail drill-through, tested on LD-PPK-005), the Session 2 report page tooltip, edited interactions and synced slicers, and weekend items 1 to 3 (chart/table bookmark toggle, Reset button and the field parameter).
+- **On your phone (10 min a day):** Watch the three Guy in a Cube videos on drillthrough, report page tooltips and bookmarks, read the "Why it works" note on `SELECTEDVALUE`, and answer Check yourself in your head.
+- **Safe to skip this week:** Weekend item 4 (the page navigator, which the Week 22 header adds anyway) and extra detail visuals on Asset Detail beyond the cards and history table can wait.
+
+---
+
 ## Tick off
 
 - [ ] Asset Detail drill-through page works from any asset visual

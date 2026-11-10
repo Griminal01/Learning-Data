@@ -137,6 +137,14 @@ The rule: **split the way you'll use it**. For new assets, split by asset. For f
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's first tree compared with the "never predict failure" baseline (98.7 % against 95 %), and Session 2's tree-depth loop for overfitting and the `GroupShuffleSplit` by bearing. That bearing split is used every week of this phase.
+- **On your phone (10 min a day):** Watch the StatQuest machine learning fundamentals, decision trees and bias and variance videos, read the vocabulary table and the leakage "Why it works", answer Check yourself in your head, and write your 5 lines on where ML could help at work (weekend item 4) on paper.
+- **Safe to skip this week:** Weekend item 3 (the time-based split), Andrew Ng's course 1 week 1 and the Géron chapters can wait, and the Kaggle Intro to ML lessons can be spread over the next couple of weeks.
+
+---
+
 ## Tick off
 
 - [ ] Can explain features, labels, train/test, supervised vs unsupervised

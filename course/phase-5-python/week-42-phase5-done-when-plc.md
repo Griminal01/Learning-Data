@@ -119,6 +119,14 @@ Then log a tag every 5 seconds to CSV for 10 minutes, and plot it with your Week
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** This is the Phase 5 done-when, so it isn't skippable: Session 1 steps 1 to 6 (one command from a fresh terminal, KPIs checked, three more report dates with no code edits, timed), the code quality pass with Ruff, and both Session 2 portfolio folders with READMEs and screenshots.
+- **On your phone (10 min a day):** Do the Phase 5 review in Check yourself in your head, read the pycomm3 docs and a "what is a process historian" explainer, draft the P-F story for the `06-vibration-trend` README on paper, and ask at work whether there's a training panel you could use under supervision.
+- **Safe to skip this week:** The weekend pycomm3 stretch, on a rig or with the fake reader, is the only part you can drop this week.
+
+---
+
 ## Tick off
 
 - [ ] **Done-when passed**: one command, three weeks, all KPIs correct

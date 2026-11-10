@@ -192,6 +192,14 @@ Weekend answers are in [`solutions/phase-2-sql/w10_select.sql`](../../solutions/
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Type Session 2's brackets comparison and half-open date range query, then write and save all seven weekend queries in `week10.sql`, and get through SQLBolt lessons 1 to 4 at the PC.
+- **On your phone (10 min a day):** Watch the Alex The Analyst SELECT WHERE video, read the "Why it works" parts on written versus run order and on NULL, plus the note on why `>=` and `<` beats `BETWEEN` for dates, and answer Check yourself questions 1 and 3 in your head.
+- **Safe to skip this week:** The first hour of the Mosh course, the sqlite.org docs and typing every one of the seven Session 1 filter lines separately can go, because the weekend queries practise the same filters.
+
+---
+
 ## Tick off
 
 - [ ] SQLBolt lessons 1–4 done

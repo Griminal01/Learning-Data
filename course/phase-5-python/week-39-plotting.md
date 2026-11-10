@@ -133,6 +133,14 @@ Give every chart a finding-style title. Then do **Kaggle Learn: Data Visualizati
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's two matplotlib charts in `fig, ax` style (the trend saved as PNG and the worst-first bar), Session 2's seaborn box plot and log-scale histogram plus the plotly HTML, and the weekend 2×2 chart pack with finding-style titles. Week 40 reuses these chart functions.
+- **On your phone (10 min a day):** Watch Corey Schafer's matplotlib episodes 1 to 3, read both "Why it works" parts on `fig` versus `ax` and the declutter rules, and answer Check yourself in your head.
+- **Safe to skip this week:** The Kaggle Data Visualization course and the seaborn and Plotly Express docs can wait.
+
+---
+
 ## Tick off
 
 - [ ] `fig, ax` style with decluttered, finding-titled charts

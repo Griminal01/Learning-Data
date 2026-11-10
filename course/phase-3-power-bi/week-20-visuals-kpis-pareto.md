@@ -113,6 +113,14 @@ For each asset on the axis, the measure builds a little table of every asset **v
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 4 (KPI cards with targets and the sorted zone bar with the `Title Compliance` dynamic title), the Session 2 DAX Pareto checked against Q2 2026, and weekend items 1, 2 and 4 (heat-map matrix, YoY icons, decomposition tree down to failure code).
+- **On your phone (10 min a day):** Watch the Guy in a Cube conditional formatting video and the How to Power BI Pareto video, read the "Which visual?" table and the Pareto "Why it works", and answer Check yourself in your head.
+- **Safe to skip this week:** Weekend item 3 (data bars on a top-20 table), item 5 (small multiples) and the *Storytelling with Data* book can wait.
+
+---
+
 ## Tick off
 
 - [ ] KPI cards with targets

@@ -137,6 +137,14 @@ Here B5's alert gave only 30 days of warning. **A monthly vibration route could 
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's 7-day trend with `transform` and the failed bearings highlighted, Session 2's absolute and 2× baseline limits with the warning-days table (64 and 30 days from the alert), and weekend step 1 packaging it as `vibration_trend.py` with argparse. Week 42's portfolio uses that script.
+- **On your phone (10 min a day):** Watch the Mobius Institute P-F curve and vibration basics videos, read "Why it matters: the P-F interval" and the RMS versus kurtosis note, and answer Check yourself in your head. At work, ask what alert and alarm limits your site's CM policy uses.
+- **Safe to skip this week:** Weekend step 2 (the kurtosis subplot) and step 3 (the optional NASA IMS download) can be skipped.
+
+---
+
 ## Tick off
 
 - [ ] Trend plotted with `transform` + rolling, failed bearings highlighted

@@ -177,6 +177,14 @@ Full answers are in [`solutions/phase-2-sql/w11_joins_groupby.sql`](../../soluti
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's three-table JOIN, the INNER versus LEFT counts (710 against 6,177) and the `LEFT JOIN … IS NULL` query for the 32 assets that never failed, then Session 2's repeat-offenders query with `HAVING`, and weekend queries 1 to 4 saved in `week11.sql`.
+- **On your phone (10 min a day):** Watch the Alex The Analyst joins and GROUP BY HAVING videos and the Data with Baraa join diagrams, read both "Why it works" parts (the full run order especially), and answer Check yourself questions 1 to 3 in your head.
+- **Safe to skip this week:** SQLBolt lessons 6 to 12, weekend queries 5 and 6 (PM tasks by type, breakdowns per asset by manufacturer) and the Venn diagram search can wait.
+
+---
+
 ## Tick off
 
 - [ ] Three-table JOIN written from memory

@@ -157,6 +157,14 @@ Look at **Planned % (91 %)** next to **Reactive Labour % (25 %)**. By count, rea
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 4 (the `_Measures` table and the nine measures, formatted and checked against the reference values), Session 2 steps 1 and 4 (`Age Band` and `MTTR Hrs` with VAR/RETURN at 1.86 h), and the weekend PM measures to 79.5 % on a basic KPI page with cards, two charts and slicers.
+- **On your phone (10 min a day):** Watch the first three modules of the SQLBI *Introducing DAX* course and the Guy in a Cube measures versus calculated columns video, read the column versus measure table in "Why it works", and answer Check yourself in your head.
+- **Safe to skip this week:** Session 2 step 3 (proving the age formula fails as a measure), the `Corrective Jobs` and `Avg Labour per Reactive Job` extras and fine-tuning the KPI page layout can wait.
+
+---
+
 ## Tick off
 
 - [ ] `_Measures` table with 12+ formatted measures, all matching the reference values

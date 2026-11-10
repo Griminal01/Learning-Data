@@ -158,6 +158,14 @@ cpk = min(USL - mu, mu - LSL) / (3 * sd)
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's c-chart of weekly reactive jobs with the week ending 13 July 2025 investigated, Session 2's I-MR chart of packing minor stops with run rule 4 coded, and the weekend Cp and Cpk calculation (1.53 / 1.17) with the histogram.
+- **On your phone (10 min a day):** Watch short videos on common and special cause variation, the Western Electric rules and Cp and Cpk, read the "Why it works" list and the Cpk bullets, and answer Check yourself in your head. At work, ask whether your site uses SPC software or Minitab for checkweighers and what its Cpk targets are.
+- **Safe to skip this week:** Weekend step 2 (the X̄-R chart for subgroups of 5) and Donald Wheeler's *Understanding Variation* can be left for later.
+
+---
+
 ## Tick off
 
 - [ ] c-chart of weekly reactive jobs; one signal found and investigated

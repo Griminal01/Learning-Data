@@ -97,6 +97,14 @@ Well done, Josh. 🎉
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** This is the Phase 7 and course done-when, so it isn't skippable: the Session 1 non-specialist test (they must explain back points 2, 3 and 4) and the Session 2 portfolio polish checklist, ending with everything running from a fresh clone and the repo pinned.
+- **On your phone (10 min a day):** Write your 3-minute explanation with your own numbers on paper and practise it out loud. At work, have the weekend conversation with your manager about trying this on real data and agreeing the data rules, and pick your next cert, book and project.
+- **Safe to skip this week:** Only the extras can wait: reading through the industrial tools table and the "Keep learning" list in detail, and the Kaggle or Coursera certificates.
+
+---
+
 ## Tick off
 
 - [ ] **Non-specialist explanation passed.** Phase 7 done.

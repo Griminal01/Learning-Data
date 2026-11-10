@@ -105,6 +105,14 @@ Then write a **half-page recommendation**:
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's gradient boosting on the bearing split (F1 about 0.93), Session 2's `GridSearchCV` with `GroupKFold` on the training bearings and one final test, then the weekend comparison table and your half-page "rule vs model" recommendation.
+- **On your phone (10 min a day):** Watch the StatQuest gradient boost and XGBoost videos, read "Why it works" and the golden rule on the test set, answer Check yourself in your head, and draft the half-page recommendation on paper, starting from the four bullet questions.
+- **Safe to skip this week:** The Kaggle XGBoost and Data Leakage lessons and the scikit-learn docs pages can wait.
+
+---
+
 ## Tick off
 
 - [ ] Gradient boosting trained (F1 ≈ 0.93)

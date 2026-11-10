@@ -114,6 +114,14 @@ pd.DataFrame({n: features(w["accel_g"].to_numpy()) for n, w in waves.items()}).T
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's waveform plots for the three captures, and Session 2's `features()` function giving RMS, peak, crest factor and kurtosis for each, checked against the table.
+- **On your phone (10 min a day):** Read the "Sampling basics" and the Session 2 "Why it works" bullets, watch the Mobius Institute crest factor and kurtosis video and a Nyquist aliasing explainer, and work Check yourself question 3 (the 3 kHz resonance) on paper.
+- **Safe to skip this week:** Weekend item 1 (features per 0.1 s window), item 2 (integrating to velocity, which Week 59 previews) and item 3 (the optional Case Western or NASA data) can be skipped.
+
+---
+
 ## Tick off
 
 - [ ] Waveforms plotted, impacts visible on the faulty ones

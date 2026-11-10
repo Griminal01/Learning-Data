@@ -130,6 +130,14 @@ prof.join(assets.set_index("asset_id")["asset_type"]).groupby("cluster")["asset_
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's asset profile table, scaling and the k = 2 to 6 loop (elbow at k = 4), Session 2's cluster summary named and mapped to strategies, and weekend items 1 and 4: the PCA scatter and the one-page segmentation note.
+- **On your phone (10 min a day):** Watch the StatQuest k-means and PCA main ideas videos, read the "Why it works" on scaling, inertia and silhouette and the cluster-to-strategy table, and draft the segmentation note on paper. Check yourself question 4 is a good one to talk through at work.
+- **Safe to skip this week:** Weekend item 2 (adding criticality and age), item 3 (DBSCAN) and the scikit-learn clustering overview can be skipped this week.
+
+---
+
 ## Tick off
 
 - [ ] Asset profile table built from CMMS data

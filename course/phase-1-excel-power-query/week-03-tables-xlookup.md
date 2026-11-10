@@ -146,6 +146,14 @@ For `WO-111700`: *End of Line Case packer 3*, failure code *Operational - jam*.
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 4 and 6 (three named Tables and one structured reference), Session 2 steps 1 to 5 (the XLOOKUP columns, Days Late, Asset Age), and the weekend Summary sheet for questions 1 to 3 followed by the "paste more rows" test.
+- **On your phone (10 min a day):** Watch the Leila Gharani Excel tables and XLOOKUP videos, read the VLOOKUP versus XLOOKUP table in "Why it works", and answer Check yourself questions 2, 3 and 5 in your head.
+- **Safe to skip this week:** Session 2 step 6 (the `WO-111700` lookup), Session 1 step 5 (trying out the Total Row) and weekend questions 4 and 5 can be skipped; the Tables and XLOOKUP pattern are what later weeks need.
+
+---
+
 ## Tick off
 
 - [ ] Three named Tables: `tblWO`, `tblAssets`, `tblPM`

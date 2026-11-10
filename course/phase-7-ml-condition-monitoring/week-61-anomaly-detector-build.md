@@ -86,6 +86,14 @@ Compare with the fixed 2.8 mm/s ISO-style alert from Week 41 (B2 64 d, B5 30 d):
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** This is the Phase 7 build, so it isn't skippable: Session 1's `score()` and `alarms()` tested on `bearing_trend.csv`, the Session 2 fleet and site evaluation at thresholds 4, 6 and 8 (pick 6 with persistence 3: 60/60, 0 false alarms, about 62 days), and weekend items 1, 4 and 5 (config file, alarm CSV, plain-English alarm sentences). Plan on two or three sittings.
+- **On your phone (10 min a day):** Read "The design" and the reasons for median/MAD and the max across features, answer Check yourself in your head, and draft the alarm sentence for each of B2 and B5 on paper using the weekend item 5 example.
+- **Safe to skip this week:** Only the stretch items can wait: weekend item 2 (the `rebaseline_after` option) and item 3 (adding Week 59's spectral features).
+
+---
+
 ## Tick off
 
 - [ ] `score()`, `alarms()` and `evaluate()` written and tested

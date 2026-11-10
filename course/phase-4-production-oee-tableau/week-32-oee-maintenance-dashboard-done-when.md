@@ -84,6 +84,14 @@ A join of shifts (one row) to stops (many rows) would repeat each shift's planne
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** This is the Phase 4 done-when, so none of the core is skippable: the Session 1 relationships with OEE still at 71.9 %, the five Session 2 sheets, the weekend dashboard with About box published to Tableau Public, the three-way OEE reconciliation, a colleague answering the two questions unaided, and the portfolio folder. Plan on several sittings, not one.
+- **On your phone (10 min a day):** Read "Why relationships, not joins", do the Phase 4 review in Check yourself in your head, draft the About box text and the README findings on paper, and line up a colleague at work for the test.
+- **Safe to skip this week:** Only polish and follow-ups can wait: the moving average and target line on the trend sheet, extra formatting, and the "At work, next steps" pilot proposal, which comes after the phase.
+
+---
+
 ## Tick off
 
 - [ ] Tableau model with relationships, OEE still 71.9 %

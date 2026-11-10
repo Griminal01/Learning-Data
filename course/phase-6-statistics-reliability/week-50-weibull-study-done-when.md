@@ -87,6 +87,14 @@ The method (life-data rules, suspensions), the plots, the β/η table, the sensi
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** This is the Phase 6 done-when, so none of it is skippable: the six-item evidence pack from Session 1, the one-page recommendation with X, Y and Z filled in plus the appendix, presenting it and answering all five sceptic's questions with a number or chart, and the `portfolio/07-weibull-pm-study/` folder. Give the write-up and the presentation separate sittings.
+- **On your phone (10 min a day):** Practise your answers to the five sceptic's questions against the model answers in Check yourself, draft page 1 from the template on paper, and line up a supervisor or engineer at work to hear your 5-minute pitch.
+- **Safe to skip this week:** Only stretch items can wait: analysing a fresh failure mode instead of the jaws, and extra README polish beyond a clear summary and the plots.
+
+---
+
 ## Tick off
 
 - [ ] Evidence pack: plot, R(current), cost curve, sensitivity, annual impact

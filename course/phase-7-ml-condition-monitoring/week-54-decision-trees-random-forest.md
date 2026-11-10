@@ -116,6 +116,14 @@ A random forest trains many trees, each on a random **bootstrap sample** of rows
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's depth-3 tree written out as a plain-English fault-finding rule (F1 about 0.79), Session 2's random forest (F1 about 0.87) with impurity and permutation importance compared, and weekend item 3, retraining without the `temp_c` features.
+- **On your phone (10 min a day):** Watch the StatQuest decision tree and random forest videos, read "Why it works" and the importance pitfalls, and answer Check yourself in your head, especially question 4 on why temperature worries you.
+- **Safe to skip this week:** Weekend items 1 and 2 (the depth sweep and `min_samples_leaf` tuning), item 4 (explaining one alarm) and the Kaggle Intermediate ML lessons can be deferred.
+
+---
+
 ## Tick off
 
 - [ ] Depth-3 tree read and written out as a fault-finding rule

@@ -169,6 +169,14 @@ Answers are in [`solutions/phase-2-sql/w13_window_reliability.sql`](../../soluti
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's LAG days-between-failures partitioned by asset and the `SUM() OVER` running total, Session 2's MTBF, MTTR and availability query (LD-PPK-005 worst), then weekend queries 1 to 3 saved in `week13.sql`. Phase 6 Weibull work uses these LAG gaps.
+- **On your phone (10 min a day):** Watch the Alex The Analyst window functions video and a short "MTBF MTTR explained" video from a maintenance channel, read "Why it works (and its limits)" on why 99.8 % asset availability isn't a good line, and answer Check yourself questions 1 to 3 in your head. At work, ask your planner where scheduled run hours come from.
+- **Safe to skip this week:** Weekend queries 4 to 6 (same failure code repeats, ranking zones by quarter, the LEAD query on flow wrapper PMs), the long Data with Baraa video and the SQLite window functions docs can wait.
+
+---
+
 ## Tick off
 
 - [ ] LAG days-between-failures partitioned by asset

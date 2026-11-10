@@ -115,6 +115,14 @@ These are in the same Microsoft Power Platform family, and they're high value fo
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 2 steps 1 to 5 in Desktop: static `Zone Lead` roles tested with *View as*, then dynamic RLS with `ZoneAccess` and `USERPRINCIPALNAME()` tested as `lead.packing@example.com`. Everything else this week works away from the PC.
+- **On your phone (10 min a day):** Session 1 is reading: work through the two PL-300 workspace and semantic model modules and write your one-line definitions. Watch the Reza Dorrani Power Apps and Power Automate videos and the Guy in a Cube RLS video, then do the weekend flow design, the 3-screen app sketch and the half-page proposal on paper.
+- **Safe to skip this week:** The PL-300 *Implement row-level security* module and the Guy in a Cube gateway video can wait, and the licensing notes only need a quick skim.
+
+---
+
 ## Tick off
 
 - [ ] Can explain workspace, semantic model, report and app

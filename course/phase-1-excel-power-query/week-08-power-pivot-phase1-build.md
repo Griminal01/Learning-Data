@@ -137,6 +137,14 @@ Tick it off in the tracker app, then commit the workbook to your portfolio (see 
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** This is the Phase 1 done-when, so none of it is skippable: Session 1 steps 1 to 4 (Calendar and relationships), the five Session 2 measures, the four weekend sheets (Dashboard, Overdue, Pareto, About) and the move-June-out, Refresh All test. It won't fit in 90 minutes, so spread it over several sittings across the holiday week.
+- **On your phone (10 min a day):** Watch the MyOnlineTrainingHub Power Pivot tutorial and the SQLBI CALCULATE introduction, read both "Why it works" parts on the Data Model and measures, answer Check yourself questions 1 to 4 in your head, and draft the About sheet definitions on paper.
+- **Safe to skip this week:** Only the polish can wait: lining up the slicers, one consistent "bad" colour and finding-style chart titles. The four sheets and the done-when test cannot.
+
+---
+
 ## Tick off
 
 - [ ] Calendar table and relationships in the Data Model

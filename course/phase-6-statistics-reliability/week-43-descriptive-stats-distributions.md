@@ -130,6 +130,14 @@ The **exponential** distribution's "memoryless" property means a part that has r
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's `describe`, skew and percentiles on breakdown durations (mean 112 against median 73), the two histograms, and the Session 2 AIC comparison showing lognormal fits repair time best. The memoryless idea comes back in Weeks 48 and 49.
+- **On your phone (10 min a day):** Watch the StatQuest videos on histograms, the normal distribution and mean, variance and standard deviation, read both "Why it works" parts and the four-distributions table, work through the Khan Academy units in your phone browser, and answer Check yourself in your head.
+- **Safe to skip this week:** Weekend items 2 to 4 (labour hours spread, the labour-hours fits and the flow wrapper gap histogram), the 3Blue1Brown video and the *Practical Statistics* chapter can wait.
+
+---
+
 ## Tick off
 
 - [ ] Can explain why mean ≠ median for downtime (112 vs 73 min)

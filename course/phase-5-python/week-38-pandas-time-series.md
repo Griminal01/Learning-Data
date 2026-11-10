@@ -127,6 +127,14 @@ That's the SQL `LAG` from Week 13 in one line. Keep `days_since_last`, because P
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's weekly and monthly resample, the rolling 13 weeks (139.4 h) and year on year, then Session 2's hour, weekday and shift patterns and the `groupby().diff()` days between failures. Keep `days_since_last`: Phase 6 fits a Weibull to it.
+- **On your phone (10 min a day):** Watch the Corey Schafer pandas datetime and Data School resample videos, read both "Why it works" parts on `resample` keeping empty weeks, and answer Check yourself in your head.
+- **Safe to skip this week:** The weekend practice items 1 to 4, finishing the Kaggle Pandas course and McKinney chapter 11 can be deferred; the sessions cover what Week 39 needs.
+
+---
+
 ## Tick off
 
 - [ ] Weekly/monthly resampling with empty periods kept

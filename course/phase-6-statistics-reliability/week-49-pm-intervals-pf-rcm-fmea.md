@@ -135,6 +135,14 @@ Read the classic: *Reliability-Centered Maintenance* (2nd ed.) by John Moubray, 
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1: run `weibull_study.py` with £400 and £2,900, read the cost curve (37 days optimal, 182 days equals run to failure), and rerun at £1,500 and £5,000 for the sensitivity. Then build the weekend FMEA in Excel with at least 6 flow wrapper modes ranked by RPN. Week 50's recommendation is built from these numbers.
+- **On your phone (10 min a day):** Session 2 is reading: the RCM decision logic, the P-F rule and the Line D table. Watch the RCM decision diagram and P-F interval videos, answer Check yourself in your head, and draft your FMEA modes and S, O and D scores on paper before you type them up.
+- **Safe to skip this week:** The flaking roll `weibull_study.py` run in the Line D table, the action priority column and Moubray's *Reliability-Centered Maintenance* chapters can wait.
+
+---
+
 ## Tick off
 
 - [ ] Optimal interval found for the jaws (37 d), with sensitivity to cost

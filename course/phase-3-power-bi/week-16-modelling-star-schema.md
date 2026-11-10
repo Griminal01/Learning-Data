@@ -110,6 +110,14 @@ Build a **Matrix** visual: `Zones[zone]` on Rows, `Calendar[Year]` on Columns, C
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 7 (seven active relationships plus the inactive due date one, Auto date/time off, Calendar marked as date table, months sorted, keys hidden) and the four Session 2 model tests, then weekend step 1 (rename for humans) and step 5 (`model.png`).
+- **On your phone (10 min a day):** Watch the Guy in a Cube star schema video, read the "Why it works" part on filters flowing from the 1 side and on Auto date/time, read the Microsoft Learn page *Understand star schema and the importance for Power BI*, and answer Check yourself in your head.
+- **Safe to skip this week:** Weekend steps 2 to 4 (formats, default summarisation and display folders) are tidy-up you can do in a lighter week, and the SQLBI relationships video and PL-300 modelling module can wait.
+
+---
+
 ## Tick off
 
 - [ ] Star schema built: 7 active relationships plus 1 inactive (due date)

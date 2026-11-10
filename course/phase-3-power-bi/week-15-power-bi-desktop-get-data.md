@@ -127,6 +127,14 @@ On the Report canvas:
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 2 to 8 (six tables with correct types, row counts 11,902 / 6,177 / 292, saved as `LineD_Maintenance.pbix`), Session 2 steps 1 to 6 (`Raised Date`, `Is Planned`, `PM Result`, `Start Date`, `Duration Hrs` and the Calendar), and weekend steps 1 to 4 for the first card, bar, table and slicer.
+- **On your phone (10 min a day):** Watch the Guy in a Cube Power BI for beginners video, read the PL-300 *Get data in Power BI* module and both "Why it works" parts, and answer Check yourself in your head. At work, ask IT whether Power BI Desktop is allowed and whether the site has Pro licences.
+- **Safe to skip this week:** Weekend steps 5 and 6 (the formatting pane and free play) and the hour-long Kevin Stratvert walkthrough can be skipped.
+
+---
+
 ## Tick off
 
 - [ ] Power BI Desktop installed

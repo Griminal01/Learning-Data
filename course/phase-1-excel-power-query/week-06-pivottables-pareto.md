@@ -113,6 +113,14 @@ Note that Pareto by **asset** gives a flat picture here, but Pareto by **failure
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 6 (the 1,391-row `tblQ2`, count and sum pivots, Show Values As, dates grouped by month), Session 2 steps 1 to 3 (slicers and a timeline connected to every pivot), and the full weekend Pareto plus your three sentences. Week 8 reuses this Pareto, so build it properly.
+- **On your phone (10 min a day):** Watch the Leila Gharani pivot tables video and the MyOnlineTrainingHub Pareto video, read the "Why it works" note on the pivot cache and Refresh, and answer Check yourself questions 1, 3 and 4 in your head. Once the Pareto is built, think through your three sentences on the bus.
+- **Safe to skip this week:** Session 2 steps 4 to 6 (the formatted PivotChart and the `Dashboard` sheet) and the built-in Histogram Pareto chart can be skipped; the combo Pareto is the one you need.
+
+---
+
 ## Tick off
 
 - [ ] Count and sum pivots with Show Values As

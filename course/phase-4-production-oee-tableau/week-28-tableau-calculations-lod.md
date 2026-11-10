@@ -115,6 +115,14 @@ Using `redzone_downtime.csv`, filtered to H1 2026 and to reason category Mechani
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's four calculated fields (70.3 % all data, 71.9 % H1 2026) checked by shift and month, Session 2 steps 1 and 2 (the FIXED shift OEE, 50 of 362 shifts below 60 %, and the binned histogram), and weekend steps 1 to 4 for the dual-axis Pareto and the 4-week moving average.
+- **On your phone (10 min a day):** Watch the Tableau training modules on calculations, LOD expressions and table calculations, read the three LODs table and the filter gotcha, look up "Tableau order of operations", and answer Check yourself in your head.
+- **Safe to skip this week:** Session 2 step 3 (Shift on Color in the histogram) and weekend step 5 (the *Compute Using* experiment, though do read Check yourself question 4) can wait.
+
+---
+
 ## Tick off
 
 - [ ] A, P, Q and OEE calculated fields, correct at every level (71.9 % H1 2026)

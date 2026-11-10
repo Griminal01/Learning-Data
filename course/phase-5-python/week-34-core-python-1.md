@@ -173,6 +173,14 @@ More worked examples are in [`solutions/phase-5-python/w34_w35_core_python.py`](
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Type the Session 1 and Session 2 code blocks into your notebook and run them, then do all six weekend exercises. Typing it yourself is the point, so don't paste.
+- **On your phone (10 min a day):** Watch Corey Schafer's beginner episodes 2 to 7, read *Automate the Boring Stuff* chapters 1, 2 and 4 and both "Why it works" parts (indentation, counting from 0, half-open slices), and answer Check yourself in your head.
+- **Safe to skip this week:** Kaggle Learn Python lessons 1 to 3 can be pushed back a week if you're short on time, because the weekend exercises cover the same ground.
+
+---
+
 ## Tick off
 
 - [ ] Comfortable with strings, f-strings, lists and dicts

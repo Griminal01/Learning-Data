@@ -114,6 +114,14 @@ Because the features are **standardised** (mean 0, sd 1), the coefficients are c
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's `_r7` and `_d7` trend features built per bearing, Session 2's scaled logistic regression pipeline on the bearing split (F1 about 0.84) with its coefficients read, and weekend item 2, the ablation with raw features only. Later weeks reuse this feature set.
+- **On your phone (10 min a day):** Watch the StatQuest logistic regression and regularization videos, read "Why it works" on scaling, pipelines and `class_weight`, and answer Check yourself in your head.
+- **Safe to skip this week:** Weekend item 1 (linear regression for RUL, which Week 60 covers), item 3 (the two-feature decision boundary), the scikit-learn pipelines docs and Géron chapter 4 can wait.
+
+---
+
 ## Tick off
 
 - [ ] Rolling and 7-day-change features engineered per bearing

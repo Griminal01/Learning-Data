@@ -121,6 +121,14 @@ The standard RUL benchmark is turbofan engine simulations from NASA. It has many
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's RUL random forest with MAE split by RUL band (3.5, 38 and 62 days) and the predicted against true plot for 3 test bearings, Session 2's tree-spread interval with its coverage checked, and weekend item 3, your planner-friendly decision rule.
+- **On your phone (10 min a day):** Read "The physics" and "Present it honestly" in Session 2, watch a "remaining useful life prediction explained" video, answer Check yourself in your head, and draft the weekend item 3 decision rule on paper.
+- **Safe to skip this week:** Weekend item 1 (the capped RUL target), item 2 (coverage under 30 days only), the optional C-MAPSS download and the conformal prediction video can be skipped.
+
+---
+
 ## Tick off
 
 - [ ] RUL random forest trained, MAE reported by RUL band

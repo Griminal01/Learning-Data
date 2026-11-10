@@ -108,6 +108,14 @@ In Excel → **Power Query** (Data → From Text/CSV → Transform):
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 6 and 8 (KPI row, filter action, highlight action, the Target OEE parameter with its reference line, saved), and Session 2 steps 1 to 6 cleaning the crosstab in Power Query until your total matches the removed Grand Total of 71.9 %.
+- **On your phone (10 min a day):** Watch the Tableau training modules on dashboards and actions, read the download options table and the four golden rules, and answer Check yourself in your head. At work, ask your manager the weekend step 1 question about downloading Line D data.
+- **Safe to skip this week:** Session 1 step 7 (finding-style titles and colour polish) and weekend step 3 (repeating the crosstab clean until it takes under 10 minutes) can wait.
+
+---
+
 ## Tick off
 
 - [ ] Dashboard with KPI row, filter action, highlight action and target parameter

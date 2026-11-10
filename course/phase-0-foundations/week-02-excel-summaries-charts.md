@@ -133,6 +133,14 @@ Shifts: Days 851 min, Nights 1080 min. The worst day of the week was Tuesday (39
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** This is the Phase 0 done-when, so the tick-off list is not skippable: Session 1 steps 1 to 7 with totals reconciling to 124 / 1931, Session 2 steps 1, 2 and 5 (`MID`, `TEXT`, the drop-down driving `SUMIFS`), and weekend steps 1 to 3 for one clean, titled chart.
+- **On your phone (10 min a day):** Watch the Leila Gharani `SUMIFS` video and the Storytelling with Data declutter talk, read the "Why it works" parts on argument order and dates as numbers, and answer Check yourself in your head.
+- **Safe to skip this week:** The second chart (weekend step 4, the stacked column), the `Weekend?` and `Label` columns (Session 2 steps 3 and 4) and the two written sentences are polish you can come back to.
+
+---
+
 ## Tick off
 
 - [ ] Zone summary built with `COUNTIF`/`SUMIFS`, totals reconcile to 124 / 1931

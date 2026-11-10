@@ -131,6 +131,14 @@ That points straight at **Weeks 48–49**: look at each failure mode's Weibull s
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's correlation and simple OLS (−11.4, R² 0.08), Session 2's controlled model with asset type (−0.6, p 0.60, R² 0.82) and the Poisson version, then weekend item 4, the half-page *"Does late PM cause breakdowns on Line D?"*. Weeks 48 and 49 pick up exactly where this leaves off.
+- **On your phone (10 min a day):** Watch the StatQuest linear regression and R-squared videos and a Simpson's paradox explainer, read "Why this matters, and what it doesn't mean", answer Check yourself in your head, and draft the half-page write-up on paper.
+- **Safe to skip this week:** Weekend items 1 to 3 (the flow wrapper regplot, asset age and the criticality repair-time model), the design matrices video and the *Practical Statistics* chapter can wait.
+
+---
+
 ## Tick off
 
 - [ ] Correlation and simple OLS run and interpreted

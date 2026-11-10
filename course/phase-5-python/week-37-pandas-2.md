@@ -139,6 +139,14 @@ Full worked code is in [`solutions/phase-5-python/w36_w38_pandas.py`](../../solu
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's clean of the dirty export (1,470 rows, 0 unmatched, 1,124.02 h) with `validate=` on the merge, Session 2's groupby summary and the zone by month compliance pivot, and weekend items 1 and 3: the Phase 2 done-when in pandas and the repeat-failure count of 68.
+- **On your phone (10 min a day):** Watch Corey Schafer's pandas episodes 5 to 8 and the Data School merge video, read the "Why it works" bullets on regex, `errors="coerce"` and `validate`, and answer Check yourself in your head. You can try the asset regex on regex101.com in a phone browser.
+- **Safe to skip this week:** Weekend item 2 (planned versus reactive pivot), the `.style` gradient, Kaggle Pandas lessons 4 to 6 and the McKinney chapters can wait.
+
+---
+
 ## Tick off
 
 - [ ] Dirty export cleaned in pandas, matching the Excel result (1,470 rows, 1,124.02 h)

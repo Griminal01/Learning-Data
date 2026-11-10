@@ -148,6 +148,14 @@ Put the matrix on a page with a Calendar slicer and test it on several periods.
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 5 (`REMOVEFILTERS` and `Breakdown % of Line`), the three Session 2 measures (`Downtime Cost £`, `Assets > 5 Breakdowns` at 39, the MTBF set that responds to Calendar and Zone), and weekend items 1 to 3 in a matrix with red and green formatting on the gap.
+- **On your phone (10 min a day):** Watch the SQLBI *Introducing DAX* modules on CALCULATE and filter context (twice is normal) and the Guy in a Cube CALCULATE video, read the SQLBI filter context article and the "Why it works" list, and answer Check yourself in your head. At work, find out your site's real cost per hour of lost production.
+- **Safe to skip this week:** Weekend items 4 and 5 (`Top Asset by Downtime` and `Repeat Asset Count`) and *The Definitive Guide to DAX* can be left for later.
+
+---
+
 ## Tick off
 
 - [ ] `% of Line` measures with REMOVEFILTERS

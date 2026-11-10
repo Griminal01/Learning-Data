@@ -137,6 +137,14 @@ stats.binomtest(236, 261 + 236, 0.5).pvalue     # ≈ 0.28
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's t-interval and bootstrap CIs for PPK and FLK MTTR, the three Session 2 tests (Welch and Mann-Whitney, chi-square on PPK compliance, the binomial test giving p ≈ 0.28), and weekend item 3: your before/after test plan, written before any data.
+- **On your phone (10 min a day):** Watch the StatQuest videos on p-values, confidence intervals, bootstrapping, the t-test and Mann-Whitney, read "Why it works (and what p-values are not)", do the Khan Academy confidence interval and significance test units, and say Check yourself answer 4 out loud. The weekend item 3 test plan works on paper.
+- **Safe to skip this week:** Weekend item 1 (the chi-square MTBF interval) and item 2 (Days against Nights repair times) can be skipped this week.
+
+---
+
 ## Tick off
 
 - [ ] MTTR with 95 % CIs, both by formula and by bootstrap

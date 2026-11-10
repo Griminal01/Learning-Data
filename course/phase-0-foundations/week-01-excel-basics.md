@@ -138,6 +138,14 @@ Watch these **after** you've tried the tasks. They'll make more sense once you'v
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 2, 3, 5 and 7 (save as `.xlsx`, freeze headers, check the status bar, filter to breakdowns) and Session 2 steps 1, 3, 5 and 6 (`SUM`, the fill handle, the `$I$126` fix and the `IF` column). Then answer the six weekend handover questions, even if roughly.
+- **On your phone (10 min a day):** Watch the Leila Gharani video on absolute and relative references, read both "Why it works" parts, and go through the Check yourself questions in your head.
+- **Safe to skip this week:** The hour-long Kevin Stratvert walkthrough, the ExcelJet shortcuts list and the weekend tidy-up (fill colours, borders, decimals) can all wait.
+
+---
+
 ## Tick off
 
 - [ ] Saved the CSV as `.xlsx` with frozen headers and filters

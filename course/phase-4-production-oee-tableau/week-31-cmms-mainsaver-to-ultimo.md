@@ -133,6 +133,14 @@ Each of these silently breaks a KPI after go-live: inflated counts (duplicates),
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** The Session 1 count of jobs failing the close-out check on the dirty Q1 file, the four Session 2 migration checks (1 duplicate, 3 unmapped, 1 merge, 20 unmapped codes), and weekend steps 1 and 2: the de-duplicated bridge table and breakdowns restated on `equipment_id`, reconciled to 1,016 plus 11.
+- **On your phone (10 min a day):** Read the functional location versus equipment section and the close-out table, watch a "functional location vs equipment" video, and write your 6-line close-out checklist on paper. At work, ask the Ultimo project lead or your supervisor the four weekend step 4 questions and note the answers.
+- **Safe to skip this week:** Weekend step 3 (mapping 5 more failure codes) and the ISO 14224 and IFS Ultimo searches can be skipped this week.
+
+---
+
 ## Tick off
 
 - [ ] Can explain functional location vs equipment, and why history needs both

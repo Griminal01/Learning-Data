@@ -123,6 +123,14 @@ Use the clean June export from Week 3 (`week03_lookups.xlsx`), or reload `WO_Exp
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1 steps 1, 2, 4 and 5 (profile the rows, uniques, spellings and text-numbers), Session 2 steps 1 to 6 (clean asset, zone and labour, remove duplicates to 1,470, reconcile and write down the gap), and weekend step 1, the whole-row late PM rule. That is a full 90 minutes, so don't stop to polish.
+- **On your phone (10 min a day):** Watch the Leila Gharani video on conditional formatting for an entire row, read both "Why it works" parts (profile first and reconcile, then trim, case, separators, structure), and answer Check yourself questions 1, 2 and 4 in your head.
+- **Safe to skip this week:** Session 1 step 3 (scrolling the filter drop-downs) and weekend steps 3 to 5 (data bars, the "Text that Contains" rule and the repeat offender rule) can be dropped this week.
+
+---
+
 ## Tick off
 
 - [ ] Profiled the raw file: rows, uniques, spellings, text-numbers

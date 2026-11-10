@@ -131,6 +131,14 @@ print("2 pumps, either is enough:", round(1 - (1 - 0.98) ** 2, 4))   # 0.9996
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** Session 1's flow wrapper block (MTBF about 653 h, A about 99.85 %, R(168 h) about 0.77), and weekend step 1: Primary Packing as a series system, about 0.987 or 226 hours.
+- **On your phone (10 min a day):** Session 2 is reading: the bathtub curve and Nowlan & Heap's six patterns. Watch the bathtub curve and Nowlan and Heap videos, read the "big caveat" on the exponential model, and work Check yourself question 3 (0.995 to the power 20) on paper.
+- **Safe to skip this week:** Weekend steps 2 to 4 (adding minor stops, the flow wrapper what-if and the OEE reading) and the `reliability` docs equations page can wait.
+
+---
+
 ## Tick off
 
 - [ ] R(t), F(t) and λ(t) explained in my own words

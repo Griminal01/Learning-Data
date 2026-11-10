@@ -208,6 +208,14 @@ Tick off **Phase 2** in the tracker. 🎉
 
 ---
 
+## Short on time?
+
+- **Must do (about 90 min at a PC):** This is the Phase 2 done-when, so none of the core is skippable: the seven Session 1 checks, the `v_pm_results` view, the done-when query matching the Week 6 Pareto, and the `portfolio/02-mini-cmms-sql/` folder with all four files. That is more than 90 minutes, so give the portfolio folder its own sitting.
+- **On your phone (10 min a day):** Watch the Alex The Analyst data cleaning SQL video, read the "What you should find" notes and the "Reading it" paragraph under the solution, and draft your 3 to 5 plain-English README findings on paper.
+- **Safe to skip this week:** Only the extras can wait: SQLBolt lessons 13 to 18, the Cathy Tanimura book chapters and a fresh ERD drawing (reuse your Week 9 star schema for the README image).
+
+---
+
 ## Tick off
 
 - [ ] Seven data quality checks written and understood
