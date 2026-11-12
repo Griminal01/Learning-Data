@@ -100,13 +100,16 @@ The axes are transformed so that Weibull data falls on a **straight line**, with
 
 ## Weekend (2 h)
 
-1. Run `life_data` + `Fit_Weibull_2P` for:
-   - Flaking roll, *Mechanical - roll wear*, PM prefix `Regrind`. You should get β ≈ **3.3**, η ≈ **137 d**.
-   - Conveyor, *Mechanical - belt/chain*, PM prefix `Replace conveyor belt`, which gives β ≈ 2.2.
-   - Pump, *Mechanical - seal*, PM prefix `Replace pump mechanical seal`.
-2. Make a table of every mode: n failures, n suspensions, β (with CI), η, and the verdict (infant / random / wear-out).
-3. Try `Fit_Everything(failures=f, right_censored=s)` on the jaws. Does Weibull still win? What about lognormal?
-4. Read the `reliability` docs page *"What is censored data"* and the *Fit_Weibull_2P* page.
+1. Run `life_data` + `Fit_Weibull_2P` for the flaking roll, *Mechanical - roll wear*, PM prefix `Regrind`.
+
+   **You should see:** β ≈ 3.3, η ≈ 137 d.
+2. Do the same for conveyors, *Mechanical - belt/chain*, PM prefix `Replace conveyor belt`.
+
+   **You should see:** β ≈ 2.2.
+3. Do the same for pumps, *Mechanical - seal*, PM prefix `Replace pump mechanical seal`.
+4. Make a table of every mode: n failures, n suspensions, β (with CI), η, and the verdict (infant / random / wear-out).
+5. Try `Fit_Everything(failures=f, right_censored=s)` on the jaws. Does Weibull still win? What about lognormal?
+6. Read the `reliability` docs page *"What is censored data"* and the *Fit_Weibull_2P* page.
 
 ---
 
@@ -139,9 +142,9 @@ The axes are transformed so that Weibull data falls on a **straight line**, with
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** The Session 1 hazard plot for the three β values, Session 2's jaw fit with suspensions (η about 85.7 d, β about 2.98), both "goes wrong" mistakes and the jam fit (β about 0.92), and weekend steps 1 and 2: fits for the flaking roll, conveyor and pump modes and your β/η table. Week 49 and the Week 50 study use these numbers.
+- **Must do (about 90 min at a PC):** The Session 1 hazard plot for the three β values, Session 2's jaw fit with suspensions (η about 85.7 d, β about 2.98), both "goes wrong" mistakes and the jam fit (β about 0.92), and weekend steps 1 to 4: fits for the flaking roll, conveyor and pump modes and your β/η table. Week 49 and the Week 50 study use these numbers.
 - **On your phone (10 min a day):** Read the β table, "Life data done properly" and "Reading the probability plot", watch the Weibull beta and right-censored data videos, and answer Check yourself in your head.
-- **Safe to skip this week:** Weekend step 3 (`Fit_Everything` on the jaws), the `reliability` docs pages in step 4 and *The New Weibull Handbook* can be skipped this week.
+- **Safe to skip this week:** Weekend step 5 (`Fit_Everything` on the jaws), the `reliability` docs pages in step 6 and *The New Weibull Handbook* can be skipped this week.
 
 ---
 

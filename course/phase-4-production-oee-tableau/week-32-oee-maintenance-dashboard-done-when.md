@@ -48,12 +48,17 @@ A join of shifts (one row) to stops (many rows) would repeat each shift's planne
 
 ## Weekend (2 h): Assemble, test, publish
 
-1. **Dashboard**: KPI row at the top, bridge (left) plus maintenance share (right), top-10 assets, and the trend at the bottom. Add a filter action from the reason chart to the top-10 list, and a date-range filter applied to all sheets.
-2. **About** text box: OEE definitions (Week 25), the matching rule and window (Week 30), and "synthetic data" clearly stated.
-3. **The done-when test:**
-   - Rebuild H1 2026 OEE from raw shifts in Excel or SQL, without Tableau. It must equal the dashboard's **71.9 %**, and the downloaded crosstab's Grand Total.
-   - Show someone the dashboard and ask: *"How much of our lost time is maintenance, and which three assets would you tackle first?"* If they can answer from the dashboard alone, **Phase 4 is passed.** 🎉
-4. **Portfolio**: `portfolio/04-oee-maintenance-impact/` with a link to the Tableau Public dashboard, screenshots, your SQL from Week 30, and a README covering the problem (two systems that don't talk to each other), the method (mapping, time-window matching), the findings (≈ 46 % of lost time is maintenance, uncoded stops are mostly breakdowns, C-critical breakdowns rarely stop the line), and what you'd do with real data.
+1. **Dashboard.** New dashboard, then put the KPI row across the top.
+2. Put the bridge on the left and the maintenance share on the right, under the KPIs.
+3. Add the top-10 assets, and the trend along the bottom.
+4. Add a filter action from the reason chart to the top-10 list (Dashboard → Actions → Add Action → Filter).
+5. Add a date-range filter and set it to apply to all sheets (on the filter's menu: Apply to Worksheets → All Using This Data Source).
+6. **About** text box: OEE definitions (Week 25), the matching rule and window (Week 30), and "synthetic data" clearly stated.
+7. **Done-when test, part 1.** Rebuild H1 2026 OEE from raw shifts in Excel or SQL, without Tableau.
+
+   **You should see:** 71.9 %, the same as the dashboard and the downloaded crosstab's Grand Total.
+8. **Done-when test, part 2.** Show someone the dashboard and ask: *"How much of our lost time is maintenance, and which three assets would you tackle first?"* If they can answer from the dashboard alone, **Phase 4 is passed.** 🎉
+9. **Portfolio**: `portfolio/04-oee-maintenance-impact/` with a link to the Tableau Public dashboard, screenshots, your SQL from Week 30, and a README covering the problem (two systems that don't talk to each other), the method (mapping, time-window matching), the findings (≈ 46 % of lost time is maintenance, uncoded stops are mostly breakdowns, C-critical breakdowns rarely stop the line), and what you'd do with real data.
 
 ---
 

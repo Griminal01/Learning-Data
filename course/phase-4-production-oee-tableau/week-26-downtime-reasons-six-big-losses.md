@@ -63,10 +63,12 @@ Look at the **shape**. Mechanical is about 100 long events. Operational is over 
 
 1. **Top reasons within Mechanical + Electrical (H1 2026)**: Noise / bearing 2,796 min, Belt / chain off 2,514, Sensor fault 2,248, Jam 1,695, Drive fault 1,033.
 2. **Top Operational reasons**: Guard door opened 2,702, Sensor misread 2,557, Jam / blockage 1,931, Film / carton misfeed 1,541. Guard doors at the top is a classic finding. It's often a behaviour or guarding-design issue, not a maintenance one.
-3. **By machine**: Packing Conveyors 5,347 min, Wrapper 1 5,204, Flaker 4,493, Former 4,013, EOL Conveyors 3,353, Cooker 3,089.
-   - "Packing Conveyors" and "Cooker" are **groups**. Behind "Cooker" are ~43 CMMS assets. Operators pick the machine they can see, not the asset number. Week 30 deals with this.
-   - "Wrapper 1" carries every changeover, because that's where changeovers get logged. **Filter out changeovers before blaming a machine.**
-4. **Coding quality**:
+3. **By machine.** Total the minutes by machine.
+
+   **You should see:** Packing Conveyors 5,347 min, Wrapper 1 5,204, Flaker 4,493, Former 4,013, EOL Conveyors 3,353, Cooker 3,089.
+4. Notice that "Packing Conveyors" and "Cooker" are **groups**. Behind "Cooker" are about 43 CMMS assets. Operators pick the machine they can see, not the asset number. Week 30 deals with this.
+5. Notice that "Wrapper 1" carries every changeover, because that's where changeovers get logged. **Filter out changeovers before blaming a machine.**
+6. **Coding quality.** Run:
 
    ```sql
    SELECT ROUND(100.0 * SUM(reason_category = 'Unassigned') / COUNT(*), 1) AS pct_events,
@@ -74,10 +76,10 @@ Look at the **shape**. Mechanical is about 100 long events. Operational is over 
    FROM redzone_downtime;
    ```
 
-   **8.8 % of events** and **7.3 % of minutes** have no reason. Also look for:
-   - "Jam" logged under *Mechanical* (an operator word for a maintenance failure), and *Operational* stops lasting over an hour (probably a breakdown coded as a jam)
-   - the `comment` field, where the real story often is ("jaws not sealing, called eng")
-5. **Reconcile**: the sum of event minutes in H1 2026 is **36,549**, but the shift table's downtime is **36,146**. Why the 403-minute gap? (Hint: stops that cross a shift boundary, and the worst shifts being capped. Look at shift `S01368` on 15 May 2026, Nights: 660 minutes down, OEE 3.7 %.) **Always reconcile two views of the same loss before presenting either.**
+   **You should see:** 8.8 % of events and 7.3 % of minutes have no reason.
+7. **Look for miscoding.** Find "Jam" logged under *Mechanical* (an operator word for a maintenance failure), and *Operational* stops lasting over an hour (probably a breakdown coded as a jam).
+8. Read the `comment` field on a few of them. That's where the real story often is ("jaws not sealing, called eng").
+9. **Reconcile**: the sum of event minutes in H1 2026 is **36,549**, but the shift table's downtime is **36,146**. Why the 403-minute gap? (Hint: stops that cross a shift boundary, and the worst shifts being capped. Look at shift `S01368` on 15 May 2026, Nights: 660 minutes down, OEE 3.7 %.) **Always reconcile two views of the same loss before presenting either.**
 
 ---
 
@@ -124,7 +126,7 @@ Worked SQL is in [`solutions/phase-4-production/w25_w26_oee_losses.sql`](../../s
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** The Session 1 category query (or pivot) with the six big losses table, and Session 2 steps 1 to 5: top reasons, the machine Pareto, the unassigned share (8.8 % of events, 7.3 % of minutes) with a couple of miscoding examples, and the 36,549 against 36,146 reconciliation.
+- **Must do (about 90 min at a PC):** The Session 1 category query (or pivot) with the six big losses table, and Session 2 steps 1 to 9: top reasons, the machine Pareto, the unassigned share (8.8 % of events, 7.3 % of minutes) with a couple of miscoding examples, and the 36,549 against 36,146 reconciliation.
 - **On your phone (10 min a day):** Watch the six big losses and SMED videos, read the Session 1 note on short stops, and answer Check yourself in your head. At work, look at your site's Redzone dashboards, ask a team leader who enters the stop reason and when, and draft your half page on what the downtime data can and can't tell maintenance.
 - **Safe to skip this week:** The Redzone vendor overview video and weekend step 1 (sketching your site's minute bridge if the dashboard doesn't show it) can wait.
 

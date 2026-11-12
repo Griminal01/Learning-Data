@@ -19,8 +19,11 @@ This week you bring it all together into the **PM Compliance Workbook**, the Pha
 
 ### Do it
 
-1. In Queries & Connections, right-click `WorkOrders` → Load To… → tick **Add this data to the Data Model**. Do the same for `Assets`.
-2. **Make a Calendar table in Power Query**: Get Data → From Other Sources → **Blank Query**. Open the Advanced Editor and paste:
+1. Open `week07_powerquery.xlsx` and **File → Save As** `PM_Compliance.xlsx`. You'll build the rest of the week in this file.
+2. **Add WorkOrders to the Data Model.** In Queries & Connections, right-click `WorkOrders` → **Load To…** → tick **Add this data to the Data Model** → OK.
+3. Do the same for `Assets`. Keep it as *Only Create Connection*, but tick **Add this data to the Data Model**.
+4. **Make a Calendar table.** Data → Get Data → From Other Sources → **Blank Query**.
+5. In the editor, Home → **Advanced Editor**. Delete what's there and paste:
 
    ```
    let
@@ -37,12 +40,20 @@ This week you bring it all together into the **PM Compliance Workbook**, the Pha
        Week
    ```
 
-   Name it `Calendar` and load it to the Data Model only.
-3. Data → **Manage Data Model** (the Power Pivot window opens). Switch to **Diagram View** (top right).
-4. Drag to create relationships:
-   - `WorkOrders[Asset]` → `Assets[asset_id]`
-   - `WorkOrders[Due]` → `Calendar[Date]`
-5. Notice the **1** and **\*** ends: one asset, many work orders. That's a *one-to-many* relationship, and you'll see it again in Phase 2.
+6. Click **Done**.
+
+   **You should see:** one row per day from 01/07/2024, with Month, Month Name, Quarter and Week Commencing columns.
+7. Rename the query `Calendar`.
+8. Home → Close & Load **To…** → *Only Create Connection* and tick **Add this data to the Data Model** → OK.
+9. Data → **Manage Data Model**. The Power Pivot window opens.
+10. Click **Diagram View** (top right).
+
+    **You should see:** three boxes: `WorkOrders`, `Assets` and `Calendar`.
+11. **First relationship.** Drag `Asset` in the `WorkOrders` box onto `asset_id` in the `Assets` box.
+12. **Second relationship.** Drag `Due` in `WorkOrders` onto `Date` in `Calendar`.
+
+    **You should see:** two lines joining the boxes.
+13. Look at the ends of each line: a **1** at `Assets` and a **\*** at `WorkOrders`. One asset, many work orders. That's a *one-to-many* relationship, and you'll see it again in Phase 2.
 
 ### Why it works
 
@@ -54,23 +65,49 @@ The Data Model holds tables **separately but related**, instead of one giant mer
 
 ### Do it
 
-In the Power Pivot window, click the `WorkOrders` table (Data View). In the **calculation area** (the grid under the data), click a cell and type each of these measures. Or, from Excel, go to Power Pivot tab → Measures → New Measure.
+1. In the Power Pivot window, click **Data View**, then the `WorkOrders` tab at the bottom.
+2. Click any empty cell in the **calculation area**, the grey grid under the data.
+3. **First measure.** Type this into the formula bar and press Enter:
 
-```
-PMs Due := CALCULATE ( COUNTROWS ( WorkOrders ), WorkOrders[WO Type] = "PM" )
+   ```
+   PMs Due := CALCULATE ( COUNTROWS ( WorkOrders ), WorkOrders[WO Type] = "PM" )
+   ```
 
-PMs On Time := SUM ( WorkOrders[On Time] )
+   **You should see:** `PMs Due: 10502` in the cell.
+4. Click the next empty cell and add:
 
-PM Compliance % := DIVIDE ( [PMs On Time], [PMs Due] )
+   ```
+   PMs On Time := SUM ( WorkOrders[On Time] )
+   ```
 
-Reactive Jobs := CALCULATE ( COUNTROWS ( WorkOrders ), WorkOrders[WO Type] = "Reactive" )
+5. Next empty cell:
 
-Downtime Hrs := DIVIDE ( SUM ( WorkOrders[Downtime Mins] ), 60 )
-```
+   ```
+   PM Compliance % := DIVIDE ( [PMs On Time], [PMs Due] )
+   ```
 
-Format `PM Compliance %` as a percentage.
+6. Select that cell → Home → Format → **Percentage**.
 
-Now Insert → PivotTable → **From Data Model**. Put `Assets[zone]` in Rows, `Calendar[Month]` in Columns, and `PM Compliance %` in Values.
+   **You should see:** 79.5 %.
+7. Next empty cell:
+
+   ```
+   Reactive Jobs := CALCULATE ( COUNTROWS ( WorkOrders ), WorkOrders[WO Type] = "Reactive" )
+   ```
+
+8. Next empty cell:
+
+   ```
+   Downtime Hrs := DIVIDE ( SUM ( WorkOrders[Downtime Mins] ), 60 )
+   ```
+
+   (If you'd rather type measures from Excel, use the Power Pivot tab → Measures → **New Measure**. Same formulas, without the `Name :=` part.)
+9. Close the Power Pivot window. In Excel, Insert → PivotTable → **From Data Model** → New Worksheet → OK.
+10. Drag `Assets[zone]` to *Rows*.
+11. Drag `Calendar[Month]` to *Columns*.
+12. Drag `PM Compliance %` to *Values*.
+
+    **You should see:** a different % for every zone and month. If every zone shows the same figure, check the relationship in Diagram View.
 
 ### Why it works
 
@@ -82,24 +119,58 @@ A **measure** is a calculation that runs **in whatever context the pivot gives i
 
 ## Weekend build (2 h): PM Compliance Workbook
 
-Build `PM_Compliance.xlsx` with these sheets. Everything must come from queries and the Data Model, with **no typed-in numbers.**
+Keep building in `PM_Compliance.xlsx`. Everything must come from queries and the Data Model, with **no typed-in numbers.** You'll make four sheets: Dashboard, Overdue, Pareto and About.
 
-| Sheet | Contents |
-|---|---|
-| **Dashboard** | Slicers for Zone and Criticality, and a timeline on Calendar[Date]. KPI cells for PM Compliance %, PMs Due, Reactive Jobs and Downtime Hrs (use `=GETPIVOTDATA` or small pivots). Chart: compliance by zone. Chart: compliance trend by month. |
-| **Overdue** | PMs not completed with Due before `ReportDate`. Build it as a Power Query table (reference `WorkOrders`, filter `WO Type = PM`, `Completed` is null, `Status = Open`, `Due < ReportDate`), sorted oldest first. |
-| **Pareto** | Top 10 assets by reactive downtime hours, with the combo chart from Week 6, driven by the timeline. |
-| **About** | Data source, refresh instructions, definitions (*on time = completed on or before due date*), and the report date. |
+### Dashboard
 
-Formatting rules: one colour for "bad" (overdue, low compliance) used consistently, titles that state findings, no gridlines, and the slicers lined up neatly.
+1. Add a sheet called `Dashboard`. View → untick **Gridlines**.
+2. Insert → PivotTable → From Data Model. Put `PM Compliance %`, `PMs Due`, `Reactive Jobs` and `Downtime Hrs` in *Values*. These are your KPI cells.
+3. Insert a second Data Model pivot with `Assets[zone]` in *Rows* and `PM Compliance %` in *Values*, then a bar PivotChart from it.
+4. Insert a third with `Calendar[Month]` in *Rows* and `PM Compliance %` in *Values*, then a line PivotChart from it.
+5. Click one of the pivots → PivotTable Analyze → Insert Slicer → tick *zone* and *criticality* (from `Assets`).
+6. Insert Timeline → `Calendar[Date]`.
+7. Right-click each slicer and the timeline → **Report Connections** → tick all three pivots.
+
+   **You should see:** one click on a slicer changes the KPIs and both charts.
+
+### Overdue
+
+8. Data → Queries & Connections → right-click `WorkOrders` → **Reference**. A new query opens, built on top of `WorkOrders`.
+9. Filter `WO Type` to `PM`.
+10. Filter `Completed` to *null* only (untick everything else).
+11. Filter `Status` to `Open`.
+12. Click the drop-down on `Due` → Date Filters → **Before…**. Pick *Parameter* in the middle box (click the small `ABC`/`123` icon to switch) and choose `ReportDate` → OK.
+13. Sort `Due` ascending, so the oldest is first.
+14. Rename the query `Overdue`, then Close & Load to a new sheet. Rename the sheet `Overdue`.
+
+    **You should see:** 17 PMs, oldest `WO-111320` (LD-FLK-013), due 27/05/2026.
+
+### Pareto
+
+15. Add a sheet called `Pareto`. Insert → PivotTable → From Data Model.
+16. Rebuild the Week 6 Pareto: Asset in *Rows*, WO Type = Reactive as a filter, `Downtime Hrs` in *Values* twice, the second as % Running Total, sorted largest first, Top 10.
+17. Make the combo chart from it, the same way as Week 6.
+18. Connect the Dashboard timeline to this pivot too (right-click the timeline → Report Connections).
+
+### About
+
+19. Add a sheet called `About`. Write where the data comes from (the work order export folder) and how to refresh it (Data → Refresh All).
+20. Write the definitions, starting with *on time = completed on or before the due date*.
+21. **Show the report date.** Data → Get Data → From Other Sources → Blank Query. In the formula bar type `= ReportDate`, rename the query `Report Date`, then Close & Load it onto `About`.
+
+### Polish
+
+22. Use one colour for "bad" (overdue, low compliance) everywhere, give every chart a title that states the finding, and line up the slicers neatly.
 
 ### Phase 1 *done when* test
 
-1. Move `WO_Export_2026-06.csv` **out** of the folder → **Refresh All**. The dashboard should now end at May.
-2. Put it **back** → **Refresh All**. June reappears.
-3. If every table and chart updated with **zero manual edits**, you've passed Phase 1. 🎉
+23. Move `WO_Export_2026-06.csv` **out** of the folder → **Refresh All**.
 
-Tick it off in the tracker app, then commit the workbook to your portfolio (see `portfolio/README.md`).
+    **You should see:** the dashboard now ends at May.
+24. Put it **back** → **Refresh All**.
+
+    **You should see:** June reappears.
+25. If every table and chart updated with **zero manual edits**, you've passed Phase 1. 🎉 Tick it off in the tracker app, then commit the workbook to your portfolio (see `portfolio/README.md`).
 
 ---
 
@@ -139,9 +210,9 @@ Tick it off in the tracker app, then commit the workbook to your portfolio (see 
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** This is the Phase 1 done-when, so none of it is skippable: Session 1 steps 1 to 4 (Calendar and relationships), the five Session 2 measures, the four weekend sheets (Dashboard, Overdue, Pareto, About) and the move-June-out, Refresh All test. It won't fit in 90 minutes, so spread it over several sittings across the holiday week.
+- **Must do (about 90 min at a PC):** This is the Phase 1 done-when, so none of it is skippable: Session 1 steps 1 to 13 (Calendar and relationships), the five Session 2 measures, weekend steps 1 to 21 (the Dashboard, Overdue, Pareto and About sheets) and steps 23 to 25 (move June out, Refresh All). It won't fit in 90 minutes, so spread it over several sittings across the holiday week.
 - **On your phone (10 min a day):** Watch the MyOnlineTrainingHub Power Pivot tutorial and the SQLBI CALCULATE introduction, read both "Why it works" parts on the Data Model and measures, answer Check yourself questions 1 to 4 in your head, and draft the About sheet definitions on paper.
-- **Safe to skip this week:** Only the polish can wait: lining up the slicers, one consistent "bad" colour and finding-style chart titles. The four sheets and the done-when test cannot.
+- **Safe to skip this week:** Only the polish can wait (weekend step 22): lining up the slicers, one consistent "bad" colour and finding-style chart titles. The four sheets and the done-when test cannot.
 
 ---
 

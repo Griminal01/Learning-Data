@@ -64,11 +64,12 @@ The scenario: zone team leaders should only see their own zone.
 
 3. Make roles for two more zones the same way.
 4. Modeling → **View as** → tick `Zone Lead`. The whole report now shows only Primary Packing: Pareto, compliance, everything. The filter flows down the relationships, just as in Week 16.
-5. **Dynamic RLS** (the scalable version):
-   - Create a table `ZoneAccess` with columns `email` and `zone_code` (Enter Data), with rows like `lead.packing@example.com, PPK`.
-   - Relate `ZoneAccess[zone_code]` → `Zones[zone_code]`. (You may need the filter to flow *from* ZoneAccess to Zones; set that relationship's direction accordingly, and tick *Apply security filter in both directions* if required.)
-   - Role `By User`, with a filter on `ZoneAccess`: `[email] = USERPRINCIPALNAME()`.
-   - **View as** → `By User` + *Other user* `lead.packing@example.com`.
+5. **Dynamic RLS** (the scalable version). Home → Enter Data → make a table `ZoneAccess` with columns `email` and `zone_code`, with rows like `lead.packing@example.com`, `PPK`.
+6. In Model view, relate `ZoneAccess[zone_code]` → `Zones[zone_code]`. The filter needs to flow *from* ZoneAccess to Zones: set the relationship's direction that way, and tick *Apply security filter in both directions* if it asks.
+7. Modeling → Manage roles → new role `By User`. Filter the `ZoneAccess` table with `[email] = USERPRINCIPALNAME()`.
+8. Modeling → **View as** → tick `By User` and *Other user*, and type `lead.packing@example.com`.
+
+   **You should see:** only Primary Packing, the same as the static role.
 
 ### Why it works
 
@@ -117,7 +118,7 @@ These are in the same Microsoft Power Platform family, and they're high value fo
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** Session 2 steps 1 to 5 in Desktop: static `Zone Lead` roles tested with *View as*, then dynamic RLS with `ZoneAccess` and `USERPRINCIPALNAME()` tested as `lead.packing@example.com`. Everything else this week works away from the PC.
+- **Must do (about 90 min at a PC):** Session 2 steps 1 to 8 in Desktop: static `Zone Lead` roles tested with *View as*, then dynamic RLS with `ZoneAccess` and `USERPRINCIPALNAME()` tested as `lead.packing@example.com`. Everything else this week works away from the PC.
 - **On your phone (10 min a day):** Session 1 is reading: work through the two PL-300 workspace and semantic model modules and write your one-line definitions. Watch the Reza Dorrani Power Apps and Power Automate videos and the Guy in a Cube RLS video, then do the weekend flow design, the 3-screen app sketch and the half-page proposal on paper.
 - **Safe to skip this week:** The PL-300 *Implement row-level security* module and the Guy in a Cube gateway video can wait, and the licensing notes only need a quick skim.
 

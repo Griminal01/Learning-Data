@@ -88,10 +88,11 @@ The standard RUL benchmark is turbofan engine simulations from NASA. It has many
 
 ## Weekend (2 h)
 
-1. **Piecewise RUL target**: many papers cap RUL at a maximum, e.g. `y_capped = y.clip(upper=60)`, meaning "healthy, > 60 days". Retrain. Does the 0–30 day error improve? Why does that make sense physically?
-2. **Interval coverage**: calculate the 10–90 % band coverage for readings with true RUL under 30 days.
-3. **Decision rule**: write a rule that a planner could use. For example: *"When the anomaly detector alarms, run the RUL model daily; when the lower bound falls below 14 days, schedule the replacement in the next planned stop."*
-4. (Optional) Download C-MAPSS FD001 and fit the same random forest. Compare your RMSE with published baselines (search *"C-MAPSS FD001 RMSE benchmark"*).
+1. **Piecewise RUL target.** Many papers cap RUL at a maximum: `y_capped = y.clip(upper=60)`, meaning "healthy, > 60 days". Retrain the random forest on `y_capped`.
+2. Compare the 0–30 day error with the uncapped model. Does it improve? Why does that make sense physically?
+3. **Interval coverage**: calculate the 10–90 % band coverage for readings with true RUL under 30 days.
+4. **Decision rule**: write a rule that a planner could use. For example: *"When the anomaly detector alarms, run the RUL model daily; when the lower bound falls below 14 days, schedule the replacement in the next planned stop."*
+5. (Optional) Download C-MAPSS FD001 and fit the same random forest. Compare your RMSE with published baselines (search *"C-MAPSS FD001 RMSE benchmark"*).
 
 ---
 
@@ -123,9 +124,9 @@ The standard RUL benchmark is turbofan engine simulations from NASA. It has many
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** Session 1's RUL random forest with MAE split by RUL band (3.5, 38 and 62 days) and the predicted against true plot for 3 test bearings, Session 2's tree-spread interval with its coverage checked, and weekend item 3, your planner-friendly decision rule.
-- **On your phone (10 min a day):** Read "The physics" and "Present it honestly" in Session 2, watch a "remaining useful life prediction explained" video, answer Check yourself in your head, and draft the weekend item 3 decision rule on paper.
-- **Safe to skip this week:** Weekend item 1 (the capped RUL target), item 2 (coverage under 30 days only), the optional C-MAPSS download and the conformal prediction video can be skipped.
+- **Must do (about 90 min at a PC):** Session 1's RUL random forest with MAE split by RUL band (3.5, 38 and 62 days) and the predicted against true plot for 3 test bearings, Session 2's tree-spread interval with its coverage checked, and weekend step 4, your planner-friendly decision rule.
+- **On your phone (10 min a day):** Read "The physics" and "Present it honestly" in Session 2, watch a "remaining useful life prediction explained" video, answer Check yourself in your head, and draft the weekend step 4 decision rule on paper.
+- **Safe to skip this week:** Weekend steps 1 and 2 (the capped RUL target), step 3 (coverage under 30 days only), the optional C-MAPSS download and the conformal prediction video can be skipped.
 
 ---
 

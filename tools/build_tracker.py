@@ -251,7 +251,8 @@ def parse_short(lines):
 
 
 STEP = re.compile(r"^(\d+)\.\s+(.*)$")
-SENTENCE = re.compile(r"[.!?](?:\s|$)")
+SENTENCE = re.compile(r"[.!](?:\s|$)")
+QUESTION = re.compile(r"\?[\"*”)]*(\s*\(.*\))?$")
 
 
 def parse_steps(lines):
@@ -302,8 +303,8 @@ def parse_steps(lines):
 
 
 def step_load(lines):
-    """Rough count of things a step asks for: sub-bullets plus sentences, ignoring code and
-    'You should see' result lines. Used to flag crammed steps (see 'Long steps' in the output)."""
+    """Rough count of things a step asks for: sub-bullets plus sentences, ignoring code,
+    'You should see' result lines and questions (lines ending in '?'). Used to flag crammed steps (see 'Long steps' in the output)."""
     bullets, text, in_fence = 0, [], False
     for line in lines:
         if FENCE.match(line):
@@ -312,6 +313,8 @@ def step_load(lines):
         if in_fence:
             continue
         s = line.strip()
+        if QUESTION.search(s):  # a question to think about or ask someone isn't an action
+            continue
         if re.match(r"^[-*]\s", s):
             bullets += 1
         if re.match(r"^(\*\*)?You should see", s) or s.startswith("|"):

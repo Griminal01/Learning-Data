@@ -144,15 +144,15 @@ LIMIT 5;
 ## Weekend practice (2 h)
 
 1. Finish **SQLBolt lessons 1–4** (and their exercises).
-2. Write queries for each question below. Save them all in one file `week10.sql` (DB Browser → Save SQL file). Keep every SQL file you write; they're portfolio material.
-
-   1. All assets made by *Kestrel Drives*, sorted by install date (oldest first).
-   2. All PM work orders for asset `LD-PPK-005` that weren't completed.
-   3. The 5 reactive jobs with the most labour hours, ever.
-   4. All assets with "Burner" in the name.
-   5. How many work orders have no completed date?
-   6. Every breakdown raised on Christmas Day 2025. (Hint: `LIKE '2025-12-25%'`.)
-   7. Every *Replace sealing jaws* PM that wasn't completed.
+2. In DB Browser, open a new SQL tab. You'll write one query per question below and save them all in one file, `week10.sql` (DB Browser → Save SQL file). Keep every SQL file you write; they're portfolio material.
+3. **Query 1.** All assets made by *Kestrel Drives*, sorted by install date (oldest first).
+4. **Query 2.** All PM work orders for asset `LD-PPK-005` that weren't completed.
+5. **Query 3.** The 5 reactive jobs with the most labour hours, ever.
+6. **Query 4.** All assets with "Burner" in the name.
+7. **Query 5.** How many work orders have no completed date?
+8. **Query 6.** Every breakdown raised on Christmas Day 2025. (Hint: `LIKE '2025-12-25%'`.)
+9. **Query 7.** Every *Replace sealing jaws* PM that wasn't completed.
+10. Save `week10.sql`.
 
 ---
 
@@ -180,6 +180,7 @@ LIMIT 5;
    FROM assets
    WHERE criticality = 'A' AND zone_code IN ('BAK', 'DRY');
    ```
+
 3. `WHERE` runs **before** `SELECT`, so the alias `hrs` doesn't exist yet. Use `WHERE ROUND(labour_hours) > 5` (or a CTE, Week 12).
 4. ```sql
    SELECT criticality, COUNT(*) FROM assets GROUP BY criticality;

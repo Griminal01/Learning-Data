@@ -101,10 +101,13 @@ Report the **spread** as well as the mean: it tells you how much the result depe
 
 Nobody on the shop floor cares about F1. Translate:
 
-1. The test set is 15 bearings over about 4,500 bearing-days. At threshold 0.5 there were **59 false-alarm days**. Per bearing-month, that's about 59 ÷ (4,484 ÷ 30) ≈ **0.4 false-alarm days per bearing per month**. With persistence (alarm only after 3 consecutive flags, Week 61), that drops a lot. Calculate it.
-2. **Cost it.** Say a false alarm costs a 30-minute check (£40), and a missed bearing failure costs £3,000 (downtime plus secondary damage). Calculate the total cost at thresholds 0.3, 0.5 and 0.7 on the test set. Which threshold is cheapest?
-3. **Event view.** Daily rows overstate things: one failing bearing produces 14 positive days. Re-score per *bearing*: did each one get **any** alarm in its last 14 days? Did any **healthy** period (RUL > 60) get an alarm?
-4. Coursera ML Specialization, course 1, weeks 2–3.
+1. **False alarms per bearing-month.** The test set is 15 bearings over about 4,500 bearing-days, and at threshold 0.5 there were **59 false-alarm days**. Work out 59 ÷ (4,484 ÷ 30).
+
+   **You should see:** about 0.4 false-alarm days per bearing per month.
+2. **With persistence.** Recount the false-alarm days if an alarm only counts after 3 consecutive flags (Week 61 does this properly). It drops a lot.
+3. **Cost it.** Say a false alarm costs a 30-minute check (£40), and a missed bearing failure costs £3,000 (downtime plus secondary damage). Calculate the total cost at thresholds 0.3, 0.5 and 0.7 on the test set. Which threshold is cheapest?
+4. **Event view.** Daily rows overstate things: one failing bearing produces 14 positive days. Re-score per *bearing*: did each one get **any** alarm in its last 14 days? Did any **healthy** period (RUL > 60) get an alarm?
+5. Coursera ML Specialization, course 1, weeks 2–3.
 
 ---
 
@@ -137,9 +140,9 @@ Nobody on the shop floor cares about F1. Translate:
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** Session 1's confusion matrix with the "always no" and RMS ≥ 4.5 rule baselines (F1 0.74), Session 2's random forest at thresholds 0.3, 0.5 and 0.7, the PR curve and `GroupKFold` with its spread, and weekend items 1 and 2: false alarms per bearing-month and the cost at each threshold.
+- **Must do (about 90 min at a PC):** Session 1's confusion matrix with the "always no" and RMS ≥ 4.5 rule baselines (F1 0.74), Session 2's random forest at thresholds 0.3, 0.5 and 0.7, the PR curve and `GroupKFold` with its spread, and weekend steps 1 to 3: false alarms per bearing-month and the cost at each threshold.
 - **On your phone (10 min a day):** Watch the StatQuest videos on the confusion matrix, sensitivity and specificity, ROC and AUC, and cross validation, read the precision and recall definitions, and practise Check yourself answer 4 as a one-sentence plant explanation.
-- **Safe to skip this week:** Weekend item 3 (the per-bearing event view, which Week 61 covers properly) and Coursera course 1 weeks 2 and 3 can be deferred.
+- **Safe to skip this week:** Weekend step 4 (the per-bearing event view, which Week 61 covers properly) and Coursera course 1 weeks 2 and 3 can be deferred.
 
 ---
 

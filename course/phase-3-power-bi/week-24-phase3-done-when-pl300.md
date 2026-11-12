@@ -11,11 +11,10 @@ Last week of Phase 3. Polish, test with a real person, package for your portfoli
 ### Do it
 
 1. **Performance Analyzer** (Optimize ribbon → Performance analyzer → Start recording → Refresh visuals). Any visual over ~1 second? Usually it's a complex measure inside a big table. Simplify it, or reduce the rows shown.
-2. **Model clean-up:**
-   - Remove unused columns in Power Query (fewer columns means a smaller, faster file).
-   - Check that every measure has a format and lives in `_Measures`, in display folders (*PM*, *Reliability*, *Downtime*, *Rollout*).
-   - Add a **description** to each key measure (Model view → Properties → Description). It shows up when users hover in the field list.
-3. **Reconciliation sheet**: on the About page (or in a separate check page), put a table of headline numbers next to their source:
+2. **Remove unused columns** in Power Query. Fewer columns means a smaller, faster file.
+3. Check every measure has a format and lives in `_Measures`, in display folders (*PM*, *Reliability*, *Downtime*, *Rollout*).
+4. Add a **description** to each key measure (Model view → Properties → Description). It shows up when users hover in the field list.
+5. **Reconciliation sheet**: on the About page (or in a separate check page), put a table of headline numbers next to their source:
 
    | KPI | Power BI | SQL (Week 12–14) | Excel (Week 8) |
    |---|---|---|---|
@@ -97,6 +96,7 @@ Without looking anything up:
        USERELATIONSHIP ( Calendar[Date], WorkOrders[due_date] )
    )
    ```
+
 3. Every number on a report is calculated with a set of filters applied: whatever row, column, slicer and page you're on. Change the filters and the same formula gives a different answer. `CALCULATE` lets a measure change those filters.
 4. `ALL` removes filters and returns all rows (it can be used as a table). `REMOVEFILTERS` only removes filters, as a CALCULATE modifier, and is clearer to read. `ALLSELECTED` removes filters from inside the visual but keeps the outer slicer and page filters.
 5. When the Service needs to refresh from a source it can't reach from the cloud: files on a PC, or on-premises databases.
@@ -107,9 +107,9 @@ Without looking anything up:
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** This is the Phase 3 done-when, so none of the core is skippable: the Session 1 step 3 reconciliation table, the Session 2 test with an independent tester (fix what they trip on), the `portfolio/03-lined-dashboard/` folder with screenshots and README, and the PL-300 practice assessment. That won't fit in 90 minutes, so book the tester first and fit the rest around them.
+- **Must do (about 90 min at a PC):** This is the Phase 3 done-when, so none of the core is skippable: the Session 1 step 5 reconciliation table, the Session 2 test with an independent tester (fix what they trip on), the `portfolio/03-lined-dashboard/` folder with screenshots and README, and the PL-300 practice assessment. That won't fit in 90 minutes, so book the tester first and fit the rest around them.
 - **On your phone (10 min a day):** Do the Phase 3 review in Check yourself in your head and sketch the star schema on paper, read the PL-300 study guide on Microsoft Learn, check the current exam price, and ask your manager at work whether the training budget will fund it.
-- **Safe to skip this week:** Only polish can wait: measure descriptions, display folders and removing unused columns (Session 1 step 2), a deep Performance Analyzer tidy-up and the second tester.
+- **Safe to skip this week:** Only polish can wait: measure descriptions, display folders and removing unused columns (Session 1 steps 2 to 4), a deep Performance Analyzer tidy-up and the second tester.
 
 ---
 

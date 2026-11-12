@@ -36,13 +36,12 @@ Good news: Power BI Desktop *is* Power Query + the Data Model + charts. You alre
    | `zones.csv` | `Zones` |
    | `sensor_rollout.csv` | `SensorRollout` |
 
-5. Type checks in `WorkOrders`:
-   - `raised_datetime` → **Date/Time**
-   - `due_date` and `completed_date` → **Date** (blanks become `null`, which is correct)
-   - `labour_hours` → Decimal, and `priority` → Whole Number
-6. In `Downtime`, set `start_datetime`/`end_datetime` → Date/Time and `duration_min` → Whole Number.
-7. **Close & Apply.** Go to Table view and click each table. Check the row count at the bottom: WorkOrders **11,902**, Downtime **6,177**, Assets **292**.
-8. Save as `LineD_Maintenance.pbix`.
+5. Open **Transform data** and click `WorkOrders`. Set `raised_datetime` → **Date/Time** (click the type icon at the left of the column heading).
+6. Set `due_date` and `completed_date` → **Date**. Blanks become `null`, which is correct.
+7. Set `labour_hours` → **Decimal Number** and `priority` → **Whole Number**.
+8. In `Downtime`, set `start_datetime`/`end_datetime` → Date/Time and `duration_min` → Whole Number.
+9. **Close & Apply.** Go to Table view and click each table. Check the row count at the bottom: WorkOrders **11,902**, Downtime **6,177**, Assets **292**.
+10. Save as `LineD_Maintenance.pbix`.
 
 ### Why it works
 
@@ -129,7 +128,7 @@ On the Report canvas:
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** Session 1 steps 2 to 8 (six tables with correct types, row counts 11,902 / 6,177 / 292, saved as `LineD_Maintenance.pbix`), Session 2 steps 1 to 6 (`Raised Date`, `Is Planned`, `PM Result`, `Start Date`, `Duration Hrs` and the Calendar), and weekend steps 1 to 4 for the first card, bar, table and slicer.
+- **Must do (about 90 min at a PC):** Session 1 steps 2 to 10 (six tables with correct types, row counts 11,902 / 6,177 / 292, saved as `LineD_Maintenance.pbix`), Session 2 steps 1 to 6 (`Raised Date`, `Is Planned`, `PM Result`, `Start Date`, `Duration Hrs` and the Calendar), and weekend steps 1 to 4 for the first card, bar, table and slicer.
 - **On your phone (10 min a day):** Watch the Guy in a Cube Power BI for beginners video, read the PL-300 *Get data in Power BI* module and both "Why it works" parts, and answer Check yourself in your head. At work, ask IT whether Power BI Desktop is allowed and whether the site has Pro licences.
 - **Safe to skip this week:** Weekend steps 5 and 6 (the formatting pane and free play) and the hour-long Kevin Stratvert walkthrough can be skipped.
 

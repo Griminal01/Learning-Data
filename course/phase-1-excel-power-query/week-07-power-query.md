@@ -23,19 +23,27 @@ The same tool is built into Power BI, so everything you learn here carries strai
 
 ### Do it
 
-1. New workbook `week07_powerquery.xlsx`. Go to Data → Get Data → From File → **From Folder** → browse to `data\exports\work_orders` → Open.
-2. Excel shows the file list. Click **Combine → Combine & Transform Data**, pick the first file as the sample → OK. The **Power Query Editor** opens.
-3. Look around the editor:
-   - **Queries** pane on the left
-   - the data preview in the middle
-   - **Applied Steps** on the right. Every click you make becomes a step here. Click an earlier step to see the data at that point.
-4. You'll see a `Source.Name` column (the filename). Keep it for now; it's handy for checking.
-5. **Set data types properly:**
-   - Select `Raised` → right-click → Change Type → **Using Locale…** → *Date/Time*, *English (United Kingdom)*. Do the same for `Due` and `Completed` with type *Date*.
-   - `Labour Hrs` → Decimal Number. `Downtime Mins` → Whole Number.
-   - **Delete** any automatic *Changed Type* step that ran before yours if it turned dates into errors (it can happen when the sample file guessed US dates).
-6. Rename the query (right pane, Properties) to `WorkOrders`.
-7. **Home → Close & Load**. A green Table appears with **11,902 rows**. Check the row count in the Queries & Connections pane.
+1. Make a new workbook, `week07_powerquery.xlsx`.
+2. Data → Get Data → From File → **From Folder**.
+3. Browse to `data\exports\work_orders` → Open.
+
+   **You should see:** a list of the CSV files in the folder.
+4. Click **Combine → Combine & Transform Data**.
+5. Leave the first file picked as the sample → OK. The **Power Query Editor** opens.
+6. **Look around the editor.** Find the **Queries** pane on the left and the data preview in the middle.
+7. Find **Applied Steps** on the right. Every click you make becomes a step here. Click an earlier step to see the data at that point, then click the last step again.
+8. Find the `Source.Name` column (the filename). Keep it for now; it's handy for checking.
+9. **Remove Excel's guess.** In Applied Steps, click the ✕ next to the last step, *Changed Type*. That's Excel guessing the types, and it can read UK dates as US ones. You'll set them yourself.
+10. **Dates, UK style.** Right-click the `Raised` heading → Change Type → **Using Locale…** → Data Type: *Date/Time*, Locale: *English (United Kingdom)* → OK.
+11. Do the same for `Due` and `Completed`, with Data Type *Date*.
+12. Right-click `Labour Hrs` → Change Type → **Decimal Number**.
+13. Right-click `Downtime Mins` → Change Type → **Whole Number**.
+
+    **You should see:** no `Error` cells in the date columns. If Excel asks whether to replace the current step, pick **Replace current**.
+14. In the Query Settings pane on the right, rename the query to `WorkOrders`.
+15. **Home → Close & Load.**
+
+    **You should see:** a green Table with 11,902 rows. The Queries & Connections pane shows the count.
 
 ### Why it works
 
@@ -49,22 +57,32 @@ Power Query separates **what you want** (the steps) from **the data** (the files
 
 ### Do it
 
-Open the editor again (Data → Queries & Connections → double-click `WorkOrders`).
-
-1. **Add a custom column** `Is PM`: Add Column → Conditional Column → if `WO Type` equals `PM` then `1` else `0`.
-2. **Add a column** `On Time` (Add Column → Custom Column):
+1. Open the editor again: Data → Queries & Connections → double-click `WorkOrders`.
+2. **`Is PM` column.** Add Column → **Conditional Column**. Name it `Is PM`: if `WO Type` equals `PM` then `1`, else `0` → OK.
+3. **`On Time` column.** Add Column → **Custom Column**. Name it `On Time` and type:
 
    ```
    if [WO Type] = "PM" and [Completed] <> null and [Completed] <= [Due] then 1 else 0
    ```
 
-   (M is case-sensitive: `null`, `and`, `if … then … else`.)
-3. **Due Month**: select `Due` → Add Column → Date → Month → **Start of Month**. Rename it `Due Month`.
-4. **Import the asset register**: Data → Get Data → From Text/CSV → `assets.csv` → **Transform Data**. Name it `Assets`. Then Close & Load To… → **Only Create Connection** (you don't need it on a sheet).
-5. Do the same for `pm_tasks.csv` → query `PMTasks`, connection only.
-6. **Merge** (this is XLOOKUP in Power Query): in `WorkOrders`, go to Home → Merge Queries → choose `PMTasks` → click `PM Ref` in the top table and `pm_id` in the bottom → Join Kind **Left Outer** → OK. A new column of nested tables appears. Click its expand icon (↔) → tick only `frequency_days` and `task_type` → untick *Use original column name as prefix*.
-7. Merge `Assets` on `Asset` = `asset_id` and bring in `manufacturer`, `asset_type` and `install_date`.
-8. Close & Load. Still **11,902 rows**. (If the count went up, your lookup table had duplicate keys. Always check the row count after a merge.)
+   M is case-sensitive: `null`, `and`, `if … then … else` must be lower case.
+4. **`Due Month` column.** Click the `Due` heading → Add Column → Date → Month → **Start of Month**.
+5. Double-click the new column's heading and rename it `Due Month`.
+6. Home → **Close & Load**.
+7. **Import the asset register.** Data → Get Data → From Text/CSV → `assets.csv` → **Transform Data**.
+8. Rename the query `Assets`.
+9. Home → Close & Load **To…** → **Only Create Connection** → OK. (You don't need it on a sheet.)
+10. Do steps 7 to 9 again for `pm_tasks.csv`, naming the query `PMTasks`.
+11. **Merge PM details into WorkOrders** (this is XLOOKUP in Power Query). Open `WorkOrders` in the editor → Home → **Merge Queries**.
+12. Choose `PMTasks` in the second drop-down. Click `PM Ref` in the top table and `pm_id` in the bottom one. Join Kind: **Left Outer** → OK.
+
+    **You should see:** a new column full of the word *Table*.
+13. Click the expand icon (↔) on that column's heading. Tick only `frequency_days` and `task_type`, untick **Use original column name as prefix** → OK.
+14. **Merge the asset details.** Home → Merge Queries → `Assets`, matching `Asset` to `asset_id`, Left Outer → OK.
+15. Expand it and keep only `manufacturer`, `asset_type` and `install_date`, with no prefix.
+16. Home → **Close & Load**.
+
+    **You should see:** still 11,902 rows. If the count went up, your lookup table had duplicate keys. Always check the row count after a merge.
 
 ### Why it works
 
@@ -84,24 +102,48 @@ Join kinds are a big idea that comes back in SQL (Phase 2):
 
 ### Unpivot
 
-1. Get Data → From Text/CSV → `zone_downtime_by_week_wide.csv` → Transform. Look at it: one row per zone, and **a column per week**. It looks fine to a person, but it's terrible for analysis. You can't easily filter by date, and next week's data adds a column, not a row.
-2. Select the `Zone` column → right-click → **Unpivot Other Columns**. You get `Attribute` (the week header) and `Value`.
-3. Rename them `Week` and `Downtime Mins`. Clean `Week`: Transform → Replace Values `w/c ` with nothing → Change Type Using Locale → Date (UK).
-4. Load it. You should have **182 rows** (7 zones × 26 weeks), and the minutes should total **26,837**. Make a PivotChart: line chart of downtime by week, one line per zone.
+1. Data → Get Data → From Text/CSV → `zone_downtime_by_week_wide.csv` → **Transform Data**.
+2. Look at it: one row per zone and **a column per week**. It reads fine to a person, but it's terrible for analysis. You can't easily filter by date, and next week's data adds a column, not a row.
+3. Right-click the `Zone` heading → **Unpivot Other Columns**.
+
+   **You should see:** three columns: `Zone`, `Attribute` (the week header) and `Value`.
+4. Rename `Attribute` to `Week` and `Value` to `Downtime Mins`.
+5. Click the `Week` heading → Transform → **Replace Values**. Value to find: `w/c ` (with the space). Replace with: nothing → OK.
+6. Right-click `Week` → Change Type → Using Locale → *Date*, *English (United Kingdom)* → OK.
+7. Home → **Close & Load**.
+
+   **You should see:** 182 rows (7 zones × 26 weeks).
+8. Add a total under the Table, or use `=SUM()` on the `Downtime Mins` column.
+
+   **You should see:** 26,837 minutes.
+9. Click in the Table → Insert → PivotChart → Line. Put `Week` on the axis, `Zone` in *Legend*, and `Downtime Mins` in *Values*.
 
 ### Parameters
 
-1. In the editor: Home → Manage Parameters → New → Name `FolderPath`, Type *Text*, Current Value = your full folder path, e.g. `C:\Users\Josh\Documents\Learning-Data\data\exports\work_orders`.
-2. Open the `WorkOrders` query's **Source** step (the gear icon or the formula bar) and replace the hard-coded path with `FolderPath`. In the formula bar it becomes `= Folder.Files(FolderPath)`.
-3. Create a second parameter `ReportDate`, type *Date*, value `30/06/2026`. Add a custom column `Overdue` to `WorkOrders`:
+10. Open the Power Query Editor → Home → Manage Parameters → **New Parameter**.
+11. Name: `FolderPath`. Type: *Text*. Current Value: your full folder path, e.g. `C:\Users\YourName\Documents\Learning-Data\data\exports\work_orders` → OK.
+12. Click the `WorkOrders` query → click its **Source** step in Applied Steps.
+13. In the formula bar, replace the typed-in path (and its quotes) with `FolderPath`, so it reads `= Folder.Files(FolderPath)` → Enter.
 
-   ```
-   if [WO Type] = "PM" and [Completed] = null and [Due] < ReportDate then 1 else 0
-   ```
+    **You should see:** the same data as before, with no errors.
+14. Manage Parameters → New Parameter → Name: `ReportDate`, Type: *Date*, Current Value: `30/06/2026` → OK.
+15. Click `WorkOrders` → Add Column → Custom Column → name it `Overdue`:
 
-4. Now if you move the folder, or want to report "as at" another date, you change one value.
+    ```
+    if [WO Type] = "PM" and [Completed] = null and [Due] < ReportDate then 1 else 0
+    ```
 
-**Final test:** copy `WO_Export_2026-06.csv`, rename the copy `WO_Export_TEST.csv`, put it in the folder and Refresh All. The row count should jump by 394. Delete the test file and refresh again to get back to 11,902. **That's the whole point of this week.**
+16. Close & Load. Now if you move the folder, or want to report "as at" another date, you change one value.
+
+### Final test
+
+17. Copy `WO_Export_2026-06.csv` and rename the copy `WO_Export_TEST.csv`, in the same folder.
+18. Data → **Refresh All**.
+
+    **You should see:** the row count jumps by 394, to 12,296.
+19. Delete `WO_Export_TEST.csv` and Refresh All again.
+
+    **You should see:** back to 11,902. **That's the whole point of this week.**
 
 ---
 
@@ -137,9 +179,9 @@ Join kinds are a big idea that comes back in SQL (Phase 2):
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** Session 1 steps 1 to 7 (From Folder, UK locale types, 11,902 rows), Session 2 steps 2 and 4 to 8 (the `On Time` column, the Assets and PMTasks merges with the row count unchanged), then the weekend unpivot to 182 rows, both parameters and the drop-a-file test. That is more than 90 minutes, so split it across two sittings if you need to, but don't drop any of it: Week 8 is built on this.
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 15 (From Folder, UK locale types, 11,902 rows), Session 2 steps 3 and 7 to 16 (the `On Time` column, the Assets and PMTasks merges with the row count unchanged), then weekend steps 1 to 8 (the unpivot to 182 rows) and 10 to 19 (both parameters and the drop-a-file test). That is more than 90 minutes, so split it across two sittings if you need to, but don't drop any of it: Week 8 is built on this.
 - **On your phone (10 min a day):** Watch the Leila Gharani Power Query beginner and combine-from-folder videos, read the "Why it works" parts on locale and on join kinds, and answer all five Check yourself questions in your head.
-- **Safe to skip this week:** Session 2 steps 1 and 3 (the `Is PM` and `Due Month` columns), the PivotChart line chart after the unpivot and the *M Is for (Data) Monkey* book can all wait.
+- **Safe to skip this week:** Session 2 steps 2, 4 and 5 (the `Is PM` and `Due Month` columns), the weekend step 9 line chart after the unpivot and the *M Is for (Data) Monkey* book can all wait.
 
 ---
 

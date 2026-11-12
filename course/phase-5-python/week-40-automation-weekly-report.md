@@ -19,11 +19,10 @@ This is the payoff week of Phase 5. You'll build a script that reads every CMMS 
 
 ### Do it
 
-1. **Write the spec first** (as a docstring at the top of `my_work\pm_report.py`):
-   - *Input:* a folder of `WO_Export_*.csv` files, and a report date (the last day of the week).
-   - *Output:* `PM_Report_YYYY-MM-DD.xlsx` with sheets **Summary** (KPIs + 2 charts), **Compliance by Zone** (13 weeks), **Overdue PMs**, and **Top 10 Downtime** (13 weeks).
-   - *Definitions:* on time = completed ≤ due. Overdue = PM, status Open, due before the report date.
-2. Write and test each function in a notebook, then move it into the script:
+1. **Write the spec first**, as a docstring at the top of `my_work\pm_report.py`. Start with the *Input:* a folder of `WO_Export_*.csv` files, and a report date (the last day of the week).
+2. Add the *Output:* `PM_Report_YYYY-MM-DD.xlsx` with sheets **Summary** (KPIs + 2 charts), **Compliance by Zone** (13 weeks), **Overdue PMs**, and **Top 10 Downtime** (13 weeks).
+3. Add the *Definitions:* on time = completed ≤ due. Overdue = PM, status Open, due before the report date.
+4. Write and test each function in a notebook, then move it into the script:
 
    ```python
    def load_exports(folder):          # -> one DataFrame, dates parsed, duplicates removed
@@ -31,7 +30,7 @@ This is the payoff week of Phase 5. You'll build a script that reads every CMMS 
    def build_report(df, report_date)  # -> summary, by_zone, overdue, top10, weekly
    ```
 
-3. **Test against known answers.** For report date 28 June 2026:
+5. **Test against known answers.** For report date 28 June 2026:
 
    | KPI | Expected |
    |---|---|

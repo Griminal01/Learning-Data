@@ -19,15 +19,34 @@ A PivotTable answers "how much, by what" in seconds: labour by zone, downtime by
 
 ### Do it
 
-1. **Combine three months, the old way.** Open the April export, copy all the rows into a new workbook `week06_pivots.xlsx`, then paste May's and June's rows underneath, **without** their header rows. Make it a Table `tblQ2`. You should have **1,391 rows**.
+1. **Combine three months, the old way.** Make a new workbook, `week06_pivots.xlsx`.
+2. Open the April export (`WO_Export_2026-04.csv`), copy every row including the headers, and paste it into `A1` of your new workbook.
+3. Open May's export, copy the rows **without** the header row, and paste them under April's.
+4. Do the same for June.
+5. Click in the data → `Ctrl+T` → name the Table `tblQ2`.
+
+   **You should see:** 1,391 rows (`=ROWS(tblQ2)` in a spare cell).
 
    > Notice how tedious and error-prone that was. Next week Power Query does it in one click, forever. Hold on to that feeling.
 
-2. Click in the Table → Insert → PivotTable → New Worksheet.
-3. Drag **Zone** to *Rows*, **WO Type** to *Columns*, and **WO Number** to *Values*. Excel counts the work orders. Check: Primary Packing has **38 reactive** jobs, and the grand total is **1,391**.
-4. Make a second pivot: **Zone** in *Rows*, **Downtime Mins** in *Values* (Sum), with a filter on **WO Type** = Reactive. Sort largest to smallest (right-click a value → Sort).
-5. **Show values as**: right-click a value → *Show Values As* → *% of Grand Total*. Then try *% of Row Total* on the first pivot: what percentage of each zone's jobs were reactive?
-6. **Group dates**: in a new pivot, drag **Raised** to *Rows*. Excel usually groups by month automatically. If it doesn't, right-click a date → Group → Months. Add Downtime Mins and filter to Reactive. Totals: April **2,516**, May **3,402**, June **2,675** minutes.
+6. Click in the Table → Insert → PivotTable → **New Worksheet** → OK.
+7. Drag **Zone** to *Rows*.
+8. Drag **WO Type** to *Columns*.
+9. Drag **WO Number** to *Values*. Excel counts the work orders.
+
+   **You should see:** Primary Packing has 38 Reactive jobs, and the grand total is 1,391.
+10. **A second pivot.** Click back in `tblQ2` → Insert → PivotTable → New Worksheet.
+11. Drag **Zone** to *Rows* and **Downtime Mins** to *Values* (it should say *Sum of*).
+12. Drag **WO Type** to *Filters*, then pick *Reactive* in the filter drop-down above the pivot.
+13. Right-click any value → Sort → **Largest to Smallest**.
+
+    **You should see:** Flaking at the top with 2,349 minutes.
+14. **Show values as a share.** Right-click a value → *Show Values As* → **% of Grand Total**.
+15. Go back to the first pivot. Right-click a value → *Show Values As* → **% of Row Total**. Now each row shows what share of that zone's jobs were each type.
+16. **Group by month.** Make a third pivot from `tblQ2` and drag **Raised** to *Rows*. Excel usually groups by month on its own. If it doesn't, right-click a date → Group → **Months** → OK.
+17. Drag **Downtime Mins** to *Values* and **WO Type** to *Filters*, then pick *Reactive*.
+
+    **You should see:** April 2,516, May 3,402, June 2,675 minutes.
 
 ### Why it works
 
@@ -41,12 +60,22 @@ Values can be *Sum*, *Count*, *Average*, *Max* and so on (right-click → Summar
 
 ### Do it
 
-1. Click in any pivot → PivotTable Analyze → **Insert Slicer** → tick *Zone*, *Criticality* and *WO Type*.
-2. **Insert Timeline** → *Raised*. Drag the timeline to pick a single month.
-3. **Connect one slicer to all pivots**: right-click the Zone slicer → *Report Connections* → tick every pivot. Now one click filters the lot.
-4. **PivotChart**: click your Zone/Downtime pivot → PivotTable Analyze → PivotChart → Clustered Bar. Apply the Week 2 formatting rules: a title that states the finding, no gridlines, data labels, and one highlight colour.
-5. **Field buttons**: right-click a button on the chart → *Hide All Field Buttons* for a clean look.
-6. Put the slicers, timeline and two charts on one sheet called `Dashboard`. Set View → untick Gridlines. You've built your first interactive dashboard.
+1. Click in any pivot → PivotTable Analyze → **Insert Slicer**.
+2. Tick *Zone*, *Criticality* and *WO Type* → OK. Three slicer boxes appear.
+3. Click in a pivot again → PivotTable Analyze → **Insert Timeline** → tick *Raised* → OK.
+4. Drag the bar on the timeline to pick a single month.
+
+   **You should see:** the pivot you inserted it from changes. The others don't yet.
+5. **Connect the Zone slicer to every pivot.** Right-click the Zone slicer → **Report Connections** → tick every pivot → OK.
+6. Do the same for the other two slicers and the timeline.
+
+   **You should see:** one click on a slicer filters every pivot at once.
+7. **PivotChart.** Click in your Zone/Downtime pivot → PivotTable Analyze → **PivotChart** → Bar → Clustered Bar → OK.
+8. Format it with the Week 2 rules: a title that states the finding, no gridlines, data labels on, one highlight colour.
+9. **Hide the field buttons.** Right-click a grey button on the chart → **Hide All Field Buttons on Chart**.
+10. Add a sheet called `Dashboard`.
+11. Cut and paste the slicers, the timeline and two charts onto `Dashboard`.
+12. View → untick **Gridlines**. You've built your first interactive dashboard.
 
 ---
 
@@ -54,14 +83,26 @@ Values can be *Sum*, *Count*, *Average*, *Max* and so on (right-click → Summar
 
 A **Pareto** sorts causes from biggest to smallest and adds a cumulative % line. It shows the "vital few": usually a small number of assets cause most of the loss.
 
-1. New pivot: **Asset** and **Asset Description** in *Rows* (PivotTable Design → Report Layout → *Show in Tabular Form*, and *Repeat All Item Labels*). Set **WO Type** = Reactive as a filter. Put **Downtime Mins** in *Values* twice.
-2. Sort by Downtime Mins, largest first.
-3. On the second Downtime Mins: right-click → Show Values As → **% Running Total In** → Asset. That's your cumulative %.
-4. Filter to the top 10: click the Rows drop-down → Value Filters → **Top 10** → by Sum of Downtime Mins.
-5. Insert a **Combo chart** from the pivot: Change Chart Type → Combo → Downtime = Clustered Column, Cumulative % = Line on the **secondary axis**. Set the secondary axis maximum to 1 (100 %).
-6. Title it with the finding. Check it against the answers below.
+1. Click in `tblQ2` → Insert → PivotTable → New Worksheet.
+2. Drag **Asset**, then **Asset Description**, to *Rows*.
+3. PivotTable Design → Report Layout → **Show in Tabular Form**.
+4. PivotTable Design → Report Layout → **Repeat All Item Labels**.
+5. PivotTable Design → Subtotals → **Do Not Show Subtotals**.
+6. Drag **WO Type** to *Filters* and pick *Reactive*.
+7. Drag **Downtime Mins** to *Values* twice. You get two identical columns.
+8. Right-click a value in the first Downtime column → Sort → **Largest to Smallest**.
 
-**Then ask the question that matters:** the top 10 is only about 39 % of the downtime here, so the losses are spread out. Two flaking rolls lead, and flow wrappers show up twice. What would you investigate first, and why? Write three sentences. That's the habit of turning a chart into a decision.
+   **You should see:** `LD-FLK-010`, Flaking roll 2, at the top with 575 minutes.
+9. Right-click a value in the **second** Downtime column → Show Values As → **% Running Total In** → Base field: *Asset* → OK. That's your cumulative %.
+10. **Top 10 only.** Click the drop-down on the Asset heading → Value Filters → **Top 10** → by *Sum of Downtime Mins* → OK.
+
+    **You should see:** the cumulative % ends at about 39 % on the 10th row.
+11. Click in the pivot → PivotTable Analyze → **PivotChart** → **Combo**.
+12. Set the first Downtime series to *Clustered Column* and the second to *Line*, and tick **Secondary Axis** for the line → OK.
+13. Right-click the right-hand axis → Format Axis → set Maximum to `1` (that's 100 %).
+14. Give it a title that states the finding, then check it against the answers below.
+15. **Read the chart.** The top 10 is only about 39 % of the downtime here, so the losses are spread out. Two flaking rolls lead, and flow wrappers show up twice.
+16. **Ask the question that matters.** What would you investigate first, and why? Write three sentences. That's the habit of turning a chart into a decision.
 
 > Also try Insert → Chart → **Histogram → Pareto** on a plain (non-pivot) two-column table of asset and downtime. Excel 365 has a built-in Pareto chart type. It's quick but less flexible than the combo version.
 
@@ -115,9 +156,9 @@ Note that Pareto by **asset** gives a flat picture here, but Pareto by **failure
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** Session 1 steps 1 to 6 (the 1,391-row `tblQ2`, count and sum pivots, Show Values As, dates grouped by month), Session 2 steps 1 to 3 (slicers and a timeline connected to every pivot), and the full weekend Pareto plus your three sentences. Week 8 reuses this Pareto, so build it properly.
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 17 (the 1,391-row `tblQ2`, count and sum pivots, Show Values As, dates grouped by month), Session 2 steps 1 to 6 (slicers and a timeline connected to every pivot), and the full weekend Pareto plus your three sentences. Week 8 reuses this Pareto, so build it properly.
 - **On your phone (10 min a day):** Watch the Leila Gharani pivot tables video and the MyOnlineTrainingHub Pareto video, read the "Why it works" note on the pivot cache and Refresh, and answer Check yourself questions 1, 3 and 4 in your head. Once the Pareto is built, think through your three sentences on the bus.
-- **Safe to skip this week:** Session 2 steps 4 to 6 (the formatted PivotChart and the `Dashboard` sheet) and the built-in Histogram Pareto chart can be skipped; the combo Pareto is the one you need.
+- **Safe to skip this week:** Session 2 steps 7 to 12 (the formatted PivotChart and the `Dashboard` sheet) and the built-in Histogram Pareto chart can be skipped; the combo Pareto is the one you need.
 
 ---
 

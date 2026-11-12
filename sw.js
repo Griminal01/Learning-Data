@@ -10,7 +10,7 @@
    - VERSION is a hash of the app files, stamped by tools/build_tracker.py. A new value installs a
      fresh cache and deletes the old ones on activate.
    Requests to other sites (GitHub's API for gist sync, YouTube) are left alone. */
-const VERSION = "64441675f1ab";
+const VERSION = "87fed2cbab39";
 const CACHE = "dss-" + VERSION;
 const SHELL = [
   "./", "index.html", "app/app.css", "app/markdown.js", "app/course-data.js", "app/app.js",

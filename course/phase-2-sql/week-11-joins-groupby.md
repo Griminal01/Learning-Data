@@ -130,13 +130,14 @@ FROM → JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMI
 ## Weekend practice (2 h)
 
 1. **SQLBolt lessons 6–12** (joins, nulls, expressions, aggregates).
-2. Write these in `week11.sql`:
-   1. Downtime hours by zone and category (Breakdown/Minor stop). Which zone loses most to minor stops?
-   2. How many downtime events have a work order vs not? (Hint: `CASE WHEN wo_id IS NULL …`; you can borrow it from Week 12.)
-   3. Average repair labour by asset type, only for types with at least 20 breakdowns.
-   4. For each technician, the number of reactive jobs and their total labour hours.
-   5. Number of PM tasks by `task_type` and `frequency_days`.
-   6. Which **manufacturer**'s assets have the most breakdowns per asset? (Count breakdowns ÷ count of distinct assets: `COUNT(DISTINCT a.asset_id)`.)
+2. Open a new SQL tab. You'll save these queries in `week11.sql`.
+3. **Query 1.** Downtime hours by zone and category (Breakdown/Minor stop). Which zone loses most to minor stops?
+4. **Query 2.** How many downtime events have a work order vs not? (Hint: `CASE WHEN wo_id IS NULL …`; you can borrow it from Week 12.)
+5. **Query 3.** Average repair labour by asset type, only for types with at least 20 breakdowns.
+6. **Query 4.** For each technician, the number of reactive jobs and their total labour hours.
+7. **Query 5.** Number of PM tasks by `task_type` and `frequency_days`.
+8. **Query 6.** Which **manufacturer**'s assets have the most breakdowns per asset? (Count breakdowns ÷ count of distinct assets: `COUNT(DISTINCT a.asset_id)`.)
+9. Save `week11.sql`.
 
 ---
 

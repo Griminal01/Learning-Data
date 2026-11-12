@@ -25,8 +25,14 @@ Your production data lives in Tableau, so you need to be fluent in it, at least 
 2. On the **Data Source** page, check the field types: `production_date` should be a **date** (calendar icon), and the counts should be **numbers** (#). Fix any that aren't by clicking the icon.
 3. Click **Sheet 1** at the bottom. Look at the Data pane: fields above the line are **dimensions** (things you slice by: shift, crew, SKU, date), and fields below are **measures** (things you add up: counts, minutes).
 4. **First view**: drag `SKU` to **Rows**, and `Good Count` to **Columns**. Tableau sums it automatically (`SUM(Good Count)`). Click the sort icon on the axis.
-5. **Over time**: new sheet. Drag `Production Date` to Columns. It shows as `YEAR(Production Date)`. Click the `+` on the pill to drill to quarter, then month. Drag `Downtime Min` to Rows. That's a line chart of downtime by month.
-6. Right-click the date pill and switch between **Month (discrete, blue)** and **Month (continuous, green)**. Watch the axis change from separate headers to a continuous timeline.
+5. **Over time.** Click the New Worksheet tab. Drag `Production Date` to **Columns**.
+
+   **You should see:** the pill reads `YEAR(Production Date)`.
+6. Click the `+` on the pill to drill down to quarter, then click the new `+` to get month.
+7. Drag `Downtime Min` to **Rows**.
+
+   **You should see:** a line chart of downtime by month.
+8. Right-click the date pill and switch between **Month (discrete, blue)** and **Month (continuous, green)**. Watch the axis change from separate headers to a continuous timeline.
 
 ### Why it works
 
@@ -89,7 +95,7 @@ Your production data lives in Tableau, so you need to be fluent in it, at least 
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** Session 1 steps 1 to 6 (connect `shifts.csv` with correct types, first bar and line, blue against green dates), Session 2 steps 1, 3, 5 and 6 (Color and Label, a filter shown to the user, the reason category bar matching Week 26, saved to your profile), and weekend step 2, three Phase 3 visuals rebuilt with your notes.
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 8 (connect `shifts.csv` with correct types, first bar and line, blue against green dates), Session 2 steps 1, 3, 5 and 6 (Color and Label, a filter shown to the user, the reason category bar matching Week 26, saved to your profile), and weekend step 2, three Phase 3 visuals rebuilt with your notes.
 - **On your phone (10 min a day):** Watch Tableau's free *Getting Started* training videos and a few Andy Kriebel tips, read the blue versus green table in "Why it works", and answer Check yourself in your head. At work, view one Redzone dashboard and note what's on Rows, Columns, Color and Filters for each chart.
 - **Safe to skip this week:** Session 2 steps 2 and 4 (the nested crew and SKU bar, clicking through Show Me), the Tableau Tim tutorial and the *Filtering and Sorting* training module can be skipped.
 

@@ -19,16 +19,20 @@ Old Excel worked one cell at a time. Modern Excel can return a whole list from *
 
 ### Do it
 
-Make a new sheet `Live`.
-
-1. **Every PM not completed in June**: in `A3`:
+1. Open `week03_lookups.xlsx` and add a new sheet called `Live`.
+2. **Every PM not completed in June.** In `A3`, type:
 
    ```
    =FILTER(tblWO[[WO Number]:[Asset Description]], (tblWO[WO Type]="PM")*(tblWO[Status]<>"Completed"))
    ```
 
-   **37 rows** spill out. You typed one formula and got an entire report.
-2. **Filter to one zone with a drop-down.** In `B1`, add a Data Validation list with source `=UNIQUE(tblWO[Zone])`. (Validation can't point at a spill directly, so first put `=SORT(UNIQUE(tblWO[Zone]))` in a spare cell, say `Z1`, and use `=$Z$1#` as the list source.) Now change the formula in `A3` to add a third condition:
+   **You should see:** 37 rows spill out. One formula, a whole report.
+3. **Make a zone list for a drop-down.** In a spare cell, `Z1`, type `=SORT(UNIQUE(tblWO[Zone]))`.
+
+   **You should see:** the zone names spill down from `Z1`.
+4. **Add the drop-down.** Click `B1` → Data → Data Validation → Allow: *List* → Source: `=$Z$1#` → OK. (Validation can't use a formula that spills, but it can point at a spill with `#`.)
+5. Pick *Primary Packing* in `B1`.
+6. **Filter by the drop-down.** Change the formula in `A3` to add a third condition and an "if empty" message:
 
    ```
    =FILTER(tblWO[[WO Number]:[Asset Description]],
@@ -36,15 +40,18 @@ Make a new sheet `Live`.
      "Nothing outstanding")
    ```
 
-   Pick *Primary Packing*: **9 rows**.
-3. **Top 5 downtime jobs**: in a new area:
+   **You should see:** 9 rows for Primary Packing.
+7. Pick a few other zones in `B1` and watch the list change.
+8. **Top 5 downtime jobs.** In an empty area to the right, type:
 
    ```
    =TAKE(SORTBY(tblWO[[WO Number]:[Asset Description]], tblWO[Downtime Mins], -1), 5)
    ```
 
-   The top row should be `LD-EOL-016`, End of Line Conveyor 6, with 253 minutes.
-4. **The `#` reference**: if your UNIQUE zone list spilled from `Z1`, then `=ROWS(Z1#)` returns 7. `Z1#` means "the whole spill, however big it is today".
+   **You should see:** the top row is `LD-EOL-016`, End of Line Conveyor 6, with 253 minutes.
+9. **The `#` reference.** In any empty cell, type `=ROWS(Z1#)`.
+
+   **You should see:** 7. `Z1#` means "the whole spill, however big it is today".
 
 ### Why it works
 
@@ -58,15 +65,28 @@ If the spill area isn't empty, you get `#SPILL!`. Clear the cells in the way.
 
 ### Do it
 
-1. **SEQUENCE** builds lists of numbers. Try `=SEQUENCE(10)`, then `=SEQUENCE(1,7)`, then `=SEQUENCE(5,7,1,1)`.
-2. **A June calendar of PMs due per day**: in a new sheet:
-   - `A2`: `=SEQUENCE(30,1,DATE(2026,6,1),1)`, formatted as dates. That's 30 days.
-   - `B2`: `=COUNTIFS(tblWO[WO Type],"PM",tblWO[Due],A2#)`
+1. **SEQUENCE warm-up.** On a scratch sheet, try `=SEQUENCE(10)`, then `=SEQUENCE(1,7)`, then `=SEQUENCE(5,7,1,1)`. Delete them when you've seen what each does.
+2. Add a new sheet called `Calendar`.
+3. **30 days of June.** In `A2`, type `=SEQUENCE(30,1,DATE(2026,6,1),1)`.
+4. Format `A2:A31` as dates (Home → Number Format → Short Date).
 
-     Because `A2#` is a list, `COUNTIFS` returns a list too: one count per day. This is called **lifting**.
-   - `C2`: `=COUNTIFS(tblWO[WO Type],"PM",tblWO[Due],A2#,tblWO[Status],"Completed")`
-   - Add a line chart of B and C.
-3. **LET for readable formulas.** This calculates on-time PM compliance for June:
+   **You should see:** 01/06/2026 down to 30/06/2026.
+5. **PMs due each day.** In `B2`, type:
+
+   ```
+   =COUNTIFS(tblWO[WO Type],"PM",tblWO[Due],A2#)
+   ```
+
+   **You should see:** 30 counts spill down, one per day. Because `A2#` is a list, `COUNTIFS` returns a list too. This is called **lifting**.
+6. **PMs completed each day.** In `C2`, type:
+
+   ```
+   =COUNTIFS(tblWO[WO Type],"PM",tblWO[Due],A2#,tblWO[Status],"Completed")
+   ```
+
+7. Type headers in row 1: `Date`, `Due`, `Completed`.
+8. Select `A1:C31` → Insert → Line chart.
+9. **On-time compliance with LET.** In an empty cell, type:
 
    ```
    =LET(
@@ -77,7 +97,10 @@ If the spill area isn't empty, you get `#SPILL!`. Clear the cells in the way.
    )
    ```
 
-   Each name is defined once and used later. The `--` converts TRUE/FALSE to 1/0. Format as %. You should get about **80 %**.
+   Each name is defined once and used later. The `--` turns TRUE/FALSE into 1/0.
+10. Format the cell as %.
+
+    **You should see:** about 80 %.
 
 > Note: this counts PMs **raised** in June (that's what the export contains). Proper compliance counts PMs **due** in the period, which needs several months of data combined. You'll do that properly with Power Query in Week 7.
 
@@ -89,27 +112,47 @@ If the spill area isn't empty, you get `#SPILL!`. Clear the cells in the way.
 
 ## Weekend build (2 h): Your own functions with LAMBDA
 
-1. Go to Formulas → Name Manager → New.
-   - Name: `ZONECODE`
-   - Refers to: `=LAMBDA(asset, MID(asset,4,3))`
-2. Now `=ZONECODE("LD-PPK-005")` returns `PPK` anywhere in the workbook.
-3. Create `DAYSLATE`:
+1. Go to Formulas → Name Manager → **New**.
+2. Name it `ZONECODE`. In *Refers to*, type `=LAMBDA(asset, MID(asset,4,3))` → OK.
+3. In any cell, type `=ZONECODE("LD-PPK-005")`.
+
+   **You should see:** `PPK`. Your function now works anywhere in the workbook.
+4. Name Manager → New → name `DAYSLATE`, refers to:
 
    ```
    =LAMBDA(due, done, IF(OR(due="",done=""), "", done-due))
    ```
 
-4. Create `ONTIME`, which returns TRUE if done is on or before due:
+5. Name Manager → New → name `ONTIME` (TRUE if done is on or before due), refers to:
 
    ```
    =LAMBDA(due, done, AND(done<>"", due<>"", done<=due))
    ```
 
-5. Create a `CLEANASSET` function from last week's asset-cleaning `LET` formula. Test it on `"ld ppk 005"`, `" LD-PPK-005 "` and `"LDPPK005"`.
-6. **Build a "Live" summary panel** on one sheet using only dynamic array formulas:
-   - outstanding PMs for the zone picked in a drop-down (FILTER)
-   - the top 5 downtime jobs (TAKE + SORTBY)
-   - the list of assets that had a breakdown this month: `=SORT(UNIQUE(FILTER(tblWO[Asset],tblWO[WO Type]="Reactive")))` should give **44 assets**
+6. Test `DAYSLATE` and `ONTIME` on a row of `tblWO`, e.g. `=DAYSLATE(tblWO[@Due],tblWO[@Completed])` in a cell next to the Table.
+7. **`CLEANASSET`.** Name Manager → New → name `CLEANASSET`. This is last week's asset-cleaning formula wrapped in a `LAMBDA`:
+
+   ```
+   =LAMBDA(asset, LET(
+     a, UPPER(TRIM(asset)),
+     b, SUBSTITUTE(a," ","-"),
+     IF(MID(b,3,1)="-", b, LEFT(b,2)&"-"&MID(b,3,3)&"-"&RIGHT(b,3))
+   ))
+   ```
+
+8. Test it on `"ld ppk 005"`, `" LD-PPK-005 "` and `"LDPPK005"`.
+
+   **You should see:** `LD-PPK-005` all three times.
+9. **Build a Live summary panel.** Add a sheet called `Panel`. You'll fill it using only dynamic array formulas.
+10. Copy the zone drop-down and the outstanding-PMs FILTER from Session 1 onto `Panel`.
+11. Copy the top 5 downtime formula (TAKE + SORTBY) onto `Panel`.
+12. **Assets with a breakdown this month.** Type:
+
+    ```
+    =SORT(UNIQUE(FILTER(tblWO[Asset],tblWO[WO Type]="Reactive")))
+    ```
+
+    **You should see:** 44 assets.
 
 **Bonus:** if your Excel has `GROUPBY` (newer Microsoft 365 builds do), try `=GROUPBY(tblWO[Zone], tblWO[Downtime Mins], SUM)`. It's a PivotTable in one formula.
 
@@ -151,9 +194,9 @@ If the spill area isn't empty, you get `#SPILL!`. Clear the cells in the way.
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** Session 1 steps 1 to 3 (FILTER with the zone drop-down and "Nothing outstanding", then the top 5 with TAKE and SORTBY), Session 2 steps 2 and 3 (the SEQUENCE calendar with its chart and the LET compliance formula), and weekend steps 1 to 4 for three LAMBDA functions.
+- **Must do (about 90 min at a PC):** Session 1 steps 2 to 8 (FILTER with the zone drop-down and "Nothing outstanding", then the top 5 with TAKE and SORTBY), Session 2 steps 2 to 10 (the SEQUENCE calendar with its chart and the LET compliance formula), and weekend steps 1 to 6 for three LAMBDA functions.
 - **On your phone (10 min a day):** Watch the Leila Gharani FILTER and LAMBDA videos, read the "Why it works" note on multiplying for AND and adding for OR, and answer Check yourself questions 2, 3 and 5 in your head.
-- **Safe to skip this week:** The Session 2 step 1 SEQUENCE warm-ups, weekend step 5 (`CLEANASSET`), the step 6 Live summary panel and the `GROUPBY` bonus can all be left for another week.
+- **Safe to skip this week:** The Session 2 step 1 SEQUENCE warm-up, weekend steps 7 and 8 (`CLEANASSET`), the steps 9 to 12 Live summary panel and the `GROUPBY` bonus can all be left for another week.
 
 ---
 

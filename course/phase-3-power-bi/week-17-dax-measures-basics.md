@@ -88,9 +88,10 @@ Look at **Planned % (91 %)** next to **Reactive Labour % (25 %)**. By count, rea
    )
    ```
 
-2. Make a bar chart of `Reactive Jobs` by `Age Band`. Do old assets fail more? Be careful: the 8+ band holds about 200 of the 292 assets, so of course it has the most jobs. Compare **jobs per asset** instead (you'll build that measure this weekend). And remember that kit installed during the window hasn't been running for the full two years. Unfair comparisons like these are the most common analysis mistake.
-3. **The same thing as a measure doesn't work.** Try making `Asset Age Yrs` a measure with the same formula and you'll get an error. A measure has no "current row" for `Assets[install_date]` to come from.
-4. **VAR / RETURN** makes measures readable and efficient:
+2. Make a bar chart of `Reactive Jobs` by `Age Band`. Do old assets fail more?
+3. **Be careful.** The 8+ band holds about 200 of the 292 assets, so of course it has the most jobs. Compare **jobs per asset** instead (you'll build that measure this weekend). Also, kit installed during the window hasn't been running for the full two years. Unfair comparisons like these are the most common analysis mistake.
+4. **The same thing as a measure doesn't work.** Try making `Asset Age Yrs` a measure with the same formula and you'll get an error. A measure has no "current row" for `Assets[install_date]` to come from.
+5. **VAR / RETURN** makes measures readable and efficient:
 
    ```dax
    MTTR Hrs =
@@ -120,13 +121,38 @@ Look at **Planned % (91 %)** next to **Reactive Labour % (25 %)**. By count, rea
 
 ## Weekend task (2 h): KPI page, version 1
 
-1. Add these measures:
-   - `PMs Due = CALCULATE ( COUNTROWS ( WorkOrders ), WorkOrders[WO Type] = "PM" )`, which gives 10,502
-   - `PMs On Time = CALCULATE ( COUNTROWS ( WorkOrders ), WorkOrders[PM Result] = "On time" )`, which gives 8,349
-   - `PM Compliance % = DIVIDE ( [PMs On Time], [PMs Due] )`, which gives **79.5 %**
-   - `Corrective Jobs`, `Avg Labour per Reactive Job`, and `Breakdowns per Asset = DIVIDE ( [Reactive Jobs], [Assets With Breakdowns] )`
-2. Build a page with: a row of KPI cards across the top (PM Compliance %, Reactive Jobs, Breakdown Hrs, MTTR Hrs, Reactive Labour %), a bar chart of `PM Compliance %` by Zone, a column chart of `Breakdown Hrs` by `Calendar[Month]`, and slicers for Zone and Criticality.
-3. Check: slice to **Primary Packing** and the compliance card should drop to **66.4 %** over all two years. (If you also filter the Calendar, it filters on *raised* date for now. Week 19 switches PM compliance to the due-date relationship properly.)
+1. In `_Measures`, add:
+
+   ```dax
+   PMs Due = CALCULATE ( COUNTROWS ( WorkOrders ), WorkOrders[WO Type] = "PM" )
+   ```
+
+   **You should see:** 10,502 on a card.
+2. Add:
+
+   ```dax
+   PMs On Time = CALCULATE ( COUNTROWS ( WorkOrders ), WorkOrders[PM Result] = "On time" )
+   ```
+
+   **You should see:** 8,349.
+3. Add:
+
+   ```dax
+   PM Compliance % = DIVIDE ( [PMs On Time], [PMs Due] )
+   ```
+
+   **You should see:** 79.5 % once it's formatted as a percentage.
+4. Add `Corrective Jobs` and `Avg Labour per Reactive Job` (write them yourself, using `Reactive Jobs` and `Reactive Labour Hrs` as patterns), then:
+
+   ```dax
+   Breakdowns per Asset = DIVIDE ( [Reactive Jobs], [Assets With Breakdowns] )
+   ```
+
+5. Add a new report page. Across the top, put a row of KPI cards: PM Compliance %, Reactive Jobs, Breakdown Hrs, MTTR Hrs and Reactive Labour %.
+6. Add a bar chart of `PM Compliance %` by Zone.
+7. Add a column chart of `Breakdown Hrs` by `Calendar[Month]`.
+8. Add slicers for Zone and Criticality.
+9. Check: slice to **Primary Packing** and the compliance card should drop to **66.4 %** over all two years. (If you also filter the Calendar, it filters on *raised* date for now. Week 19 switches PM compliance to the due-date relationship properly.)
 
 ---
 
@@ -159,9 +185,9 @@ Look at **Planned % (91 %)** next to **Reactive Labour % (25 %)**. By count, rea
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** Session 1 steps 1 to 4 (the `_Measures` table and the nine measures, formatted and checked against the reference values), Session 2 steps 1 and 4 (`Age Band` and `MTTR Hrs` with VAR/RETURN at 1.86 h), and the weekend PM measures to 79.5 % on a basic KPI page with cards, two charts and slicers.
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 4 (the `_Measures` table and the nine measures, formatted and checked against the reference values), Session 2 steps 1 and 5 (`Age Band` and `MTTR Hrs` with VAR/RETURN at 1.86 h), and the weekend PM measures to 79.5 % on a basic KPI page with cards, two charts and slicers.
 - **On your phone (10 min a day):** Watch the first three modules of the SQLBI *Introducing DAX* course and the Guy in a Cube measures versus calculated columns video, read the column versus measure table in "Why it works", and answer Check yourself in your head.
-- **Safe to skip this week:** Session 2 step 3 (proving the age formula fails as a measure), the `Corrective Jobs` and `Avg Labour per Reactive Job` extras and fine-tuning the KPI page layout can wait.
+- **Safe to skip this week:** Session 2 step 4 (proving the age formula fails as a measure), the `Corrective Jobs` and `Avg Labour per Reactive Job` extras and fine-tuning the KPI page layout can wait.
 
 ---
 

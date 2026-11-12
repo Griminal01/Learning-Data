@@ -36,16 +36,14 @@ You've learned the pieces. This week you design the real thing: the **Line D Mai
    }
    ```
 
-2. **The colour rules** (write them on your About page):
-   - Navy = the thing you're looking at. Grey = context. **Red = bad, and only bad.** Green = on target.
-   - Never use red and green just for decoration. If a colour doesn't mean something, use grey.
-3. **The layout grid** (canvas 1280 × 720):
-   - Header band: 0–60 px (title, last refresh date, navigator)
-   - KPI row: 70–170 px (4–5 cards, equal widths)
-   - Main visual: left two-thirds. Supporting visual: right third.
-   - Slicers: one consistent place, either a left rail or the top right. Pick one and never move it.
-   - View → *Snap to grid* and *Gridlines* on while you build.
-4. Build the **header** once on a page, then copy it to every page so they all match.
+2. **The colour rules.** On your About page, write: *Navy = the thing you're looking at. Grey = context. Red = bad, and only bad. Green = on target.*
+3. Add the second rule: *Never use red or green just for decoration. If a colour doesn't mean something, use grey.*
+4. **The layout grid.** Use the standard 1280 × 720 canvas. Turn on View → *Snap to grid* and *Gridlines* while you build.
+5. **Header band** at 0–60 px: the title, the last refresh date and the navigator.
+6. **KPI row** at 70–170 px: 4 or 5 cards of equal width.
+7. **Main visual** on the left two-thirds; **supporting visual** on the right third.
+8. **Slicers** in one place, either a left rail or the top right. Pick one and never move it.
+9. Build the **header** once on a page, then copy it to every page so they all match.
 
 ### Why it matters
 

@@ -34,11 +34,10 @@ The model is the foundation. Get it right and DAX is easy. Get it wrong and ever
 3. Double-click each relationship and check it's *Many to one (\*:1)* with cross-filter direction **Single**.
 4. **Second date relationship**: create `Calendar[Date]` → `WorkOrders[due_date]`. Power BI makes it **inactive** (a dotted line), because there can only be one active path between two tables. That's what you want: you'll switch it on in DAX for PM compliance (Week 19).
 5. **Mark as date table**: select `Calendar` in Table view → Table tools → *Mark as date table* → choose `Date`.
-6. Tidy the field list:
-   - Hide the key columns on the fact tables (right-click → *Hide in report view*): `WorkOrders[asset_id]`, `Downtime[asset_id]` and so on. Users should pick asset fields from `Assets`, not from the facts.
-   - Hide `raised_datetime` and `start_datetime` if you don't need them on visuals.
-   - Set `Calendar[Month Name]` → *Sort by column* → `Month`, so months sort Jan, Feb, Mar instead of alphabetically.
-7. Now re-check last week's zone bar chart. Each zone now shows its own count. 🎉
+6. **Hide the keys on the fact tables.** In Model view, right-click `WorkOrders[asset_id]` → *Hide in report view*. Do the same for `Downtime[asset_id]`, `PMTasks[asset_id]` and `SensorRollout[asset_id]`. Users should pick asset fields from `Assets`, not from the facts.
+7. Hide `raised_datetime` and `start_datetime` the same way, if you don't need them on visuals.
+8. **Sort months properly.** In Table view, click `Calendar[Month Name]` → Column tools → *Sort by column* → `Month`, so months sort Jan, Feb, Mar instead of alphabetically.
+9. Now re-check last week's zone bar chart. Each zone now shows its own count. 🎉
 
 ### Why it works
 
@@ -112,7 +111,7 @@ Build a **Matrix** visual: `Zones[zone]` on Rows, `Calendar[Year]` on Columns, C
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** Session 1 steps 1 to 7 (seven active relationships plus the inactive due date one, Auto date/time off, Calendar marked as date table, months sorted, keys hidden) and the four Session 2 model tests, then weekend step 1 (rename for humans) and step 5 (`model.png`).
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 9 (seven active relationships plus the inactive due date one, Auto date/time off, Calendar marked as date table, months sorted, keys hidden) and the four Session 2 model tests, then weekend step 1 (rename for humans) and step 5 (`model.png`).
 - **On your phone (10 min a day):** Watch the Guy in a Cube star schema video, read the "Why it works" part on filters flowing from the 1 side and on Auto date/time, read the Microsoft Learn page *Understand star schema and the importance for Power BI*, and answer Check yourself in your head.
 - **Safe to skip this week:** Weekend steps 2 to 4 (formats, default summarisation and display folders) are tidy-up you can do in a lighter week, and the SQLBI relationships video and PL-300 modelling module can wait.
 
