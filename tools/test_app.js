@@ -675,7 +675,7 @@ function mockGist(context) {
     check(await page.$(".reader-head a[href='#read/0']") !== null, "Week 1 header has a ‹ Week 0 button");
     await goHash(page, "#read/0/set-up-files-windows-and-your-first-back");
     const n = await page.$$eval(".rsec.open li.step", (l) => l.length);
-    check(n === 15, "15 tickable set-up steps (" + n + ")");
+    check(n === 14, "14 tickable set-up steps (" + n + ")");
     await page.click("[data-stepnext]");
     const st = await state(page);
     check(Object.keys(st.step).some((k) => k.startsWith("0:set-up-files-windows-and-your-first-back:")), "set-up step saved under week 0");
@@ -730,6 +730,41 @@ function mockGist(context) {
     check(Object.values((await state(page)).fb).every((n) => n.del), "clearing sent notes deletes them");
     check(errors.length === 0, "no errors: " + errors.join(" / "));
     await context.close();
+  });
+
+  await test("course files: the ZIP, each week's files, and sharing the course", async () => {
+    const zipInfo = await (async () => { const { context, page } = await open(browser); const z = await page.evaluate(() => window.COURSE_DATA.zip); await context.close(); return z; })();
+    const zipFile = path.join(ROOT, zipInfo.path);
+    check(fs.existsSync(zipFile) && fs.statSync(zipFile).size > 500000, "course ZIP exists");
+    const zbytes = fs.readFileSync(zipFile).toString("latin1");
+    check(zbytes.includes("Learning-Data/START HERE.txt") && zbytes.includes("Learning-Data/data/week01/shift_downtime_log.csv") && zbytes.includes("Learning-Data/my_work/README.md"), "ZIP has one Learning-Data folder with the data, my_work and START HERE");
+    check(!/Learning-Data\/(app|course|tools)\//.test(zbytes) && !zbytes.includes("__pycache__"), "ZIP leaves out the app, lessons, tools and caches");
+    // every listed file exists
+    const weeks = await (async () => { const { context, page } = await open(browser); const w = await page.evaluate(() => window.COURSE_DATA.weeks.map((x) => x.files)); await context.close(); return w; })();
+    const missing = weeks.flat().filter((f) => !fs.existsSync(path.join(ROOT, f.p)));
+    check(missing.length === 0, "every listed week file exists: " + missing.map((f) => f.p).join(", "));
+    check(weeks[2].some((f) => f.p === "data/csv/assets.csv") && weeks[6].some((f) => f.dir && f.p === "data/exports/work_orders/" && f.n === 24), "Week 3 lists assets.csv, Week 7 the exports folder");
+
+    const srv = await serve();
+    const base = `http://127.0.0.1:${srv.port}/`;
+    const { context, page, errors } = await open(browser, { url: base, context: { viewport: { width: 390, height: 844 } } });
+    await goHash(page, "#read/3");
+    check(await page.isVisible(".files-card summary"), "Files for this week box in the reader");
+    await page.click(".files-card summary");
+    const [dl] = await Promise.all([page.waitForEvent("download"), page.click(".files-card a[href='data/csv/assets.csv']")]);
+    check(dl.suggestedFilename() === "assets.csv", "a week's file downloads from the site");
+    check(/Documents\\Learning-Data\\data\\csv/.test(await page.textContent(".files-card")), "says which folder it belongs in");
+    const [zdl] = await Promise.all([page.waitForEvent("download"), page.click(".files-card a[href='downloads/Learning-Data.zip']")]);
+    check(zdl.suggestedFilename() === "Learning-Data.zip", "the course ZIP downloads from the reader");
+    await goHash(page, "#settings");
+    const wa = decodeURIComponent((await page.getAttribute("#shWhatsApp", "href")).replace("https://wa.me/?text=", ""));
+    check(wa.includes(base) && /Week 0/.test(wa), "Share the course sends this site's link and what to do: " + wa);
+    check((await page.textContent("#shLink")) === base, "Settings shows the link to share");
+    check(await page.$("#shZip a[href='downloads/Learning-Data.zip']") !== null, "Settings offers the files on their own");
+    check(await noOverflow(page), "no overflow on Settings at phone width");
+    check(errors.filter((e) => !/Failed to load resource/.test(e)).length === 0, "no errors: " + errors.join(" / "));
+    await context.close();
+    await srv.kill();
   });
 
   await test("practice data generator still produces downloads", async () => {

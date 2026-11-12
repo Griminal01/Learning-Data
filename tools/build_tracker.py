@@ -405,6 +405,92 @@ def check(weeks, paths):
     return errors
 
 
+# ---------- course files: one ZIP to download, and each week's files ----------
+ZIP = ROOT / "downloads" / "Learning-Data.zip"
+ZIP_DIRS = ["data", "solutions", "portfolio", "my_work"]
+ZIP_FILES = ["requirements.txt"]
+SKIP = re.compile(r"(^|/)(__pycache__|\.ipynb_checkpoints|\.venv|venv)(/|$)|\.pyc$|(^|/)\.DS_Store$")
+START_HERE = """Data Skills Studio: course files
+================================
+
+This folder holds the files you work on in the course. The lessons
+themselves are in the tracker:
+
+    https://griminal01.github.io/Learning-Data/
+
+Put this folder at Documents\\Learning-Data, so the paths in the lessons
+match (for example Documents\\Learning-Data\\data\\week01).
+
+  data\\        the practice data: CSVs, the SQLite database, exports
+  my_work\\     save your own workbooks, reports and backups here
+  solutions\\   worked answers (try the lesson first)
+  portfolio\\   how to package each phase build for a portfolio
+
+Back up your progress once a week: in the tracker, Settings > Export
+backup, and keep the file in my_work.
+"""
+
+
+def course_files():
+    """Every file that goes in the course ZIP, as repo-relative posix paths, sorted."""
+    out = [f for f in ZIP_FILES if (ROOT / f).exists()]
+    for d in ZIP_DIRS:
+        for p in (ROOT / d).rglob("*"):
+            rel = p.relative_to(ROOT).as_posix()
+            if p.is_file() and not SKIP.search(rel):
+                out.append(rel)
+    return sorted(out)
+
+
+def build_zip():
+    """Write downloads/Learning-Data.zip: one top folder, Learning-Data/, so 'Extract All' into
+    Documents gives Documents\\Learning-Data. Fixed timestamps make it byte-identical when nothing
+    changed, so git only stores a new copy when the data does."""
+    import io
+    import zipfile
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as z:
+        def add(name, data):
+            info = zipfile.ZipInfo("Learning-Data/" + name, date_time=(2026, 1, 1, 0, 0, 0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = 0o644 << 16
+            z.writestr(info, data)
+        add("START HERE.txt", START_HERE.replace("\n", "\r\n").encode("utf-8"))
+        for rel in course_files():
+            add(rel, (ROOT / rel).read_bytes())
+    data = buf.getvalue()
+    ZIP.parent.mkdir(exist_ok=True)
+    if not ZIP.exists() or ZIP.read_bytes() != data:
+        ZIP.write_bytes(data)
+    return len(data)
+
+
+def week_files(path: Path, all_files):
+    """The data files a lesson mentions, by path ('data/csv/assets.csv', 'data/exports/work_orders/')
+    or by file name ('assets.csv'). Folders come back as one entry with their file count."""
+    text = path.read_text(encoding="utf-8")
+    data_files = [f for f in all_files if f.startswith("data/")]
+    by_name = {}
+    for f in data_files:
+        by_name.setdefault(f.rsplit("/", 1)[-1], []).append(f)
+    found, folders = set(), set()
+    for ref in re.findall(r"data/[A-Za-z0-9_./-]*[A-Za-z0-9_/]", text):
+        ref = ref.rstrip("/.")
+        if ref in data_files:
+            found.add(ref)
+        elif any(f.startswith(ref + "/") for f in data_files):
+            folders.add(ref)
+    for name, paths in by_name.items():
+        if len(paths) == 1 and re.search(r"(?<![\w/.-])" + re.escape(name) + r"(?![\w-])", text):
+            found.add(paths[0])
+    found = {f for f in found if not any(f.startswith(d + "/") for d in folders)}
+    out = [{"p": f, "kb": max(1, round((ROOT / f).stat().st_size / 1024))} for f in sorted(found)]
+    for d in sorted(folders):
+        inside = [f for f in data_files if f.startswith(d + "/")]
+        out.append({"p": d + "/", "dir": True, "n": len(inside), "kb": round(sum((ROOT / f).stat().st_size for f in inside) / 1024)})
+    return out
+
+
 def stamp_sw():
     """Write a hash of every cached file into sw.js, so a deploy with any change gets a fresh cache."""
     h = hashlib.sha256()
@@ -438,12 +524,17 @@ def main():
         for e in errors:
             print("  " + e, file=sys.stderr)
         return 1
+    all_files = course_files()
+    for w in weeks:
+        w["files"] = week_files(paths[w["week"]], all_files)
+    zip_size = build_zip()
     setup_path = ROOT / "course" / "week-00-setup.md"
     setup = parse_lesson(setup_path, report) if setup_path.exists() else None
     if setup and not any(sec.get("steps") for sec in setup["sections"]):
         print("Build FAILED: course/week-00-setup.md has no numbered steps", file=sys.stderr)
         return 1
-    data = json.dumps({"phases": PHASES, "weeks": weeks, "setup": setup}, ensure_ascii=False, separators=(",", ":"))
+    data = json.dumps({"phases": PHASES, "weeks": weeks, "setup": setup,
+                       "zip": {"path": ZIP.relative_to(ROOT).as_posix(), "kb": round(zip_size / 1024)}}, ensure_ascii=False, separators=(",", ":"))
     # "</" is escaped so lesson text can never close the <script> element early.
     data = data.replace("</", "<\\/")
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -461,6 +552,8 @@ def main():
           f"{n_cards} quiz cards, {n_watch} watch items ({n_search} with a search phrase), "
           f"{n_short} 'Short on time?' sections, {size / 1024:.0f} KB")
     print(f"sw.js cache version {version}")
+    print(f"{ZIP.relative_to(ROOT).as_posix()}: {len(all_files)} files, {zip_size / 1048576:.1f} MB; "
+          f"{sum(1 for w in weeks if w['files'])} weeks list their files")
     raw_total = sum(raw_tick_count(p) for p in paths.values())
     print(f"tick cross-check: {n_ticks} parsed = {raw_total} '- [ ] ' lines under '## Tick off'")
     no_check = [w["week"] for w in weeks if not w["quiz"]]

@@ -24,6 +24,10 @@ You only need one link: **https://griminal01.github.io/Learning-Data/**
 
 **On your phone too:** open the same link, then Android (Chrome): menu ⋮ → *Install app*, or iPhone (Safari): Share → *Add to Home Screen*. Phone and PC keep separate progress, so carry it across with a backup file. Gist sync (below) does it automatically if you have a GitHub account, but you don't need one.
 
+**Sharing it with someone else?** In the tracker, go to **Settings → Share the course → Send on WhatsApp**. It sends the link with a line on what to do. They get their own copy of the progress, starting from the welcome.
+
+**Just the files.** The course files (the data, your `my_work` folder and the worked solutions) are one ZIP of about 2 MB: [Learning-Data.zip](https://griminal01.github.io/Learning-Data/downloads/Learning-Data.zip). Extract it into `Documents` and you get `Documents\Learning-Data`. Each lesson in the tracker also has a **Files for this week** box that downloads single files.
+
 **Already using the downloaded ZIP?** Your ticks live in that copy. Open it, go to **Settings → Export backup**, then open the link above, skip the welcome tour, and use **Settings → Import and merge** with that file. From then on, use the link.
 
 ### Working from the files instead
@@ -147,6 +151,8 @@ The link in *Getting started* is this repo on GitHub Pages. To set it up (once):
 No build step is needed: GitHub Pages serves `index.html`, `app/`, `sw.js` and `manifest.webmanifest` as they are. The empty `.nojekyll` file tells Pages not to run the lessons through Jekyll. Every push to `main` updates the site, and each learner's copy fetches the new version the next time it opens online.
 
 Progress is stored in each learner's own browser (localStorage), so hosting it shares the course, not anyone's ticks.
+
+The build script also makes `downloads/Learning-Data.zip` (the course files, for Week 0) and each week's **Files for this week** list. The ZIP is byte-identical when nothing changed, so git only stores a new copy when the data does. Commit it with your change.
 
 **After editing any lesson** (its title, sections, *Tick off*, *Check yourself*, *Watch* or *Short on time?*), run `python tools/build_tracker.py`. It rebuilds `app/course-data.js`, which is what the app reads, and updates the offline cache version in `sw.js`. It prints how many weeks, ticks, quiz cards and watch items it found, and any lesson where the *Check yourself* questions and answers don't pair up. Commit `app/course-data.js` with your lesson change.
 

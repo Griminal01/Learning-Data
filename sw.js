@@ -10,7 +10,7 @@
    - VERSION is a hash of the app files, stamped by tools/build_tracker.py. A new value installs a
      fresh cache and deletes the old ones on activate.
    Requests to other sites (GitHub's API for gist sync, YouTube) are left alone. */
-const VERSION = "3c3a610a4048";
+const VERSION = "9402bfccec85";
 const CACHE = "dss-" + VERSION;
 const SHELL = [
   "./", "index.html", "app/app.css", "app/markdown.js", "app/course-data.js", "app/app.js",
@@ -47,6 +47,7 @@ self.addEventListener("fetch", (event) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+  if (url.pathname.includes("/downloads/") || url.pathname.includes("/data/")) return; // course files: straight from the network, never cached
   event.respondWith((async () => {
     const cache = await caches.open(CACHE);
     try {

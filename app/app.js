@@ -707,6 +707,7 @@
         </div>
       </div>
       ${shortCard(w, true)}
+      ${filesCard(w)}
       <nav class="toc" aria-label="Sections">${secs.map((s) => `<a href="#read/${w.week}/${s.id}" class="toc-item ${secDone(w, s) ? "done" : ""}">${secDone(w, s) ? "✓ " : ""}${esc(shortTitle(s.title))}</a>`).join("")}</nav>
       ${secs.map((s, i) => sectionHtml(w, s, i, secs, unlocked)).join("")}`;
     const act = activeStepSec(w, secs);
@@ -835,6 +836,48 @@
     }
   });
   $("view-reader").addEventListener("change", onTickChange);
+
+  // ---------- course files ----------
+  /* The site that serves the tracker also serves the course files, so links are relative: from
+     GitHub Pages they download, and from a downloaded copy (file://) they open the local file. */
+  const SITE = "https://griminal01.github.io/Learning-Data/";
+  const siteUrl = () => (/^https?:$/.test(location.protocol) ? location.href.replace(/[#?].*$/, "").replace(/[^/]*$/, "") : SITE);
+  const fmtKB = (kb) => (kb >= 1024 ? `${(kb / 1024).toFixed(1)} MB` : `${kb} KB`);
+  const winPath = (p) => "Documents\\Learning-Data\\" + p.replace(/\/$/, "").replace(/\//g, "\\");
+  function zipLink(label, cls) {
+    const z = COURSE.zip; if (!z) return "";
+    return `<a class="btn ${cls || ""}" href="${esc(z.path)}" download>⬇ ${esc(label || "All course files")} <span class="muted">(ZIP, ${fmtKB(z.kb)})</span></a>`;
+  }
+  function filesCard(w) {
+    if (!w.week) return "";
+    const fs = w.files || [];
+    const rows = fs.map((f) => {
+      const name = f.p.replace(/\/$/, "").split("/").pop(), where = winPath(f.p.replace(/[^/]*\/?$/, ""));
+      return f.dir
+        ? `<li><span><b>${esc(name)}</b> folder · ${f.n} files · ${fmtKB(f.kb)}<div class="muted small">${esc(winPath(f.p))}. It's in the course ZIP.</div></span></li>`
+        : `<li><span><b>${esc(name)}</b> · ${fmtKB(f.kb)}<div class="muted small">${esc(where)}</div></span><a class="btn small" href="${esc(f.p)}" download>⬇ Download</a></li>`;
+    }).join("");
+    return `<details class="card files-card collapsible" data-files="${w.week}"><summary><span>Files for this week <span class="muted">${fs.length ? `${fs.length} item${fs.length === 1 ? "" : "s"}` : "none new"}</span></span><span class="caret" aria-hidden="true"></span></summary>
+      <div class="pad">${fs.length
+        ? `<p class="muted small">You already have these if you did Week 0. They're in your <code>Documents\\Learning-Data</code> folder. Missing one, or on a different PC? Download it here and move it into the folder shown.</p><ul class="files">${rows}</ul>`
+        : `<p class="muted small">This week doesn't name a new data file. You carry on with what you made earlier.</p>`}
+      <div class="row">${zipLink("All course files")}</div></div></details>`;
+  }
+  // Share the course: one message with the link and what to do.
+  function shareText() {
+    return `I'm doing a free data skills course for maintenance and production data: Excel, then SQL, Power BI, Python and reliability stats. It's about 5 hours a week. Open this on your PC to start: ${siteUrl()}\nIt asks your name and start date, and Week 0 gets the course files onto your PC (about 30 minutes).`;
+  }
+  function renderShare() {
+    $("shWhatsApp").href = "https://wa.me/?text=" + encodeURIComponent(shareText());
+    $("shNative").classList.toggle("hidden", !navigator.share);
+    $("shLink").textContent = siteUrl();
+    $("shLink").href = siteUrl();
+    $("shZip").innerHTML = zipLink("Course files only");
+  }
+  $("shNative").addEventListener("click", async () => {
+    try { await navigator.share({ title: "Data Skills Studio", text: shareText() }); } catch (e) { /* cancelled */ }
+  });
+  $("shCopy").addEventListener("click", async () => toast((await copyText(siteUrl())) ? "Link copied" : "Couldn't copy here. Press and hold the link instead."));
 
   // ---------- feedback notes ("this step confused me") ----------
   /* Each note is kept like a log entry ({..., t}, deleted = {del:true}), so it rides along in backups
@@ -1119,6 +1162,7 @@
     $("bShare").classList.toggle("hidden", !canShareFiles());
     Sync.render();
     renderFeedback();
+    renderShare();
     $("installBtn").classList.toggle("hidden", !deferredInstall);
     $("installNote").innerHTML = location.protocol.startsWith("http")
       ? "On Android (Chrome): menu ⋮ → <b>Install app</b> or <b>Add to Home screen</b>. On iPhone (Safari): Share → <b>Add to Home Screen</b>. Once installed it opens full screen and works offline."

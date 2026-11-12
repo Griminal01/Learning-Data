@@ -133,6 +133,18 @@
         <button class="btn danger" id="bReset" type="button">Reset all progress</button>
       </div>
 
+      <div class="card pad" id="shareCard">
+        <h3>Share the course</h3>
+        <p class="muted">Send a friend the link. It opens the course with a welcome, and Week 0 walks them through getting the files. Their progress is their own, and yours stays yours.</p>
+        <p class="small"><a id="shLink" href="#" target="_blank" rel="noopener"></a></p>
+        <div class="row">
+          <a class="btn primary" id="shWhatsApp" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
+          <button class="btn hidden" id="shNative" type="button">Share…</button>
+          <button class="btn" id="shCopy" type="button">Copy link</button>
+        </div>
+        <p class="muted small">Only need the files, for example on a new PC? <span id="shZip"></span></p>
+      </div>
+
       <div class="card pad" id="syncCard">
         <h3>Sync with a private GitHub gist (optional)</h3>
         <p class="muted">Keeps your phone and PC in step automatically, with no server of ours. Your progress is saved in one <b>secret gist</b> on your own GitHub account. Each device pulls and merges when the app opens, and pushes a few seconds after you change something.</p>
