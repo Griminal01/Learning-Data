@@ -57,6 +57,14 @@
     // the few inline tags the lessons use (in <summary>)
     s = s.replace(/<(\/?)(strong|em|b|i|kbd)>/gi, (_, sl, tag) => hold("<" + sl + tag.toLowerCase() + ">"));
     s = s.replace(/<br\s*\/?>/gi, () => hold("<br>"));
+    // images ![alt](path): shown only when ctx.image says the file exists, so a lesson can name a
+    // picture before anyone has taken it.
+    s = s.replace(/!\[([^\]]*)\]\(\s*<?([^)\s>]+)>?\s*\)/g, (_, alt, url) => {
+      if (/^[a-z][a-z0-9+.-]*:/i.test(url)) return hold("");
+      const full = resolvePath(ctx.path || "", url.trim());
+      if (!ctx.image || !ctx.image(full)) return hold("");
+      return hold(`<img class="md-img" src="${esc(full)}" alt="${esc(alt)}" loading="lazy">`);
+    });
     // links [text](url "title")
     s = s.replace(/\[([^\]]+)\]\(\s*<?([^)\s>]+)>?(?:\s+"[^"]*")?\s*\)/g, (_, text, url) => {
       const l = linkFor(url, ctx);

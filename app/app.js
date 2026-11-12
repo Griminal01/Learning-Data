@@ -14,6 +14,7 @@
   /* Week 0 (Set up) has steps like any lesson, but no checklist, quiz or dates, and it isn't in
      WEEKS, so it never counts towards progress or becomes "the week you're on". */
   const SETUP = COURSE.setup || null;
+  const IMAGES = new Set(COURSE.images || []); // pictures that exist under course/img/
   const weekByNo = (n) => (n === 0 ? SETUP : WEEKS[n - 1]);
   const weekByPath = {}; WEEKS.concat(SETUP ? [SETUP] : []).forEach((w) => (weekByPath[w.path] = w));
   // Tests switch off the welcome and the Week 0 suggestion so they start on the plain app.
@@ -147,7 +148,7 @@
   const reduced = () => window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   const inl = (s) => MD.inline(s, mdCtx(null));
   function mdCtx(w) {
-    return { path: w ? w.path : "", repo: setting("repo"), internal: (p) => (weekByPath[p] ? `#read/${weekByPath[p].week}` : null) };
+    return { path: w ? w.path : "", repo: setting("repo"), image: (p) => IMAGES.has(p), internal: (p) => (weekByPath[p] ? `#read/${weekByPath[p].week}` : null) };
   }
   const plain = (s) => String(s || "").replace(/`([^`]*)`/g, "$1").replace(/\*\*|__|[*_]/g, "").replace(/\[([^\]]*)\]\([^)]*\)/g, "$1");
   const secLabel = (s) => { const t = s.title.replace(/\s*\(\d+(?:\.\d+)?\s*h\)/, ""); return /^weekend$/i.test(t.trim()) ? "the weekend block" : t; };
@@ -630,6 +631,7 @@
       if (cur >= 0) { li.classList.toggle("prev", i === cur - 1); li.classList.toggle("next", i === cur + 1); }
       li.insertAdjacentHTML("afterbegin", `<button type="button" class="stepbox" data-step="${i}" data-sid="${s.id}" aria-pressed="${done}" aria-label="Step ${num}${done ? ", done. Untick" : ". Tick when done"}">${done ? "✓" : num}</button>${i === cur ? `<span class="here">You are here</span>` : ""}`);
       li.querySelectorAll("p").forEach((p) => { if (/^You should see\b/.test(p.textContent.trim())) p.classList.add("expect"); });
+      if (i === cur) addChecker(li, w, s);
       const note = fbFor(w, s, ids[i]);
       if (fbOpen && fbOpen.week === w.week && fbOpen.sid === s.id && fbOpen.i === i) {
         li.insertAdjacentHTML("beforeend", `<div class="fbform" data-sid="${s.id}" data-i="${i}">
@@ -647,6 +649,41 @@
       lis.forEach((li) => { if (li.matches(".current, .prev, .next")) li.parentElement.classList.add("in-focus"); });
       el.insertAdjacentHTML("afterbegin", `<p class="focus-note muted small">Focus view: just the step you're on. <button type="button" class="linkbtn" data-focus="1">Show the whole session</button></p>`);
     }
+  }
+  /* Check my answer: on the step you're on, a "You should see" line with a number in it gets a box.
+     Type what Excel shows and it says whether it matches one of the line's numbers. Cell names
+     (A2, $I$126), asset codes (LD-PPK-021) and the like aren't counted as answers. */
+  const NUM = /(?<![\w$.\/:-])-?\d{1,3}(?:,\d{3})+(?:\.\d+)?(?![\w\/:-])|(?<![\w$.\/:-])-?\d+(?:\.\d+)?(?![\w\/:-])/g;
+  function expectNums(text) {
+    const t = text.replace(/^You should see:?/, "");
+    return (t.match(NUM) || []).map((x) => ({ v: +x.replace(/,/g, ""), dp: (x.split(".")[1] || "").length }));
+  }
+  function checkAnswer(text, typed) {
+    const raw = String(typed).trim().replace(/[\s,%£]/g, "").replace(/…$/, "");
+    if (!/^-?\d+(\.\d+)?$/.test(raw)) return null;
+    const got = +raw, gdp = (raw.split(".")[1] || "").length, approx = /≈|about|around|roughly|…/.test(text);
+    const round = (x, d) => Math.round(x * 10 ** d) / 10 ** d;
+    return expectNums(text).some(({ v, dp }) => {
+      if (Math.abs(round(got, dp) - v) < 1e-9) return true;            // 15.5737 against 15.57
+      // fewer decimals than the lesson shows (Excel's own rounding): 15.6 against 15.57…
+      return gdp < dp && (gdp > 0 || approx) && Math.abs(round(v, gdp) - got) < 1e-9;
+    });
+  }
+  function addChecker(li, w, s) {
+    const p = [...li.querySelectorAll("p.expect")].find((x) => expectNums(x.textContent).length);
+    if (!p) return;
+    p.insertAdjacentHTML("afterend", `<div class="chk" role="group" aria-label="Check my answer">
+      <label class="muted small" for="chkIn">Check my answer</label>
+      <input type="text" id="chkIn" inputmode="decimal" autocomplete="off" placeholder="Type your number">
+      <button type="button" class="btn small" data-chk="1">Check</button>
+      <span class="chk-res" role="status" aria-live="polite"></span></div>`);
+  }
+  function runCheck(btn) {
+    const box = btn.closest(".chk"), p = box.previousElementSibling, res = box.querySelector(".chk-res");
+    const ok = checkAnswer(p.textContent, box.querySelector("input").value);
+    res.className = "chk-res " + (ok === null ? "" : ok ? "good" : "bad");
+    res.textContent = ok === null ? "Type a number, like 1931 or 15.6." : ok ? "✓ That matches. On to the next step."
+      : `✗ Not a match. Redo this step${document.querySelector(".rsec.open .md-fix") ? ", or see If your numbers don't match at the end of this session" : ""}.`;
   }
   function tickStep(w, s, i, on) {
     const ids = stepsOf(s); if (!ids[i]) return;
@@ -714,6 +751,7 @@
     $("view-reader").innerHTML = html + (act ? stepBarHtml(w, act, secs) : "");
     $("view-reader").classList.toggle("has-stepbar", !!act);
     secs.forEach((s) => { if (openSecs.has(s.id) && stepsOf(s).length) decorateSteps(w, s, !!P.focus && s === act); });
+    document.querySelectorAll("#view-reader .rsec.open .rsec-body").forEach((el) => { markSupport(el); markGlossary(el); });
     if (fromRoute && target) {
       const midSteps = stepsDone(w, target) > 0 && stepIndex(w, target) >= 0 && !route.why;
       const hadPlace = !!route.sid || get("pos", String(w.week)) === target.id && target !== secs[0] || midSteps;
@@ -794,6 +832,7 @@
     if (b.dataset.fbcancel) { fbOpen = null; renderReader(false); return; }
     if (b.dataset.fbsave) { saveFeedback(w); return; }
     if (b.dataset.fbdel) { delFeedback(b.dataset.fbdel); fbOpen = null; renderReader(false); toast("Note removed"); return; }
+    if (b.dataset.chk) { runCheck(b); return; }
     if (b.dataset.stepnext) { stepNext(w); return; }
     if (b.dataset.stepback) { stepBack(w); return; }
     if (b.dataset.focus) { P.focus = !P.focus; savePrefs(); renderReader(false); scrollToCurrent(false); return; }
@@ -836,6 +875,76 @@
     }
   });
   $("view-reader").addEventListener("change", onTickChange);
+  $("view-reader").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && e.target.id === "chkIn") { e.preventDefault(); runCheck(e.target.parentElement.querySelector("[data-chk]")); }
+  });
+
+  // Checkpoints ("**Checkpoint:** by now…") and the "If your numbers don't match" box get their own look.
+  function markSupport(root) {
+    root.querySelectorAll(":scope > p").forEach((p) => { if (/^Checkpoint:/.test(p.textContent.trim())) p.classList.add("checkpoint"); });
+    root.querySelectorAll(":scope > h3").forEach((h) => {
+      if (!/^If your numbers/i.test(h.textContent.trim())) return;
+      const box = document.createElement("div"); box.className = "md-fix";
+      h.before(box); box.appendChild(h);
+      while (box.nextElementSibling && !/^H[1-3]$/.test(box.nextElementSibling.tagName) && box.nextElementSibling.tagName !== "HR") box.appendChild(box.nextElementSibling);
+    });
+  }
+  // ---------- glossary ----------
+  /* course/glossary.md, built into COURSE.glossary. The first time a term appears in an open
+     section it becomes a dotted-underlined button; tapping it shows the one-line meaning. */
+  const GLOSS = COURSE.glossary || [];
+  const reEsc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const glIndex = {}, glForms = { ci: [], cs: [] };
+  GLOSS.forEach((g, i) => g.forms.forEach((f) => { glIndex[g.cs ? f : f.toLowerCase()] = i; glForms[g.cs ? "cs" : "ci"].push(f); }));
+  const glRe = (forms, flags) => forms.length ? new RegExp(`(?<![\\w-])(${forms.sort((a, b) => b.length - a.length).map(reEsc).join("|")})(?![\\w-])`, flags) : null;
+  const GL_CI = glRe(glForms.ci, "gi"), GL_CS = glRe(glForms.cs, "g");
+  const GL_SKIP = "code, pre, a, button, h1, h2, h3, h4, summary, label, textarea, .here, .chk, .fbform, th";
+  function markGlossary(root) {
+    if (!GLOSS.length || !root) return;
+    const used = new Set(), nodes = [];
+    const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (n.nodeValue.trim() && !n.parentElement.closest(GL_SKIP) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT) });
+    while (tw.nextNode()) nodes.push(tw.currentNode);
+    for (let node of nodes) {
+      for (;;) {
+        const text = node.nodeValue; let best = null;
+        for (const [re, cs] of [[GL_CI, false], [GL_CS, true]]) {
+          if (!re) continue;
+          re.lastIndex = 0; let m;
+          while ((m = re.exec(text))) {
+            const i = glIndex[cs ? m[1] : m[1].toLowerCase()];
+            if (i != null && !used.has(i)) { if (!best || m.index < best.at) best = { at: m.index, len: m[1].length, i }; break; }
+          }
+        }
+        if (!best) break;
+        used.add(best.i);
+        const hit = node.splitText(best.at), rest = hit.splitText(best.len);
+        const b = Object.assign(document.createElement("button"), { type: "button", className: "gl", textContent: hit.nodeValue });
+        b.dataset.gl = best.i; b.setAttribute("aria-label", `${hit.nodeValue}: what does it mean?`);
+        hit.replaceWith(b); node = rest;
+      }
+    }
+  }
+  function showGloss(btn) {
+    const g = GLOSS[+btn.dataset.gl]; if (!g) return;
+    let pop = $("glPop");
+    if (!pop) { pop = Object.assign(document.createElement("div"), { id: "glPop", className: "glpop" }); pop.setAttribute("role", "dialog"); document.body.appendChild(pop); }
+    pop.innerHTML = `<strong>${esc(g.t)}</strong>: ${MD.inline(g.md, mdCtx(null))}`;
+    pop.classList.add("show");
+    const r = btn.getBoundingClientRect(), pw = Math.min(320, window.innerWidth - 24);
+    pop.style.width = pw + "px";
+    pop.style.left = Math.max(12, Math.min(r.left + window.scrollX, window.scrollX + window.innerWidth - pw - 12)) + "px";
+    pop.style.top = (r.bottom + window.scrollY + 6) + "px";
+    glOpen = btn;
+  }
+  let glOpen = null;
+  function hideGloss() { const p = $("glPop"); if (p) p.classList.remove("show"); glOpen = null; }
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("button.gl");
+    if (b) { if (glOpen === b) hideGloss(); else showGloss(b); return; }
+    if (!e.target.closest("#glPop")) hideGloss();
+  }, true);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") hideGloss(); });
+  window.addEventListener("hashchange", hideGloss);
 
   // ---------- course files ----------
   /* The site that serves the tracker also serves the course files, so links are relative: from
@@ -1483,5 +1592,5 @@
   if (Sync.on()) Sync.syncNow();
 
   // Small hooks for tools/test_app.js. They expose nothing that isn't already in localStorage.
-  window.DSS = { state: () => JSON.parse(JSON.stringify(S)), merge, plan: (m, d) => { const p = planToday(m, d); return p.done ? { done: true } : { week: p.w.week, primary: p.primary.kind, alts: p.alts.map((a) => a.kind) }; }, syncNow: () => Sync.syncNow(), currentWeek: () => (currentWeek() || {}).w?.week || null };
+  window.DSS = { checkAnswer, state: () => JSON.parse(JSON.stringify(S)), merge, plan: (m, d) => { const p = planToday(m, d); return p.done ? { done: true } : { week: p.w.week, primary: p.primary.kind, alts: p.alts.map((a) => a.kind) }; }, syncNow: () => Sync.syncNow(), currentWeek: () => (currentWeek() || {}).w?.week || null };
 })();

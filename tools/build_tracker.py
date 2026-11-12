@@ -254,6 +254,7 @@ def parse_short(lines):
 
 
 STEP = re.compile(r"^(\d+)\.\s+(.*)$")
+IMG_LINE = re.compile(r"^\s*!\[[^\]]*\]\([^)]*\)\s*$")
 SENTENCE = re.compile(r"[.!](?:\s|$)")
 QUESTION = re.compile(r"\?[\"*”)]*(\s*\(.*\))?$")
 
@@ -298,7 +299,8 @@ def parse_steps(lines):
         cur, prev_blank = None, False  # a new paragraph ends the list
     out, seen = [], {}
     for st in steps:
-        text = " ".join(" ".join(st).split())
+        # Picture lines don't count, so adding a screenshot to a step never resets its tick.
+        text = " ".join(" ".join(l for l in st if not IMG_LINE.match(l)).split())
         h = hashlib.sha1(text.encode("utf-8")).hexdigest()[:8]
         seen[h] = seen.get(h, 0) + 1
         out.append({"id": h if seen[h] == 1 else f"{h}-{seen[h]}", "lines": st})
@@ -316,6 +318,8 @@ def step_load(lines):
         if in_fence:
             continue
         s = line.strip()
+        if IMG_LINE.match(s):
+            continue
         if QUESTION.search(s):  # a question to think about or ask someone isn't an action
             continue
         if re.match(r"^[-*]\s", s):
@@ -491,6 +495,20 @@ def week_files(path: Path, all_files):
     return out
 
 
+GLOSS = re.compile(r"^- \*\*(.+?)\*\*\s*(?:\(([^)]*)\))?\s*(\*\(match case\)\*)?\s*:\s*(.+)$")
+
+
+def parse_glossary(path: Path):
+    """course/glossary.md: '- **Term** (other, forms) *(match case)*: meaning' lines."""
+    out = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        m = GLOSS.match(line.strip())
+        if m:
+            forms = [m.group(1)] + [f.strip() for f in (m.group(2) or "").split(",") if f.strip()]
+            out.append({"t": m.group(1), "forms": forms, "cs": bool(m.group(3)), "md": m.group(4).strip()})
+    return out
+
+
 def stamp_sw():
     """Write a hash of every cached file into sw.js, so a deploy with any change gets a fresh cache."""
     h = hashlib.sha256()
@@ -534,6 +552,9 @@ def main():
         print("Build FAILED: course/week-00-setup.md has no numbered steps", file=sys.stderr)
         return 1
     data = json.dumps({"phases": PHASES, "weeks": weeks, "setup": setup,
+                       "glossary": parse_glossary(ROOT / "course" / "glossary.md") if (ROOT / "course" / "glossary.md").exists() else [],
+                       "images": sorted(p.relative_to(ROOT).as_posix() for p in (ROOT / "course" / "img").glob("*")
+                                        if p.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp")),
                        "zip": {"path": ZIP.relative_to(ROOT).as_posix(), "kb": round(zip_size / 1024)}}, ensure_ascii=False, separators=(",", ":"))
     # "</" is escaped so lesson text can never close the <script> element early.
     data = data.replace("</", "<\\/")

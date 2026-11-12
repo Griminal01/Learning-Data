@@ -344,3 +344,19 @@ ul.files li { display: flex; gap: 10px; align-items: center; justify-content: sp
 ul.files li > span { min-width: 0; overflow-wrap: anywhere; }
 #shLink { overflow-wrap: anywhere; }
 ul.files .btn { white-space: nowrap; flex: none; }
+.chk { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 4px 0 6px; }
+.chk input { width: 150px; min-height: 36px; }
+.chk-res { font-size: 14px; flex-basis: 100%; }
+.chk-res.good { color: var(--good); font-weight: 600; }
+.chk-res.bad { color: var(--bad); font-weight: 600; }
+button.gl { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: help; text-decoration: underline dotted var(--muted); text-underline-offset: 3px; }
+button.gl:hover, button.gl:focus-visible { color: var(--accent); text-decoration-color: var(--accent); }
+.glpop { position: absolute; z-index: 40; display: none; padding: 10px 12px; background: var(--surface); color: var(--text); border: 1px solid var(--accent); border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,.18); font-size: 14px; line-height: 1.45; }
+.glpop.show { display: block; }
+.md img.md-img { display: block; max-width: 100%; height: auto; margin: 8px 0; border: 1px solid var(--border); border-radius: 8px; }
+.md p:empty { display: none; }
+.md p.checkpoint { margin: 10px 0 12px; padding: 8px 12px; border: 1px solid var(--accent); border-left-width: 4px; border-radius: 6px; background: var(--accent-soft); }
+.md p.checkpoint strong:first-child { color: var(--accent); }
+.md .md-fix { margin: 16px 0; padding: 4px 14px 6px; border: 1px solid var(--warn); border-radius: 8px; background: var(--warn-soft); }
+.md .md-fix h3 { margin: 10px 0 6px; color: var(--warn); }
+.md .md-fix li { margin: 6px 0; }

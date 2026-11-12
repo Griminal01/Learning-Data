@@ -32,6 +32,8 @@ The same tool is built into Power BI, so everything you learn here carries strai
 5. Leave the first file picked as the sample → OK. The **Power Query Editor** opens.
 6. **Look around the editor.** Find the **Queries** pane on the left and the data preview in the middle.
 7. Find **Applied Steps** on the right. Every click you make becomes a step here. Click an earlier step to see the data at that point, then click the last step again.
+
+   ![The Power Query editor with the Applied Steps list on the right](../img/w7-applied-steps.png)
 8. Find the `Source.Name` column (the filename). Keep it for now; it's handy for checking.
 9. **Remove Excel's guess.** In Applied Steps, click the ✕ next to the last step, *Changed Type*. That's Excel guessing the types, and it can read UK dates as US ones. You'll set them yourself.
 10. **Dates, UK style.** Right-click the `Raised` heading → Change Type → **Using Locale…** → Data Type: *Date/Time*, Locale: *English (United Kingdom)* → OK.

@@ -767,6 +767,49 @@ function mockGist(context) {
     await srv.kill();
   });
 
+  await test("Stage 3: check my answer, glossary, checkpoints, fix boxes, pictures", async () => {
+    const { context, page, errors } = await open(browser, { context: { viewport: { width: 390, height: 844 } } });
+    // answer matching rules
+    const cases = await page.evaluate(() => {
+      const c = window.DSS.checkAnswer;
+      const t1 = "You should see: Average ≈ 15.6, Count 125 (124 rows plus the header) and Sum 1931.";
+      return [c(t1, "1931"), c(t1, "1,931"), c(t1, "15.57"), c(t1, "126"), c(t1, "15.9"), c("You should see: 15.57…", "15.6"),
+        c("You should see: `LD-PPK-021` become `PPK`.", "21"), c("You should see: 79.5 %", "79.5%"), c("You should see: 79.5 %", "80"),
+        c("You should see: `I3` change to 1080.", "3"), c("You should see: 1931.", "abc")];
+    });
+    check(JSON.stringify(cases) === JSON.stringify([true, true, true, false, false, true, false, true, false, false, null]), "answer matching: " + JSON.stringify(cases));
+    await goHash(page, "#read/1/session-2-formulas-and-cell-references");
+    await page.click("[data-stepnext]");
+    check(await page.isVisible(".rsec.open li.step.current .chk input"), "Check my answer box on the step you're on");
+    check((await page.$$(".rsec.open .chk")).length === 1, "only on that step");
+    await page.fill("#chkIn", "1930"); await page.keyboard.press("Enter");
+    check(/Not a match/.test(await page.textContent(".chk-res")) && /If your numbers don't match/.test(await page.textContent(".chk-res")), "a wrong number points to the fix box");
+    await page.fill("#chkIn", "1931"); await page.click("[data-chk]");
+    check(/matches/.test(await page.textContent(".chk-res")), "the right number gets a tick");
+    check(Object.keys((await state(page)).step).length === 1, "typing in the box doesn't tick steps");
+    // checkpoints and fix box
+    check((await page.$$(".rsec.open p.checkpoint")).length === 2, "two checkpoints in Week 1 Session 2");
+    check(await page.isVisible(".rsec.open .md-fix h3") && (await page.$$(".rsec.open .md-fix li")).length === 6, "If your numbers don't match box with its six fixes");
+    const lessonFix = await page.evaluate(() => window.COURSE_DATA.weeks.slice(0, 4).map((w) => w.sections.filter((s) => s.kind === "hands" && /If your numbers don't match/.test(s.md)).length));
+    check(JSON.stringify(lessonFix) === "[2,3,3,3]", "Weeks 1–4 have fix boxes: " + JSON.stringify(lessonFix));
+    // glossary
+    const gl = await page.$$eval(".rsec.open button.gl", (b) => b.map((x) => x.textContent.toLowerCase()));
+    check(gl.includes("fill handle") && new Set(gl).size === gl.length, "glossary terms underlined once each: " + gl.join(", "));
+    check(await page.$(".rsec.open code button.gl, .rsec.open a button.gl") === null, "never inside code or links");
+    await page.click(".rsec.open button.gl >> text=fill handle");
+    check(await page.isVisible("#glPop") && /small square/.test(await page.textContent("#glPop")), "tapping a term shows its meaning");
+    await page.keyboard.press("Escape");
+    check(!(await page.isVisible("#glPop")), "Escape closes it");
+    // pictures: only rendered when the file exists
+    const md = await page.evaluate(() => [
+      MD.render("![Freeze Panes](../img/x.png)", { path: "course/phase-0/w.md", image: (p) => p === "course/img/x.png" }),
+      MD.render("![Missing](../img/y.png)", { path: "course/phase-0/w.md", image: () => false })]);
+    check(/<img class="md-img" src="course\/img\/x.png" alt="Freeze Panes"/.test(md[0]) && !/<img/.test(md[1]), "pictures show when present and vanish when not");
+    check(await noOverflow(page), "no overflow at phone width");
+    check(errors.length === 0, "no errors: " + errors.join(" / "));
+    await context.close();
+  });
+
   await test("practice data generator still produces downloads", async () => {
     const { context, page } = await open(browser, { context: { viewport: { width: 1280, height: 800 } } });
     await goHash(page, "#data");

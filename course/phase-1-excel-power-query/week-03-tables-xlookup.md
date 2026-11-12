@@ -33,10 +33,20 @@ This week you meet the two features that make that possible: **Tables**, which g
 6. Add a sheet called `PMs` and paste `pm_tasks.csv` into its `A1` the same way.
 
    **You should see:** 476 rows.
+
+**Checkpoint:** `week03_lookups.xlsx` has three sheets, `WOs`, `Assets` and `PMs`, with 395, 293 and 476 rows. Press `Ctrl+End` on each sheet: the row number of the cell it jumps to is the row count.
+
 7. On the `WOs` sheet, click any cell in the data and press **`Ctrl+T`**. Tick *My table has headers* and press OK.
+
+   ![The Create Table window with My table has headers ticked](../img/w3-create-table.png)
 8. **Name the Table** (this matters): go to Table Design → Table Name, type `tblWO`, and press Enter.
+
+   ![The Table Design tab with the Table Name box on the left](../img/w3-table-name.png)
 9. Make the `Assets` data a Table in the same way and name it `tblAssets`.
 10. Make the `PMs` data a Table and name it `tblPM`.
+
+**Checkpoint:** Formulas → Name Manager lists `tblWO`, `tblAssets` and `tblPM`. If one is missing or spelt differently, click in that data and fix it in Table Design → Table Name.
+
 11. **Try out what a Table gives you.** On `WOs`, scroll down a long way.
 
     **You should see:** the column letters at the top replaced by your headers.
@@ -55,6 +65,14 @@ This week you meet the two features that make that possible: **Tables**, which g
 18. Finish it as `=[@[Labour Hrs]]*60` and press Enter.
 
     **You should see:** the formula fill the whole column by itself.
+
+### If your numbers don't match
+
+- **Fewer rows than expected.** Not everything was copied. Click `A1` in the CSV, press `Ctrl+A`, copy, and paste into `A1` again.
+- **The headers became `Column1`, `Column2`…** *My table has headers* wasn't ticked. Press `Ctrl+Z` and redo step 7 with the box ticked.
+- **The Labour Hrs total isn't 316.16.** The test row from step 12 is still there: delete it. If the total is only slightly off, the cell is showing fewer decimals.
+- **The formula shows `=N2*60` rather than `[@[Labour Hrs]]`.** You typed outside the Table. Use the column straight to the right of the last Table column (step 16). If it still happens, tick File → Options → Formulas → *Use table names in formulas*.
+- **The formula didn't fill the column by itself.** Same cause: the new column isn't part of the Table.
 
 ### Why it works
 
@@ -89,6 +107,9 @@ The export has the asset code but not the manufacturer, install date or PM frequ
    ```
 
    The fourth argument is what to return **if not found**. Reactive jobs have no PM Ref, so without it you'd get a column full of `#N/A`.
+
+**Checkpoint:** `tblWO` has three new columns. Manufacturer and Install Date have a value on every row. PM Frequency is a number on PM rows and blank on the rest.
+
 4. Add a column called `Days Late`, for PM rows:
 
    ```
@@ -104,6 +125,15 @@ The export has the asset code but not the manufacturer, install date or PM frequ
 8. In `C1`, return its failure code the same way.
 
    **You should see:** Operational - jam.
+
+### If your numbers don't match
+
+- **`#N/A` in Manufacturer.** Every June asset is in the asset list, so a whole column of `#N/A` means a wrong column name. Check the formula says `tblAssets[asset_id]` and `tblAssets[manufacturer]` (step 1).
+- **`#NAME?`.** A Table name is misspelt, for example `tblAsset` instead of `tblAssets`. Formulas → Name Manager shows the real names.
+- **`#N/A` all down PM Frequency.** The fourth argument, `""`, is missing, so jobs with no PM Ref show `#N/A` (step 3).
+- **Days Late shows dates like 05/01/1900.** Excel has formatted the column as a date. Set it to *General* (Home → Number Format).
+- **Asset Age shows `#VALUE!`.** Install Date came in as text. Leave it for now: Week 4 shows the fix.
+- **`B1` shows `#N/A` for `WO-111700`.** Check `A1` has no space at the end. Then check the lookup column is `tblWO[WO Number]` and the return column is `tblWO[Asset Description]`.
 
 ### Why it works
 
@@ -141,6 +171,11 @@ Then **test that it's robust**:
    **You should see:** the Table grow, the calculated columns fill in, and every total on your Summary sheet change.
 9. If a total didn't change, that formula points at a fixed range. Change it to use the Table column (`tblWO[...]`).
 10. Press `Ctrl+Z` to undo the paste.
+
+### If your numbers don't match
+
+- **A total didn't change when you pasted the 10 rows.** That formula uses a fixed range like `N2:N395`. Change it to the Table column, such as `tblWO[Labour Hrs]` (step 9).
+- **The pasted rows didn't join the Table.** The Total Row was still on (step 6), or there was a blank row between the Table and your paste. Press `Ctrl+Z` and paste into the first row straight under the Table.
 
 ---
 

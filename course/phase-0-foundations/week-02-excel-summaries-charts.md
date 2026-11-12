@@ -29,6 +29,9 @@ Last week you answered questions by filtering and reading the status bar. That w
    ```
 
    If your data sheet has a different name, use that instead of `Sheet1`. The easiest way is to type `=COUNTIF(`, click across to the data sheet, click column D, and let Excel write the reference for you.
+
+**Checkpoint:** `B2` shows 6, the number of Cooking stops. If you see `0`, the zone name in `A2` doesn't match the data exactly. If a window asks you to choose a file, your data sheet isn't called `Sheet1`: see *If your numbers don't match* below.
+
 5. In `C2` type `=SUMIF(Sheet1!$D:$D,A2,Sheet1!$I:$I)`.
 6. In `D2` type `=AVERAGEIF(Sheet1!$D:$D,A2,Sheet1!$I:$I)`.
 7. Select `B2:D2` and drag the fill handle down to row 8.
@@ -47,6 +50,13 @@ Last week you answered questions by filtering and reading the status bar. That w
 12. Select `E2:F2` and drag the fill handle down to row 8.
 
     **You should see:** each row's Breakdown and Minor stop minutes add up to its Minutes in column C.
+
+### If your numbers don't match
+
+- **A window opens asking you to pick a file, or you see `#REF!`.** Your data sheet isn't called `Sheet1`. When you open a CSV, Excel names the sheet after the file, so yours is probably `shift_downtime_log`. Either use that name in the formulas, or right-click the tab, choose Rename and type `Sheet1`.
+- **The Events total is less than 124, or a zone shows 0.** A zone name in column A is misspelt or has a space at the end (step 3). The reference table under *Check yourself* shows each zone's count, so you can see which one is short.
+- **The same number all the way down.** The `A2` in your formula has a `$` before the row (`A$2` or `$A$2`), so it didn't move as you filled down. Use plain `A2` in `COUNTIF` and `$A2` in `SUMIFS`.
+- **Breakdown plus Minor stop doesn't add up to Minutes.** Check the words in quotes match the Category column exactly: `"Breakdown"` and `"Minor stop"`. Breakdowns across all seven zones come to 976 minutes.
 
 ### Why it works
 
@@ -72,9 +82,14 @@ Criteria can be comparisons in quotes: `COUNTIF(Sheet1!I:I,">=30")` counts stops
    If you get `#VALUE!`, your dates were read as text (real dates sit on the right of the cell, text on the left). Check yourself, Q5 shows the fix.
 3. Add a column headed `Weekend?` with `=IF(WEEKDAY(A2,2)>5,"Weekend","Weekday")` and fill it down. `WEEKDAY(...,2)` numbers Monday as 1 and Sunday as 7.
 4. Add a column headed `Label` with `=E2&" - "&F2` and fill it down. The `&` joins the asset code and description.
+
+**Checkpoint:** your data sheet has four new columns (Zone Code, Day, Weekend? and Label), each filled down to row 125 with no errors. If one stops early, double-click its fill handle again.
+
 5. **Drop-down filter.** Go to your `Summary` sheet. In `H1` type `Pick a shift:`.
 6. Select `I1`, then go to Data → Data Validation.
 7. Set Allow to *List*, type `Days,Nights` in Source, and press OK.
+
+   ![The Data Validation window with Allow set to List and Source Days,Nights](../img/w2-data-validation.png)
 
    **You should see:** a drop-down arrow beside `I1`. Pick *Days* from it.
 8. In `H3` type `Minutes for that shift`.
@@ -84,6 +99,14 @@ Criteria can be comparisons in quotes: `COUNTIF(Sheet1!I:I,">=30")` counts stops
 10. Change the drop-down in `I1` to *Nights*.
 
     **You should see:** `I3` change to 1080. This is the seed of every dashboard you'll ever build.
+
+### If your numbers don't match
+
+- **`#VALUE!` in the Day column.** Your dates came in as text. Question 5 in *Check yourself* shows the fix.
+- **Zone Code shows the wrong letters.** `MID(E2,4,3)` needs the column with the asset code in it. If yours isn't column E, use its letter (step 1).
+- **`I3` shows 0.** The drop-down choice must match the Shift column exactly. Check that the Source in step 7 is `Days,Nights` with no spaces.
+- **`I3` shows 1931 whatever you pick.** The formula has lost its shift condition. It should end `Sheet1!$C:$C,I1)` (step 9).
+- **No drop-down arrow.** Click `I1`: the arrow only shows on the selected cell.
 
 ### Why it works
 
@@ -107,12 +130,20 @@ On the `Summary` sheet:
 4. **Format it properly**, because this is what separates a chart people read from one they ignore. Click the chart title and type a title that says the finding, not the topic: *"Primary Packing lost the most time (1–14 June)"*, not *"Minutes by Zone"*.
 5. Click one of the gridlines and press Delete. Do the same for the legend (you only have one series).
 6. Click the `+` next to the chart and tick **Data Labels**.
+
+   ![The + button next to a chart, with Data Labels ticked](../img/w2-chart-elements.png)
 7. Click a bar once to select all the bars, then choose a grey fill (Format → Shape Fill).
 8. Click the top bar again so only that bar is selected, and give it a strong colour.
 
    **You should see:** six grey bars and one coloured bar, each with its number on top.
 9. Add a second chart: select the Zone, Breakdown mins and Minor stop mins columns, then go to Insert → Stacked Column.
 10. Write two sentences under the charts: what you'd tell the shift manager.
+
+### If your numbers don't match
+
+- **Total ends up at the top after sorting.** You selected down to row 9. Press `Ctrl+Z`, then select `A1:F8` only (step 1).
+- **The chart has a Total bar, or more than seven bars.** Same cause: select rows 1 to 8 only.
+- **The chart shows Events or Avg mins as well.** Select just the Zone and Minutes columns, holding `Ctrl` for the second one (step 2).
 
 ---
 
