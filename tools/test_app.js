@@ -32,13 +32,15 @@ async function test(name, fn) {
 async function open(browser, opts = {}) {
   const context = await browser.newContext(Object.assign({ viewport: { width: 390, height: 844 }, acceptDownloads: true }, opts.context || {}));
   if (opts.syncDelay) await context.addInitScript(() => { window.__DSS_SYNC_DELAY__ = 50; });
+  // The welcome tour and the Week 0 suggestion are off unless a test asks for them.
+  if (!opts.onboarding) await context.addInitScript(() => { window.__DSS_NO_ONBOARDING__ = true; });
   const page = await context.newPage();
   const errors = [];
   page.on("console", (m) => { if (m.type() === "error") errors.push("console: " + m.text()); });
   page.on("pageerror", (e) => errors.push("pageerror: " + e.message));
   if (opts.time) await page.clock.setFixedTime(new Date(opts.time));
   await page.goto(opts.url || FILE_URL);
-  await page.waitForSelector("#view-today .rec, #view-today .today-head", { timeout: 10000 });
+  await page.waitForSelector("#view-today .rec, #view-today .today-head", { state: "attached", timeout: 10000 });
   return { context, page, errors };
 }
 const state = (page) => page.evaluate(() => window.DSS.state());
@@ -602,6 +604,134 @@ function mockGist(context) {
     await context.close();
   });
 
+  await test("first run: welcome asks name and start date, then a short tour", async () => {
+    const { context, page, errors } = await open(browser, { onboarding: true, time: "2026-11-12T19:00:00", context: { viewport: { width: 1280, height: 800 } } });
+    check(await page.isVisible("#welcome #wName"), "welcome shows on first open");
+    check(await page.inputValue("#wStart") === "2026-11-16", "start date defaults to the coming Monday");
+    await page.fill("#wName", "Sam");
+    await page.fill("#wStart", "2026-11-18");
+    await page.click("[data-wnext]");
+    let st = await state(page);
+    check(reg(st, "settings", "name") === "Sam", "name saved");
+    check(reg(st, "settings", "start") === "2026-11-16", "start snapped to its Monday (" + reg(st, "settings", "start") + ")");
+    for (let i = 1; i < 4; i++) { check(await page.isVisible("#welcome h2"), "tour slide " + i); await page.click("[data-wnext]"); }
+    check(await page.isVisible("[data-wdone='#read/0']"), "last slide offers Week 0 to a new learner");
+    await page.click("[data-wdone='#read/0']");
+    await page.waitForTimeout(100);
+    check(!(await page.isVisible("#welcome")), "welcome closed");
+    check(await page.evaluate(() => location.hash) === "#read/0", "went to Week 0");
+    check(await page.isVisible(".reader-head h2") && /Week 0: Set up/.test(await page.textContent(".reader-head h2")), "Week 0 opens in the reader");
+    check(!!reg(await state(page), "settings", "welcomed"), "welcome remembered");
+    await page.reload(); await page.waitForTimeout(150);
+    check(!(await page.isVisible("#welcome")), "no welcome the second time");
+    await goHash(page, "#today");
+    await setTime(page, 60, "pc");
+    check(/Hi Sam\./.test(await page.textContent(".today-head")), "Today says hello by name");
+    check(await page.getAttribute("#view-today .primary-rec", "data-kind") === "setup", "Today recommends Week 0 first on a PC");
+    await setTime(page, 15, "phone");
+    check(await page.$("#view-today .alt-rec[data-kind='setup']") !== null, "on a phone Week 0 is an alternative");
+    await goHash(page, "#settings");
+    await page.click("#sTour");
+    check(await page.isVisible("#welcome #wName") && await page.inputValue("#wName") === "Sam", "tour can be shown again from Settings, with the name filled in");
+    await page.keyboard.press("Escape");
+    check(!(await page.isVisible("#welcome")), "Escape closes it");
+    check(errors.length === 0, "no errors: " + errors.join(" / "));
+    await context.close();
+  });
+
+  await test("someone already part-way through: welcome keeps their dates, no Week 0 nudge", async () => {
+    const { context, page } = await open(browser, { onboarding: true, time: "2026-11-12T19:00:00" });
+    await page.evaluate(() => { localStorage.setItem("data-skills-studio-v2", JSON.stringify({ v: 2, ticks: { "1:0": { v: true, t: 1 } }, settings: {}, sec: {}, read: {}, step: {}, watched: {}, pos: {}, quiz: {}, days: {}, log: {}, doneWhen: {} })); });
+    await page.reload(); await page.waitForSelector("#welcome #wStart");
+    check(await page.inputValue("#wStart") === "2026-11-02", "start date stays at 2 Nov");
+    for (let i = 0; i < 4; i++) await page.click("[data-wnext]");
+    check(await page.isVisible("[data-wdone='#today']") && !(await page.isVisible("[data-wdone='#read/0']")), "last slide just says Done");
+    await page.click("[data-wdone='#today']");
+    check(!("start" in (await state(page)).settings), "start date not written when unchanged");
+    await setTime(page, 60, "pc");
+    check(await page.$("#view-today [data-kind='setup']") === null, "no Week 0 suggestion once you've started");
+    await context.close();
+  });
+
+  await test("lessons show your own week dates", async () => {
+    const { context, page } = await open(browser);
+    await goHash(page, "#read/3/overview");
+    check(/Mon 16 Nov – Sun 22 Nov 2026/.test(await page.textContent(".rsec.open .rsec-body")), "default start: lesson keeps 16–22 Nov");
+    await page.evaluate(() => { const s = window.DSS.state(); s.settings.start = { v: "2026-12-28", t: Date.now() }; localStorage.setItem("data-skills-studio-v2", JSON.stringify(s)); });
+    await page.reload(); await goHash(page, "#read/3/overview");
+    const body = await page.textContent(".rsec.open .rsec-body");
+    check(/Mon 11 Jan – Sun 17 Jan 2027/.test(body) && !/16 Nov/.test(body), "lesson date line follows the start date: " + body.slice(0, 160).replace(/\s+/g, " "));
+    check(/Mon 11 Jan – Sun 17 Jan 2027/.test(await page.textContent(".reader-head .eyebrow")), "reader header shows the dates too");
+    await goHash(page, "#read/1/overview");
+    check(/Mon 28 Dec 2026 – Sun 3 Jan 2027/.test(await page.textContent(".rsec.open .rsec-body")), "a week spanning New Year shows both years");
+    await context.close();
+  });
+
+  await test("Week 0: steps tick but don't count towards course progress", async () => {
+    const { context, page, errors } = await open(browser, { context: { viewport: { width: 1280, height: 800 } } });
+    await goHash(page, "#read/1/overview");
+    const link = await page.$(".rsec.open a[href='#read/0']");
+    check(!!link, "Week 1 links to Week 0");
+    check(await page.$(".reader-head a[href='#read/0']") !== null, "Week 1 header has a ‹ Week 0 button");
+    await goHash(page, "#read/0/set-up-files-windows-and-your-first-back");
+    const n = await page.$$eval(".rsec.open li.step", (l) => l.length);
+    check(n === 15, "15 tickable set-up steps (" + n + ")");
+    await page.click("[data-stepnext]");
+    const st = await state(page);
+    check(Object.keys(st.step).some((k) => k.startsWith("0:set-up-files-windows-and-your-first-back:")), "set-up step saved under week 0");
+    check((await page.textContent("#overallPct")).startsWith("0%"), "overall progress unchanged");
+    check(await page.$(".reader-head a[href='#read/1']") !== null, "Week 0 leads on to Week 1");
+    check(await page.evaluate(() => window.DSS.currentWeek()) === 1, "you're still on Week 1");
+    check(errors.length === 0, "no errors: " + errors.join(" / "));
+    await context.close();
+  });
+
+  await test("Confusing? notes: save, show, send on WhatsApp, mark sent", async () => {
+    const { context, page, errors } = await open(browser, { context: { viewport: { width: 1280, height: 800 } } });
+    await page.evaluate(() => { const s = window.DSS.state(); s.settings.name = { v: "Sam", t: Date.now() }; localStorage.setItem("data-skills-studio-v2", JSON.stringify(s)); });
+    await page.reload();
+    await goHash(page, "#read/1/session-1-find-your-way-around");
+    check((await page.$$(".rsec.open .fbbtn")).length === 17, "every step has a Confusing? button");
+    check(await page.isVisible(".rsec.open li.step.current .fbbtn") && !(await page.isVisible(".rsec.open li.step:nth-of-type(5) .fbbtn")), "it shows on the step you're on, not on every step");
+    await page.hover(".rsec.open li.step:nth-of-type(3)");
+    await page.click(".rsec.open li.step:nth-of-type(3) .fbbtn");
+    check(await page.isVisible("#fbNote"), "note box opens");
+    await page.keyboard.type("Which button is select all?");
+    check((await state(page)).step && Object.keys((await state(page)).step).length === 0, "typing N in the note box doesn't tick a step");
+    await page.click("[data-fbsave]");
+    let st = await state(page);
+    const notes = Object.values(st.fb);
+    check(notes.length === 1 && notes[0].week === 1 && notes[0].step === 3 && notes[0].note === "Which button is select all?", "note saved with week and step");
+    check(/^Make it readable/.test(notes[0].text), "note keeps the step's words: " + notes[0].text);
+    check(/Noted/.test(await page.textContent(".rsec.open li.step:nth-of-type(3) .fbbtn")), "step shows it's noted");
+    check(/1 confusing step noted/.test(await page.textContent(".reader-head")), "reader header counts notes to send");
+    // edit the same step: still one note
+    await page.click(".rsec.open li.step:nth-of-type(3) .fbbtn");
+    check(await page.inputValue("#fbNote") === "Which button is select all?", "existing note opens for editing");
+    await page.fill("#fbNote", "Ctrl+A selected only one cell");
+    await page.click("[data-fbsave]");
+    check(Object.values((await state(page)).fb).length === 1, "editing doesn't duplicate the note");
+    await goHash(page, "#settings");
+    check((await page.$$("#fbList .fblist li")).length === 1, "Settings lists the note");
+    const href = await page.getAttribute("#fbWhatsApp", "href");
+    const msg = decodeURIComponent(href.replace("https://wa.me/?text=", ""));
+    check(href.startsWith("https://wa.me/?text=") && /from Sam/.test(msg) && /Week 1 · Session 1 · step 3/.test(msg) && /Ctrl\+A selected only one cell/.test(msg), "WhatsApp message names the week, step and note: " + msg);
+    await page.click("#fbCopy");
+    check(await page.isVisible("#toast.show"), "copy gives feedback");
+    await page.click("#fbSent");
+    st = await state(page);
+    check(Object.values(st.fb).every((n) => n.sent), "marked as sent");
+    check(await page.isVisible("#fbClear") && /1 sent already/.test(await page.textContent("#fbList")), "sent notes are counted, not listed");
+    check(await page.evaluate(() => document.getElementById("fbCopy").disabled), "nothing left to copy");
+    // merge keeps notes from both devices
+    const merged = await page.evaluate(() => { const a = window.DSS.state(); const b = { v: 2, fb: { x1: { id: "x1", week: 2, sid: "s", step: 1, text: "t", note: "n", t: 5 } } }; return window.DSS.merge(a, b).fb; });
+    check(Object.keys(merged).length === 2, "backup merge keeps both devices' notes");
+    await page.click("#fbClear");
+    check(Object.values((await state(page)).fb).every((n) => n.del), "clearing sent notes deletes them");
+    check(errors.length === 0, "no errors: " + errors.join(" / "));
+    await context.close();
+  });
+
   await test("practice data generator still produces downloads", async () => {
     const { context, page } = await open(browser, { context: { viewport: { width: 1280, height: 800 } } });
     await goHash(page, "#data");
@@ -647,6 +777,7 @@ function mockGist(context) {
     const srv = await serve();
     const base = `http://127.0.0.1:${srv.port}/`;
     const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    await context.addInitScript(() => { window.__DSS_NO_ONBOARDING__ = true; });
     const page = await context.newPage();
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));

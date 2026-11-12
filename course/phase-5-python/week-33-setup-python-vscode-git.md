@@ -31,7 +31,7 @@ Python is where you go when Excel and Power BI run out: big sensor files, automa
 4. **Git**: install from [git-scm.com](https://git-scm.com/download/win), keeping the defaults. Then in PowerShell:
 
    ```powershell
-   git config --global user.name "Josh Wiley"
+   git config --global user.name "Your Name"            # your own name
    git config --global user.email "you@example.com"     # the email on your GitHub account
    ```
 

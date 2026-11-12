@@ -1,6 +1,9 @@
 """
 Rebuild the tracker's course data from the lesson files.
 
+Week 0 (course/week-00-setup.md) is built too, as "setup": it has steps to tick but no
+checklist, quiz or dates, and it doesn't count towards progress.
+
 Run after editing any lesson (title, sections, "Tick off", "Check yourself",
 "Watch" or "Short on time?"):
     python tools/build_tracker.py
@@ -73,7 +76,7 @@ def kind_of(title):
         return "check"
     if t.startswith("watch"):
         return "watch"
-    if t.startswith("session") or t.startswith("weekend"):
+    if t.startswith(("session", "weekend", "set up")):
         return "hands"
     return "other"
 
@@ -435,7 +438,12 @@ def main():
         for e in errors:
             print("  " + e, file=sys.stderr)
         return 1
-    data = json.dumps({"phases": PHASES, "weeks": weeks}, ensure_ascii=False, separators=(",", ":"))
+    setup_path = ROOT / "course" / "week-00-setup.md"
+    setup = parse_lesson(setup_path, report) if setup_path.exists() else None
+    if setup and not any(sec.get("steps") for sec in setup["sections"]):
+        print("Build FAILED: course/week-00-setup.md has no numbered steps", file=sys.stderr)
+        return 1
+    data = json.dumps({"phases": PHASES, "weeks": weeks, "setup": setup}, ensure_ascii=False, separators=(",", ":"))
     # "</" is escaped so lesson text can never close the <script> element early.
     data = data.replace("</", "<\\/")
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -459,7 +467,7 @@ def main():
     if no_check:
         print("No quiz cards in weeks: " + ", ".join(map(str, no_check)))
     n_steps = sum(len(s.get("steps", [])) for w in weeks for s in w["sections"])
-    print(f"{n_steps} tickable steps")
+    print(f"{n_steps} tickable steps" + (f", plus {sum(len(s.get('steps', [])) for s in setup['sections'])} in Week 0: Set up" if setup else ""))
     if LONG:
         per = {}
         for wk, _, _ in LONG:

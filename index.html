@@ -96,6 +96,7 @@
     <div class="grid2">
       <div class="card pad">
         <h3>Plan</h3>
+        <div class="field"><label for="sName">Your first name</label><input type="text" id="sName" autocomplete="given-name"></div>
         <div class="field"><label for="sStart">Course start date (a Monday)</label><input type="date" id="sStart"></div>
         <div class="field"><label for="sTarget">Weekly hours target</label><input type="number" id="sTarget" min="1" max="40" step="0.5"></div>
         <div class="field"><label for="sRepo">Lesson link base (GitHub)</label><input type="url" id="sRepo"></div>
@@ -103,7 +104,20 @@
           <select id="sTheme"><option value="auto">Match device</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
         <div class="field"><label for="sDevice">Today assumes I'm on (this device)</label>
           <select id="sDevice"><option value="auto">Work it out from the screen</option><option value="phone">Phone</option><option value="pc">PC</option></select></div>
-        <p class="muted">Missed a few weeks? Move the start date later and every week's dates shift with it.</p>
+        <p class="muted">Missed a few weeks? Move the start date later and every week's dates shift with it, in the lessons too.</p>
+        <button class="btn" id="sTour" type="button">Show the welcome tour again</button>
+      </div>
+
+      <div class="card pad" id="fbCard">
+        <h3>Steps that confused you</h3>
+        <p class="muted">Press <b>Confusing?</b> on any step in a lesson and say what didn't make sense. Your notes collect here. Send them all in one message so the steps can be fixed for everyone.</p>
+        <div id="fbList"></div>
+        <div class="row">
+          <a class="btn primary" id="fbWhatsApp" href="#settings" target="_blank" rel="noopener">Send on WhatsApp</a>
+          <button class="btn" id="fbCopy" type="button">Copy my feedback</button>
+          <button class="btn ghost" id="fbSent" type="button">Mark as sent</button>
+          <button class="btn ghost hidden" id="fbClear" type="button">Clear sent notes</button>
+        </div>
       </div>
 
       <div class="card pad">
@@ -154,6 +168,10 @@
 </div>
 
 <div id="pendingBar" class="hidden" role="status"></div>
+
+<div id="welcome" class="welcome hidden" role="dialog" aria-modal="true" aria-labelledby="wTitle">
+  <div class="card pad welcome-card" id="welcomeBody"></div>
+</div>
 
 <nav class="bottombar" aria-label="Main">
   <button type="button" data-tab="today"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Today</button>

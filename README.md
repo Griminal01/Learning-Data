@@ -8,11 +8,27 @@ Everything runs on a realistic **synthetic** data set for a fictional 7-zone cer
 
 ---
 
-## Quick start
+## Getting started
 
-1. **Get the files.** Click the green **Code** button → **Download ZIP** and unzip it to `Documents\Learning-Data`. (From Week 33 you'll switch to `git clone`.)
-2. **Open the tracker.** Double-click `index.html` to open **Data Skills Studio** in Edge. It tells you what to do today with the time you have, shows every lesson inside the app (offline), quizzes you with flash cards, and tracks your ticks, done-when tests and weekly hours. It also generates fresh practice data. To use it on your phone too, host it on GitHub Pages (see below).
-3. **Open Week 1:** in the tracker's **Today** tab, or [`course/phase-0-foundations/week-01-excel-basics.md`](course/phase-0-foundations/week-01-excel-basics.md) on GitHub.
+You only need one link: **https://griminal01.github.io/Learning-Data/**
+
+1. **Open the link on your PC** in Edge or Chrome. A short welcome asks your name and the Monday you start, then shows you round.
+2. **Do Week 0: Set up** (about 30 minutes). Today suggests it first. It gets the course files onto your PC, installs the tracker as an app, puts it next to Excel, and makes your first backup.
+3. **Start Week 1** from the **Today** tab.
+
+**Updates arrive by themselves.** When the course is improved, the tracker picks up the new version the next time you open it online. Your ticks stay put.
+
+**Your progress is yours.** It's saved in your own browser and nobody else sees it. Once a week, go to **Settings → Export backup**. That file brings everything back if your browser is ever cleared, or moves it to another device (**Import and merge**).
+
+**Stuck on a step?** Press **Confusing?** next to it and say what didn't make sense. **Settings → Steps that confused you → Send on WhatsApp** sends all your notes in one message.
+
+**On your phone too:** open the same link, then Android (Chrome): menu ⋮ → *Install app*, or iPhone (Safari): Share → *Add to Home Screen*. Phone and PC keep separate progress, so carry it across with a backup file. Gist sync (below) does it automatically if you have a GitHub account, but you don't need one.
+
+**Already using the downloaded ZIP?** Your ticks live in that copy. Open it, go to **Settings → Export backup**, then open the link above, skip the welcome tour, and use **Settings → Import and merge** with that file. From then on, use the link.
+
+### Working from the files instead
+
+Click the green **Code** button → **Download ZIP**, unzip it to `Documents\Learning-Data`, and double-click `index.html`. That copy works offline but never updates itself, and it can't be installed on a phone. (From Week 33 you'll switch to `git clone`.)
 
 The full dated schedule is in **[`course/README.md`](course/README.md)**.
 
@@ -59,7 +75,7 @@ The plan assumes two 1.5-hour evenings and a weekend block, but most weeks won't
 
 ### Put it on your phone
 
-1. Host the tracker on GitHub Pages (see below) and open its address on your phone.
+1. Open the tracker link (see *Getting started*) on your phone.
 2. **Android (Chrome):** menu ⋮ → *Install app* (or *Add to Home screen*). **iPhone (Safari):** Share → *Add to Home Screen*.
 3. It now opens like an app and works with no signal once it has been opened once. It picks up a new version by itself next time you open it online.
 
@@ -77,13 +93,13 @@ Both use the same rule: for each tick, card or entry, the most recent change win
 ## What's in this repo
 
 ```
-course/            62 weekly lessons, one folder per phase, plus the dated schedule
+course/            Week 0 (set-up) and 62 weekly lessons, one folder per phase, plus the dated schedule
 data/              the practice data set (CSV, SQLite, exports, production, migration, vibration) and its generator
   README.md        data dictionary: every table and column explained
 solutions/         worked SQL, Python, reliability and ML solutions (all tested against the data)
 portfolio/         how to package each phase build for a public GitHub portfolio
 my_work/           your own files go here
-index.html         Data Skills Studio, the tracker app (open it by double-click, or host it)
+index.html         Data Skills Studio, the tracker app (hosted on GitHub Pages, or open it by double-click)
 app/               the app's script, styles, icons and course-data.js (lessons built for the app)
 sw.js, manifest.webmanifest   offline and "install on phone" support when hosted
 tools/             build script that syncs the tracker with the lessons, its icon maker and browser tests
@@ -122,13 +138,15 @@ The main free learning resources used throughout are Microsoft Learn (PL-300 pat
 
 ## Hosting the tracker on GitHub Pages
 
-1. Push this repo to GitHub.
-2. Go to **Settings → Pages → Build and deployment**: Source = *Deploy from a branch*, Branch = your default branch, folder = `/ (root)` → Save.
-3. After a minute, the tracker is live at `https://<your-username>.github.io/<repo-name>/`.
+The link in *Getting started* is this repo on GitHub Pages. To set it up (once):
 
-No build step is needed: GitHub Pages serves `index.html`, `app/`, `sw.js` and `manifest.webmanifest` as they are. The hosted copy works offline once opened and can be installed on a phone (see *Doing it day by day*).
+1. Go to the repo's **Settings → Pages → Build and deployment**.
+2. Set Source = *Deploy from a branch*, Branch = `main`, folder = `/ (root)`, and press **Save**.
+3. After a minute or two, the tracker is live at `https://<your-username>.github.io/<repo-name>/`.
 
-Your progress is stored in the browser you use (localStorage). Use **Settings → Export backup** for backups, and import-merge or gist sync to move between devices.
+No build step is needed: GitHub Pages serves `index.html`, `app/`, `sw.js` and `manifest.webmanifest` as they are. The empty `.nojekyll` file tells Pages not to run the lessons through Jekyll. Every push to `main` updates the site, and each learner's copy fetches the new version the next time it opens online.
+
+Progress is stored in each learner's own browser (localStorage), so hosting it shares the course, not anyone's ticks.
 
 **After editing any lesson** (its title, sections, *Tick off*, *Check yourself*, *Watch* or *Short on time?*), run `python tools/build_tracker.py`. It rebuilds `app/course-data.js`, which is what the app reads, and updates the offline cache version in `sw.js`. It prints how many weeks, ticks, quiz cards and watch items it found, and any lesson where the *Check yourself* questions and answers don't pair up. Commit `app/course-data.js` with your lesson change.
 

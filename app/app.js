@@ -11,8 +11,13 @@
     return;
   }
   const WEEKS = COURSE.weeks, PHASES = COURSE.phases;
-  const weekByNo = (n) => WEEKS[n - 1];
-  const weekByPath = {}; WEEKS.forEach((w) => (weekByPath[w.path] = w));
+  /* Week 0 (Set up) has steps like any lesson, but no checklist, quiz or dates, and it isn't in
+     WEEKS, so it never counts towards progress or becomes "the week you're on". */
+  const SETUP = COURSE.setup || null;
+  const weekByNo = (n) => (n === 0 ? SETUP : WEEKS[n - 1]);
+  const weekByPath = {}; WEEKS.concat(SETUP ? [SETUP] : []).forEach((w) => (weekByPath[w.path] = w));
+  // Tests switch off the welcome and the Week 0 suggestion so they start on the plain app.
+  const ONBOARD = !window.__DSS_NO_ONBOARDING__;
 
   // ---------- keys & defaults ----------
   const KEY = "data-skills-studio-v2";          // synced progress
@@ -41,7 +46,7 @@
      Caveat: if two devices' clocks disagree, the one that is ahead wins a genuine conflict on the
      same item. That is rare and harmless here (the worst case is one tick flipping back). */
   function blank() {
-    return { v: 2, settings: {}, ticks: {}, doneWhen: {}, sec: {}, read: {}, step: {}, watched: {}, pos: {}, quiz: {}, days: {}, log: {} };
+    return { v: 2, settings: {}, ticks: {}, doneWhen: {}, sec: {}, read: {}, step: {}, watched: {}, pos: {}, quiz: {}, days: {}, log: {}, fb: {} };
   }
   function normalise(o) {
     const s = blank();
@@ -92,6 +97,7 @@
     for (const k of ["settings", "ticks", "doneWhen", "sec", "read", "step", "watched", "pos"]) out[k] = mergeMap(a[k], b[k], pickReg);
     out.quiz = mergeMap(a.quiz, b.quiz, pickCard);
     out.log = mergeMap(a.log, b.log, pickLog);
+    out.fb = mergeMap(a.fb, b.fb, pickLog); // feedback notes merge like log entries
     out.days = mergeMap(a.days, b.days, (x, y) => Math.max(x || 0, y || 0));
     return out;
   }
@@ -127,6 +133,7 @@
 
   const get = (map, k) => (S[map][k] ? S[map][k].v : undefined);
   const put = (map, k, v) => { S[map][k] = { v, t: now() }; };
+  const name = () => String(get("settings", "name") || "").trim();
   const setting = (k) => { const v = get("settings", k); return v == null || v === "" ? DEF[k] : v; };
 
   // ---------- small helpers ----------
@@ -193,6 +200,9 @@
   const stepDone = (w, s, id) => !!get("step", stepKey(w, s, id));
   const stepsDone = (w, s) => stepsOf(s).filter((id) => stepDone(w, s, id)).length;
   const stepIndex = (w, s) => stepsOf(s).findIndex((id) => !stepDone(w, s, id));
+  const setupDone = () => !!SETUP && SETUP.sections.filter((s) => s.kind === "hands").every((s) => secDone(SETUP, s));
+  // Has this person done anything in the course proper (not counting Week 0)?
+  const started = () => ["ticks", "sec", "read", "step"].some((m) => Object.entries(S[m]).some(([k, r]) => r && r.v && !k.startsWith("0:")));
   function nextHands(w) { return w.sections.find((s) => s.kind === "hands" && !secDone(w, s)); }
   function nextReading(w) {
     return w.sections.find((s) =>
@@ -360,6 +370,11 @@
       cta: "Open the course", mins: minutes, label: `Phase ${w.phase} done-when test`, run: () => go("#course"),
     } : null;
 
+    const setupA = ONBOARD && SETUP && !setupDone() && !started() && !cur.gate ? {
+      kind: "setup", title: "Start with Week 0: Set up",
+      detail: "About 30 minutes at your PC: get the course files, put the tracker next to Excel and make your first backup. Then Week 1 is all Excel.",
+      cta: "Open Week 0", mins: 30, label: "Week 0: Set up", run: () => go("#read/0"),
+    } : null;
     let primary, alts = [];
     const pcNote = hands ? `Hands-on work (${shortTitle(hands.title)}) needs a PC. It'll be waiting in the reader.` : "";
     if (gateA) { primary = dev === "pc" && minutes >= 30 ? gateA : quiz || readA || gateA; alts = [gateA, readA, quiz]; }
@@ -380,6 +395,7 @@
       else if (minutes <= 15) { primary = readA || quiz || handsA || tickA; alts = [handsA, quiz]; }
       else { primary = handsA || tickA || readA || quiz; alts = [quiz, readA, watchA]; }
     }
+    if (setupA) { if (dev === "pc") { alts = [primary, ...alts]; primary = setupA; } else alts = [setupA, ...alts]; }
     if (!primary) primary = tickA || tipA || { kind: "rest", title: "Nothing left this week", detail: "Every section is done. Tick off the checklist in the Course tab.", cta: "Open the course", mins: 5, label: "", run: () => go("#course") };
     alts = alts.filter((a) => a && a !== primary && a.kind !== primary.kind && !(primary.steps && ["read", "watch", "quiz"].includes(a.kind))).slice(0, 2);
     if (!alts.length && primary.kind !== "tick" && tickA && dev === "pc") alts = [tickA];
@@ -411,6 +427,7 @@
       else if (cal < w.week) calNote = `You're ahead of the calendar (it says Week ${cal}).`;
       else calNote = `On schedule: w/c ${fmt(weekStart(w.week))}.`;
       head = `<div class="card pad today-head">
+        ${name() ? `<p class="hello">Hi ${esc(name())}.</p>` : ""}
         <div class="head-row"><div class="eyebrow">Week ${w.week} · Phase ${w.phase}: ${esc(PHASES[w.phase].short)}</div>${streakHtml}</div>
         <h2><a href="#read/${w.week}">${inl(w.title)}</a></h2>
         <div class="bar thin"><span style="width:${Math.round(weekDone(w) / w.ticks.length * 100)}%"></span></div>
@@ -492,7 +509,7 @@
       const w = cur.w;
       nc.innerHTML = `<div><b>You're on Week ${w.week}: ${inl(w.title)}</b>
         <div class="meta">${weekDone(w)}/${w.ticks.length} done · Phase ${w.phase}: ${esc(PHASES[w.phase].name)}${cal >= 1 && cal <= WEEKS.length && cal !== w.week ? ` · Calendar: Week ${cal}` : ""}</div></div>
-        <a class="btn primary" href="#read/${w.week}">Open lesson</a>`;
+        <div class="row"><a class="btn primary" href="#read/${w.week}">Open lesson</a>${SETUP ? `<a class="btn ghost" href="#read/0">${setupDone() ? "✓ " : ""}Week 0: Set up</a>` : ""}</div>`;
     }
     const host = $("phases");
     const openState = {};
@@ -551,7 +568,7 @@
   $("phases").addEventListener("change", onTickChange);
 
   // ---------- Reader ----------
-  let readerWeek = null, openSecs = new Set();
+  let readerWeek = null, openSecs = new Set(), fbOpen = null;
   function sectionChip(w, s) {
     if (s.kind === "short" || s.kind === "tick") return "";
     if (secDone(w, s)) return `<span class="chip done">Done</span>`;
@@ -613,6 +630,17 @@
       if (cur >= 0) { li.classList.toggle("prev", i === cur - 1); li.classList.toggle("next", i === cur + 1); }
       li.insertAdjacentHTML("afterbegin", `<button type="button" class="stepbox" data-step="${i}" data-sid="${s.id}" aria-pressed="${done}" aria-label="Step ${num}${done ? ", done. Untick" : ". Tick when done"}">${done ? "✓" : num}</button>${i === cur ? `<span class="here">You are here</span>` : ""}`);
       li.querySelectorAll("p").forEach((p) => { if (/^You should see\b/.test(p.textContent.trim())) p.classList.add("expect"); });
+      const note = fbFor(w, s, ids[i]);
+      if (fbOpen && fbOpen.week === w.week && fbOpen.sid === s.id && fbOpen.i === i) {
+        li.insertAdjacentHTML("beforeend", `<div class="fbform" data-sid="${s.id}" data-i="${i}">
+          <label for="fbNote">What confused you about step ${num}? <span class="muted">(optional)</span></label>
+          <textarea id="fbNote" rows="2" placeholder="For example: I couldn't find Freeze Panes on my ribbon">${esc(note ? note.note : "")}</textarea>
+          <div class="row"><button type="button" class="btn small primary" data-fbsave="1">Save note</button>
+          <button type="button" class="btn small ghost" data-fbcancel="1">Cancel</button>
+          ${note ? `<button type="button" class="btn small danger" data-fbdel="${esc(note.id)}">Remove note</button>` : ""}</div></div>`);
+      } else {
+        li.insertAdjacentHTML("beforeend", `<button type="button" class="fbbtn${note ? " noted" : ""}" data-fb="${i}" data-sid="${s.id}" title="Note that this step confused you">${note ? "✎ Noted" : "Confusing?"}</button>`);
+      }
     });
     if (focus && cur >= 0) {
       el.classList.add("focus");
@@ -657,7 +685,7 @@
     renderHeader();
     const w = weekByNo(route.week);
     if (!w) return;
-    if (readerWeek !== w.week) { readerWeek = w.week; openSecs = new Set(); }
+    if (readerWeek !== w.week) { readerWeek = w.week; openSecs = new Set(); fbOpen = null; }
     const secs = w.sections.filter((s) => s.kind !== "short");
     let target = route.sid && secs.find((s) => s.id === route.sid);
     if (fromRoute) {
@@ -667,13 +695,13 @@
     const ps = progressSections(w), nd = ps.filter((s) => secDone(w, s)).length;
     const unlocked = phaseUnlocked(w.phase);
     const html = `<div class="card pad reader-head">
-        <div class="eyebrow">Week ${w.week} · Phase ${w.phase}: ${esc(PHASES[w.phase].name)}</div>
-        <h2>${inl(w.title)}</h2>
+        <div class="eyebrow">${w.week ? `Week ${w.week} · Phase ${w.phase}: ${esc(PHASES[w.phase].name)} · ${esc(weekDates(w.week))}` : "Before you start"}</div>
+        <h2>${inl(w.week ? w.title : `Week 0: ${w.title}`)}</h2>
         <div class="bar thin"><span style="width:${ps.length ? Math.round(nd / ps.length * 100) : 0}%"></span></div>
-        <p class="muted small">${nd}/${ps.length} sections done · ${weekDone(w)}/${w.ticks.length} ticked${unlocked ? "" : " · phase locked for ticking"}</p>
+        <p class="muted small">${nd}/${ps.length} sections done${w.ticks.length ? ` · ${weekDone(w)}/${w.ticks.length} ticked` : ""}${unlocked ? "" : " · phase locked for ticking"}${fbLine()}</p>
         ${hereLine(w, secs)}
         <div class="row">
-          ${w.week > 1 ? `<a class="btn small" href="#read/${w.week - 1}">‹ Week ${w.week - 1}</a>` : ""}
+          ${w.week > 1 ? `<a class="btn small" href="#read/${w.week - 1}">‹ Week ${w.week - 1}</a>` : w.week === 1 && SETUP ? `<a class="btn small" href="#read/0">‹ Week 0: Set up</a>` : ""}
           ${w.week < WEEKS.length ? `<a class="btn small" href="#read/${w.week + 1}">Week ${w.week + 1} ›</a>` : ""}
           <a class="btn small ghost" href="${esc(lessonUrl(w))}" target="_blank" rel="noopener">Open on GitHub ↗</a>
         </div>
@@ -737,8 +765,17 @@
         <button type="button" class="btn small toggle" aria-pressed="${watched(w, x.i)}" data-watch="${x.i}">${watched(w, x.i) ? "✓ Watched" : "Mark watched"}</button></div>
       </li>`).join("")}</ul>`;
     }
-    return MD.render(s.md, ctx);
+    return MD.render(s.kind === "intro" && w.week ? ownDates(w, s.md) : s.md, ctx);
   }
+  /* Lessons are written with the first learner's dates ("Mon 2 Nov – Sun 8 Nov 2026"). The reader
+     swaps that line for this learner's own week, worked out from their start date. */
+  const LESSON_DATES = /\b(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun) \d{1,2} [A-Z][a-z]{2}(?: \d{4})? – Sun \d{1,2} [A-Z][a-z]{2} \d{4}\b/;
+  function weekDates(n) {
+    const a = weekStart(n), b = addDays(a, 6);
+    const f = (d) => d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" }).replace(",", "");
+    return `${f(a)}${a.getFullYear() !== b.getFullYear() ? " " + a.getFullYear() : ""} – ${f(b)} ${b.getFullYear()}`;
+  }
+  function ownDates(w, md) { return md.replace(LESSON_DATES, weekDates(w.week)); }
   $("view-reader").addEventListener("click", (e) => {
     const w = weekByNo(readerWeek); if (!w) return;
     const b = e.target.closest("button, a"); if (!b) return;
@@ -747,6 +784,15 @@
       tickStep(w, s, +b.dataset.step, b.getAttribute("aria-pressed") !== "true");
       return;
     }
+    if (b.dataset.fb != null) {
+      fbOpen = { week: w.week, sid: b.dataset.sid, i: +b.dataset.fb };
+      renderReader(false);
+      const t = $("fbNote"); if (t) { t.focus(); t.scrollIntoView({ block: "center", behavior: "auto" }); }
+      return;
+    }
+    if (b.dataset.fbcancel) { fbOpen = null; renderReader(false); return; }
+    if (b.dataset.fbsave) { saveFeedback(w); return; }
+    if (b.dataset.fbdel) { delFeedback(b.dataset.fbdel); fbOpen = null; renderReader(false); toast("Note removed"); return; }
     if (b.dataset.stepnext) { stepNext(w); return; }
     if (b.dataset.stepback) { stepBack(w); return; }
     if (b.dataset.focus) { P.focus = !P.focus; savePrefs(); renderReader(false); scrollToCurrent(false); return; }
@@ -789,6 +835,134 @@
     }
   });
   $("view-reader").addEventListener("change", onTickChange);
+
+  // ---------- feedback notes ("this step confused me") ----------
+  /* Each note is kept like a log entry ({..., t}, deleted = {del:true}), so it rides along in backups
+     and gist sync. "Sent" notes stay, greyed out, until cleared. */
+  const fbList = () => Object.values(S.fb).filter((n) => !n.del).sort((a, b) => a.week - b.week || (a.t || 0) - (b.t || 0));
+  const fbUnsent = () => fbList().filter((n) => !n.sent);
+  function fbFor(w, s, stepId) { return fbList().find((n) => n.week === w.week && n.sid === s.id && n.stepId === stepId); }
+  function fbLine() {
+    const n = fbUnsent().length;
+    return n ? ` · <a href="#settings" data-fblink="1">${n} confusing step${n === 1 ? "" : "s"} noted, to send</a>` : "";
+  }
+  function stepText(li) {
+    const c = li.cloneNode(true);
+    c.querySelectorAll(".stepbox, .here, .fbbtn, .fbform, p.expect, pre, ol, ul").forEach((x) => x.remove());
+    const t = c.textContent.replace(/\s+/g, " ").trim();
+    return t.length > 90 ? t.slice(0, 87).replace(/\s+\S*$/, "") + "…" : t;
+  }
+  function saveFeedback(w) {
+    const box = document.querySelector(".fbform"); if (!box) return;
+    const s = w.sections.find((x) => x.id === box.dataset.sid), i = +box.dataset.i;
+    const id0 = stepsOf(s)[i]; if (!id0) return;
+    const li = box.closest("li");
+    const old = fbFor(w, s, id0), id = old ? old.id : uid();
+    S.fb[id] = { id, week: w.week, sid: s.id, section: shortTitle(s.title), step: i + 1, stepId: id0, text: stepText(li),
+      note: $("fbNote").value.trim(), date: today(), sent: false, t: now() };
+    fbOpen = null; save(); renderReader(false);
+    toast("Noted. Send your notes from Settings when you're ready.", { label: "Send now", run: () => go("#settings") });
+  }
+  function delFeedback(id) { const x = S.fb[id]; if (x) { S.fb[id] = Object.assign({}, x, { del: true, t: now() }); save(); } }
+  function fbMessage(notes) {
+    const who = name();
+    const head = `Course feedback${who ? " from " + who : ""}: ${notes.length} step${notes.length === 1 ? "" : "s"} that confused me`;
+    return [head, ...notes.map((n) => `${n.week ? "Week " + n.week : "Week 0"} · ${n.section} · step ${n.step}\n"${n.text}"${n.note ? "\n→ " + n.note : ""}`)].join("\n\n");
+  }
+  async function copyText(text) {
+    try { await navigator.clipboard.writeText(text); return true; } catch (e) { /* file:// or an old browser: fall back */ }
+    const t = Object.assign(document.createElement("textarea"), { value: text });
+    t.style.position = "fixed"; t.style.opacity = "0"; document.body.appendChild(t); t.select();
+    let ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+    t.remove(); return ok;
+  }
+  function renderFeedback() {
+    const notes = fbList(), unsent = notes.filter((n) => !n.sent), sent = notes.length - unsent.length;
+    $("fbList").innerHTML = unsent.length
+      ? `<ul class="fblist">${unsent.map((n) => `<li><div><a href="#read/${n.week}/${esc(n.sid)}">${n.week ? "Week " + n.week : "Week 0"} · ${esc(n.section)} · step ${n.step}</a>
+          <div class="muted small">${esc(n.text)}</div>${n.note ? `<div>${esc(n.note)}</div>` : ""}</div>
+          <button class="btn danger small" type="button" data-fbdel="${esc(n.id)}" aria-label="Delete this note">✕</button></li>`).join("")}</ul>`
+      : `<p class="muted small">No notes waiting. ${sent ? `${sent} sent already.` : "Press <b>Confusing?</b> on any step in a lesson to add one."}</p>`;
+    $("fbCopy").disabled = !unsent.length;
+    $("fbWhatsApp").classList.toggle("disabled", !unsent.length);
+    $("fbWhatsApp").href = unsent.length ? "https://wa.me/?text=" + encodeURIComponent(fbMessage(unsent)) : "#settings";
+    $("fbSent").classList.toggle("hidden", !unsent.length);
+    $("fbClear").classList.toggle("hidden", !sent);
+    $("fbClear").textContent = `Clear ${sent} sent note${sent === 1 ? "" : "s"}`;
+  }
+  function markSent() { const t = now(); fbUnsent().forEach((n) => (S.fb[n.id] = Object.assign({}, n, { sent: true, t }))); save(); renderFeedback(); }
+  $("fbCopy").addEventListener("click", async () => {
+    const ok = await copyText(fbMessage(fbUnsent()));
+    toast(ok ? "Copied. Paste it into WhatsApp." : "Couldn't copy here. Use Send on WhatsApp instead.", ok ? { label: "Mark as sent", run: markSent } : null);
+  });
+  $("fbWhatsApp").addEventListener("click", (e) => {
+    if (!fbUnsent().length) { e.preventDefault(); return; }
+    setTimeout(() => toast("Sent it?", { label: "Mark as sent", run: markSent }), 300);
+  });
+  $("fbSent").addEventListener("click", markSent);
+  $("fbClear").addEventListener("click", () => { fbList().filter((n) => n.sent).forEach((n) => delFeedback(n.id)); renderFeedback(); });
+  $("fbList").addEventListener("click", (e) => { const b = e.target.closest("[data-fbdel]"); if (b) { delFeedback(b.dataset.fbdel); renderFeedback(); } });
+
+  // ---------- first-run welcome ----------
+  const TOUR = [
+    ["Today", "Today says what to do next. Pick how long you've got and whether you're on your phone or a PC, and it suggests one thing from the week you're on."],
+    ["The lesson reader", "Lessons open inside the app. Every numbered step has a tick box, and <b>You are here</b> marks the one you're on. Press <b>Done → next step</b> (or <b>N</b>) after each one. Close the app and it reopens on the same step."],
+    ["Stuck on a step?", "Press <b>Confusing?</b> next to it and say what didn't make sense. Settings collects your notes and sends them in one WhatsApp message, so the step gets fixed."],
+    ["Back up your progress", "Your ticks are saved in this browser only. Once a week, go to Settings (<b>More</b> on a phone) and press <b>Export backup</b>. <b>Import and merge</b> brings everything back, on any device."],
+  ];
+  let wStep = 0;
+  function showWelcome() { wStep = 0; renderWelcome(); $("welcome").classList.remove("hidden"); document.body.classList.add("modal-open"); setTimeout(() => { const f = $("wName"); if (f) f.focus(); }, 50); }
+  function defaultStart() {
+    if (get("settings", "start") || started()) return setting("start");
+    const d = new Date(), m = mondayOf(d);
+    return iso(m.getTime() === new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime() ? m : addDays(m, 7));
+  }
+  function renderWelcome() {
+    const box = $("welcomeBody"), last = wStep === TOUR.length;
+    const dots = `<div class="wdots" aria-hidden="true">${[0, ...TOUR.keys()].map((_, i) => `<span class="${i === wStep ? "on" : ""}"></span>`).join("")}</div>`;
+    if (wStep === 0) {
+      box.innerHTML = `<h2 id="wTitle">Welcome to Data Skills Studio</h2>
+        <p>A 62-week course, from Excel basics to machine learning, at about 5 hours a week. Two quick questions first.</p>
+        <div class="field"><label for="wName">Your first name</label><input type="text" id="wName" autocomplete="given-name" value="${esc(name())}" placeholder="So the app can say hello"></div>
+        <div class="field"><label for="wStart">When do you start Week 1? (a Monday)</label><input type="date" id="wStart" value="${esc(defaultStart())}"></div>
+        <p class="muted small">The lessons show your own week dates from this. You can change it any time in Settings.</p>
+        ${dots}<div class="row wbtns"><button type="button" class="btn ghost" data-wskip="1">Skip</button><button type="button" class="btn primary" data-wnext="1">Next</button></div>`;
+      return;
+    }
+    const [h, p] = TOUR[wStep - 1];
+    box.innerHTML = `<p class="eyebrow">Quick tour · ${wStep} of ${TOUR.length}</p><h2 id="wTitle">${h}</h2><p>${p}</p>${dots}
+      <div class="row wbtns"><button type="button" class="btn ghost" data-wback="1">‹ Back</button>
+      ${last ? (SETUP && !setupDone() && !started()
+        ? `<button type="button" class="btn" data-wdone="#today">Go to Today</button><button type="button" class="btn primary" data-wdone="#read/0">Start Week 0: Set up</button>`
+        : `<button type="button" class="btn primary" data-wdone="#today">Done</button>`)
+      : `<button type="button" class="btn ghost" data-wskip="1">Skip</button><button type="button" class="btn primary" data-wnext="1">Next</button>`}</div>`;
+  }
+  function saveWelcomeForm() {
+    const n = $("wName"), st = $("wStart"); if (!n) return;
+    if (n.value.trim() !== name()) put("settings", "name", n.value.trim());
+    if (st.value) {
+      const v = iso(mondayOf(parseISO(st.value)));
+      if (v !== get("settings", "start") && (get("settings", "start") || v !== DEF.start)) put("settings", "start", v);
+      if (v !== st.value) toast(`Week 1 starts on the Monday: ${fmtY(parseISO(v))}`);
+    }
+  }
+  function closeWelcome(dest) {
+    if (wStep === 0) saveWelcomeForm();
+    put("settings", "welcomed", today()); save();
+    $("welcome").classList.add("hidden"); document.body.classList.remove("modal-open");
+    renderAll(); if (dest) go(dest);
+  }
+  $("welcome").addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.wnext) { if (wStep === 0) saveWelcomeForm(); wStep++; renderWelcome(); }
+    else if (b.dataset.wback) { wStep--; renderWelcome(); }
+    else if (b.dataset.wskip) closeWelcome("#today");
+    else if (b.dataset.wdone) closeWelcome(b.dataset.wdone);
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("welcome").classList.contains("hidden")) closeWelcome(null); });
+  $("welcome").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && e.target.tagName === "INPUT") { e.preventDefault(); saveWelcomeForm(); wStep++; renderWelcome(); }
+  });
 
   // ---------- Cards ----------
   let review = null; // {queue:[card], i, shown, done, again:Set, weekOnly}
@@ -864,7 +1038,7 @@
   }
   // Reader keys, for when the reader is on a second monitor: N = done, next step; B = back; F = focus.
   document.addEventListener("keydown", (e) => {
-    if (route.view !== "reader" || e.ctrlKey || e.metaKey || e.altKey || e.target.closest("input, textarea, select")) return;
+    if (route.view !== "reader" || document.body.classList.contains("modal-open") || e.ctrlKey || e.metaKey || e.altKey || e.target.closest("input, textarea, select")) return;
     const w = weekByNo(readerWeek); if (!w || !document.querySelector(".stepbar")) return;
     const k = e.key.toLowerCase();
     if (k === "n") { e.preventDefault(); stepNext(w); }
@@ -940,16 +1114,19 @@
 
   // ---------- settings, backup ----------
   function renderSettings() {
-    $("sStart").value = setting("start"); $("sTarget").value = setting("target"); $("sRepo").value = setting("repo"); $("sTheme").value = P.theme;
+    $("sName").value = name(); $("sStart").value = setting("start"); $("sTarget").value = setting("target"); $("sRepo").value = setting("repo"); $("sTheme").value = P.theme;
     $("sDevice").value = P.device || "auto";
     $("bShare").classList.toggle("hidden", !canShareFiles());
     Sync.render();
+    renderFeedback();
     $("installBtn").classList.toggle("hidden", !deferredInstall);
     $("installNote").innerHTML = location.protocol.startsWith("http")
       ? "On Android (Chrome): menu ⋮ → <b>Install app</b> or <b>Add to Home screen</b>. On iPhone (Safari): Share → <b>Add to Home Screen</b>. Once installed it opens full screen and works offline."
-      : "Installing needs the web address (GitHub Pages, see the README). This copy was opened from a file, which works fine on this PC but can't be installed.";
+      : "Installing needs the tracker's web link (see Getting started in the README). This copy was opened from a file, which works fine on this PC but can't be installed and doesn't update itself.";
   }
   $("sStart").addEventListener("change", (e) => { if (e.target.value) { const v = iso(mondayOf(parseISO(e.target.value))); put("settings", "start", v); e.target.value = v; save(); toast("Plan dates updated"); } });
+  $("sName").addEventListener("change", (e) => { put("settings", "name", e.target.value.trim()); save(); });
+  $("sTour").addEventListener("click", showWelcome);
   $("sTarget").addEventListener("change", (e) => { put("settings", "target", Math.max(1, +e.target.value || 5)); save(); });
   $("sRepo").addEventListener("change", (e) => { put("settings", "repo", e.target.value.trim() || DEFAULT_REPO); save(); });
   $("sTheme").addEventListener("change", (e) => { P.theme = e.target.value; savePrefs(); applyTheme(); });
@@ -985,6 +1162,8 @@
     for (const k of ["ticks", "sec", "read", "watched"]) for (const key of Object.keys(S[k])) r[k][key] = { v: false, t };
     for (const key of Object.keys(S.doneWhen)) r.doneWhen[key] = { v: null, t };
     for (const [id, x] of Object.entries(S.log)) r.log[id] = Object.assign({}, x, { del: true, t });
+    for (const [id, x] of Object.entries(S.fb)) r.fb[id] = Object.assign({}, x, { del: true, t });
+    for (const key of Object.keys(S.step)) r.step[key] = { v: false, t };
     for (const id of Object.keys(S.quiz)) r.quiz[id] = { box: 0, due: today(), t, n: 0 };
     r.settings = S.settings;
     S = r; save(); renderAll(); toast("Reset");
@@ -1256,6 +1435,7 @@
   $("lDate").value = today();
   applyTheme();
   renderAll();
+  if (ONBOARD && !get("settings", "welcomed")) showWelcome();
   if (Sync.on()) Sync.syncNow();
 
   // Small hooks for tools/test_app.js. They expose nothing that isn't already in localStorage.

@@ -93,7 +93,7 @@ Ask whether the training budget will fund PL-300 or CMRP, since both map directl
 
 Go back to `course/README.md` and look at the seven *done when* tests (plus Phase 0). Can you still pass each one today, from memory, on a fresh copy of the data? If yes: **you've done it.** A year ago you were starting at "how do I freeze panes". Now you can defend a PM interval with a Weibull analysis and build an anomaly detector from raw vibration data.
 
-Well done, Josh. 🎉
+Well done. 🎉
 
 ---
 

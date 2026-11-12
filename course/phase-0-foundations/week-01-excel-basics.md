@@ -11,7 +11,7 @@ You're starting from scratch, so this week is about getting comfortable: opening
 - write formulas with `SUM`, `AVERAGE`, `MIN`, `MAX`, `COUNT` and `IF`
 - explain the difference between `A1`, `$A$1` and `A$1`, and why it matters
 
-**You need:** Excel (Microsoft 365) and the file `data/week01/shift_downtime_log.csv` from this repo. To get the files, open the repo on GitHub, click the green **Code** button, then **Download ZIP**, and unzip it somewhere like `Documents\Learning-Data`.
+**You need:** Excel (Microsoft 365) and the file `Documents\Learning-Data\data\week01\shift_downtime_log.csv`. If you haven't got the course files yet, do [Week 0: Set up](../week-00-setup.md) first. It takes about 30 minutes.
 
 ---
 
