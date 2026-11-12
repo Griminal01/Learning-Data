@@ -41,7 +41,7 @@
      Caveat: if two devices' clocks disagree, the one that is ahead wins a genuine conflict on the
      same item. That is rare and harmless here (the worst case is one tick flipping back). */
   function blank() {
-    return { v: 2, settings: {}, ticks: {}, doneWhen: {}, sec: {}, read: {}, watched: {}, pos: {}, quiz: {}, days: {}, log: {} };
+    return { v: 2, settings: {}, ticks: {}, doneWhen: {}, sec: {}, read: {}, step: {}, watched: {}, pos: {}, quiz: {}, days: {}, log: {} };
   }
   function normalise(o) {
     const s = blank();
@@ -89,7 +89,7 @@
   function merge(a, b) {
     a = normalise(a); b = normalise(b);
     const out = blank();
-    for (const k of ["settings", "ticks", "doneWhen", "sec", "read", "watched", "pos"]) out[k] = mergeMap(a[k], b[k], pickReg);
+    for (const k of ["settings", "ticks", "doneWhen", "sec", "read", "step", "watched", "pos"]) out[k] = mergeMap(a[k], b[k], pickReg);
     out.quiz = mergeMap(a.quiz, b.quiz, pickCard);
     out.log = mergeMap(a.log, b.log, pickLog);
     out.days = mergeMap(a.days, b.days, (x, y) => Math.max(x || 0, y || 0));
@@ -106,7 +106,7 @@
   function writeJSON(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); return true; } catch (e) { return false; } }
 
   let S = load();
-  let P = Object.assign({ theme: "auto", device: null, minutes: 15, pending: null }, readJSON(PREFS_KEY) || {});
+  let P = Object.assign({ theme: "auto", device: null, minutes: 15, pending: null, focus: false }, readJSON(PREFS_KEY) || {});
   function load() {
     const cur = readJSON(KEY);
     if (cur) return normalise(cur);
@@ -185,6 +185,14 @@
   const secDone = (w, s) => !!get("sec", secKey(w, s));
   const secRead = (w, s) => !!get("read", secKey(w, s));
   const progressSections = (w) => w.sections.filter((s) => s.kind !== "short" && s.kind !== "tick");
+  /* Steps: the numbered items of a hands-on section's "Do it" lists. build_tracker.py gives each one
+     an id that is a hash of its text, so a tick stays with its step if steps around it change.
+     The step you're on is the first one not ticked; -1 means all done. */
+  const stepsOf = (s) => (s && s.steps) || [];
+  const stepKey = (w, s, id) => `${w.week}:${s.id}:${id}`;
+  const stepDone = (w, s, id) => !!get("step", stepKey(w, s, id));
+  const stepsDone = (w, s) => stepsOf(s).filter((id) => stepDone(w, s, id)).length;
+  const stepIndex = (w, s) => stepsOf(s).findIndex((id) => !stepDone(w, s, id));
   function nextHands(w) { return w.sections.find((s) => s.kind === "hands" && !secDone(w, s)); }
   function nextReading(w) {
     return w.sections.find((s) =>
@@ -333,7 +341,9 @@
     } : null;
     if (watchA) { watchA.detail = MD.inline(watch.md, mdCtx(w)); watchA.detailHtml = true; }
     const handsA = hands ? {
-      kind: "hands", title: `${get("pos", String(w.week)) === hands.id ? "Continue" : "Start"} ${secLabel(hands)}`,
+      kind: "hands", title: stepsDone(w, hands) && stepIndex(w, hands) >= 0
+        ? `Continue ${secLabel(hands)} at step ${stepIndex(w, hands) + 1} of ${stepsOf(hands).length}`
+        : `${get("pos", String(w.week)) === hands.id ? "Continue" : "Start"} ${secLabel(hands)}`,
       detail: hands.mins && minutes < hands.mins ? `Planned as ${fmtMins(hands.mins)}. Do what you can in ${minutes} min: the reader remembers where you got to.` : `About ${fmtMins(hands.mins || 90)} at your PC.`,
       cta: "Open in the reader", mins: minutes, label: `${plain(shortTitle(hands.title))} (Week ${w.week})`, run: () => go(`#read/${w.week}/${hands.id}`),
     } : null;
@@ -545,8 +555,103 @@
   function sectionChip(w, s) {
     if (s.kind === "short" || s.kind === "tick") return "";
     if (secDone(w, s)) return `<span class="chip done">Done</span>`;
+    const n = stepsOf(s).length, d = stepsDone(w, s);
+    if (n && d) return `<span class="chip">${d}/${n} steps</span>`;
     if (secRead(w, s)) return `<span class="chip">Read</span>`;
     return "";
+  }
+  /* The hands-on section the step bar follows: the one you last opened, if it's open and has steps,
+     else the first open one with steps. */
+  function activeStepSec(w, secs) {
+    const has = (s) => s && openSecs.has(s.id) && stepsOf(s).length;
+    const pos = secs.find((s) => s.id === get("pos", String(w.week)));
+    return has(pos) ? pos : secs.find(has) || null;
+  }
+  function hereLine(w, secs) {
+    const pos = secs.find((s) => s.id === get("pos", String(w.week)));
+    const s = pos && stepsOf(pos).length && stepIndex(w, pos) >= 0 ? pos : secs.find((x) => stepsOf(x).length && stepsDone(w, x) && stepIndex(w, x) >= 0);
+    if (!s || !stepsDone(w, s)) return "";
+    return `<p class="here-line"><span class="here-dot" aria-hidden="true"></span>You're on <a href="#read/${w.week}/${s.id}">${esc(shortTitle(s.title))} · step ${stepIndex(w, s) + 1} of ${stepsOf(s).length}</a></p>`;
+  }
+  function stepBarHtml(w, s, secs) {
+    const n = stepsOf(s).length, cur = stepIndex(w, s), d = stepsDone(w, s);
+    const name = esc(shortTitle(s.title));
+    if (cur < 0) {
+      const next = secs[secs.indexOf(s) + 1];
+      return `<div class="stepbar" role="region" aria-label="Step controls" data-sid="${s.id}">
+        <span class="sb-text"><strong>All ${n} steps done</strong> <span class="muted">· ${name}</span></span>
+        <button type="button" class="btn small ghost" data-stepback="1">‹ Back</button>
+        ${next ? `<button type="button" class="btn primary" data-barnext="${next.id}">Next: ${esc(shortTitle(next.title))} ›</button>` : ""}
+      </div>`;
+    }
+    return `<div class="stepbar" role="region" aria-label="Step controls" data-sid="${s.id}">
+      <span class="sb-text"><strong>Step ${cur + 1} of ${n}</strong> <span class="muted">· ${name}</span></span>
+      <button type="button" class="btn small ghost" data-stepback="1"${d ? "" : " disabled"}>‹ Back</button>
+      <button type="button" class="btn small toggle" data-focus="1" aria-pressed="${!!P.focus}" title="Show only the step you're on (F)">Focus</button>
+      <button type="button" class="btn primary" data-stepnext="1" title="Tick this step and move on (N)">Done → next step</button>
+    </div>`;
+  }
+  /* Turn the rendered "Do it" lists of one open section into tickable steps. The build script and
+     app/markdown.js agree on which <li>s these are: top-level <ol> items outside "Why ..." parts.
+     If the counts ever disagree the section stays plain rather than ticking the wrong step. */
+  function decorateSteps(w, s, focus) {
+    const el = document.querySelector(`.rsec[data-sid="${CSS.escape(s.id)}"] .rsec-body`);
+    const ids = stepsOf(s);
+    if (!el || !ids.length) return;
+    const lis = []; let why = false;
+    for (const node of el.children) {
+      if (node.tagName === "H3") { why = /^why/i.test(node.textContent.trim()); continue; }
+      if (node.tagName === "OL" && !why) { node.classList.add("steps-ol"); lis.push(...node.children); }
+    }
+    if (lis.length !== ids.length) { el.querySelectorAll("ol.steps-ol").forEach((o) => o.classList.remove("steps-ol")); return; }
+    const cur = stepIndex(w, s);
+    lis.forEach((li, i) => {
+      const done = stepDone(w, s, ids[i]), num = i + 1;
+      li.classList.add("step");
+      li.classList.toggle("done", done);
+      li.classList.toggle("current", i === cur);
+      if (cur >= 0) { li.classList.toggle("prev", i === cur - 1); li.classList.toggle("next", i === cur + 1); }
+      li.insertAdjacentHTML("afterbegin", `<button type="button" class="stepbox" data-step="${i}" data-sid="${s.id}" aria-pressed="${done}" aria-label="Step ${num}${done ? ", done. Untick" : ". Tick when done"}">${done ? "✓" : num}</button>${i === cur ? `<span class="here">You are here</span>` : ""}`);
+      li.querySelectorAll("p").forEach((p) => { if (/^You should see\b/.test(p.textContent.trim())) p.classList.add("expect"); });
+    });
+    if (focus && cur >= 0) {
+      el.classList.add("focus");
+      lis.forEach((li) => { if (li.matches(".current, .prev, .next")) li.parentElement.classList.add("in-focus"); });
+      el.insertAdjacentHTML("afterbegin", `<p class="focus-note muted small">Focus view: just the step you're on. <button type="button" class="linkbtn" data-focus="1">Show the whole session</button></p>`);
+    }
+  }
+  function tickStep(w, s, i, on) {
+    const ids = stepsOf(s); if (!ids[i]) return;
+    put("step", stepKey(w, s, ids[i]), on);
+    put("pos", String(w.week), s.id);
+    const all = on && stepIndex(w, s) < 0;
+    if (all && !secDone(w, s)) {
+      put("sec", secKey(w, s), true);
+      save(); renderReader(false);
+      finished(s.mins ? Math.min(s.mins, 90) : 30, `${plain(shortTitle(s.title))} (Week ${w.week})`);
+      toast(`${shortTitle(s.title)}: all ${ids.length} steps done`);
+      return;
+    }
+    save(); renderReader(false);
+  }
+  function scrollToCurrent(smooth) {
+    const el = document.querySelector(".rsec.open li.step.current") || document.querySelector(".stepbar");
+    if (el) el.scrollIntoView({ block: "center", behavior: smooth && !reduced() ? "smooth" : "auto" });
+  }
+  function stepNext(w) {
+    const secs = w.sections.filter((x) => x.kind !== "short"), s = activeStepSec(w, secs);
+    if (!s) return;
+    const cur = stepIndex(w, s); if (cur < 0) return;
+    tickStep(w, s, cur, true);
+    scrollToCurrent(true);
+  }
+  function stepBack(w) {
+    const secs = w.sections.filter((x) => x.kind !== "short"), s = activeStepSec(w, secs);
+    if (!s) return;
+    const cur = stepIndex(w, s), i = (cur < 0 ? stepsOf(s).length : cur) - 1;
+    if (i < 0) return;
+    tickStep(w, s, i, false);
+    scrollToCurrent(true);
   }
   function renderReader(fromRoute) {
     renderHeader();
@@ -566,6 +671,7 @@
         <h2>${inl(w.title)}</h2>
         <div class="bar thin"><span style="width:${ps.length ? Math.round(nd / ps.length * 100) : 0}%"></span></div>
         <p class="muted small">${nd}/${ps.length} sections done · ${weekDone(w)}/${w.ticks.length} ticked${unlocked ? "" : " · phase locked for ticking"}</p>
+        ${hereLine(w, secs)}
         <div class="row">
           ${w.week > 1 ? `<a class="btn small" href="#read/${w.week - 1}">‹ Week ${w.week - 1}</a>` : ""}
           ${w.week < WEEKS.length ? `<a class="btn small" href="#read/${w.week + 1}">Week ${w.week + 1} ›</a>` : ""}
@@ -575,14 +681,20 @@
       ${shortCard(w, true)}
       <nav class="toc" aria-label="Sections">${secs.map((s) => `<a href="#read/${w.week}/${s.id}" class="toc-item ${secDone(w, s) ? "done" : ""}">${secDone(w, s) ? "✓ " : ""}${esc(shortTitle(s.title))}</a>`).join("")}</nav>
       ${secs.map((s, i) => sectionHtml(w, s, i, secs, unlocked)).join("")}`;
-    $("view-reader").innerHTML = html;
+    const act = activeStepSec(w, secs);
+    $("view-reader").innerHTML = html + (act ? stepBarHtml(w, act, secs) : "");
+    $("view-reader").classList.toggle("has-stepbar", !!act);
+    secs.forEach((s) => { if (openSecs.has(s.id) && stepsOf(s).length) decorateSteps(w, s, !!P.focus && s === act); });
     if (fromRoute && target) {
-      const hadPlace = !!route.sid || get("pos", String(w.week)) === target.id && target !== secs[0];
+      const midSteps = stepsDone(w, target) > 0 && stepIndex(w, target) >= 0 && !route.why;
+      const hadPlace = !!route.sid || get("pos", String(w.week)) === target.id && target !== secs[0] || midSteps;
       if (get("pos", String(w.week)) !== target.id) { put("pos", String(w.week), target.id); save(); }
       requestAnimationFrame(() => {
         let el = document.querySelector(`.rsec[data-sid="${CSS.escape(target.id)}"]`);
         if (route.why && target.why) el = el.querySelector(`[data-h="${target.why[0]}"]`) || el;
-        if (el && hadPlace) el.scrollIntoView({ block: "start", behavior: "auto" });
+        const cur = midSteps && el && el.querySelector("li.step.current");
+        if (cur) cur.scrollIntoView({ block: "center", behavior: "auto" });
+        else if (el && hadPlace) el.scrollIntoView({ block: "start", behavior: "auto" });
         else window.scrollTo(0, 0);
       });
     }
@@ -630,6 +742,23 @@
   $("view-reader").addEventListener("click", (e) => {
     const w = weekByNo(readerWeek); if (!w) return;
     const b = e.target.closest("button, a"); if (!b) return;
+    if (b.dataset.step != null) {
+      const s = w.sections.find((x) => x.id === b.dataset.sid); if (!s) return;
+      tickStep(w, s, +b.dataset.step, b.getAttribute("aria-pressed") !== "true");
+      return;
+    }
+    if (b.dataset.stepnext) { stepNext(w); return; }
+    if (b.dataset.stepback) { stepBack(w); return; }
+    if (b.dataset.focus) { P.focus = !P.focus; savePrefs(); renderReader(false); scrollToCurrent(false); return; }
+    if (b.dataset.barnext) {
+      const sid = b.closest(".stepbar").dataset.sid;
+      openSecs.delete(sid); openSecs.add(b.dataset.barnext);
+      put("pos", String(w.week), b.dataset.barnext); save();
+      renderReader(false);
+      const el = document.querySelector(`.rsec[data-sid="${CSS.escape(b.dataset.barnext)}"]`);
+      if (el) el.scrollIntoView({ block: "start", behavior: reduced() ? "auto" : "smooth" });
+      return;
+    }
     if (b.dataset.toggle) {
       const id = b.dataset.toggle;
       if (openSecs.has(id)) openSecs.delete(id); else { openSecs.add(id); put("pos", String(w.week), id); save(); }
@@ -733,6 +862,15 @@
     renderHeader(); renderCard($("view-cards"));
     window.scrollTo(0, 0);
   }
+  // Reader keys, for when the reader is on a second monitor: N = done, next step; B = back; F = focus.
+  document.addEventListener("keydown", (e) => {
+    if (route.view !== "reader" || e.ctrlKey || e.metaKey || e.altKey || e.target.closest("input, textarea, select")) return;
+    const w = weekByNo(readerWeek); if (!w || !document.querySelector(".stepbar")) return;
+    const k = e.key.toLowerCase();
+    if (k === "n") { e.preventDefault(); stepNext(w); }
+    else if (k === "b") { e.preventDefault(); stepBack(w); }
+    else if (k === "f") { e.preventDefault(); P.focus = !P.focus; savePrefs(); renderReader(false); scrollToCurrent(false); }
+  });
   document.addEventListener("keydown", (e) => {
     if (route.view !== "cards" || !review || e.target.closest("input, textarea, select")) return;
     if (!review.shown && (e.key === " " || e.key === "Enter")) { e.preventDefault(); review.shown = true; renderCard($("view-cards")); }

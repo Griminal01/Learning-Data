@@ -275,6 +275,83 @@ function mockGist(context) {
     await context.close();
   });
 
+  await test("steps: every lesson's steps line up with the rendered lists", async () => {
+    const { context, page } = await open(browser);
+    const bad = await page.evaluate(() => {
+      const out = [];
+      for (const w of window.COURSE_DATA.weeks) for (const s of w.sections) {
+        if (!s.steps) continue;
+        const div = document.createElement("div"); div.innerHTML = MD.render(s.md, {});
+        let n = 0, why = false;
+        for (const node of div.children) {
+          if (node.tagName === "H3") why = /^why/i.test(node.textContent.trim());
+          else if (node.tagName === "OL" && !why) n += node.children.length;
+        }
+        if (n !== s.steps.length) out.push(`week ${w.week} ${s.id}: ${s.steps.length} steps, ${n} rendered`);
+        if (new Set(s.steps).size !== s.steps.length) out.push(`week ${w.week} ${s.id}: duplicate step ids`);
+      }
+      return out;
+    });
+    check(bad.length === 0, "step counts match the rendered lists: " + bad.slice(0, 5).join("; "));
+    await context.close();
+  });
+
+  await test("steps: tick, You are here, Done → next, back, resume, focus", async () => {
+    const { context, page, errors } = await open(browser, { context: { viewport: { width: 1280, height: 800 } } });
+    const s1 = await page.evaluate(() => { const s = window.COURSE_DATA.weeks[0].sections.find((x) => x.kind === "hands"); return { id: s.id, n: s.steps.length }; });
+    check(s1.n >= 10, `Week 1 Session 1 has one-action steps (${s1.n})`);
+    await goHash(page, "#read/1/" + s1.id);
+    const sec = `.rsec[data-sid="${s1.id}"]`;
+    check(await page.locator(`${sec} li.step`).count() === s1.n, "every step gets a tick box");
+    check((await page.textContent(".stepbar")).includes(`Step 1 of ${s1.n}`), "step bar starts at step 1");
+    check(await page.isVisible(`${sec} li.step.current .here`), "You are here on the first step");
+    check(await page.locator(`${sec} p.expect`).count() > 3, "'You should see' lines are marked");
+    for (let i = 0; i < 3; i++) await page.click("[data-stepnext]");
+    let st = await state(page);
+    check(Object.keys(st.step).filter((k) => k.startsWith("1:" + s1.id) && st.step[k].v).length === 3, "Done → next ticks 3 steps");
+    check((await page.textContent(".stepbar")).includes(`Step 4 of ${s1.n}`), "step bar moves to step 4");
+    check(await page.locator(`${sec} li.step`).nth(3).evaluate((li) => li.classList.contains("current")), "4th step is current");
+    check((await page.textContent(".reader-head")).includes(`step 4 of ${s1.n}`), "header says which step you're on");
+    check((await page.textContent(`${sec} .rsec-head`)).includes(`3/${s1.n} steps`), "section chip counts steps");
+    const box = await page.locator(`${sec} li.step.current`).boundingBox();
+    check(box && box.y >= 0 && box.y < 800, "current step scrolled into view");
+    await page.keyboard.press("b");
+    check((await page.textContent(".stepbar")).includes(`Step 3 of ${s1.n}`), "B key steps back");
+    await page.keyboard.press("n");
+    check((await page.textContent(".stepbar")).includes(`Step 4 of ${s1.n}`), "N key ticks and moves on");
+    await page.click(`${sec} li.step >> nth=0 >> .stepbox`);
+    check((await page.textContent(".stepbar")).includes(`Step 1 of ${s1.n}`), "unticking step 1 makes it current again");
+    await page.click(`${sec} li.step >> nth=0 >> .stepbox`);
+    // resume: leave, come back to the week, land on the current step
+    await goHash(page, "#today");
+    await setTime(page, 60, "pc");
+    check((await page.textContent("#view-today .primary-rec")).includes("at step 4 of"), "Today says which step to continue at");
+    await page.reload(); await page.waitForSelector("#view-today .rec");
+    await goHash(page, "#read/1");
+    await page.waitForTimeout(150);
+    const rb = await page.locator(`${sec} li.step.current`).boundingBox();
+    check(rb && rb.y > 0 && rb.y < 800, "reopening the week lands on the current step");
+    // focus view
+    await page.click(".stepbar [data-focus]");
+    check(await page.isVisible(`${sec} .rsec-body.focus`), "focus view on");
+    const shown = await page.locator(`${sec} li.step:visible`).count();
+    check(shown === 3, `focus shows the step before, the current one and the next (${shown})`);
+    check(!(await page.isVisible(`${sec} .rsec-body > h3`)), "focus hides the rest of the session");
+    await page.reload(); await page.waitForSelector(".rsec");
+    check(await page.isVisible(`${sec} .rsec-body.focus`), "focus view remembered on this device");
+    await page.keyboard.press("f");
+    check(!(await page.isVisible(`${sec} .rsec-body.focus`)), "F key turns focus off");
+    // finish the session: section is marked done
+    for (let i = 3; i < s1.n; i++) await page.click("[data-stepnext]");
+    st = await state(page);
+    check(reg(st, "sec", "1:" + s1.id) === true, "ticking the last step marks the session done");
+    check((await page.textContent(".stepbar")).includes(`All ${s1.n} steps done`), "step bar says all done");
+    await page.click("[data-barnext]");
+    check(reg(await state(page), "pos", "1") !== s1.id, "Next from the step bar moves on");
+    check(errors.length === 0, "no errors: " + errors.join(" | "));
+    await context.close();
+  });
+
   await test("quiz cards: reveal, Got it, Leitner rescheduling, Again", async () => {
     const { context, page, errors } = await open(browser, { time: "2026-11-10T09:00:00" });
     await goHash(page, "#cards");

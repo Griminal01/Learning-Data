@@ -250,6 +250,80 @@ def parse_short(lines):
     return found or None
 
 
+STEP = re.compile(r"^(\d+)\.\s+(.*)$")
+SENTENCE = re.compile(r"[.!?](?:\s|$)")
+
+
+def parse_steps(lines):
+    """The steps the reader lets you tick: top-level numbered items, outside 'Why ...' parts.
+
+    Each step's id is a short hash of its text, so a tick stays with its step when steps
+    around it are added or moved. Mirrors how app/markdown.js turns them into <ol><li>.
+    """
+    steps, cur, in_fence, why, prev_blank = [], None, False, False, False
+    for line in lines:
+        if FENCE.match(line):
+            in_fence = not in_fence
+            if cur is not None:
+                cur.append(line)
+            continue
+        if in_fence:
+            if cur is not None:
+                cur.append(line)
+            continue
+        if line.startswith("### "):
+            why = line[4:].strip().lower().startswith("why")
+            cur = None
+            continue
+        m = STEP.match(line)
+        if m and not why:
+            cur = [m.group(2)]
+            steps.append(cur)
+            prev_blank = False
+            continue
+        if cur is None:
+            continue
+        if not line.strip():
+            prev_blank = True
+            cur.append("")
+            continue
+        if line.startswith((" ", "\t")) or not prev_blank:
+            cur.append(line)
+            prev_blank = False
+            continue
+        cur, prev_blank = None, False  # a new paragraph ends the list
+    out, seen = [], {}
+    for st in steps:
+        text = " ".join(" ".join(st).split())
+        h = hashlib.sha1(text.encode("utf-8")).hexdigest()[:8]
+        seen[h] = seen.get(h, 0) + 1
+        out.append({"id": h if seen[h] == 1 else f"{h}-{seen[h]}", "lines": st})
+    return out
+
+
+def step_load(lines):
+    """Rough count of things a step asks for: sub-bullets plus sentences, ignoring code and
+    'You should see' result lines. Used to flag crammed steps (see 'Long steps' in the output)."""
+    bullets, text, in_fence = 0, [], False
+    for line in lines:
+        if FENCE.match(line):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        s = line.strip()
+        if re.match(r"^[-*]\s", s):
+            bullets += 1
+        if re.match(r"^(\*\*)?You should see", s) or s.startswith("|"):
+            continue
+        text.append(re.sub(r"`[^`]*`", "x", s))
+    sentences = len(SENTENCE.findall(" ".join(text)))
+    return bullets, sentences
+
+
+LONG = []  # (week, section title, step number) of steps that look crammed
+
+
 def parse_lesson(path: Path, report):
     text = path.read_text(encoding="utf-8")
     lines = text.splitlines()
@@ -272,6 +346,14 @@ def parse_lesson(path: Path, report):
         if why:
             entry["why"] = why
             entry["readMins"] = max(2, round(why_words / 180))
+        if kind == "hands":
+            steps = parse_steps(body)
+            if steps:
+                entry["steps"] = [st["id"] for st in steps]
+                for k, st in enumerate(steps, 1):
+                    bullets, sentences = step_load(st["lines"])
+                    if bullets >= 2 or sentences >= 5:
+                        LONG.append((week, sec["title"], k))
         if kind in ("intro", "other"):
             entry["readMins"] = max(2, round(words(body) / 180))
         if kind == "tick":
@@ -373,6 +455,17 @@ def main():
     no_check = [w["week"] for w in weeks if not w["quiz"]]
     if no_check:
         print("No quiz cards in weeks: " + ", ".join(map(str, no_check)))
+    n_steps = sum(len(s.get("steps", [])) for w in weeks for s in w["sections"])
+    print(f"{n_steps} tickable steps")
+    if LONG:
+        per = {}
+        for wk, _, _ in LONG:
+            per[wk] = per.get(wk, 0) + 1
+        print(f"Long steps (2+ sub-bullets or 5+ sentences), {len(LONG)} in all. Split them into one action each:")
+        print("  " + ", ".join(f"W{wk} ({n})" for wk, n in sorted(per.items())))
+        if "--long" in sys.argv:
+            for wk, title, k in LONG:
+                print(f"  week {wk}, {title}, step {k}")
     if report:
         print("Question/answer notes:")
         for r in report:

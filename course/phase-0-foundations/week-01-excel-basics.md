@@ -19,20 +19,49 @@ You're starting from scratch, so this week is about getting comfortable: opening
 
 ### Do it
 
-1. Double-click `shift_downtime_log.csv`. It opens in Excel. This is two weeks of downtime from a fictional cereal line, the same kind of log a shift team fills in.
-2. **Save it as a workbook straight away:** File → Save As → choose *Excel Workbook (\*.xlsx)* → name it `week01_downtime.xlsx`. A CSV can't hold formulas, formatting or extra sheets, so always save a working copy as `.xlsx`.
-3. **Make it readable.**
-   - Select all (`Ctrl+A`), then on the Home tab choose Format → AutoFit Column Width.
-   - Click cell `A2`, then View → Freeze Panes → *Freeze Panes*. Now the headers stay put when you scroll.
-   - Make row 1 bold (`Ctrl+B`).
-4. **Learn to move fast.** Try each of these and watch where the cursor lands:
-   - `Ctrl+↓` jumps to the bottom of the data, `Ctrl+↑` jumps back up.
-   - `Ctrl+Home` goes to A1, and `Ctrl+End` goes to the last used cell.
-   - `Ctrl+Shift+↓` selects from where you are down to the bottom.
-5. **Use the status bar.** Click the column letter **I** (Minutes). Look at the bottom-right of the window: Excel shows Average, Count and Sum. Right-click the status bar and tick Minimum and Maximum as well.
-   - You should see **Sum 1931**, **Average ≈ 15.6**, **Count 125** (124 rows plus the header), **Min 2**, **Max 177**.
-6. **Sort.** Click any cell in the Minutes column, then go to Data → Sort Largest to Smallest. The top row is the worst stop: a vacuum pump bearing in Forming, 177 minutes.
-7. **Filter.** Data → Filter. Little arrows appear in the headers. Filter **Category** to *Breakdown* only. Select column I again and check the status bar: **14 breakdowns, 976 minutes.** Clear the filter afterwards (Data → Clear).
+Each step is one thing to do. Where there's a **You should see** line, check it before you move on. If it doesn't match, redo that step.
+
+1. Double-click `shift_downtime_log.csv` and it opens in Excel. This is two weeks of downtime from a fictional cereal line, the same kind of log a shift team fills in.
+2. **Save it as a workbook straight away:** File → Save As → choose *Excel Workbook (\*.xlsx)* → name it `week01_downtime.xlsx`.
+
+   A CSV can't hold formulas, formatting or extra sheets, so always save a working copy as `.xlsx`.
+3. **Make it readable.** Press `Ctrl+A` to select everything.
+4. On the Home tab, choose Format → AutoFit Column Width.
+
+   **You should see:** every column wide enough to read its contents.
+5. Click cell `A2`.
+6. Go to View → Freeze Panes → *Freeze Panes*. Scroll down a little.
+
+   **You should see:** the header row stays put while the data scrolls.
+7. Click the row number **1** on the left and press `Ctrl+B` to make the headers bold.
+8. **Learn to move fast.** Click any cell in the data, then press `Ctrl+↓`, then `Ctrl+↑`.
+
+   **You should see:** the cursor jump to the last row of data, then back to the top.
+9. Press `Ctrl+End`, then `Ctrl+Home`.
+
+   **You should see:** the cursor jump to the last used cell, then back to `A1`.
+10. Click `I2` and press `Ctrl+Shift+↓`.
+
+    **You should see:** everything from `I2` down to the bottom of the data selected.
+11. **Use the status bar.** Click the column letter **I** (Minutes) at the top of the column, then look at the bottom-right of the Excel window.
+
+    **You should see:** Average ≈ 15.6, Count 125 (124 rows plus the header) and Sum 1931.
+12. Right-click the status bar and tick **Minimum** and **Maximum**.
+
+    **You should see:** Min 2 and Max 177 added to the status bar.
+13. **Sort.** Click any cell in the Minutes column, then go to Data → Sort Largest to Smallest.
+
+    **You should see:** the worst stop at the top: a vacuum pump bearing in Forming, 177 minutes.
+14. **Filter.** Go to Data → Filter.
+
+    **You should see:** a small arrow in every header cell.
+15. Click the arrow on **Category**, untick everything except *Breakdown*, and press OK.
+16. Click the column letter **I** again and read the status bar.
+
+    **You should see:** Sum 976. That's 14 breakdowns.
+17. Clear the filter: Data → Clear.
+
+    **You should see:** all 124 rows back.
 
 ### Why it works
 
@@ -46,32 +75,49 @@ The status bar is the quickest sanity check in Excel. Before trusting any formul
 
 ### Do it
 
-1. Go to the first empty cell under the Minutes column (`I126`, since the data ends on row 125). Type `=SUM(I2:I125)` and press Enter. You get **1931**.
-2. In the cells below, add:
+1. Click `I126`, the first empty cell under the Minutes column. (The data ends on row 125.)
+2. Type `=SUM(I2:I125)` and press Enter.
 
-   | Cell | Type this | Result |
-   |---|---|---|
-   | H127 | `Average` | |
-   | I127 | `=AVERAGE(I2:I125)` | 15.57… |
-   | H128 | `Longest` | |
-   | I128 | `=MAX(I2:I125)` | 177 |
-   | H129 | `Shortest` | |
-   | I129 | `=MIN(I2:I125)` | 2 |
-   | H130 | `Events` | |
-   | I130 | `=COUNT(I2:I125)` | 124 |
+   **You should see:** 1931.
+3. In `H127` type `Average`. In `I127` type `=AVERAGE(I2:I125)` and press Enter.
 
-3. **Add a calculated column.** In `J1` type `Hours`. In `J2` type `=I2/60` and press Enter. Now copy it down: select `J2`, then double-click the tiny square at the bottom-right corner of the cell (the *fill handle*). Excel fills the formula to the bottom of the data.
-4. Click `J3` and look at the formula bar. It says `=I3/60`, not `=I2/60`. Excel moved the reference down one row for you. That's a **relative reference**.
-5. **Percent of total.** In `K1` type `% of total`. In `K2` type `=I2/I126` and fill down. The results go wrong straight away: `K3` divides by `I127`, `K4` by `I128`… The total moved too.
-   - Fix it: in `K2` type `=I2/$I$126` and fill down again. The `$` signs lock the reference. Now every row divides by the total.
-   - Format column K as a percentage: Home → `%` button.
-6. **Your first decision formula.** In `L1` type `Long stop?`. In `L2` type:
+   **You should see:** 15.57…
+4. In `H128` type `Longest`. In `I128` type `=MAX(I2:I125)`.
 
-   ```
-   =IF(I2>=30,"Long","Short")
-   ```
+   **You should see:** 177.
+5. In `H129` type `Shortest`. In `I129` type `=MIN(I2:I125)`.
 
-   Fill it down. Filter column L to *Long*: you should get **12 rows**.
+   **You should see:** 2.
+6. In `H130` type `Events`. In `I130` type `=COUNT(I2:I125)`.
+
+   **You should see:** 124.
+7. **Add a calculated column.** In `J1` type `Hours`.
+8. In `J2` type `=I2/60` and press Enter.
+9. Click `J2`, then double-click the tiny square at the bottom-right corner of the cell (the *fill handle*).
+
+   **You should see:** the formula filled down to the bottom of the data.
+10. Click `J3` and look at the formula bar, above the column letters.
+
+    **You should see:** `=I3/60`, not `=I2/60`. Excel moved the reference down one row for you. That's a **relative reference**.
+11. **Percent of total.** In `K1` type `% of total`.
+12. In `K2` type `=I2/I126`, press Enter, then fill it down with the fill handle.
+
+    **You should see:** the results go wrong straight away. `K3` divides by `I127`, `K4` by `I128`… The total moved too.
+13. **Fix it.** In `K2` type `=I2/$I$126` instead, press Enter, and fill down again.
+
+    **You should see:** sensible small numbers all the way down. The `$` signs lock the reference, so every row divides by the total.
+14. Select column K and press the `%` button on the Home tab.
+
+    **You should see:** the column shown as percentages.
+15. **Your first decision formula.** In `L1` type `Long stop?`.
+16. In `L2` type this and press Enter, then fill it down:
+
+    ```
+    =IF(I2>=30,"Long","Short")
+    ```
+17. Filter column L to *Long*. (If L has no filter arrow, turn Data → Filter off and on again.)
+
+    **You should see:** 12 rows.
 
 ### Why it works
 
@@ -140,9 +186,9 @@ Watch these **after** you've tried the tasks. They'll make more sense once you'v
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** Session 1 steps 2, 3, 5 and 7 (save as `.xlsx`, freeze headers, check the status bar, filter to breakdowns) and Session 2 steps 1, 3, 5 and 6 (`SUM`, the fill handle, the `$I$126` fix and the `IF` column). Then answer the six weekend handover questions, even if roughly.
+- **Must do (about 90 min at a PC):** Session 1 steps 2 to 7 and 11 to 17 (save as `.xlsx`, freeze headers, check the status bar, sort, filter to breakdowns) and Session 2 steps 1, 2 and 7 to 17 (`SUM`, the fill handle, the `$I$126` fix and the `IF` column). Then answer the six weekend handover questions, even if roughly.
 - **On your phone (10 min a day):** Watch the Leila Gharani video on absolute and relative references, read both "Why it works" parts, and go through the Check yourself questions in your head.
-- **Safe to skip this week:** The hour-long Kevin Stratvert walkthrough, the ExcelJet shortcuts list and the weekend tidy-up (fill colours, borders, decimals) can all wait.
+- **Safe to skip this week:** The shortcut practice (Session 1 steps 8 to 10), the hour-long Kevin Stratvert walkthrough, the ExcelJet shortcuts list and the weekend tidy-up (fill colours, borders, decimals) can all wait.
 
 ---
 

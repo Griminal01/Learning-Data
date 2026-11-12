@@ -205,6 +205,44 @@ details.short-card > .pad { padding-top: 0; }
 .md details.md-details { margin: 12px 0; border: 1px solid var(--border); border-radius: 8px; padding: 0 12px; background: var(--surface); }
 .md details.md-details > summary { cursor: pointer; padding: 11px 0; min-height: 44px; display: list-item; }
 .md details.md-details[open] > summary { border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+/* tickable steps in the reader */
+.md ol.steps-ol { list-style: none; padding-left: 0; }
+.md ol.steps-ol > li.step { position: relative; padding: 6px 8px 6px 48px; margin: 2px -8px; border-radius: 8px; border-left: 3px solid transparent; }
+.md ol.steps-ol > li.step > p:first-of-type { margin-top: 0; }
+.stepbox { position: absolute; left: 8px; top: 6px; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--border); background: var(--surface); color: var(--muted); font: 600 13px var(--font); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+.stepbox:hover { border-color: var(--accent); color: var(--accent); }
+.stepbox:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.stepbox[aria-pressed="true"] { background: var(--good); border-color: var(--good); color: var(--surface); }
+li.step.done { color: var(--muted); }
+li.step.done .expect { opacity: .7; }
+li.step.current { background: var(--accent-soft); border-left-color: var(--accent); }
+li.step.current .stepbox { border-color: var(--accent); color: var(--accent); background: var(--surface); }
+.here { display: inline-block; margin: 0 0 4px; padding: 1px 8px; border-radius: 99px; background: var(--accent); color: var(--on-accent); font: 600 11px var(--font); letter-spacing: .03em; text-transform: uppercase; }
+.md p.expect { margin: 6px 0; padding: 4px 10px; border-left: 3px solid var(--good); background: var(--good-soft); border-radius: 0 6px 6px 0; font-size: .95em; }
+.md p.expect strong:first-child { color: var(--good); }
+.here-line { margin: 6px 0 0; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+.here-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
+
+/* the step bar: one click from Excel ticks the step and moves on */
+.stepbar { position: sticky; bottom: calc(10px + var(--tabbar)); z-index: 15; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 12px; background: var(--surface); border: 1px solid var(--accent); border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.12); }
+.stepbar .sb-text { flex: 1 1 180px; min-width: 0; font-size: 15px; }
+.stepbar .btn { min-height: 44px; }
+.stepbar .btn.primary { font-size: 16px; padding: 0 18px; }
+.stepbar .btn[disabled] { opacity: .45; cursor: default; }
+body.has-pending .stepbar { bottom: calc(72px + var(--tabbar)); }
+
+/* focus view: the step you're on, large, with the one before and after faded */
+.rsec-body.focus > :not(ol.in-focus):not(.focus-note) { display: none; }
+.rsec-body.focus li.step:not(.current):not(.prev):not(.next) { display: none; }
+.rsec-body.focus li.step.prev, .rsec-body.focus li.step.next { opacity: .45; font-size: .92em; }
+.rsec-body.focus li.step.current { font-size: 1.22em; padding-top: 12px; padding-bottom: 12px; }
+.rsec-body.focus li.step.current .stepbox { top: 12px; }
+.focus-note { margin: 10px 0 4px; }
+@media (max-width: 720px) {
+  .stepbar .sb-text { flex-basis: 100%; }
+  .stepbar .btn.primary { flex: 1; }
+}
+
 ul.watch { list-style: none; padding: 0; }
 ul.watch li { padding: 10px 0; border-bottom: 1px solid var(--border); display: grid; gap: 8px; }
 ul.watch li:last-child { border-bottom: 0; }

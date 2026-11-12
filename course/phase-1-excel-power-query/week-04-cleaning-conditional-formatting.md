@@ -19,20 +19,33 @@ Real exports are messy. Someone types `ld-ppk-005`, another person types `LD PPK
 
 ### Do it
 
-1. Open the dirty file, copy everything into a new workbook `week04_cleaning.xlsx` on a sheet `Raw`, and make it a Table called `tblRaw`.
-2. **Profile it before touching anything.** Add a sheet `Checks` and work out:
-   - Row count: `=ROWS(tblRaw)` gives **1,499**.
-   - Unique WO numbers: `=COUNTA(UNIQUE(tblRaw[WO Number]))` gives **1,470**. So there are 29 duplicate rows.
-   - Zone spellings: `=UNIQUE(tblRaw[Zone])`. This *spills* a list of every distinct value. You'll see *Prim Pack*, *EOL*, *end of line* and *Primary Packing* with a trailing space…
-3. **Use filters to look.** Turn on the filter on the Asset column and scroll the drop-down list. You'll see lower-case codes, codes with spaces, and codes with no dashes.
-4. **Find numbers stored as text.** Add a column `Labour OK?` with `=ISNUMBER([@[Labour Hrs]])`, then filter it to FALSE. You'll find `1.5h`-style entries and blanks.
-5. **Find impossible combinations.** Add `Status Check`:
+1. Open the dirty file and copy everything into a new workbook, `week04_cleaning.xlsx`, on a sheet called `Raw`.
+2. Make it a Table (`Ctrl+T`) and name it `tblRaw` (Table Design → Table Name).
+3. **Profile it before touching anything.** Add a sheet called `Checks`.
+4. **Row count.** On `Checks`, type `Rows` in `A1` and `=ROWS(tblRaw)` in `B1`.
 
-   ```
-   =IF(AND([@Status]="Completed",[@Completed]=""),"Completed but no date","")
-   ```
+   **You should see:** 1,499.
+5. **Unique WO numbers.** Type `Unique WOs` in `A2` and `=COUNTA(UNIQUE(tblRaw[WO Number]))` in `B2`.
 
-   Count them: **44**.
+   **You should see:** 1,470. So there are 29 duplicate rows.
+6. **Zone spellings.** In `D1`, type `=UNIQUE(tblRaw[Zone])`. This *spills* a list of every distinct value down the column.
+
+   **You should see:** *Prim Pack*, *EOL*, *end of line*, and *Primary Packing* with a trailing space, among others.
+7. **Use filters to look.** On `Raw`, click the filter arrow on the Asset column and scroll through its list.
+
+   **You should see:** lower-case codes, codes with spaces, and codes with no dashes.
+8. **Find numbers stored as text.** Add a column to `tblRaw` called `Labour OK?` with `=ISNUMBER([@[Labour Hrs]])`.
+9. Filter `Labour OK?` to FALSE.
+
+   **You should see:** `1.5h`-style entries and blanks. Clear the filter when you've looked.
+10. **Find impossible combinations.** Add a column called `Status Check`:
+
+    ```
+    =IF(AND([@Status]="Completed",[@Completed]=""),"Completed but no date","")
+    ```
+11. Count them. On `Checks`, type `No date` in `A3` and `=COUNTIF(tblRaw[Status Check],"Completed but no date")` in `B3`.
+
+    **You should see:** 44.
 
 ### Why it works
 
@@ -59,16 +72,34 @@ Add these cleaning columns to `tblRaw`. Never overwrite the raw column: keep raw
    ```
 
    `LET` lets you name steps inside a formula (`a`, `b`). Read it top to bottom: trim the spaces and upper-case, swap spaces for dashes, and if there are no dashes at all, rebuild the code as `LD-XXX-NNN`.
-2. **Check it worked**: add a column with `=XLOOKUP([@[Asset (clean)]],tblAssets[asset_id],tblAssets[asset_id],"NOT FOUND")`. (Copy `assets.csv` into the workbook as `tblAssets` first.) Filter for NOT FOUND. You want zero.
-3. **Zone (clean)**: the best fix isn't a clever formula, it's **looking it up from the asset**, which is the trusted source:
+2. Copy `assets.csv` into the workbook on a sheet called `Assets`, and make it a Table called `tblAssets`.
+3. **Check it worked.** Add a column to `tblRaw` with:
+
+   ```
+   =XLOOKUP([@[Asset (clean)]],tblAssets[asset_id],tblAssets[asset_id],"NOT FOUND")
+   ```
+4. Filter that column for NOT FOUND.
+
+   **You should see:** no rows. Clear the filter.
+5. **Zone (clean)**: the best fix isn't a clever formula, it's **looking it up from the asset**, which is the trusted source:
 
    ```
    =XLOOKUP([@[Asset (clean)]],tblAssets[asset_id],tblAssets[zone])
    ```
 
-4. **Labour (clean)**: `=IFERROR(VALUE(SUBSTITUTE([@[Labour Hrs]],"h","")),"")`
-5. **Remove duplicates**: copy the whole Table to a new sheet `Clean` (paste as values: `Ctrl+Alt+V` → Values). Then Data → Remove Duplicates → tick all columns. Excel should report 29 removed, leaving **1,470**.
-6. **Reconcile**: total `Labour (clean)` on the Clean sheet. Then open the three clean monthly exports and total their Labour Hrs (**1,142.17**). Yours will be about **1,124**. The ~18 h gap is the blank labour entries, which can't be recovered. Write that down: knowing what you *couldn't* fix is part of the job.
+6. **Labour (clean)**: `=IFERROR(VALUE(SUBSTITUTE([@[Labour Hrs]],"h","")),"")`
+7. **Remove duplicates.** Click any cell in `tblRaw`, press `Ctrl+A` twice (data, then headers too), and press `Ctrl+C`.
+8. Add a sheet called `Clean`, click `A1`, and paste as values: `Ctrl+Alt+V` → Values → OK.
+9. Go to Data → Remove Duplicates, leave all columns ticked, and press OK.
+
+   **You should see:** Excel report 29 duplicates removed and 1,470 left.
+10. **Reconcile.** Under the `Labour (clean)` column on the `Clean` sheet, add a `SUM` of the column.
+
+    **You should see:** about 1,124.
+11. Open the three clean monthly exports (`WO_Export_2026-01`, `-02` and `-03`) and total their Labour Hrs.
+
+    **You should see:** 1,142.17 across the three.
+12. Write the gap down in a note on the `Checks` sheet. The ~18 h difference is the blank labour entries, which can't be recovered. Knowing what you *couldn't* fix is part of the job.
 
 ### Why it works
 
@@ -80,17 +111,23 @@ The order of operations matters: **trim → standardise case → standardise sep
 
 Use the clean June export from Week 3 (`week03_lookups.xlsx`), or reload `WO_Export_2026-06.csv` into a Table.
 
-1. **Highlight whole rows for late PMs.** Select the whole Table body (click the top-left corner of the Table, avoiding the header). Go to Home → Conditional Formatting → New Rule → *Use a formula to determine which cells to format*:
+1. **Highlight whole rows for late PMs.** Select the whole Table body: click the top-left corner of the Table, avoiding the header.
+2. Go to Home → Conditional Formatting → New Rule → *Use a formula to determine which cells to format*.
+3. Type this formula:
 
    ```
    =AND($F2="PM",$L2<>"",$L2>$K2)
    ```
 
-   (F = WO Type, K = Due, L = Completed. Adjust the letters to match your sheet.) Choose a light red fill. **The `$` before the column letter is the trick**: it locks the column but lets the row move, so every cell in a row checks the same columns.
-2. **Highlight PMs not done at all**: `=AND($F2="PM",$M2<>"Completed")` with an amber fill. Put this rule *below* the red one in Manage Rules.
-3. **Data bars on Downtime Mins**: select the column → Conditional Formatting → Data Bars.
-4. **Icon sets for criticality**: not every rule needs a formula. Try Conditional Formatting → Highlight Cells Rules → *Text that Contains* "A" on the Criticality column.
-5. **One more formula rule**: highlight any asset whose code appears more than twice in the month: `=COUNTIF($B:$B,$B2)>2`. These are your repeat offenders.
+   (F = WO Type, K = Due, L = Completed. Adjust the letters to match your sheet.) **The `$` before the column letter is the trick**: it locks the column but lets the row move, so every cell in a row checks the same columns.
+4. Click Format, choose a light red fill, and press OK twice.
+
+   **You should see:** whole rows turn red where a PM was completed after its due date.
+5. **Highlight PMs not done at all.** Add another formula rule, `=AND($F2="PM",$M2<>"Completed")`, with an amber fill.
+6. Go to Conditional Formatting → Manage Rules and move the amber rule *below* the red one.
+7. **Data bars on Downtime Mins.** Select that column, then Conditional Formatting → Data Bars.
+8. **Not every rule needs a formula.** Select the Criticality column and use Conditional Formatting → Highlight Cells Rules → *Text that Contains* "A".
+9. **One more formula rule:** highlight any asset whose code appears more than twice in the month with `=COUNTIF($B:$B,$B2)>2`. These are your repeat offenders.
 
 ---
 
@@ -125,9 +162,9 @@ Use the clean June export from Week 3 (`week03_lookups.xlsx`), or reload `WO_Exp
 
 ## Short on time?
 
-- **Must do (about 90 min at a PC):** Session 1 steps 1, 2, 4 and 5 (profile the rows, uniques, spellings and text-numbers), Session 2 steps 1 to 6 (clean asset, zone and labour, remove duplicates to 1,470, reconcile and write down the gap), and weekend step 1, the whole-row late PM rule. That is a full 90 minutes, so don't stop to polish.
+- **Must do (about 90 min at a PC):** Session 1 steps 1 to 6 and 8 to 11 (profile the rows, uniques, spellings and text-numbers), Session 2 steps 1 to 12 (clean asset, zone and labour, remove duplicates to 1,470, reconcile and write down the gap), and weekend steps 1 to 4, the whole-row late PM rule. That is a full 90 minutes, so don't stop to polish.
 - **On your phone (10 min a day):** Watch the Leila Gharani video on conditional formatting for an entire row, read both "Why it works" parts (profile first and reconcile, then trim, case, separators, structure), and answer Check yourself questions 1, 2 and 4 in your head.
-- **Safe to skip this week:** Session 1 step 3 (scrolling the filter drop-downs) and weekend steps 3 to 5 (data bars, the "Text that Contains" rule and the repeat offender rule) can be dropped this week.
+- **Safe to skip this week:** Session 1 step 7 (scrolling the filter drop-downs) and weekend steps 7 to 9 (data bars, the "Text that Contains" rule and the repeat offender rule) can be dropped this week.
 
 ---
 
